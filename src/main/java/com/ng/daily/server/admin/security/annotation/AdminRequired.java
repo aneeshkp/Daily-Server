@@ -1,0 +1,16 @@
+package com.ng.daily.server.admin.security.annotation;
+
+import java.lang.annotation.*;
+
+/**
+ * 标识方法执行需要管理员权限
+ *
+ * Created by fangs on 15/1/21.
+ */
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.METHOD)
+@Inherited
+@Documented
+public @interface AdminRequired {
+
+}
