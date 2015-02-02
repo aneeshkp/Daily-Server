@@ -12,26 +12,23 @@
         <sourceRoots>
           <root url="file://$MODULE_DIR$/src/main/java" />
           <root url="file://$MODULE_DIR$/src/main/resources" />
-          <root url="file://$MODULE_DIR$/target/generated-sources/mybatis-generator" />
         </sourceRoots>
       </configuration>
     </facet>
     <facet type="Spring" name="Spring">
       <configuration>
-        <fileset id="fileset" name="Spring Application Context" removed="false" profiles="production">
-          <file>file://$MODULE_DIR$/src/main/resources/applicationContext.xml</file>
-          <file>file://$MODULE_DIR$/src/main/resources/applicationContext-ehcache.xml</file>
+        <fileset id="fileset" name="Spring Application Context" removed="false">
+          <file>file://$MODULE_DIR$/src/main/resources/resources/applicationContext-swagger.xml</file>
           <file>file://$MODULE_DIR$/src/main/resources/applicationContext-mongo.xml</file>
-          <file>file://$MODULE_DIR$/src/main/webapp/WEB-INF/spring-mvc.xml</file>
-          <file>file://$MODULE_DIR$/src/main/resources/applicationContext-mail.xml</file>
-          <file>file://$MODULE_DIR$/src/main/resources/applicationContext-spring-scheduler.xml</file>
           <file>file://$MODULE_DIR$/src/main/resources/applicationContext-shiro.xml</file>
-          <file>file://$MODULE_DIR$/src/main/resources/applicationContext-swagger.xml</file>
-          <file>file://$MODULE_DIR$/src/main/resources/applicationContext-redis.xml</file>
-          <file>file://$MODULE_DIR$/src/main/resources/applicationContext-redis.xml</file>
+          <file>file://$MODULE_DIR$/src/main/resources/resources/applicationContext-spring-scheduler.xml</file>
+          <file>file://$MODULE_DIR$/src/main/resources/resources/applicationContext-redis.xml</file>
+          <file>file://$MODULE_DIR$/src/main/resources/resources/applicationContext-mybatis.xml</file>
+          <file>file://$MODULE_DIR$/src/main/resources/applicationContext-ehcache.xml</file>
+          <file>file://$MODULE_DIR$/src/main/resources/resources/applicationContext-mail.xml</file>
+          <file>file://$MODULE_DIR$/src/main/resources/applicationContext.xml</file>
+          <file>file://$MODULE_DIR$/src/main/webapp/WEB-INF/spring-mvc.xml</file>
         </fileset>
-        <fileset id="web application context" profiles="production" autodetected="true" />
-        <fileset id="web springServlet servlet context" profiles="production" autodetected="true" />
       </configuration>
     </facet>
   </component>
@@ -43,12 +40,7 @@
       <sourceFolder url="file://$MODULE_DIR$/src/main/resources" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/test/java" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/test/resources" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/target/generated-sources/mybatis-generator" isTestSource="false" generated="true" />
-      <excludeFolder url="file://$MODULE_DIR$/target/classes" />
-      <excludeFolder url="file://$MODULE_DIR$/target/maven-archiver" />
-      <excludeFolder url="file://$MODULE_DIR$/target/maven-status" />
-      <excludeFolder url="file://$MODULE_DIR$/target/server-0.0.1-SNAPSHOT" />
-      <excludeFolder url="file://$MODULE_DIR$/target/test-classes" />
+      <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
