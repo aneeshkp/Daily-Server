@@ -11,7 +11,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
  */
 @Controller
 @RequestMapping(value = "/admin/pages")
-public class PagesController extends BaseAdminController {
+public class TestController extends BaseAdminController {
 
     @RequestMapping( method = RequestMethod.GET)
     public String defaultPage(RedirectAttributes attributes) {
@@ -84,5 +84,6 @@ public class PagesController extends BaseAdminController {
     public String login() {
         return "admin/pages/login";
     }
+
 
 }
