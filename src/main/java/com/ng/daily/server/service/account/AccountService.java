@@ -8,12 +8,12 @@ package com.ng.daily.server.service.account;
 import com.ng.daily.server.admin.entity.User;
 import com.ng.daily.server.admin.repository.task.TaskRepository;
 import com.ng.daily.server.admin.repository.user.UserRepository;
-import com.ng.daily.server.common.security.Digests;
-import com.ng.daily.server.common.utils.Clock;
-import com.ng.daily.server.common.utils.Encodes;
 import com.ng.daily.server.service.ServiceException;
+import com.ng.daily.server.util.Encodes;
+import com.ng.daily.server.util.security.Digests;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
+import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,8 +48,6 @@ public class AccountService {
     @Autowired
     private TaskRepository taskRepository;
 
-    private Clock clock = Clock.DEFAULT;
-
     public List<User> getAllUser() {
         return (List<User>) userRepository.findAll();
     }
@@ -65,7 +63,7 @@ public class AccountService {
     public void registerUser(User user) {
         entryptPassword(user);
         user.setRoles("user");
-        user.setRegisterDate(clock.getCurrentDate());
+        user.setRegisterDate(DateTime.now().toDate());
 
 
         // mongodb

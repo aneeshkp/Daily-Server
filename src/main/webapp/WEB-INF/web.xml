@@ -47,7 +47,7 @@
     <!-- Cache Control Header filter -->
     <filter>
         <filter-name>cacheControlHeaderFilter</filter-name>
-        <filter-class>com.ng.daily.server.common.web.CacheControlHeaderFilter</filter-class>
+        <filter-class>com.ng.daily.server.util.web.CacheControlHeaderFilter</filter-class>
     </filter>
     <filter-mapping>
         <filter-name>cacheControlHeaderFilter</filter-name>

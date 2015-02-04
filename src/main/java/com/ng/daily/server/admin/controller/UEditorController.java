@@ -27,13 +27,31 @@ public class UEditorController extends BaseAdminController {
     public String ueditorPost(HttpServletRequest request, HttpServletResponse response) {
 
 
-        Map<String,String[]> params = request.getParameterMap();
-        for(String s : params.keySet()) {
+        Map<String, String[]> params = request.getParameterMap();
+        for (String s : params.keySet()) {
             System.out.println(s);
             System.out.println(params.get(s));
         }
 
         return "admin/pages/ueditor";
+
+    }
+
+    @RequestMapping(value = "/umeditor", method = RequestMethod.GET)
+    public String umeditor() {
+        return "admin/pages/umeditor";
+    }
+
+    @RequestMapping(value = "/umeditorPost", method = RequestMethod.POST)
+    public String umeditorPost(HttpServletRequest request, HttpServletResponse response) {
+
+        Map<String, String[]> params = request.getParameterMap();
+        for (String s : params.keySet()) {
+            System.out.println(s);
+            System.out.println(params.get(s));
+        }
+
+        return "admin/pages/umeditor";
 
     }
 

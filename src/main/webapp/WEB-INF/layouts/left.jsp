@@ -19,7 +19,10 @@
                 <!-- /input-group -->
             </li>
             <li>
-                <a href="${ctx}/admin/pages/ueditor "><i class="fa fa-dashboard fa-fw"></i> UEditor</a>
+                <a href="${ctx}/admin/pages/ueditor"><i class="fa fa-dashboard fa-fw"></i> UEditor</a>
+            </li>
+            <li>
+                <a href="${ctx}/admin/pages/umeditor"><i class="fa fa-dashboard fa-fw"></i> UMEditor</a>
             </li>
             <li>
                 <a href="${ctx}/admin/pages/index"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>

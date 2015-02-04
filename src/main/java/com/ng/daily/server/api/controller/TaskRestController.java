@@ -1,8 +1,8 @@
 package com.ng.daily.server.api.controller;
 
 import com.ng.daily.server.api.exception.RestException;
-import com.ng.daily.server.common.utils.BeanValidators;
-import com.ng.daily.server.common.web.MediaTypes;
+import com.ng.daily.server.util.BeanValidators;
+import com.ng.daily.server.util.web.MediaTypes;
 import com.ng.daily.server.admin.entity.Task;
 import com.ng.daily.server.service.task.TaskService;
 import org.slf4j.Logger;

@@ -1,6 +1,6 @@
 package com.ng.daily.server.admin.base;
 
-import com.ng.daily.server.common.utils.BeanValidators;
+import com.ng.daily.server.util.BeanValidators;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

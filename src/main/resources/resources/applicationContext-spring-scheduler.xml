@@ -27,7 +27,7 @@
     </task:scheduled-tasks>
 
     <!-- coding 方式的加強版 -->
-    <bean id="springCronJob" class="com.ng.daily.server.common.schedule.SpringCronJob" lazy-init="false">
+    <bean id="springCronJob" class="com.ng.daily.server.util.schedule.SpringCronJob" lazy-init="false">
         <property name="cronExpression" value="0 15 9-17 * * MON-FRI"/>
         <property name="shutdownTimeout" value="20"/>
     </bean>

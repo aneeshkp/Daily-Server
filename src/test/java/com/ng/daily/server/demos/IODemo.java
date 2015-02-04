@@ -2,7 +2,7 @@
 package com.ng.daily.server.demos;
 
 import com.google.common.base.Charsets;
-import com.ng.daily.server.common.utils.Exceptions;
+import com.ng.daily.server.util.Exceptions;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.io.input.ReaderInputStream;

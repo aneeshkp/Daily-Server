@@ -6,8 +6,8 @@
 package com.ng.daily.server.service.account;
 
 import com.google.common.base.Objects;
-import com.ng.daily.server.common.SpringContextHolder;
-import com.ng.daily.server.common.utils.Encodes;
+import com.ng.daily.server.util.SpringContextHolder;
+import com.ng.daily.server.util.Encodes;
 import com.ng.daily.server.admin.entity.User;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
