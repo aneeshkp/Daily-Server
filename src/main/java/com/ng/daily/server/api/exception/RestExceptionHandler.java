@@ -1,8 +1,8 @@
 package com.ng.daily.server.api.exception;
 
-import com.ng.daily.server.util.mapper.JsonMapper;
-import com.ng.daily.server.util.BeanValidators;
-import com.ng.daily.server.util.web.MediaTypes;
+import com.ng.daily.server.common.util.mapper.JsonMapper;
+import com.ng.daily.server.common.util.BeanValidators;
+import com.ng.daily.server.common.util.web.MediaTypes;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;

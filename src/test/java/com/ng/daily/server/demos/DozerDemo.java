@@ -1,7 +1,7 @@
 
 package com.ng.daily.server.demos;
 
-import com.ng.daily.server.util.mapper.BeanMapper;
+import com.ng.daily.server.common.util.mapper.BeanMapper;
 import org.dozer.Mapping;
 import org.junit.Test;
 

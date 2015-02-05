@@ -3,7 +3,7 @@ package com.ng.daily.server.api.controller;
 import com.google.common.collect.Maps;
 import com.ng.daily.server.api.base.ApiController;
 import com.ng.daily.server.api.base.ApiResponse;
-import com.ng.daily.server.util.web.MediaTypes;
+import com.ng.daily.server.common.util.web.MediaTypes;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
