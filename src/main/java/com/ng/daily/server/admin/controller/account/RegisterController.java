@@ -3,7 +3,7 @@ package com.ng.daily.server.admin.controller.account;
 
 import com.ng.daily.server.admin.base.BaseAdminController;
 import com.ng.daily.server.admin.entity.User;
-import com.ng.daily.server.service.account.AccountService;
+import com.ng.daily.server.common.service.account.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

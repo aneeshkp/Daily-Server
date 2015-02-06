@@ -1,4 +1,4 @@
-package com.ng.daily.server.service.article;
+package com.ng.daily.server.common.service.article;
 
 import com.ng.daily.server.admin.entity.Article;
 import com.ng.daily.server.admin.repository.article.ArticleRepository;

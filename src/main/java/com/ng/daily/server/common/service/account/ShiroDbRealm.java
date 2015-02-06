@@ -3,7 +3,7 @@
  *
 
  ********/
-package com.ng.daily.server.service.account;
+package com.ng.daily.server.common.service.account;
 
 import com.google.common.base.Objects;
 import com.ng.daily.server.common.util.SpringContextHolder;

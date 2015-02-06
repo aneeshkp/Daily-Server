@@ -4,7 +4,7 @@ import com.ng.daily.server.api.exception.RestException;
 import com.ng.daily.server.common.util.BeanValidators;
 import com.ng.daily.server.common.util.web.MediaTypes;
 import com.ng.daily.server.admin.entity.Task;
-import com.ng.daily.server.service.task.TaskService;
+import com.ng.daily.server.common.service.task.TaskService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

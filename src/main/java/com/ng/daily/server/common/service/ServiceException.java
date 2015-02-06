@@ -3,7 +3,7 @@
  *
 
  ********/
-package com.ng.daily.server.service;
+package com.ng.daily.server.common.service;
 
 /**
  * Service层公用的Exception.

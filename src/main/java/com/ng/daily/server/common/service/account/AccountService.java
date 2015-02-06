@@ -3,12 +3,12 @@
  *
 
  ********/
-package com.ng.daily.server.service.account;
+package com.ng.daily.server.common.service.account;
 
 import com.ng.daily.server.admin.entity.User;
 import com.ng.daily.server.admin.repository.task.TaskRepository;
 import com.ng.daily.server.admin.repository.user.UserRepository;
-import com.ng.daily.server.service.ServiceException;
+import com.ng.daily.server.common.service.ServiceException;
 import com.ng.daily.server.common.util.Encodes;
 import com.ng.daily.server.common.util.security.Digests;
 import org.apache.commons.lang3.StringUtils;

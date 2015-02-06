@@ -3,7 +3,7 @@
  *
 
  ********/
-package com.ng.daily.server.service.task;
+package com.ng.daily.server.common.service.task;
 
 import com.ng.daily.server.admin.entity.Task;
 import com.ng.daily.server.admin.repository.task.TaskRepository;

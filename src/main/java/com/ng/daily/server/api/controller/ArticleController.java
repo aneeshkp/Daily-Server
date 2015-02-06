@@ -3,7 +3,7 @@ package com.ng.daily.server.api.controller;
 import com.ng.daily.server.api.base.ApiController;
 import com.ng.daily.server.api.base.ApiResponse;
 import com.ng.daily.server.admin.entity.Article;
-import com.ng.daily.server.service.article.ArticleService;
+import com.ng.daily.server.common.service.article.ArticleService;
 import net.sf.ehcache.Cache;
 import net.sf.ehcache.Element;
 import org.slf4j.Logger;

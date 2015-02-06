@@ -3,8 +3,8 @@ package com.ng.daily.server.admin.controller.account;
 
 import com.ng.daily.server.admin.base.BaseAdminController;
 import com.ng.daily.server.admin.entity.User;
-import com.ng.daily.server.service.account.AccountService;
-import com.ng.daily.server.service.account.ShiroDbRealm.ShiroUser;
+import com.ng.daily.server.common.service.account.AccountService;
+import com.ng.daily.server.common.service.account.ShiroDbRealm.ShiroUser;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
