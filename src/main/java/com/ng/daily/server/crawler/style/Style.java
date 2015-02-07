@@ -45,6 +45,11 @@ public class Style {
 
             DownloadTask task = new DownloadTask(url, saveDir, saveName, httpClient);
             service.submit(task);
+
+//            if(item.hasDetailSlides) {
+                // TODO deltail image download
+//            }
+
         }
 
         service.shutdown();

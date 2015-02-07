@@ -33,6 +33,11 @@ public class UEditorController extends BaseAdminController {
             System.out.println(params.get(s));
         }
 
+        String[] values = request.getParameterValues("editorValue");
+        for(String v : values) {
+            System.out.println(v);
+        }
+
         return "admin/pages/ueditor";
 
     }

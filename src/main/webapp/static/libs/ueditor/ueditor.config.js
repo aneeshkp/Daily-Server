@@ -47,6 +47,20 @@
             'inserttable', 'deletetable', 'insertparagraphbeforetable', 'insertrow', 'deleterow', 'insertcol', 'deletecol', 'mergecells', 'mergeright', 'mergedown', 'splittocells', 'splittorows', 'splittocols', 'charts', '|',
             'print', 'preview', 'searchreplace', 'help', 'drafts'
         ]]
+
+
+        // fangs
+        //工具栏上的所有的功能按钮和下拉框，可以在new编辑器的实例时选择自己需要的从新定义
+        //,toolbar:[
+        //    'source | undo redo | bold italic underline strikethrough | superscript subscript | forecolor backcolor | removeformat |',
+        //    'insertorderedlist insertunorderedlist | selectall cleardoc paragraph | fontfamily fontsize' ,
+        //    '| justifyleft justifycenter justifyright justifyjustify |',
+        //    'link unlink | emotion image video  | map',
+        //    '| horizontal print preview fullscreen', 'drafts', 'formula'
+        //]
+
+
+
         //当鼠标放在工具栏上时显示的tooltip提示,留空支持自动多语言配置，否则以配置值为准
         //,labelMap:{
         //    'anchor':'', 'undo':''
