@@ -408,6 +408,13 @@
             <version>0.0.1</version>
         </dependency>
 
+        <!-- 图片缩放 -->
+        <dependency>
+            <groupId>org.imgscalr</groupId>
+            <artifactId>imgscalr-lib</artifactId>
+            <version>4.2</version>
+        </dependency>
+
         <!-- 在线API文档-->
         <dependency>
             <groupId>com.mangofactory</groupId>

@@ -4,7 +4,15 @@ import com.ng.daily.server.admin.base.BaseAdminController;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.IOException;
 
 /**
  * Created by fangs on 15/2/1.
@@ -13,7 +21,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @RequestMapping(value = "/admin/pages")
 public class TestController extends BaseAdminController {
 
-    @RequestMapping( method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET)
     public String defaultPage(RedirectAttributes attributes) {
 //        addMessage(MESSAGE_ALERT, attributes, "欢迎");
 //        return "redirect:index";
@@ -85,5 +93,20 @@ public class TestController extends BaseAdminController {
         return "admin/pages/login";
     }
 
+    @RequestMapping(value = "/medium", method = RequestMethod.GET)
+    public String medium() {
+        return "admin/pages/medium";
+    }
+
+    @RequestMapping(value = "/upload", method = RequestMethod.POST)
+    public String handleFormUpload(
+            @RequestParam("file") MultipartFile file) throws IOException {
+        if (!file.isEmpty()) {
+            BufferedImage src = ImageIO.read(new ByteArrayInputStream(file.getBytes()));
+            File destination = new File("File directory with file name");
+            ImageIO.write(src, "png", destination);
+        }
+        return "";
+    }
 
 }

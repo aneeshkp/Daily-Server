@@ -19,6 +19,9 @@
                 <!-- /input-group -->
             </li>
             <li>
+                <a href="${ctx}/admin/pages/medium"><i class="fa fa-dashboard fa-fw"></i> Dante</a>
+            </li>
+            <li>
                 <a href="${ctx}/admin/pages/ueditor"><i class="fa fa-dashboard fa-fw"></i> UEditor</a>
             </li>
             <li>
