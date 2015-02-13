@@ -3,6 +3,6 @@
 *.ipr
 *.iws
 out/
-target
+target/
 .idea/
 .idea
