@@ -1,4 +1,4 @@
-package com.ng.daily.server.admin.controller.pages;
+package com.ng.daily.server.demo;
 
 import com.ng.daily.server.common.qiniu.QiniuService;
 import org.apache.commons.io.FileUtils;
@@ -23,7 +23,7 @@ import java.util.Map;
  * Created by fangs on 15/2/11.
  */
 @Controller
-@RequestMapping(value = "/admin/pages")
+@RequestMapping(value = "/demo/pages")
 public class MediumController {
 
 
@@ -38,7 +38,7 @@ public class MediumController {
 
     @RequestMapping(value = "/medium", method = RequestMethod.GET)
     public String medium() {
-        return "admin/pages/medium";
+        return "demo/pages/medium";
     }
 
 

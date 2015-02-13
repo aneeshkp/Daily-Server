@@ -19,12 +19,12 @@ import java.util.List;
  */
 @Controller
 @RequestMapping(value = "/admin/user")
-public class AdminController extends BaseAdminController {
+public class AccountController extends BaseAdminController {
 
     @Autowired
     private AccountService accountService;
 
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(value = "list", method = RequestMethod.GET)
     public String list(Model model) {
         List<User> users = accountService.getAllUser();
         model.addAttribute("users", users);

@@ -11,7 +11,9 @@
 
             <jsp:include page="navbar.jsp"></jsp:include>
 
-            <jsp:include page="left.jsp"></jsp:include>
+            <shiro:hasRole name="admin">
+                <jsp:include page="left.jsp"></jsp:include>
+            </shiro:hasRole>
 
         </nav>
 

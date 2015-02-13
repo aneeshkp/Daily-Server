@@ -21,7 +21,7 @@ public class LoginController extends BaseAdminController {
 
     @RequestMapping(method = RequestMethod.GET)
     public String login() {
-        return "account/login";
+        return "admin/account/login";
     }
 
     @RequestMapping(method = RequestMethod.POST)

@@ -1,4 +1,4 @@
-package com.ng.daily.server;
+package com.ng.daily.server.test;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,10 +12,12 @@ import org.springframework.stereotype.Component;
 @Component
 public class StartupListener implements ApplicationListener<ContextRefreshedEvent> {
 
-    private Logger log = LoggerFactory.getLogger(StartupListener.class);
+    private static final Logger log = LoggerFactory.getLogger(StartupListener.class);
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
+
+        log.debug("========================start .........");
 
     }
 }

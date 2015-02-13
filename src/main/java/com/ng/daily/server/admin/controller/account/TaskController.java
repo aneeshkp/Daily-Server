@@ -1,4 +1,4 @@
-package com.ng.daily.server.admin.controller;
+package com.ng.daily.server.admin.controller.account;
 
 import com.google.common.collect.Maps;
 import com.ng.daily.server.admin.base.BaseAdminController;

@@ -25,7 +25,7 @@ import java.util.List;
  */
 @Controller
 @RequestMapping(value = "/api/v1/task")
-public class TaskRestController extends ApiController {
+public class TaskApi extends ApiController {
 
     @Autowired
     private TaskService taskService;

@@ -5,7 +5,7 @@
 
 <html>
 <head>
-    <title>用户管理</title>
+    <title>用户列表</title>
 </head>
 
 <body>
@@ -15,27 +15,52 @@
             ${message}</div>
 </c:if>
 
-<table id="contentTable" class="table table-striped table-bordered table-condensed">
-    <thead>
-    <tr>
-        <th>登录名</th>
-        <th>用户名</th>
-        <th>注册时间
-        <th>管理</th>
-    </tr>
-    </thead>
-    <tbody>
-    <c:forEach items="${users}" var="user">
-        <tr>
-            <td><a href="${ctx}/admin/user/update/${user.id}">${user.loginName}</a></td>
-            <td>${user.name}</td>
-            <td>
-                <fmt:formatDate value="${user.registerDate}" pattern="yyyy年MM月dd日  HH时mm分ss秒"/>
-            </td>
-            <td><a href="${ctx}/admin/user/delete/${user.id}">删除</a></td>
-        </tr>
-    </c:forEach>
-    </tbody>
-</table>
+
+
+<div id="wrapper">
+
+    <!-- Page Content -->
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">用户列表</h1>
+
+
+                    <table id="contentTable" class="table table-striped table-bordered table-condensed">
+                        <thead>
+                        <tr>
+                            <th>登录名</th>
+                            <th>用户名</th>
+                            <th>注册时间
+                            <th>管理</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <c:forEach items="${users}" var="user">
+                            <tr>
+                                <td><a href="${ctx}/admin/user/update/${user.id}">${user.loginName}</a></td>
+                                <td>${user.name}</td>
+                                <td>
+                                    <fmt:formatDate value="${user.registerDate}" pattern="yyyy年MM月dd日  HH时mm分ss秒"/>
+                                </td>
+                                <td><a href="${ctx}/admin/user/delete/${user.id}">删除</a></td>
+                            </tr>
+                        </c:forEach>
+                        </tbody>
+                    </table>
+
+
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container-fluid -->
+    </div>
+    <!-- /#page-wrapper -->
+
+</div>
+<!-- /#wrapper -->
 </body>
 </html>

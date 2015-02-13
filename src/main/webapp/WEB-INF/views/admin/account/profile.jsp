@@ -4,61 +4,65 @@
 
 <html>
 <head>
-    <title>资料修改</title>
+    <title>个人资料</title>
 </head>
 
 <body>
 
+<div id="wrapper">
 
-<div class="container">
-    <div class="row">
-        <div class="col-md-4 col-md-offset-4">
-            <div class="login-panel panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title">资料修改</h3>
+    <!-- Page Content -->
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">资料修改</h1>
+
+                    <div class="row">
+                        <div class="col-lg-6">
+
+                            <form id="inputForm" action="${ctx}/admin/profile" method="post" role="form">
+                                <input type="hidden" name="id" value="${user.id}"/>
+                                <fieldset>
+                                    <div class="form-group">
+                                        <label for="name" class="control-label">用户名:</label>
+                                        <input type="text" id="name" name="name" value="${user.name}"
+                                               class="form-control required"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="plainPassword" class="control-label">密码:</label>
+
+                                            <input type="password" id="plainPassword" name="plainPassword"
+                                                   class="form-control"  placeholder="密码"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="confirmPassword" class="control-label">确认密码:</label>
+
+                                            <input type="password" id="confirmPassword" name="confirmPassword"
+                                                   class="form-control"
+                                                   equalTo="#plainPassword"/>
+                                    </div>
+                                    <div class="form-actions">
+                                        <input id="submit_btn" class="btn btn-primary" type="submit" value="提交"/>&nbsp;
+                                        <input id="cancel_btn" class="btn" type="button" value="返回"
+                                               onclick="history.back()"/>
+
+                                    </div>
+                                </fieldset>
+                            </form>
+                        </div>
+                    </div>
                 </div>
-                <div class="panel-body">
-
-                    <form id="inputForm" action="${ctx}/admin/profile" method="post" class="form-horizontal">
-                        <input type="hidden" name="id" value="${user.id}"/>
-                        <fieldset>
-                            <div class="control-group">
-                                <label for="name" class="control-label">用户名:</label>
-
-                                <div class="controls">
-                                    <input type="text" id="name" name="name" value="${user.name}"
-                                           class="input-large required"/>
-                                </div>
-                            </div>
-                            <div class="control-group">
-                                <label for="plainPassword" class="control-label">密码:</label>
-
-                                <div class="controls">
-                                    <input type="password" id="plainPassword" name="plainPassword" class="input-large"
-                                           placeholder="...Leave it blank if no change"/>
-                                </div>
-                            </div>
-                            <div class="control-group">
-                                <label for="confirmPassword" class="control-label">确认密码:</label>
-
-                                <div class="controls">
-                                    <input type="password" id="confirmPassword" name="confirmPassword"
-                                           class="input-large"
-                                           equalTo="#plainPassword"/>
-                                </div>
-                            </div>
-                            <div class="form-actions">
-                                <input id="submit_btn" class="btn btn-primary" type="submit" value="提交"/>&nbsp;
-                                <input id="cancel_btn" class="btn" type="button" value="返回" onclick="history.back()"/>
-                            </div>
-                        </fieldset>
-                    </form>
-
-                </div>
+                <!-- /.col-lg-12 -->
             </div>
+            <!-- /.row -->
         </div>
+        <!-- /.container-fluid -->
     </div>
+    <!-- /#page-wrapper -->
+
 </div>
+<!-- /#wrapper -->
 
 <script>
     $(document).ready(function () {

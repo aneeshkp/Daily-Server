@@ -20,9 +20,9 @@
     <logger name="com.ng.daily.server" level="DEBUG"/>
 
     <!-- thirdparty level -->
-    <logger name="org.apache.shiro" level="DEBUG"/>
+    <logger name="org.apache.shiro" level="INFO"/>
     <logger name="org.springframework" level="INFO"/>
-    <logger name="com.mangofactory.swagger" level="DEBUG"/>
+    <logger name="com.mangofactory.swagger" level="INFO"/>
 
 
     <!--log4jdbc -->

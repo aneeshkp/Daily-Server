@@ -17,7 +17,7 @@ import java.util.Map;
  */
 @Controller
 @RequestMapping(value = "/api/v1/version")
-public class VersionController extends ApiController {
+public class VersionApi extends ApiController {
 
     @RequestMapping(value = "/{platform}/{version}", method = RequestMethod.GET, produces = MediaTypes.JSON_UTF_8)
     @ResponseBody

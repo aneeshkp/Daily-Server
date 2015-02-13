@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  */
 @Controller
 @RequestMapping(value = "/api/v1/article")
-public class ArticleController extends ApiController {
+public class ArticleApi extends ApiController {
 
     @Autowired
     private ArticleService articleService;
