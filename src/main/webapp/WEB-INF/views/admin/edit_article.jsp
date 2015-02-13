@@ -33,30 +33,52 @@
 
             <div class="row">
 
-                <div class="col-lg-12">
+                <div class="col-lg-10">
                     <form action="/admin/pages/ueditorPost" method="post" role="form">
 
-                        <!-- 加载编辑器的容器 -->
-                        <div>
-                            <script id="editor" type="text/plain" style="height:300px;"></script>
+
+                        <div class="form-group">
+                            <label>文章标题</label>
+                            <input class="form-control" placeholder="标题,不超过20字">
+                        </div>
+
+                        <div class="form-group">
+                            <label>文章来源</label>
+                            <input class="form-control" placeholder="来源">
                         </div>
 
 
-                        <div class="col-lg-4">
-                            <input id="submit_btn" class="btn btn-primary btn-block" type="submit"
-                                   value="暂存到草稿箱"/>
+                        <div class="form-group">
+                            <label>分类/标签</label>
+                            <input class="form-control" placeholder="分类/标签">
+                        </div>
+
+                        <div class="form-group">
+                            <label>文章内容</label>
+
+                            <!-- 加载编辑器的容器 -->
+                            <div>
+                                <script id="editor" type="text/plain" style="height:300px;"></script>
+                            </div>
                         </div>
 
                         <div class="col-lg-4">
-                            <input id="1" class="btn  btn-success btn-block" type="submit"
-                                   value="提交发布"/>
+                            <input id="2" class="btn btn-normal btn-block" type="submit" value="预览"/>
+                        </div>
+
+                        <div class="col-lg-4">
+                            <input id="submit_btn" class="btn btn-primary btn-block" type="submit" value="暂存到草稿箱"/>
+                        </div>
+
+                        <div class="col-lg-4">
+                            <input id="1" class="btn btn-success btn-block" type="submit" value="提交发布"/>
                         </div>
 
 
                     </form>
                 </div>
 
-                <div class="col-lg-12">
+                <div class="col-lg-12" style="padding-top: 20px;">
 
                     <div id="btns">
 

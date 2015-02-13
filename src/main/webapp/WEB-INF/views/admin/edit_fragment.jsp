@@ -10,7 +10,8 @@
     <link href="${ctx}/static/libs/image-upload/style.css" type="text/css" rel="stylesheet"/>
 
     <script type="text/javascript" charset="utf-8" src="${ctx}/static/libs/webuploader/webuploader.min.js"></script>
-    <script type="text/javascript" charset="utf-8" src="${ctx}/static/libs/image-upload/upload.js"></script>
+    <script type="text/javascript" charset="utf-8"
+            src="${ctx}/static/libs/image-upload/upload_fragment_image.js"></script>
 </head>
 
 
@@ -25,34 +26,71 @@
                 <div class="col-lg-12">
                     <h1 class="page-header">编辑碎片</h1>
 
-
-                    <!--头部，相册选择和格式选择-->
-
-                    <div id="uploader">
-                        <div class="queueList">
-                            <div id="dndArea" class="placeholder">
-                                <div id="filePicker"></div>
-                                <p>或将照片拖到这里，单次最多可选300张</p>
-                            </div>
-                        </div>
-                        <div class="statusBar" style="display:none;">
-                            <div class="progress">
-                                <span class="text">0%</span>
-                                <span class="percentage"></span>
-                            </div>
-                            <div class="info"></div>
-                            <div class="btns">
-                                <div id="filePicker2"></div>
-                                <div class="uploadBtn">开始上传</div>
-                            </div>
-                        </div>
-                    </div>
-
-
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
             <!-- /.row -->
+
+            <div class="row">
+
+                <div class="col-lg-10">
+
+                    <form role="form" method="post">
+
+                        <div class="form-group">
+                            <label>碎片简介</label>
+
+                            <textarea class="form-control" rows="3" placeholder="剪短介绍,不超过140字"></textarea>
+
+                        </div>
+
+
+                        <div class="form-group">
+                            <label>上传图片(4张)</label>
+
+                            <!--头部，相册选择和格式选择-->
+                            <div id="uploader">
+                                <div class="queueList">
+                                    <div id="dndArea" class="placeholder">
+                                        <div id="filePicker"></div>
+                                        <p>或将照片拖到这里，单次最多可选300张</p>
+                                    </div>
+                                </div>
+                                <div class="statusBar" style="display:none;">
+                                    <div class="progress">
+                                        <span class="text">0%</span>
+                                        <span class="percentage"></span>
+                                    </div>
+                                    <div class="info"></div>
+                                    <div class="btns">
+                                        <div id="filePicker2"></div>
+                                        <div class="uploadBtn">开始上传</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4">
+                            <input id="2" class="btn btn-normal btn-block" type="submit" value="预览"/>
+                        </div>
+
+
+                        <div class="col-lg-4">
+                            <input id="submit_btn" class="btn btn-primary btn-block" type="submit" value="暂存到草稿箱"/>
+                        </div>
+
+                        <div class="col-lg-4">
+                            <input id="1" class="btn btn-success btn-block" type="submit" value="提交发布"/>
+                        </div>
+
+
+                    </form>
+
+
+                </div>
+
+            </div>
+
         </div>
         <!-- /.container-fluid -->
     </div>

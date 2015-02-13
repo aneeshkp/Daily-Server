@@ -26,7 +26,7 @@ public class QiniuService {
     private String domainName;
 
     public String uploadFile(String localFilePath, String key) {
-        String resultUrl = "";
+        String resultUrl;
         try {
             Config.ACCESS_KEY = ak;
             Config.SECRET_KEY = sk;
@@ -34,10 +34,8 @@ public class QiniuService {
             PutPolicy putPolicy = new PutPolicy(bucketName);
             String uptoken = putPolicy.token(mac);
             PutExtra extra = new PutExtra();
-//            String key = String.valueOf(System.currentTimeMillis());
-//            String localFile = "/Users/fangs/Pictures/drunk.jpg";
             PutRet ret = IoApi.putFile(uptoken, key, localFilePath, extra);
-//            System.out.println(ret);
+//            ret.getHash();
             resultUrl = domainName + key;
         } catch (AuthException e) {
             e.printStackTrace();

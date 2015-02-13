@@ -124,8 +124,8 @@ public abstract class BaseAdminController {
     @ExceptionHandler(Exception.class)
     @ResponseBody
     public ModelAndView handleException(Exception ex) {
-        log.error("controller exception =====>>>>>>>>>>", ex);
-        ModelAndView model = new ModelAndView("common/error/500");
+        log.error("admin controller exception =====>>>>>>>>>>", ex);
+        ModelAndView model = new ModelAndView("error/500");
         model.addObject("exception", ex);
         model.addObject(ex);
         return model;

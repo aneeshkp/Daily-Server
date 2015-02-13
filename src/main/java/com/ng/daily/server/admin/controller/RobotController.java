@@ -1,5 +1,6 @@
 package com.ng.daily.server.admin.controller;
 
+import com.ng.daily.server.admin.base.BaseAdminController;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -9,12 +10,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
  */
 @Controller
 @RequestMapping(value = "/admin/robot")
-public class RobotController {
+public class RobotController extends BaseAdminController {
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String index() {
         return "admin/robot";
     }
 
     // 运行状态 抓取日志 抓取量
-    
+
 }
