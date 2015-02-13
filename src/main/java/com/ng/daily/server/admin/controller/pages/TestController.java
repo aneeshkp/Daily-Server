@@ -4,6 +4,8 @@ import com.ng.daily.server.admin.base.BaseAdminController;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
@@ -83,6 +85,20 @@ public class TestController extends BaseAdminController {
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login() {
         return "admin/pages/login";
+    }
+
+    @RequestMapping(value = "/webuploader", method = RequestMethod.GET)
+    public String webuploader() {
+        return "admin/pages/webuploader";
+    }
+
+
+    @RequestMapping(value = "/webuploader/upload", method = RequestMethod.POST)
+    @ResponseBody
+    public String webuploaderUpload(MultipartFile file) {
+        String fileName = file.getName();
+        System.out.println(fileName);
+        return "true";
     }
 
 

@@ -3,11 +3,11 @@ package com.ng.daily.server.admin.controller;
 
 import com.google.common.collect.Maps;
 import com.ng.daily.server.admin.base.BaseAdminController;
-import com.ng.daily.server.admin.entity.Task;
-import com.ng.daily.server.admin.entity.User;
+import com.ng.daily.server.entity.Task;
+import com.ng.daily.server.entity.User;
 import com.ng.daily.server.common.util.web.Servlets;
-import com.ng.daily.server.common.service.account.ShiroDbRealm.ShiroUser;
-import com.ng.daily.server.common.service.task.TaskService;
+import com.ng.daily.server.service.account.ShiroDbRealm.ShiroUser;
+import com.ng.daily.server.service.task.TaskService;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

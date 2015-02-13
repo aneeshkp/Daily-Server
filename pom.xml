@@ -559,7 +559,7 @@
                     </descriptorRefs>
                     <archive>
                         <manifest>
-                            <mainClass>com.ng.daily.server.admin.crawler.style.Style</mainClass>
+                            <mainClass>com.ng.daily.server.service.crawler.style.Style</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

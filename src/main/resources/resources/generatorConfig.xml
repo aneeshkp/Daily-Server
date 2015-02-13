@@ -24,7 +24,7 @@
         </javaTypeResolver>
 
         <!-- 生成model模型，对应的包，存放位置可以指定具体的路径,如/ProjectName/src，也可以使用MAVEN来自动生成 -->
-        <javaModelGenerator targetPackage="com.ng.daily.server.admin.entity" targetProject="MAVEN">
+        <javaModelGenerator targetPackage="com.ng.daily.server.entity" targetProject="MAVEN">
             <property name="enableSubPackages" value="true"/>
         </javaModelGenerator>
 

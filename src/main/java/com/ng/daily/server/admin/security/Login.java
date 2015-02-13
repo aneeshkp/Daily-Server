@@ -1,6 +1,6 @@
 package com.ng.daily.server.admin.security;
 
-import com.ng.daily.server.admin.entity.User;
+import com.ng.daily.server.entity.User;
 import org.apache.commons.lang.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
