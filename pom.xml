@@ -415,6 +415,13 @@
             <version>4.2</version>
         </dependency>
 
+        <!-- 七牛云存储 -->
+        <dependency>
+            <groupId>com.qiniu</groupId>
+            <artifactId>sdk</artifactId>
+            <version>[6.1.7, 6.999]</version>
+        </dependency>
+
         <!-- 在线API文档-->
         <dependency>
             <groupId>com.mangofactory</groupId>
@@ -552,7 +559,7 @@
                     </descriptorRefs>
                     <archive>
                         <manifest>
-                            <mainClass>com.ng.daily.server.crawler.style.Style</mainClass>
+                            <mainClass>com.ng.daily.server.admin.crawler.style.Style</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
