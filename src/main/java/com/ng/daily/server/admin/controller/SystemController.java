@@ -15,4 +15,6 @@ public class SystemController {
         return "admin/system";
     }
 
+    // 配置 异常日志..
+
 }

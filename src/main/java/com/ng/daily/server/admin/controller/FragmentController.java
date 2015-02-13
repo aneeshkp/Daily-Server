@@ -15,4 +15,5 @@ public class FragmentController {
         return "admin/edit_fragment";
     }
 
+    // 图片 简短文字
 }

@@ -42,7 +42,7 @@
     </bean>
 
     <!-- 定义无需Controller的url<->view直接映射 -->
-    <mvc:view-controller path="/" view-name="redirect:/admin/article/"/>
+    <mvc:view-controller path="/" view-name="redirect:/admin/main"/>
 
     <!-- the mvc resources tag does the magic -->
     <mvc:resources mapping="/static/**" location="/static/" />

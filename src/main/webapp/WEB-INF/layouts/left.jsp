@@ -22,6 +22,9 @@
             </li>
 
             <li>
+                <a href="${ctx}/admin/main/"><i class="fa fa-dashboard fa-fw"></i> 概要</a>
+            </li>
+            <li>
                 <a href="${ctx}/admin/article/"><i class="fa fa-edit fa-fw"></i> 编辑文章</a>
             </li>
             <li>
@@ -51,12 +54,6 @@
 
 
 
-            <li>
-                <a href="${ctx}/demo/pages/ueditor"><i class="fa fa-dashboard fa-fw"></i> UEditor</a>
-            </li>
-            <li>
-                <a href="${ctx}/demo/pages/webuploader"><i class="fa fa-dashboard fa-fw"></i> Uploader</a>
-            </li>
 
             <li>
                 <a href="${ctx}/demo/pages/tables"><i class="fa fa-table fa-fw"></i> Tables</a>
@@ -91,6 +88,12 @@
 
 
 
+            <%--<li>--%>
+                <%--<a href="${ctx}/demo/pages/ueditor"><i class="fa fa-dashboard fa-fw"></i> UEditor</a>--%>
+            <%--</li>--%>
+            <%--<li>--%>
+                <%--<a href="${ctx}/demo/pages/webuploader"><i class="fa fa-dashboard fa-fw"></i> Uploader</a>--%>
+            <%--</li>--%>
 
 
             <%--<li>--%>

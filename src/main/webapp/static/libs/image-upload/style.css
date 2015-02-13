@@ -18,12 +18,10 @@ time, mark, audio, video, input  {
 html, body, form, fieldset, p, div, h1, h2, h3, h4, h5, h6 {
     -webkit-text-size-adjust: none;
 }
-*/
 
 article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
     display: block;
 }
-
 body {
     font-family: arial, sans-serif;
 }
@@ -41,6 +39,7 @@ blockquote:before, blockquote:after, q:before, q:after {
     content: none;
 }
 
+
 ins {
     text-decoration: none;
 }
@@ -54,7 +53,11 @@ table {
     border-spacing: 0;
 }
 
+*/
+
+
 /* ------------ */
+/**
 #wrapper {
     width: 980px;
     margin: 0 auto;
@@ -70,6 +73,7 @@ table {
     margin-top: 10px;
     background-color: #FFF;
 }
+*/
 
 #uploader .queueList {
     margin: 20px;

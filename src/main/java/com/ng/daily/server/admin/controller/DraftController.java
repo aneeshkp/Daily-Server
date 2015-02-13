@@ -15,4 +15,7 @@ public class DraftController {
         return "admin/draft";
     }
 
+    // 编辑 提交发布 废弃
+    
+
 }

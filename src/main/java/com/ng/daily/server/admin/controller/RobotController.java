@@ -15,4 +15,6 @@ public class RobotController {
         return "admin/robot";
     }
 
+    // 运行状态 抓取日志 抓取量
+    
 }

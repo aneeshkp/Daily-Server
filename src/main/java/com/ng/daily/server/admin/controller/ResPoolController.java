@@ -15,4 +15,6 @@ public class ResPoolController {
         return "admin/respool";
     }
 
+    //链接 文字 图片 来源 时间 已使用/废弃 评分 备注
+
 }
