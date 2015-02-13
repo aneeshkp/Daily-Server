@@ -44,7 +44,7 @@ public class MediumController {
 
     @RequestMapping(value = "/medium/save", method = RequestMethod.POST)
     @ResponseBody
-    public String upload(HttpServletRequest request, HttpServletResponse response){
+    public String upload(HttpServletRequest request, HttpServletResponse response) {
         System.out.println(request.toString());
         Map<String, String[]> map = request.getParameterMap();
 
@@ -62,7 +62,7 @@ public class MediumController {
     @ResponseBody
     public String upload(
 //                         @RequestParam(value = "name", required = false) String name,
-                         @RequestParam(value = "file", required = true) MultipartFile file) throws IOException {
+            @RequestParam(value = "file", required = true) MultipartFile file) throws IOException {
 
         String imageUrl = imagePlaceHolder;
         if (!file.isEmpty()) {

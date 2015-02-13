@@ -5,12 +5,12 @@
  ********/
 package com.ng.daily.server.service.account;
 
+import com.ng.daily.server.common.util.Encodes;
+import com.ng.daily.server.common.util.security.Digests;
 import com.ng.daily.server.entity.User;
 import com.ng.daily.server.repository.task.TaskRepository;
 import com.ng.daily.server.repository.user.UserRepository;
 import com.ng.daily.server.service.ServiceException;
-import com.ng.daily.server.common.util.Encodes;
-import com.ng.daily.server.common.util.security.Digests;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.joda.time.DateTime;
@@ -35,7 +35,7 @@ public class AccountService {
     public static final int HASH_INTERATIONS = 1024;
     private static final int SALT_SIZE = 8;
 
-    private static Logger logger = LoggerFactory.getLogger(AccountService.class);
+    private static Logger log = LoggerFactory.getLogger(AccountService.class);
 
 //    @Autowired
 //    private RedisTemplate redisTemplate;
@@ -96,7 +96,7 @@ public class AccountService {
 
     public void deleteUser(Long id) {
         if (isSupervisor(id)) {
-            logger.warn("操作员{}尝试删除超级管理员用户", getCurrentUserName());
+            log.warn("操作员{}尝试删除超级管理员用户", getCurrentUserName());
             throw new ServiceException("不能删除超级管理员用户");
         }
         userRepository.delete(id);

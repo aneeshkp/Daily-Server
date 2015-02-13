@@ -19,10 +19,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
-* 邮件
-* <p/>
-* Created by fangs on 15/1/15.
-*/
+ * 邮件
+ * <p/>
+ * Created by fangs on 15/1/15.
+ */
 @Component
 public class VelocityEmailSender {
 

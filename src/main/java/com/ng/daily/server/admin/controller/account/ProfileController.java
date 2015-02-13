@@ -1,4 +1,3 @@
-
 package com.ng.daily.server.admin.controller.account;
 
 import com.ng.daily.server.admin.base.BaseAdminController;
@@ -23,7 +22,7 @@ import javax.validation.Valid;
  */
 @Controller
 @RequestMapping(value = "/admin/profile")
-public class ProfileController  extends BaseAdminController {
+public class ProfileController extends BaseAdminController {
 
     @Autowired
     private AccountService accountService;

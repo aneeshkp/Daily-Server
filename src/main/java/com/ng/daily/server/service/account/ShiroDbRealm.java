@@ -6,8 +6,8 @@
 package com.ng.daily.server.service.account;
 
 import com.google.common.base.Objects;
-import com.ng.daily.server.common.util.SpringContextHolder;
 import com.ng.daily.server.common.util.Encodes;
+import com.ng.daily.server.common.util.SpringContextHolder;
 import com.ng.daily.server.entity.User;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
@@ -47,7 +47,7 @@ public class ShiroDbRealm extends AuthorizingRealm {
         ShiroUser shiroUser = (ShiroUser) principals.getPrimaryPrincipal();
         AccountService accountService = SpringContextHolder.getBean("accountService");
         User user = accountService.findUserByLoginName(shiroUser.loginName);
-        if(user == null) {
+        if (user == null) {
             return null;
         } else {
             SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();

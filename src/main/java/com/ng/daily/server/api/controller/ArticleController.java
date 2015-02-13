@@ -6,8 +6,6 @@ import com.ng.daily.server.entity.Article;
 import com.ng.daily.server.service.article.ArticleService;
 import net.sf.ehcache.Cache;
 import net.sf.ehcache.Element;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -22,8 +20,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping(value = "/api/v1/article")
 public class ArticleController extends ApiController {
 
-    private static final Logger logger = LoggerFactory.getLogger(ArticleController.class);
-
     @Autowired
     private ArticleService articleService;
 
@@ -34,7 +30,7 @@ public class ArticleController extends ApiController {
     @ResponseBody
     public ApiResponse list() {
 
-        logger.debug("article list .....");
+        log.debug("article list .....");
 
         Page<Article> list = articleService.listAll();
 

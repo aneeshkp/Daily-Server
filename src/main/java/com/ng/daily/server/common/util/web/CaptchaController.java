@@ -12,7 +12,6 @@ import com.github.bingoohuang.patchca.service.Captcha;
 import com.github.bingoohuang.patchca.text.renderer.BestFitTextRenderer;
 import com.github.bingoohuang.patchca.text.renderer.TextRenderer;
 import com.github.bingoohuang.patchca.word.RandomWordFactory;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -37,9 +36,9 @@ import java.util.Random;
 
 /**
  * 验证码
- *
-* Created by fangs on 15/1/14.
-*/
+ * <p/>
+ * Created by fangs on 15/1/14.
+ */
 @Controller
 @RequestMapping(value = "/captcha")
 public class CaptchaController {
@@ -74,7 +73,7 @@ public class CaptchaController {
         outputStream.close();
     }
 
-    @RequestMapping(value="" ,method = RequestMethod.POST)
+    @RequestMapping(value = "", method = RequestMethod.POST)
     public void validCaptcha(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession(true);

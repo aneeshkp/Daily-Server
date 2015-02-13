@@ -1,11 +1,10 @@
-
 package com.ng.daily.server.admin.controller;
 
 import com.google.common.collect.Maps;
 import com.ng.daily.server.admin.base.BaseAdminController;
+import com.ng.daily.server.common.util.web.Servlets;
 import com.ng.daily.server.entity.Task;
 import com.ng.daily.server.entity.User;
-import com.ng.daily.server.common.util.web.Servlets;
 import com.ng.daily.server.service.account.ShiroDbRealm.ShiroUser;
 import com.ng.daily.server.service.task.TaskService;
 import org.apache.shiro.SecurityUtils;
@@ -35,7 +34,7 @@ import java.util.Map;
  */
 @Controller
 @RequestMapping(value = "/admin/task")
-public class TaskController  extends BaseAdminController {
+public class TaskController extends BaseAdminController {
 
     private static final String PAGE_SIZE = "10";
 

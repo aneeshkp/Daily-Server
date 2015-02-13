@@ -34,7 +34,7 @@ public class UEditorController extends BaseAdminController {
         }
 
         String[] values = request.getParameterValues("editorValue");
-        for(String v : values) {
+        for (String v : values) {
             System.out.println(v);
         }
 

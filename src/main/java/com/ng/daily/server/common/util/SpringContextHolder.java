@@ -3,6 +3,7 @@ package com.ng.daily.server.common.util;
 /**
  * Created by fangs on 15/1/20.
  */
+
 import org.apache.commons.lang.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

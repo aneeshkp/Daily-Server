@@ -63,11 +63,11 @@
 
 
     <!-- FormValidation CSS file -->
-    <link rel="stylesheet" href="${ctx}/static/libs/validator/css/formValidation.min.css">
+    <link rel="stylesheet" href="${ctx}/static/libs/formvalidation/css/formValidation.min.css">
     <!-- FormValidation plugin and the class supports validating Bootstrap form -->
-    <script src="${ctx}/static/libs/validator/js/formValidation.js"></script>
-    <script src="${ctx}/static/libs/validator/js/framework/bootstrap.min.js"></script>
-    <script src="${ctx}/static/libs/validator/js/language/zh_CN.js"></script>
+    <script src="${ctx}/static/libs/formvalidation/js/formValidation.js"></script>
+    <script src="${ctx}/static/libs/formvalidation/js/framework/bootstrap.min.js"></script>
+    <script src="${ctx}/static/libs/formvalidation/js/language/zh_CN.js"></script>
 
 
     <sitemesh:head/>

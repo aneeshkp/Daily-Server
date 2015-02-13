@@ -1,12 +1,11 @@
 package com.ng.daily.server.api.controller;
 
+import com.ng.daily.server.api.base.ApiController;
 import com.ng.daily.server.api.exception.RestException;
 import com.ng.daily.server.common.util.BeanValidators;
 import com.ng.daily.server.common.util.web.MediaTypes;
 import com.ng.daily.server.entity.Task;
 import com.ng.daily.server.service.task.TaskService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -26,9 +25,7 @@ import java.util.List;
  */
 @Controller
 @RequestMapping(value = "/api/v1/task")
-public class TaskRestController {
-
-    private static Logger logger = LoggerFactory.getLogger(TaskRestController.class);
+public class TaskRestController extends ApiController {
 
     @Autowired
     private TaskService taskService;
@@ -48,7 +45,7 @@ public class TaskRestController {
         Task task = taskService.getTask(id);
         if (task == null) {
             String message = "任务不存在(id:" + id + ")";
-            logger.warn(message);
+            log.warn(message);
             throw new RestException(HttpStatus.NOT_FOUND, message);
         }
         return task;

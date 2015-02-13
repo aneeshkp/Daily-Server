@@ -2,7 +2,7 @@ package com.ng.daily.server.api.base;
 
 /**
  * 移动API响应对象
- *
+ * <p/>
  * Created by fangs on 15/1/7.
  */
 public class ApiResponse {

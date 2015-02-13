@@ -4,8 +4,6 @@ import com.google.common.collect.Maps;
 import com.ng.daily.server.api.base.ApiController;
 import com.ng.daily.server.api.base.ApiResponse;
 import com.ng.daily.server.common.util.web.MediaTypes;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,12 +19,10 @@ import java.util.Map;
 @RequestMapping(value = "/api/v1/version")
 public class VersionController extends ApiController {
 
-    private static Logger logger = LoggerFactory.getLogger(VersionController.class);
-
     @RequestMapping(value = "/{platform}/{version}", method = RequestMethod.GET, produces = MediaTypes.JSON_UTF_8)
     @ResponseBody
     public ApiResponse version(@PathVariable(value = "platform") String platform, @PathVariable(value = "version") String version) {
-        logger.debug("version");
+        log.debug("version");
         Map<String, String> map = Maps.newHashMap();
         map.put("platform", platform);
         map.put("version", version);

@@ -47,7 +47,7 @@ public class Style {
             service.submit(task);
 
 //            if(item.hasDetailSlides) {
-                // TODO deltail image download
+            // TODO deltail image download
 //            }
 
         }

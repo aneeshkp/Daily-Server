@@ -25,136 +25,136 @@ import java.net.URL;
 
 /**
  * 演示使用多线程安全且带连接池的Apache HttpClient和 JDK两种方案获取远程静态内容并进行展示的Servlet.
- * 
+ * <p/>
  * 另外简单演示了轻量级更易用的Apache HttpClient Fluent API。
- * 
+ * <p/>
  * 演示访问地址如下(contentUrl已经过URL编码):
  * remote-content?contentUrl=http%3A%2F%2Flocalhost%3A8080%2Fshowcase%2Fimages%2Flogo.jpg
- * 
+ *
  * @author calvin
  */
 public class RemoteContentServlet extends HttpServlet {
 
-	private static final long serialVersionUID = -8483811141908827663L;
+    private static final long serialVersionUID = -8483811141908827663L;
 
-	private static final int TIMEOUT_SECONDS = 20;
+    private static final int TIMEOUT_SECONDS = 20;
 
-	private static final int POOL_SIZE = 20;
+    private static final int POOL_SIZE = 20;
 
-	private static Logger logger = LoggerFactory.getLogger(RemoteContentServlet.class);
+    private static Logger logger = LoggerFactory.getLogger(RemoteContentServlet.class);
 
-	private static CloseableHttpClient httpClient;
+    private static CloseableHttpClient httpClient;
 
-	@Override
-	public void init(ServletConfig config) throws ServletException {
-		initApacheHttpClient();
-	}
+    @Override
+    public void init(ServletConfig config) throws ServletException {
+        initApacheHttpClient();
+    }
 
-	@Override
-	public void destroy() {
-		destroyApacheHttpClient();
-	}
+    @Override
+    public void destroy() {
+        destroyApacheHttpClient();
+    }
 
-	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 获取URL
-		String contentUrl = request.getParameter("contentUrl");
-		if (StringUtils.isBlank(contentUrl)) {
-			response.sendError(HttpServletResponse.SC_BAD_REQUEST, "contentUrl parameter is required.");
-		}
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // 获取URL
+        String contentUrl = request.getParameter("contentUrl");
+        if (StringUtils.isBlank(contentUrl)) {
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "contentUrl parameter is required.");
+        }
 
-		// 基於配置，使用HttpClient或JDK 獲取URL內容
-		String client = request.getParameter("client");
-		if ("apache".equals(client)) {
-			fetchContentByApacheHttpClient(response, contentUrl);
-		} else {
-			fetchContentByJDKConnection(response, contentUrl);
-		}
-	}
+        // 基於配置，使用HttpClient或JDK 獲取URL內容
+        String client = request.getParameter("client");
+        if ("apache".equals(client)) {
+            fetchContentByApacheHttpClient(response, contentUrl);
+        } else {
+            fetchContentByJDKConnection(response, contentUrl);
+        }
+    }
 
-	private void fetchContentByApacheHttpClient(HttpServletResponse response, String contentUrl) throws IOException {
-		// 获取内容
-		HttpGet httpGet = new HttpGet(contentUrl);
-		CloseableHttpResponse remoteResponse = httpClient.execute(httpGet);
-		try {
-			// 判断返回值
-			int statusCode = remoteResponse.getStatusLine().getStatusCode();
-			if (statusCode >= 400) {
-				response.sendError(statusCode, "fetch image error from " + contentUrl);
-				return;
-			}
+    private void fetchContentByApacheHttpClient(HttpServletResponse response, String contentUrl) throws IOException {
+        // 获取内容
+        HttpGet httpGet = new HttpGet(contentUrl);
+        CloseableHttpResponse remoteResponse = httpClient.execute(httpGet);
+        try {
+            // 判断返回值
+            int statusCode = remoteResponse.getStatusLine().getStatusCode();
+            if (statusCode >= 400) {
+                response.sendError(statusCode, "fetch image error from " + contentUrl);
+                return;
+            }
 
-			HttpEntity entity = remoteResponse.getEntity();
+            HttpEntity entity = remoteResponse.getEntity();
 
-			// 设置Header
-			response.setContentType(entity.getContentType().getValue());
-			if (entity.getContentLength() > 0) {
-				response.setContentLength((int) entity.getContentLength());
-			}
-			// 输出内容
-			InputStream input = entity.getContent();
-			OutputStream output = response.getOutputStream();
-			// 基于byte数组读取InputStream并直接写入OutputStream, 数组默认大小为4k.
-			IOUtils.copy(input, output);
-			output.flush();
-		} finally {
-			remoteResponse.close();
-		}
-	}
+            // 设置Header
+            response.setContentType(entity.getContentType().getValue());
+            if (entity.getContentLength() > 0) {
+                response.setContentLength((int) entity.getContentLength());
+            }
+            // 输出内容
+            InputStream input = entity.getContent();
+            OutputStream output = response.getOutputStream();
+            // 基于byte数组读取InputStream并直接写入OutputStream, 数组默认大小为4k.
+            IOUtils.copy(input, output);
+            output.flush();
+        } finally {
+            remoteResponse.close();
+        }
+    }
 
-	private void fetchContentByJDKConnection(HttpServletResponse response, String contentUrl) throws IOException {
+    private void fetchContentByJDKConnection(HttpServletResponse response, String contentUrl) throws IOException {
 
-		HttpURLConnection connection = (HttpURLConnection) new URL(contentUrl).openConnection();
-		// 设置Socket超时
-		connection.setReadTimeout(TIMEOUT_SECONDS * 1000);
-		try {
-			connection.connect();
+        HttpURLConnection connection = (HttpURLConnection) new URL(contentUrl).openConnection();
+        // 设置Socket超时
+        connection.setReadTimeout(TIMEOUT_SECONDS * 1000);
+        try {
+            connection.connect();
 
-			// 真正发出请求
-			InputStream input;
-			try {
-				input = connection.getInputStream();
-			} catch (FileNotFoundException e) {
-				response.sendError(HttpServletResponse.SC_NOT_FOUND, contentUrl + " is not found.");
-				return;
-			}
+            // 真正发出请求
+            InputStream input;
+            try {
+                input = connection.getInputStream();
+            } catch (FileNotFoundException e) {
+                response.sendError(HttpServletResponse.SC_NOT_FOUND, contentUrl + " is not found.");
+                return;
+            }
 
-			// 设置Header
-			response.setContentType(connection.getContentType());
-			if (connection.getContentLength() > 0) {
-				response.setContentLength(connection.getContentLength());
-			}
+            // 设置Header
+            response.setContentType(connection.getContentType());
+            if (connection.getContentLength() > 0) {
+                response.setContentLength(connection.getContentLength());
+            }
 
-			// 输出内容
-			OutputStream output = response.getOutputStream();
-			try {
-				// 基于byte数组读取InputStream并直接写入OutputStream, 数组默认大小为4k.
-				IOUtils.copy(input, output);
-				output.flush();
-			} finally {
-				// 保证InputStream的关闭.
-				IOUtils.closeQuietly(input);
-			}
-		} finally {
-			connection.disconnect();
-		}
-	}
+            // 输出内容
+            OutputStream output = response.getOutputStream();
+            try {
+                // 基于byte数组读取InputStream并直接写入OutputStream, 数组默认大小为4k.
+                IOUtils.copy(input, output);
+                output.flush();
+            } finally {
+                // 保证InputStream的关闭.
+                IOUtils.closeQuietly(input);
+            }
+        } finally {
+            connection.disconnect();
+        }
+    }
 
-	// 创建包含connection pool与超时设置的client
-	private void initApacheHttpClient() {
-		RequestConfig requestConfig = RequestConfig.custom().setSocketTimeout(TIMEOUT_SECONDS * 1000)
-				.setConnectTimeout(TIMEOUT_SECONDS * 1000).build();
+    // 创建包含connection pool与超时设置的client
+    private void initApacheHttpClient() {
+        RequestConfig requestConfig = RequestConfig.custom().setSocketTimeout(TIMEOUT_SECONDS * 1000)
+                .setConnectTimeout(TIMEOUT_SECONDS * 1000).build();
 
-		httpClient = HttpClientBuilder.create().setMaxConnTotal(POOL_SIZE).setMaxConnPerRoute(POOL_SIZE)
-				.setDefaultRequestConfig(requestConfig).build();
-	}
+        httpClient = HttpClientBuilder.create().setMaxConnTotal(POOL_SIZE).setMaxConnPerRoute(POOL_SIZE)
+                .setDefaultRequestConfig(requestConfig).build();
+    }
 
-	private void destroyApacheHttpClient() {
-		try {
-			httpClient.close();
-		} catch (IOException e) {
-			logger.error("httpclient close fail", e);
-		}
-	}
+    private void destroyApacheHttpClient() {
+        try {
+            httpClient.close();
+        } catch (IOException e) {
+            logger.error("httpclient close fail", e);
+        }
+    }
 
 }

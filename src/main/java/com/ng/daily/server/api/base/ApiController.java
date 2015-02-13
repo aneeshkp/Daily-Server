@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  */
 public abstract class ApiController {
 
-    private static Logger logger = LoggerFactory.getLogger(ApiController.class);
+    protected Logger log = LoggerFactory.getLogger(getClass());
 
     protected ApiResponse success() {
         return new ApiResponse();
@@ -38,7 +38,7 @@ public abstract class ApiController {
     @ExceptionHandler(Exception.class)
     @ResponseBody
     public ApiResponse handleException(Exception e) {
-        logger.error("mobile api exception =====>>>>>>>>>>", e);
+        log.error("mobile api exception =====>>>>>>>>>>", e);
         e.printStackTrace();
         return exception(e);
     }
