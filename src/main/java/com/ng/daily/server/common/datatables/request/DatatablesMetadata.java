@@ -15,13 +15,13 @@ public class DatatablesMetadata {
 
     private Integer start;
 
-    private Integer lenght;
+    private Integer length;
 
     private Integer draw;
 
     public DatatablesMetadata(Integer start, Integer lenght, String search, Integer draw) {
         this.start = start;
-        this.lenght = lenght;
+        this.length = lenght;
         this.search = search;
         this.draw = draw;
     }
@@ -51,7 +51,7 @@ public class DatatablesMetadata {
     }
 
     public int getCurrentPageIndex() {
-        return Math.max(0, this.start / this.lenght);
+        return Math.max(0, this.start / this.length);
     }
 
     public String getSearch() {
@@ -70,12 +70,12 @@ public class DatatablesMetadata {
         this.start = start;
     }
 
-    public Integer getLenght() {
-        return lenght;
+    public Integer getLength() {
+        return length;
     }
 
-    public void setLenght(Integer lenght) {
-        this.lenght = lenght;
+    public void setLength(Integer length) {
+        this.length = length;
     }
 
     public Integer getDraw() {
@@ -94,7 +94,7 @@ public class DatatablesMetadata {
         DatatablesMetadata that = (DatatablesMetadata) o;
 
         if (draw != null ? !draw.equals(that.draw) : that.draw != null) return false;
-        if (lenght != null ? !lenght.equals(that.lenght) : that.lenght != null) return false;
+        if (length != null ? !length.equals(that.length) : that.length != null) return false;
         if (search != null ? !search.equals(that.search) : that.search != null) return false;
         if (start != null ? !start.equals(that.start) : that.start != null) return false;
 
@@ -105,7 +105,7 @@ public class DatatablesMetadata {
     public int hashCode() {
         int result = search != null ? search.hashCode() : 0;
         result = 31 * result + (start != null ? start.hashCode() : 0);
-        result = 31 * result + (lenght != null ? lenght.hashCode() : 0);
+        result = 31 * result + (length != null ? length.hashCode() : 0);
         result = 31 * result + (draw != null ? draw.hashCode() : 0);
         return result;
     }

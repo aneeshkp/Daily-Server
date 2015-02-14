@@ -79,17 +79,17 @@
                         notEmpty: {
                             message: '登录名不能为空'
                         }
-                        <%--,--%>
-                        <%--remote: {--%>
-                            <%--url: "${ctx}/register/checkLoginName",--%>
-                            <%--type: 'POST',--%>
-                            <%--data: function (validator) {--%>
-                                <%--return {--%>
-                                    <%--loginName: validator.getFieldElements('loginName').val()--%>
-                                <%--};--%>
-                            <%--},--%>
-                            <%--message: '该账号已被注册'--%>
-                        <%--}--%>
+                        ,
+                        remote: {
+                            url: "${ctx}/admin/register/checkLoginName",
+                            type: 'POST',
+                            data: function (validator) {
+                                return {
+                                    loginName: validator.getFieldElements('loginName').val()
+                                };
+                            },
+                            message: '该账号已被注册'
+                        }
                     }
                 }
             }

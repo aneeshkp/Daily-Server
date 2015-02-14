@@ -39,6 +39,8 @@
             <li>
                 <a href="${ctx}/admin/onlinelist/"><i class="fa fa-list  fa-fw"></i> 已发布列表</a>
             </li>
+
+            <!--
             <li>
                 <a href="${ctx}/admin/robot/"><i class="fa fa-beer fa-fw"></i> 抓取机器人</a>
             </li>
@@ -51,8 +53,7 @@
             <li>
                 <a href="${ctx}/admin/system/"><i class="fa fa-cog fa-fw"></i> 系统管理</a>
             </li>
-
-
+-->
 
 
             <li>
@@ -87,71 +88,70 @@
             </li>
 
 
-
             <%--<li>--%>
-                <%--<a href="${ctx}/demo/pages/ueditor"><i class="fa fa-dashboard fa-fw"></i> UEditor</a>--%>
+            <%--<a href="${ctx}/demo/pages/ueditor"><i class="fa fa-dashboard fa-fw"></i> UEditor</a>--%>
             <%--</li>--%>
             <%--<li>--%>
-                <%--<a href="${ctx}/demo/pages/webuploader"><i class="fa fa-dashboard fa-fw"></i> Uploader</a>--%>
+            <%--<a href="${ctx}/demo/pages/webuploader"><i class="fa fa-dashboard fa-fw"></i> Uploader</a>--%>
             <%--</li>--%>
 
 
             <%--<li>--%>
-                <%--<a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Charts<span class="fa arrow"></span></a>--%>
-                <%--<ul class="nav nav-second-level">--%>
-                    <%--<li>--%>
-                        <%--<a href="${ctx}/demo/pages/flot">Flot Charts</a>--%>
-                    <%--</li>--%>
-                    <%--<li>--%>
-                        <%--<a href="${ctx}/demo/pages/morris">Morris.js Charts</a>--%>
-                    <%--</li>--%>
-                <%--</ul>--%>
-                <%--<!-- /.nav-second-level -->--%>
+            <%--<a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Charts<span class="fa arrow"></span></a>--%>
+            <%--<ul class="nav nav-second-level">--%>
+            <%--<li>--%>
+            <%--<a href="${ctx}/demo/pages/flot">Flot Charts</a>--%>
+            <%--</li>--%>
+            <%--<li>--%>
+            <%--<a href="${ctx}/demo/pages/morris">Morris.js Charts</a>--%>
+            <%--</li>--%>
+            <%--</ul>--%>
+            <%--<!-- /.nav-second-level -->--%>
             <%--</li>--%>
             <%----%>
             <%--<li>--%>
-                <%--<a href="#"><i class="fa fa-sitemap fa-fw"></i> Multi-Level Dropdown<span--%>
-                        <%--class="fa arrow"></span></a>--%>
-                <%--<ul class="nav nav-second-level">--%>
-                    <%--<li>--%>
-                        <%--<a href="#">Second Level Item</a>--%>
-                    <%--</li>--%>
-                    <%--<li>--%>
-                        <%--<a href="#">Second Level Item</a>--%>
-                    <%--</li>--%>
-                    <%--<li>--%>
-                        <%--<a href="#">Third Level <span class="fa arrow"></span></a>--%>
-                        <%--<ul class="nav nav-third-level">--%>
-                            <%--<li>--%>
-                                <%--<a href="#">Third Level Item</a>--%>
-                            <%--</li>--%>
-                            <%--<li>--%>
-                                <%--<a href="#">Third Level Item</a>--%>
-                            <%--</li>--%>
-                            <%--<li>--%>
-                                <%--<a href="#">Third Level Item</a>--%>
-                            <%--</li>--%>
-                            <%--<li>--%>
-                                <%--<a href="#">Third Level Item</a>--%>
-                            <%--</li>--%>
-                        <%--</ul>--%>
-                        <%--<!-- /.nav-third-level -->--%>
-                    <%--</li>--%>
-                <%--</ul>--%>
-                <%--<!-- /.nav-second-level -->--%>
+            <%--<a href="#"><i class="fa fa-sitemap fa-fw"></i> Multi-Level Dropdown<span--%>
+            <%--class="fa arrow"></span></a>--%>
+            <%--<ul class="nav nav-second-level">--%>
+            <%--<li>--%>
+            <%--<a href="#">Second Level Item</a>--%>
             <%--</li>--%>
             <%--<li>--%>
-                <%--<a href="#"><i class="fa fa-files-o fa-fw"></i> Sample Pages<span--%>
-                        <%--class="fa arrow"></span></a>--%>
-                <%--<ul class="nav nav-second-level">--%>
-                    <%--<li>--%>
-                        <%--<a href="${ctx}/demo/pages/blank">Blank Page</a>--%>
-                    <%--</li>--%>
-                    <%--<li>--%>
-                        <%--<a href="${ctx}/demo/pages/login">Login Page</a>--%>
-                    <%--</li>--%>
-                <%--</ul>--%>
-                <%--<!-- /.nav-second-level -->--%>
+            <%--<a href="#">Second Level Item</a>--%>
+            <%--</li>--%>
+            <%--<li>--%>
+            <%--<a href="#">Third Level <span class="fa arrow"></span></a>--%>
+            <%--<ul class="nav nav-third-level">--%>
+            <%--<li>--%>
+            <%--<a href="#">Third Level Item</a>--%>
+            <%--</li>--%>
+            <%--<li>--%>
+            <%--<a href="#">Third Level Item</a>--%>
+            <%--</li>--%>
+            <%--<li>--%>
+            <%--<a href="#">Third Level Item</a>--%>
+            <%--</li>--%>
+            <%--<li>--%>
+            <%--<a href="#">Third Level Item</a>--%>
+            <%--</li>--%>
+            <%--</ul>--%>
+            <%--<!-- /.nav-third-level -->--%>
+            <%--</li>--%>
+            <%--</ul>--%>
+            <%--<!-- /.nav-second-level -->--%>
+            <%--</li>--%>
+            <%--<li>--%>
+            <%--<a href="#"><i class="fa fa-files-o fa-fw"></i> Sample Pages<span--%>
+            <%--class="fa arrow"></span></a>--%>
+            <%--<ul class="nav nav-second-level">--%>
+            <%--<li>--%>
+            <%--<a href="${ctx}/demo/pages/blank">Blank Page</a>--%>
+            <%--</li>--%>
+            <%--<li>--%>
+            <%--<a href="${ctx}/demo/pages/login">Login Page</a>--%>
+            <%--</li>--%>
+            <%--</ul>--%>
+            <%--<!-- /.nav-second-level -->--%>
             <%--</li>--%>
 
 

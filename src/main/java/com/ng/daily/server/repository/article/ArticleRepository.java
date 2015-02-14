@@ -8,6 +8,4 @@ import org.springframework.data.repository.PagingAndSortingRepository;
  */
 public interface ArticleRepository extends PagingAndSortingRepository<Article, String>, ArticleRepositoryPlus {
 
-    public Article findByAuthor(String author);
-
 }

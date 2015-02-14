@@ -70,7 +70,7 @@ public class AccountService {
         userRepository.save(user);
 
 //
-//        // mybatis
+//        // mybatis test
 //        ssUser u = BeanMapper.map(user, ssUser.class);
 //        userMapper.insert(u);
 //
@@ -78,7 +78,7 @@ public class AccountService {
 //        logger.debug("user from DB : {}", userFromDB);
 //
 //
-//        // redis
+//        // redis test
 //        redisTemplate.opsForValue().set("" + user.getId().longValue(), user.getLoginName());
 //        String userFromRedis = (String) redisTemplate.opsForValue().get("" + user.getId().longValue());
 //

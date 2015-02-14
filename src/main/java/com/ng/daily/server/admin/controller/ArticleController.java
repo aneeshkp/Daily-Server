@@ -18,7 +18,7 @@ public class ArticleController extends BaseAdminController {
     }
 
 
-    // 内容 标题 题图 分类/标签 创建人 创建时间 最后修改人 最后修改时间 发布人 发布时间  来源  推荐度(决定展示优先级)
+    //  分类/标签  推荐度(决定展示优先级)
 
 
 }

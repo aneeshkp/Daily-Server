@@ -6,6 +6,7 @@
 <html>
 <head>
     <title>编辑文章</title>
+    <meta name="decorator" content="default"/>
     <script type="text/javascript" charset="utf-8" src="${ctx}/static/libs/ueditor/ueditor.config.js"></script>
     <script type="text/javascript" charset="utf-8" src="${ctx}/static/libs/ueditor/ueditor.all.min.js"></script>
     <!--建议手动加在语言，避免在ie下有时因为加载语言失败导致编辑器加载失败-->
@@ -30,97 +31,92 @@
             </div>
             <!-- /.row -->
 
+            <form action="/admin/pages/ueditorPost" method="post" role="form">
 
-            <div class="row">
-
-                <div class="col-lg-10">
-                    <form action="/admin/pages/ueditorPost" method="post" role="form">
-
-
+                <div class="row">
+                    <div class="col-lg-8">
                         <div class="form-group">
-                            <label>文章标题</label>
-                            <input class="form-control" placeholder="标题,不超过20字">
-                        </div>
-
-                        <div class="form-group">
-                            <label>文章来源</label>
-                            <input class="form-control" placeholder="来源">
-                        </div>
-
-
-                        <div class="form-group">
-                            <label>分类/标签</label>
-                            <input class="form-control" placeholder="分类/标签">
-                        </div>
-
-                        <div class="form-group">
-                            <label>文章内容</label>
-
+                            <label>内容</label>
                             <!-- 加载编辑器的容器 -->
                             <div>
                                 <script id="editor" type="text/plain" style="height:300px;"></script>
                             </div>
                         </div>
+                    </div>
 
-                        <div class="col-lg-4">
-                            <input id="2" class="btn btn-normal btn-block" type="submit" value="预览"/>
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label>标题</label>
+                            <textarea class="form-control" rows="2" placeholder="标题,不超过20字"></textarea>
                         </div>
-
-                        <div class="col-lg-4">
-                            <input id="submit_btn" class="btn btn-primary btn-block" type="submit" value="暂存到草稿箱"/>
+                        <div class="form-group">
+                            <label>来源</label>
+                            <input class="form-control" placeholder="来源">
                         </div>
-
-                        <div class="col-lg-4">
-                            <input id="1" class="btn btn-success btn-block" type="submit" value="提交发布"/>
+                        <div class="form-group">
+                            <label>分类/标签</label>
+                            <input class="form-control" placeholder="分类/标签">
                         </div>
-
-
-                    </form>
+                    </div>
                 </div>
+
+                <div class="row">
+                    <div class="col-lg-4">
+                        <input id="2" class="btn btn-normal btn-block" type="submit" value="预览"/>
+                    </div>
+                    <div class="col-lg-4">
+                        <input id="submit_btn" class="btn btn-primary btn-block" type="submit" value="暂存到草稿箱"/>
+                    </div>
+                    <div class="col-lg-4">
+                        <input id="1" class="btn btn-success btn-block" type="submit" value="提交发布"/>
+                    </div>
+                </div>
+
 
                 <div class="col-lg-12" style="padding-top: 20px;">
 
                     <div id="btns">
 
-                        <button type="button" class="btn btn-default" onclick="getAllHtml()">获得整个html的内容</button>
+                        <%--<button type="button" class="btn btn-default" onclick="getAllHtml()">获得整个html的内容</button>--%>
+
                         <button type="button" class="btn btn-default" onclick="getContent()">获得内容</button>
                         <button type="button" class="btn btn-default" onclick="setContent()">写入内容</button>
                         <button type="button" class="btn btn-default" onclick="setContent(true)">追加内容</button>
+
                         <button type="button" class="btn btn-default" onclick="getContentTxt()">获得纯文本</button>
                         <button type="button" class="btn btn-default" onclick="getPlainTxt()">获得带格式的纯文本</button>
                         <button type="button" class="btn btn-default" onclick="hasContent()">判断是否有内容</button>
-                        <button type="button" class="btn btn-default" onclick="setFocus()">使编辑器获得焦点</button>
-                        <button type="button" class="btn btn-default" onmousedown="isFocus(event)">编辑器是否获得焦点</button>
-                        <button type="button" class="btn btn-default" onmousedown="setblur(event)">编辑器失去焦点</button>
+                        <%--<button type="button" class="btn btn-default" onclick="setFocus()">使编辑器获得焦点</button>--%>
+                        <%--<button type="button" class="btn btn-default" onmousedown="isFocus(event)">编辑器是否获得焦点</button>--%>
+                        <%--<button type="button" class="btn btn-default" onmousedown="setblur(event)">编辑器失去焦点</button>--%>
 
-                        <button type="button" class="btn btn-default" onclick="getText()">获得当前选中的文本</button>
+                        <%--<button type="button" class="btn btn-default" onclick="getText()">获得当前选中的文本</button>--%>
                         <button type="button" class="btn btn-default" onclick="insertHtml()">插入给定的内容</button>
+
                         <button type="button" class="btn btn-default" id="enable" onclick="setEnabled()">可以编辑</button>
                         <button type="button" class="btn btn-default" onclick="setDisabled()">不可编辑</button>
-                        <button type="button" class="btn btn-default" onclick=" UE.getEditor('editor').setHide()">
-                            隐藏编辑器
-                        </button>
-                        <button type="button" class="btn btn-default" onclick=" UE.getEditor('editor').setShow()">
-                            显示编辑器
-                        </button>
-                        <button type="button" class="btn btn-default" onclick=" UE.getEditor('editor').setHeight(300)">
-                            设置高度为300默认关闭了自动长高
-                        </button>
 
-                        <button type="button" class="btn btn-default" onclick="getLocalData()">获取草稿箱内容</button>
-                        <button type="button" class="btn btn-default" onclick="clearLocalData()">清空草稿箱</button>
+                        <%--<button type="button" class="btn btn-default" onclick=" UE.getEditor('editor').setHide()">隐藏编辑器--%>
+                        <%--</button>--%>
+                        <%--<button type="button" class="btn btn-default" onclick=" UE.getEditor('editor').setShow()">--%>
+                        <%--显示编辑器--%>
+                        <%--</button>--%>
+                        <%--<button type="button" class="btn btn-default" onclick=" UE.getEditor('editor').setHeight(300)">--%>
+                        <%--设置高度为300默认关闭了自动长高--%>
+                        <%--</button>--%>
 
-                        <button type="button" class="btn btn-default" onclick="createEditor()">创建编辑器</button>
-                        <button type="button" class="btn btn-default" onclick="deleteEditor()">删除编辑器</button>
+                        <%--<button type="button" class="btn btn-default" onclick="getLocalData()">获取草稿箱内容</button>--%>
+                        <%--<button type="button" class="btn btn-default" onclick="clearLocalData()">清空草稿箱</button>--%>
+
+                        <%--<button type="button" class="btn btn-default" onclick="createEditor()">创建编辑器</button>--%>
+                        <%--<button type="button" class="btn btn-default" onclick="deleteEditor()">删除编辑器</button>--%>
 
                     </div>
 
 
                 </div>
 
-            </div>
-
-
+            </form>
         </div>
         <!-- /.container-fluid -->
     </div>

@@ -32,15 +32,15 @@
                                     <div class="form-group">
                                         <label for="plainPassword" class="control-label">密码:</label>
 
-                                            <input type="password" id="plainPassword" name="plainPassword"
-                                                   class="form-control"  placeholder="密码"/>
+                                        <input type="password" id="plainPassword" name="plainPassword"
+                                               class="form-control" placeholder="密码"/>
                                     </div>
                                     <div class="form-group">
                                         <label for="confirmPassword" class="control-label">确认密码:</label>
 
-                                            <input type="password" id="confirmPassword" name="confirmPassword"
-                                                   class="form-control"
-                                                   equalTo="#plainPassword"/>
+                                        <input type="password" id="confirmPassword" name="confirmPassword"
+                                               class="form-control"
+                                               equalTo="#plainPassword"/>
                                     </div>
                                     <div class="form-actions">
                                         <input id="submit_btn" class="btn btn-primary" type="submit" value="提交"/>&nbsp;

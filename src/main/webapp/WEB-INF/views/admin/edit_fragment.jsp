@@ -6,6 +6,7 @@
 <html>
 <head>
     <title>编辑碎片</title>
+    <meta name="decorator" content="default"/>
     <link href="${ctx}/static/libs/webuploader/webuploader.css" type="text/css" rel="stylesheet"/>
     <link href="${ctx}/static/libs/image-upload/style.css" type="text/css" rel="stylesheet"/>
 
@@ -25,28 +26,16 @@
             <div class="row">
                 <div class="col-lg-12">
                     <h1 class="page-header">编辑碎片</h1>
-
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
             <!-- /.row -->
 
-            <div class="row">
-
-                <div class="col-lg-10">
-
-                    <form role="form" method="post">
-
+            <form role="form" method="post">
+                <div class="row">
+                    <div class="col-lg-8">
                         <div class="form-group">
-                            <label>碎片简介</label>
-
-                            <textarea class="form-control" rows="3" placeholder="剪短介绍,不超过140字"></textarea>
-
-                        </div>
-
-
-                        <div class="form-group">
-                            <label>上传图片(4张)</label>
+                            <label>图片(4张)</label>
 
                             <!--头部，相册选择和格式选择-->
                             <div id="uploader">
@@ -69,28 +58,38 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
 
-                        <div class="col-lg-4">
-                            <input id="2" class="btn btn-normal btn-block" type="submit" value="预览"/>
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label>标题</label>
+                            <textarea class="form-control" rows="2" placeholder="标题,不超过20字"></textarea>
                         </div>
-
-
-                        <div class="col-lg-4">
-                            <input id="submit_btn" class="btn btn-primary btn-block" type="submit" value="暂存到草稿箱"/>
+                        <div class="form-group">
+                            <label>来源</label>
+                            <input class="form-control" placeholder="来源">
                         </div>
-
-                        <div class="col-lg-4">
-                            <input id="1" class="btn btn-success btn-block" type="submit" value="提交发布"/>
+                        <div class="form-group">
+                            <label>分类/标签</label>
+                            <input class="form-control" placeholder="分类/标签">
                         </div>
-
-
-                    </form>
-
+                    </div>
 
                 </div>
 
-            </div>
+                <div class="row">
+                    <div class="col-lg-4">
+                        <input id="2" class="btn btn-normal btn-block" type="submit" value="预览"/>
+                    </div>
+                    <div class="col-lg-4">
+                        <input id="submit_btn" class="btn btn-primary btn-block" type="submit" value="暂存到草稿箱"/>
+                    </div>
+                    <div class="col-lg-4">
+                        <input id="1" class="btn btn-success btn-block" type="submit" value="提交发布"/>
+                    </div>
+                </div>
 
+            </form>
         </div>
         <!-- /.container-fluid -->
     </div>

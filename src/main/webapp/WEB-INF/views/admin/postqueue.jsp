@@ -21,8 +21,6 @@
                     <h1 class="page-header">发布队列</h1>
 
 
-
-
                 </div>
                 <!-- /.col-lg-12 -->
             </div>

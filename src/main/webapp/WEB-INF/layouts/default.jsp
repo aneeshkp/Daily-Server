@@ -69,6 +69,9 @@
     <script src="${ctx}/static/libs/formvalidation/js/framework/bootstrap.min.js"></script>
     <script src="${ctx}/static/libs/formvalidation/js/language/zh_CN.js"></script>
 
+    <script>
+        var _ctxPath = "${ctx}";
+    </script>
 
     <sitemesh:head/>
 </head>

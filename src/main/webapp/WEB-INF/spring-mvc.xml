@@ -19,6 +19,12 @@
             <!-- 将StringHttpMessageConverter的默认编码设为UTF-8 -->
             <bean class="org.springframework.http.converter.StringHttpMessageConverter">
                 <constructor-arg value="UTF-8"/>
+                <property name="supportedMediaTypes">
+                    <list>
+                        <value>application/json;charset=UTF-8</value>
+                        <value>text/json</value>
+                    </list>
+                </property>
             </bean>
             <!-- 将Jackson2HttpMessageConverter的默认格式化输出设为true -->
             <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
@@ -30,22 +36,25 @@
         </mvc:argument-resolvers>
     </mvc:annotation-driven>
 
+
     <bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator">
         <property name="proxyTargetClass" value="true"/>
     </bean>
 
+
     <!-- 定义JSP文件的位置 -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <!--<property name="order" value="2"/>-->
         <property name="prefix" value="/WEB-INF/views/"/>
         <property name="suffix" value=".jsp"/>
+        <property name="viewClass" value="org.springframework.web.servlet.view.InternalResourceView"/>
     </bean>
+
 
     <!-- 定义无需Controller的url<->view直接映射 -->
     <mvc:view-controller path="/" view-name="redirect:/admin/main"/>
 
     <!-- the mvc resources tag does the magic -->
-    <mvc:resources mapping="/static/**" location="/static/" />
+    <mvc:resources mapping="/static/**" location="/static/"/>
 
     <!-- 容器默认的DefaultServletHandler处理 所有静态内容与无RequestMapping处理的URL-->
     <mvc:default-servlet-handler/>
@@ -67,4 +76,6 @@
             </props>
         </property>
     </bean>
+
+
 </beans>

@@ -16,7 +16,6 @@
 </c:if>
 
 
-
 <div id="wrapper">
 
     <!-- Page Content -->

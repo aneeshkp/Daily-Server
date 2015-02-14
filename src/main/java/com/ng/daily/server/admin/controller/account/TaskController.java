@@ -1,13 +1,12 @@
 package com.ng.daily.server.admin.controller.account;
 
 import com.google.common.collect.Maps;
+import com.ng.daily.server.admin.Utils;
 import com.ng.daily.server.admin.base.BaseAdminController;
 import com.ng.daily.server.common.util.web.Servlets;
 import com.ng.daily.server.entity.Task;
 import com.ng.daily.server.entity.User;
-import com.ng.daily.server.service.account.ShiroDbRealm.ShiroUser;
 import com.ng.daily.server.service.task.TaskService;
-import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -17,7 +16,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.ServletRequest;
 import javax.validation.Valid;
-import java.math.BigInteger;
 import java.util.Map;
 
 /**
@@ -54,7 +52,7 @@ public class TaskController extends BaseAdminController {
                        @RequestParam(value = "sortType", defaultValue = "auto") String sortType, Model model,
                        ServletRequest request) {
         Map<String, Object> searchParams = Servlets.getParametersStartingWith(request, "search_");
-        Long userId = getCurrentUserId().longValue();
+        Long userId = Utils.getCurrentUserId().longValue();
 
         Page<Task> tasks = taskService.getUserTask(userId, searchParams, pageNumber, pageSize, sortType);
 
@@ -76,7 +74,7 @@ public class TaskController extends BaseAdminController {
 
     @RequestMapping(value = "create", method = RequestMethod.POST)
     public String create(@Valid Task newTask, RedirectAttributes redirectAttributes) {
-        User user = new User(getCurrentUserId());
+        User user = new User(Utils.getCurrentUserId());
         newTask.setUser(user);
 
         taskService.saveTask(newTask);
@@ -116,11 +114,4 @@ public class TaskController extends BaseAdminController {
         }
     }
 
-    /**
-     * 取出Shiro中的当前用户Id.
-     */
-    private BigInteger getCurrentUserId() {
-        ShiroUser user = (ShiroUser) SecurityUtils.getSubject().getPrincipal();
-        return BigInteger.valueOf(user.id);
-    }
 }

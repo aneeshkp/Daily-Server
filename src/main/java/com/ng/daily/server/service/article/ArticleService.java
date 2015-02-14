@@ -18,6 +18,13 @@ public class ArticleService {
 
     public Page<Article> listAll() {
         return articleRepository.findAll(new PageRequest(0, Integer.MAX_VALUE));
+
+
+    }
+
+    public Page<Article> findAll(int currentPageIndex, int length, String search) {
+//        ArticlePredicate.searchTerm(search),
+        return articleRepository.findAll( new PageRequest(currentPageIndex, length));
     }
 
 }

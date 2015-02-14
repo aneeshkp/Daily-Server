@@ -14,9 +14,9 @@
     <script type="text/javascript" charset="utf-8" src="${ctx}/static/libs/ueditor/lang/zh-cn/zh-cn.js"></script>
 
     <%--<style type="text/css">--%>
-        <%--div {--%>
-            <%--width: 100%;--%>
-        <%--}--%>
+    <%--div {--%>
+    <%--width: 100%;--%>
+    <%--}--%>
     <%--</style>--%>
 </head>
 

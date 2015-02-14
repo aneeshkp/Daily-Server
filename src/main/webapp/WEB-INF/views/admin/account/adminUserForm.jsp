@@ -67,8 +67,8 @@
                                                                                   pattern="yyyy年MM月dd日  HH时mm分ss秒"/></span>
                                 </div>
                             </div>
-                                <input id="submit_btn" class="btn btn-primary" type="submit" value="提交"/>&nbsp;
-                                <input id="cancel_btn" class="btn" type="button" value="返回" onclick="history.back()"/>
+                            <input id="submit_btn" class="btn btn-primary" type="submit" value="提交"/>&nbsp;
+                            <input id="cancel_btn" class="btn" type="button" value="返回" onclick="history.back()"/>
 
                         </fieldset>
                     </form>
