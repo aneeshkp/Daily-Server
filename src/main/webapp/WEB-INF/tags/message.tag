@@ -27,10 +27,6 @@
                        x : 'center',
                        y : 'center'
                     },
-/*                     attributes: { // Notices have a fixed position, that's why you need to change the attribute option to move them
-                        x: 'right',
-                        y: 'bottom'
-                    }, */
                     color: "green",
                     autoClose: 2000
                 });
@@ -43,10 +39,6 @@
                       x : 'center',
                       y : 'center'
                    },
-/*                     attributes: { // Notices have a fixed position, that's why you need to change the attribute option to move them
-                        x: 'right',
-                        y: 'bottom'
-                    }, */
                     color: "red",
                     autoClose: 1000
                 });

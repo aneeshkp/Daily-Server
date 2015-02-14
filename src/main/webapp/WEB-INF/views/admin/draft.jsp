@@ -57,7 +57,6 @@
                                         <th>创建时间</th>
                                         <th>创建人</th>
                                         <th>来源</th>
-                                        <th>操作</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -173,7 +172,7 @@
 
         $('#draftTable tbody').on('click', 'tr', function () {
             var name = $('td', this).eq(0).text();
-//            alert( '你点击了 '+name+'这行' );
+            alert( '你点击了 '+name+'这行' );
         });
 
 
@@ -181,6 +180,8 @@
 
 
 </script>
+
+
 </body>
 
 </html>

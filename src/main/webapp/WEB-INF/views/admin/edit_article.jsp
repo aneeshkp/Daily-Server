@@ -61,16 +61,44 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-lg-4">
+                    <div class="col-lg-3">
                         <input id="2" class="btn btn-normal btn-block" type="submit" value="预览"/>
                     </div>
-                    <div class="col-lg-4">
+                    <div class="col-lg-3">
                         <input id="submit_btn" class="btn btn-primary btn-block" type="submit" value="暂存到草稿箱"/>
                     </div>
-                    <div class="col-lg-4">
-                        <input id="1" class="btn btn-success btn-block" type="submit" value="提交发布"/>
+                    <div class="col-lg-3">
+                        <input id="publishBtn" class="btn btn-success btn-block" type="button" value="提交发布"
+                               data-confirm="确定要发布吗?"
+                               onclick="publishBtnClicked()"/>
+                    </div>
+                    <div class="col-lg-3">
+                        <input id="dropBtn" class="btn btn-warning btn-block" type="button" value="废弃"
+                               data-confirm="确定要废弃吗?"
+                               onclick="dropBtnClicked()"/>
                     </div>
                 </div>
+
+                <script>
+                    $(document).ready(function () {
+                        new jBox('Confirm', {
+                            confirmButton: '确定',
+                            cancelButton: '取消'
+                        });
+                    });
+                    function dropBtnClicked() {
+                        new jBox('Notice', {
+                            content: '删除成功!', color: 'green',
+                            autoClose: 1000, position: {x: 'center', y: 'center'}
+                        });
+                    }
+                    function publishBtnClicked() {
+                        new jBox('Notice', {
+                            content: '成功发布到队列!', color: 'green',
+                            autoClose: 1000, position: {x: 'center', y: 'center'}
+                        });
+                    }
+                </script>
 
 
                 <div class="col-lg-12" style="padding-top: 20px;">
