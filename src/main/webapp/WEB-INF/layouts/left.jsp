@@ -53,39 +53,38 @@
             <li>
                 <a href="${ctx}/admin/system/"><i class="fa fa-cog fa-fw"></i> 系统管理</a>
             </li>
--->
+            -->
 
 
-            <li>
-                <a href="${ctx}/demo/pages/tables"><i class="fa fa-table fa-fw"></i> Tables</a>
-            </li>
-            <li>
-                <a href="${ctx}/demo/pages/forms"><i class="fa fa-edit fa-fw"></i> Forms</a>
-            </li>
-            <li>
-                <a href="#"><i class="fa fa-wrench fa-fw"></i> UI Elements<span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level">
-                    <li>
-                        <a href="${ctx}/demo/pages/panels-wells">Panels and Wells</a>
-                    </li>
-                    <li>
-                        <a href="${ctx}/demo/pages/buttons">Buttons</a>
-                    </li>
-                    <li>
-                        <a href="${ctx}/demo/pages/notifications">Notifications</a>
-                    </li>
-                    <li>
-                        <a href="${ctx}/demo/pages/typography">Typography</a>
-                    </li>
-                    <li>
-                        <a href="${ctx}/demo/pages/icons"> Icons</a>
-                    </li>
-                    <li>
-                        <a href="${ctx}/demo/pages/grid">Grid</a>
-                    </li>
-                </ul>
-                <!-- /.nav-second-level -->
-            </li>
+            <%--<li>--%>
+            <%--<a href="${ctx}/demo/pages/tables"><i class="fa fa-table fa-fw"></i> Tables</a>--%>
+            <%--</li>--%>
+            <%--<li>--%>
+            <%--<a href="${ctx}/demo/pages/forms"><i class="fa fa-edit fa-fw"></i> Forms</a>--%>
+            <%--</li>--%>
+            <%--<li>--%>
+            <%--<a href="#"><i class="fa fa-wrench fa-fw"></i> UI Elements<span class="fa arrow"></span></a>--%>
+            <%--<ul class="nav nav-second-level">--%>
+            <%--<li>--%>
+            <%--<a href="${ctx}/demo/pages/panels-wells">Panels and Wells</a>--%>
+            <%--</li>--%>
+            <%--<li>--%>
+            <%--<a href="${ctx}/demo/pages/buttons">Buttons</a>--%>
+            <%--</li>--%>
+            <%--<li>--%>
+            <%--<a href="${ctx}/demo/pages/notifications">Notifications</a>--%>
+            <%--</li>--%>
+            <%--<li>--%>
+            <%--<a href="${ctx}/demo/pages/typography">Typography</a>--%>
+            <%--</li>--%>
+            <%--<li>--%>
+            <%--<a href="${ctx}/demo/pages/icons"> Icons</a>--%>
+            <%--</li>--%>
+            <%--<li>--%>
+            <%--<a href="${ctx}/demo/pages/grid">Grid</a>--%>
+            <%--</li>--%>
+            <%--</ul>--%>
+            <%--</li>--%>
 
 
             <%--<li>--%>

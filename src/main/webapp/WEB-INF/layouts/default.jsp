@@ -47,6 +47,7 @@
 
     <!-- jQuery -->
     <script src="${ctx}/static/libs/jquery/jquery.min.js"></script>
+    <%--<script src="${ctx}/static/libs/datatables-editor/jquery-1.11.1.min.js"></script>--%>
 
     <!-- Bootstrap Core JavaScript -->
     <script src="${ctx}/static/libs/bootstrap/js/bootstrap.min.js"></script>

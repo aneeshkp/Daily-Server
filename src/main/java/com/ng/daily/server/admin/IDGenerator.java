@@ -32,7 +32,4 @@ public class IDGenerator {
         return prefix + timestamp + random;
     }
 
-    public static void main(String[] args) {
-        System.out.println(getArticleId());
-    }
 }

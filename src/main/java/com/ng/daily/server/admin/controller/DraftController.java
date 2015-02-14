@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 /**
  * Created by fangs on 15/2/13.
  */
@@ -26,6 +29,19 @@ public class DraftController extends BaseAdminController {
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String index() {
+
+//        for(int i = 0 ; i < 200; i ++) {
+//            Article article = new Article();
+//            article.setId(IDGenerator.getArticleId());
+//            article.setContent("内容内容" + 1);
+//            article.setTitle("中文中文" + i);
+//            article.setCreateAt(DateTime.now().toDate());
+//            article.setCreateBy("admin");
+//            article.setSource("测试");
+//
+//            articleService.saveArticle(article);
+//        }
+
         return "admin/draft";
     }
 
@@ -35,7 +51,22 @@ public class DraftController extends BaseAdminController {
     @ResponseBody
     public PageEntity<Article> list(@DatatablesParams DatatablesMetadata metadata) {
         Page<Article> page = articleService.findAll(metadata.getCurrentPageIndex(), metadata.getLength(), metadata.getSearch());
+
         return new PageEntity<>(metadata.getDraw(), page.getNumberOfElements(), page.getTotalElements(), page.getContent());
+    }
+
+
+
+    @RequestMapping(value = "editor", produces = MediaTypes.JSON_UTF_8)
+    @ResponseBody
+    public Object editor(HttpServletRequest request, HttpServletResponse response) {
+
+        // action:
+        // create
+        // remove
+        // edit
+
+        return "";
     }
 
 }

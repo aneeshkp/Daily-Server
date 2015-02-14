@@ -16,6 +16,10 @@ public class ArticleService {
     @Autowired
     private ArticleRepository articleRepository;
 
+    public void saveArticle(Article article) {
+        articleRepository.save(article);
+    }
+
     public Page<Article> listAll() {
         return articleRepository.findAll(new PageRequest(0, Integer.MAX_VALUE));
 

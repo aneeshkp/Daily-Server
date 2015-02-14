@@ -15,6 +15,10 @@
     <!-- DataTables Responsive CSS -->
     <link href="${ctx}/static/libs/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
 
+    <link href="${ctx}/static/libs/datatables-tools/dataTables.tableTools.css" rel="stylesheet">
+    <link href="${ctx}/static/libs/datatables-editor/css/dataTables.editor.css" rel="stylesheet">
+
+
 </head>
 
 
@@ -48,10 +52,12 @@
                                     <thead>
                                     <tr>
                                         <th>ID</th>
-                                        <th>类型</th>
                                         <th>标题</th>
-                                        <th>Engine version</th>
-                                        <th>CSS grade</th>
+                                        <th>内容</th>
+                                        <th>创建时间</th>
+                                        <th>创建人</th>
+                                        <th>来源</th>
+                                        <th>操作</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -77,15 +83,37 @@
 </div>
 <!-- /#wrapper -->
 
+
 <!-- DataTables JavaScript -->
 <script src="${ctx}/static/libs/datatables/js/jquery.dataTables.min.js"></script>
 <script src="${ctx}/static/libs/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
 
+<script src="${ctx}/static/libs/datatables-tools/dataTables.tableTools.js"></script>
+<script src="${ctx}/static/libs/datatables-editor/js/dataTables.editor.js"></script>
 
 <!-- Page-Level Demo Scripts - Tables - Use for reference -->
 <script>
     $(document).ready(function () {
 
+        var editor = new $.fn.dataTable.Editor({
+            ajax: _ctxPath + "/admin/draft", // 指定服务端URL
+            table: "#draftTable",
+
+            fields: [{
+                label: "标题:",
+                name: "title"
+            }, {
+                label: "内容:",
+                name: "content"
+            }, {
+                label: "创建时间:",
+                name: "createAt"
+            }, {
+                label: "创建人:",
+                name: "createBy"
+            }
+            ]
+        });
 
         $('#draftTable').DataTable({
             responsive: true,
@@ -115,9 +143,28 @@
             }
             ,
 
+            "columns": [ // 列映射
+                {"data": "id", sDefaultContent: ""}, // 默认值
+                {"data": "title"},
+                {"data": "content"},
+                {"data": "createAt"},
+                {"data": "createBy"},
+                {"data": "source"}
+            ],
+
+//            sDom: "draftTable",
+//            tableTools: {
+//                sRowSelect: "os",
+//                aButtons: [
+//                    {sExtends: "editor_create", editor: editor},
+//                    {sExtends: "editor_edit", editor: editor},
+//                    {sExtends: "editor_remove", editor: editor}
+//                ]
+//            },
+
 //            scrollX: true,
 //            scrollY: true,
-            stateSave: true,
+//            stateSave: true,
             pagingType: "full_numbers",
             processing: true,
             serverSide: true,
