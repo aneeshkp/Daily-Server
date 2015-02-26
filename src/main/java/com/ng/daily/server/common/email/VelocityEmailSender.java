@@ -47,7 +47,7 @@ public class VelocityEmailSender {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom(systemEmail);
         message.setTo(email);
-        message.setSubject("大家社区开发平台账号激活");
+        message.setSubject("绿草鞋账号激活");
         send(message, params, "registerVerify.vm");
 
         log.debug("账号激活邮件发送完成: email=" + email + ",verifyLink=" + verifyLink);
@@ -60,7 +60,7 @@ public class VelocityEmailSender {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom(systemEmail);
         message.setTo(email);
-        message.setSubject("重置大家社区开发平台密码");
+        message.setSubject("重置绿草鞋密码");
         send(message, params, "resetPassword.vm");
 
         log.debug("重置密码邮件发送完成: email=" + email + ",verifyLink=" + verifyLink);

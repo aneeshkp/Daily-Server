@@ -22,7 +22,7 @@
             </li>
 
             <li>
-                <a href="${ctx}/admin/main/"><i class="fa fa-dashboard fa-fw"></i> 概要</a>
+                <a href="${ctx}/admin/summary/"><i class="fa fa-dashboard fa-fw"></i> 概要</a>
             </li>
             <li>
                 <a href="${ctx}/admin/article/"><i class="fa fa-edit fa-fw"></i> 编辑文章</a>

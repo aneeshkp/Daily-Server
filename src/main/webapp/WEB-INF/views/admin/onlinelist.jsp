@@ -40,7 +40,7 @@
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            草稿列表
+                            已发布列表
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
@@ -51,8 +51,6 @@
                                         <th>ID</th>
                                         <th>标题</th>
                                         <th>内容</th>
-                                        <th>创建时间</th>
-                                        <th>创建人</th>
                                         <th>来源</th>
                                     </tr>
                                     </thead>
@@ -102,11 +100,8 @@
                 label: "内容:",
                 name: "content"
             }, {
-                label: "创建时间:",
-                name: "createAt"
-            }, {
-                label: "创建人:",
-                name: "createBy"
+                label: "来源:",
+                name: "source"
             }
             ]
         });
@@ -143,8 +138,6 @@
                 {"data": "id", sDefaultContent: ""}, // 默认值
                 {"data": "title"},
                 {"data": "content"},
-                {"data": "createAt"},
-                {"data": "createBy"},
                 {"data": "source"}
             ],
 
@@ -169,7 +162,7 @@
 
         $('#draftTable tbody').on('click', 'tr', function () {
             var name = $('td', this).eq(0).text();
-            alert( '你点击了 '+name+'这行' );
+//            alert( '你点击了 '+name+'这行' );
         });
 
 

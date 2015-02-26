@@ -5,14 +5,13 @@
 
 <html>
 <head>
-    <title>编辑碎片</title>
+    <title>预览碎片</title>
     <meta name="decorator" content="default"/>
     <link href="${ctx}/static/libs/webuploader/webuploader.css" type="text/css" rel="stylesheet"/>
     <link href="${ctx}/static/libs/image-upload/style.css" type="text/css" rel="stylesheet"/>
 
     <script type="text/javascript" charset="utf-8" src="${ctx}/static/libs/webuploader/webuploader.min.js"></script>
-    <script type="text/javascript" charset="utf-8"
-            src="${ctx}/static/libs/image-upload/upload_fragment_image.js"></script>
+    <script type="text/javascript" charset="utf-8" src="${ctx}/static/libs/image-upload/upload_fragment_image.js"></script>
 </head>
 
 
@@ -25,7 +24,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">编辑碎片</h1>
+                    <h1 class="page-header">预览碎片</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -61,19 +60,17 @@
                     </div>
 
                     <div class="col-lg-4">
-                        <input id="postId" type="hidden">
-
                         <div class="form-group">
                             <label>标题</label>
-                            <textarea id="postTitle" class="form-control" rows="2" placeholder="标题,不超过20字"></textarea>
+                            <textarea class="form-control" rows="2" placeholder="标题,不超过20字"></textarea>
                         </div>
                         <div class="form-group">
                             <label>来源</label>
-                            <input id="postSource" class="form-control" placeholder="来源">
+                            <input class="form-control" placeholder="来源">
                         </div>
                         <div class="form-group">
-                            <label>标签</label>
-                            <input id="postTag" class="form-control" placeholder="标签">
+                            <label>分类/标签</label>
+                            <input class="form-control" placeholder="分类/标签">
                         </div>
                     </div>
 
@@ -81,24 +78,26 @@
 
                 <div class="row">
                     <div class="col-lg-3">
-                        <input id="draftBtn" class="btn btn-primary btn-block" type="button" value="暂存到草稿箱"
-                               onclick="doDraft()"/>
+                        <input id="previewBtn" class="btn btn-normal btn-block" type="button" value="预览"
+                               onclick="previewBtnClicked()"/>
                     </div>
                     <div class="col-lg-3">
-                        <input id="previewBtn" class="btn btn-normal btn-block" type="button" value="预览"
-                               onclick="doPreview()"/>
+                        <input id="draftBtn" class="btn btn-primary btn-block" type="button" value="暂存到草稿箱"
+                               onclick="draftBtnClicked()"/>
                     </div>
                     <div class="col-lg-3">
                         <input id="publishBtn" class="btn btn-success btn-block" type="button" value="提交发布"
                                data-confirm="确定要发布吗?"
-                               onclick="doPublish()"/>
+                               onclick="publishBtnClicked()"/>
                     </div>
                     <div class="col-lg-3">
                         <input id="dropBtn" class="btn btn-warning btn-block" type="button" value="废弃"
                                data-confirm="确定要废弃吗?"
-                               onclick="doDrop()"/>
+                               onclick="dropBtnClicked()"/>
                     </div>
                 </div>
+
+
             </form>
         </div>
         <!-- /.container-fluid -->
@@ -110,70 +109,33 @@
 
 
 <script>
-    function doDrop() {
-        var id = $("#postId").val();
-        $.ajax({
-            type: "POST",
-            url: "${ctx}/admin/fragment/delete",
-            data: {"id": id},
-            success: function (data) {
-                notice("已废弃")
-            },
-            error: function (data, errCode, errDesc) {
-                alert("操作失败:\n" + errCode + errDesc);
-            }
+    $(document).ready(function () {
+        new jBox('Confirm', {
+            confirmButton: '确定',
+            cancelButton: '取消'
+        });
+    });
+    function dropBtnClicked() {
+        new jBox('Notice', {
+            content: '已废弃', color: 'green',
+            autoClose: 1000, position: {x: 'center', y: 'center'}
         });
     }
-    function doPublish() {
-        doDraft(function(){
-            var id = $("#postId").val();
-            $.ajax({
-                type: "POST",
-                url: "${ctx}/admin/fragment/queue",
-                data: {"id": id},
-                success: function (data) {
-                    notice("已提交到发布队列");
-                },
-                error: function (data, errCode, errDesc) {
-                    alert("操作失败:\n" + errCode + errDesc);
-                }
-            });
+    function publishBtnClicked() {
+        new jBox('Notice', {
+            content: '已提交到发布队列', color: 'green',
+            autoClose: 1000, position: {x: 'center', y: 'center'}
         });
     }
-    function doPreview() {
+    function draftBtnClicked() {
+        new jBox('Notice', {
+            content: '已暂存到草稿箱', color: 'green',
+            autoClose: 1000, position: {x: 'center', y: 'center'}
+        });
+    }
+    function previewBtnClicked() {
         alert("preview");
     }
-    function doDraft(callback) {
-//        var content = UE.getEditor('editor').getContent();
-        var id = $("#postId").val();
-        var title = $("#postTitle").val();
-        var source = $("#postSource").val();
-        var tag = $("#postTag").val();
-        $.ajax({
-            type: "POST",
-            url: "${ctx}/admin/fragment/save",
-            data: {"id": id, "title": title, "source": source, "tag": tag, "content": ""},
-            success: function (data) {
-                $("#postId").val(data.id);
-                if(callback){
-                    callback();
-                } else {
-                    notice("已暂存到草稿箱");
-                }
-            },
-            error: function (data, errCode, errDesc) {
-                alert("错误:\n" + errCode + errDesc);
-            }
-        });
-    }
-
-    $(document).ready(function () {
-        $("#postId").val("${post.id}");
-        $("#postTitle").val("${post.title}");
-        $("#postSource").val("${post.source}");
-        $("#postTag").val("${post.tag}");
-    });
-
 </script>
 
 </body>

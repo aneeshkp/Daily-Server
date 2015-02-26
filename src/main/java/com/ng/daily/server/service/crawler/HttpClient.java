@@ -63,7 +63,7 @@ public class HttpClient {
             }
         } finally {
             remoteResponse.close();
-            log.debug("invoke finished:" + targetUrl + ", cost " + sw.stop().elapsed(TimeUnit.MILLISECONDS) + " ms");
+            log.debug("http get finished:" + targetUrl + ", cost " + sw.stop().elapsed(TimeUnit.MILLISECONDS) + " ms");
         }
     }
 

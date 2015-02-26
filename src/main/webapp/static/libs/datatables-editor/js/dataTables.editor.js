@@ -17,20 +17,20 @@ var remaining = Math.ceil(
 	(new Date( 1425081600 * 1000 ).getTime() - new Date().getTime()) / (1000*60*60*24)
 );
 
-if ( remaining <= 0 ) {
-	alert(
-		'Thank you for trying DataTables Editor\n\n'+
-		'Your trial has now expired. To purchase a license '+
-		'for Editor, please see https://editor.datatables.net/purchase'
-	);
-	throw 'Editor - Trial expired';
-}
-else if ( remaining <= 7 ) {
-	console.log(
-		'DataTables Editor trial info - '+remaining+
-		' day'+(remaining===1 ? '' : 's')+' remaining'
-	);
-}
+//if ( remaining <= 0 ) {
+//	alert(
+//		'Thank you for trying DataTables Editor\n\n'+
+//		'Your trial has now expired. To purchase a license '+
+//		'for Editor, please see https://editor.datatables.net/purchase'
+//	);
+//	throw 'Editor - Trial expired';
+//}
+//else if ( remaining <= 7 ) {
+//	console.log(
+//		'DataTables Editor trial info - '+remaining+
+//		' day'+(remaining===1 ? '' : 's')+' remaining'
+//	);
+//}
 
 })();
 var F4t={'v5Q':(function(r5Q){return (function(V5Q,c5Q){return (function(j5Q){return {b5Q:j5Q}

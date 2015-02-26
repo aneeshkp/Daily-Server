@@ -15,13 +15,13 @@ public class AdminController extends BaseAdminController {
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String index() {
-        return "admin/main";
+        return "admin/summary";
     }
 
 
-    @RequestMapping(value = "/main", method = RequestMethod.GET)
-    public String main() {
-        return "admin/main";
+    @RequestMapping(value = "/summary", method = RequestMethod.GET)
+    public String summary() {
+        return "admin/summary";
     }
 
 

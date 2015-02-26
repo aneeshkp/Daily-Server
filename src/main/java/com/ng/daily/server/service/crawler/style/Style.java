@@ -25,6 +25,8 @@ public class Style {
         Element script = doc.select("script").get(5);
         String json = script.toString().replace("<script>", "").replace("window.slideshowItems =", "").replace(";\n</script>", "");
 
+        System.err.println(json);
+
         Gson gson = new Gson();
         ResultMap resultMap = gson.fromJson(json, ResultMap.class);
 
@@ -44,11 +46,11 @@ public class Style {
             String saveName = url.substring(url.lastIndexOf("/") + 1, url.length());
 
             DownloadTask task = new DownloadTask(url, saveDir, saveName, httpClient);
-            service.submit(task);
+//            service.submit(task);
 
-//            if(item.hasDetailSlides) {
+            if(item.hasDetailSlides) {
             // TODO deltail image download
-//            }
+            }
 
         }
 
@@ -65,12 +67,19 @@ class ResultMap {
     String seasonUrlFragment;
     String brandUrlFragment;
     List<Item> items;
+    String canonicalUrl;
 }
 
 class Item {
     String id;
+    int order;
     String slidepath;
-    String hasDetailSlides;
-    String height;
-    String width;
+    Boolean hasDetailSlides;
+    int height;
+    int width;
+    SlideDetail slideDetails;
+}
+
+class SlideDetail {
+
 }

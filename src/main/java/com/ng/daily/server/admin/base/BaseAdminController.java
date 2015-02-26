@@ -1,5 +1,6 @@
 package com.ng.daily.server.admin.base;
 
+import com.google.common.collect.Maps;
 import com.ng.daily.server.common.util.BeanValidators;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,6 +13,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.ConstraintViolationException;
 import javax.validation.Validator;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -132,4 +134,10 @@ public abstract class BaseAdminController {
     }
 
 
+    protected static final HashMap success = Maps.newHashMap();
+    protected static final HashMap exception = Maps.newHashMap();
+    static {
+        success.put("result","ok");
+        exception.put("result","error");
+    }
 }

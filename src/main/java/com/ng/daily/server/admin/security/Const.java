@@ -22,6 +22,6 @@ public class Const {
     public static final String COOKIE_KEY_AUTOLOGIN_CODE = "k_autologin_code"; // 自动登录记录在cookie中的code
     public static final int AUTOLOGIN_MAX_DAYS = 15; // 自动登录最长生效时间(天)
 
-    public static final String ADMIN_EMAIL = "service@dajiashequ.com"; // 大家社区管理员账号 TODO 转移到配置
+    public static final String ADMIN_EMAIL = "service@daily.ngdaily.com"; // 管理员账号 TODO 转移到配置
 
 }

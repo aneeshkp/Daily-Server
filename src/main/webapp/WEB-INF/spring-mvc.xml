@@ -51,7 +51,7 @@
 
 
     <!-- 定义无需Controller的url<->view直接映射 -->
-    <mvc:view-controller path="/" view-name="redirect:/admin/main"/>
+    <mvc:view-controller path="/" view-name="redirect:/admin/"/>
 
     <!-- the mvc resources tag does the magic -->
     <mvc:resources mapping="/static/**" location="/static/"/>

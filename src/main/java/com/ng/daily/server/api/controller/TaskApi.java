@@ -87,4 +87,5 @@ public class TaskApi extends ApiController {
     public void delete(@PathVariable("id") Long id) {
         taskService.deleteTask(id);
     }
+
 }

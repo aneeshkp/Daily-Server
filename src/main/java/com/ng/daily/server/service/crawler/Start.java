@@ -14,8 +14,8 @@ public class Start {
 
         Style style = new Style();
         String saveDir = "/tmp/style.com";
-        String collectionUrl = "http://www.style.com/slideshows/fashion-shows/spring-2015-couture/chanel/collection";
-
+//        String collectionUrl = "http://www.style.com/slideshows/fashion-shows/spring-2015-couture/chanel/collection";
+        String collectionUrl = "http://www.style.com/slideshows/fashion-shows/pre-fall-2015/alice-olivia/collection";
         style.download(saveDir, collectionUrl);
 
     }

@@ -386,7 +386,7 @@ function extendClass(parent, members) {
  */
 function numberFormat(number, decimals, decPoint, thousandsSep) {
 	var lang = defaultOptions.lang,
-		// http://kevin.vanzonneveld.net/techblog/article/javascript_equivalent_for_phps_number_format/
+		// http://kevin.vanzonneveld.net/techblog/post/javascript_equivalent_for_phps_number_format/
 		n = +number || 0,
 		c = decimals === -1 ?
 			(n.toString().split('.')[1] || '').length : // preserve decimals
