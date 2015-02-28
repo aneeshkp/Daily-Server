@@ -7,11 +7,6 @@
 <head>
     <title>预览碎片</title>
     <meta name="decorator" content="default"/>
-    <link href="${ctx}/static/libs/webuploader/webuploader.css" type="text/css" rel="stylesheet"/>
-    <link href="${ctx}/static/libs/image-upload/style.css" type="text/css" rel="stylesheet"/>
-
-    <script type="text/javascript" charset="utf-8" src="${ctx}/static/libs/webuploader/webuploader.min.js"></script>
-    <script type="text/javascript" charset="utf-8" src="${ctx}/static/libs/image-upload/upload_fragment_image.js"></script>
 </head>
 
 
@@ -24,81 +19,50 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">预览碎片</h1>
+                    <h1 class="page-header">预览</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
             <!-- /.row -->
 
-            <form role="form" method="post">
-                <div class="row">
-                    <div class="col-lg-8">
-                        <div class="form-group">
-                            <label>图片(4张)</label>
+            <div class="row">
 
-                            <!--头部，相册选择和格式选择-->
-                            <div id="uploader">
-                                <div class="queueList">
-                                    <div id="dndArea" class="placeholder">
-                                        <div id="filePicker"></div>
-                                        <p>或将照片拖到这里，单次最多可选300张</p>
-                                    </div>
-                                </div>
-                                <div class="statusBar" style="display:none;">
-                                    <div class="progress">
-                                        <span class="text">0%</span>
-                                        <span class="percentage"></span>
-                                    </div>
-                                    <div class="info"></div>
-                                    <div class="btns">
-                                        <div id="filePicker2"></div>
-                                        <div class="uploadBtn">开始上传</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="col-lg-8 col-lg-offset-2" style="background: #f6f8fa">
 
-                    <div class="col-lg-4">
-                        <div class="form-group">
-                            <label>标题</label>
-                            <textarea class="form-control" rows="2" placeholder="标题,不超过20字"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label>来源</label>
-                            <input class="form-control" placeholder="来源">
-                        </div>
-                        <div class="form-group">
-                            <label>分类/标签</label>
-                            <input class="form-control" placeholder="分类/标签">
-                        </div>
+                    <h2 class="text-center">${post.title}</h2>
+
+
+                    <div class="row">
+                        <script>
+                            $(document).ready(function () {
+                                new jBox('Image')
+                            });
+                        </script>
+                        <!-- 已有图片列表 -->
+                        <ul id="imageList" class="list-group">
+                            <c:forEach var="image" items="${post.imageList}">
+                                <li class="col-xs-6 col-md-2 thumbnail">
+                                    <a href="${image}" data-jbox-image="gallery">
+                                        <img style="height: 140px; width: 100%; display: block;"
+                                             src="${image}"
+                                             data-holder-rendered="true"
+                                                />
+                                    </a>
+                                </li>
+                            </c:forEach>
+                        </ul>
                     </div>
 
-                </div>
 
-                <div class="row">
-                    <div class="col-lg-3">
-                        <input id="previewBtn" class="btn btn-normal btn-block" type="button" value="预览"
-                               onclick="previewBtnClicked()"/>
-                    </div>
-                    <div class="col-lg-3">
-                        <input id="draftBtn" class="btn btn-primary btn-block" type="button" value="暂存到草稿箱"
-                               onclick="draftBtnClicked()"/>
-                    </div>
-                    <div class="col-lg-3">
-                        <input id="publishBtn" class="btn btn-success btn-block" type="button" value="提交发布"
-                               data-confirm="确定要发布吗?"
-                               onclick="publishBtnClicked()"/>
-                    </div>
-                    <div class="col-lg-3">
-                        <input id="dropBtn" class="btn btn-warning btn-block" type="button" value="废弃"
-                               data-confirm="确定要废弃吗?"
-                               onclick="dropBtnClicked()"/>
+                    <div class="row">
+                        <p class="pull-left">来源:${post.source}</p>
+                        <p class="pull-right">标签:${post.tag}</p>
                     </div>
                 </div>
 
+            </div>
 
-            </form>
+
         </div>
         <!-- /.container-fluid -->
     </div>
@@ -107,36 +71,6 @@
 </div>
 <!-- /#wrapper -->
 
-
-<script>
-    $(document).ready(function () {
-        new jBox('Confirm', {
-            confirmButton: '确定',
-            cancelButton: '取消'
-        });
-    });
-    function dropBtnClicked() {
-        new jBox('Notice', {
-            content: '已废弃', color: 'green',
-            autoClose: 1000, position: {x: 'center', y: 'center'}
-        });
-    }
-    function publishBtnClicked() {
-        new jBox('Notice', {
-            content: '已提交到发布队列', color: 'green',
-            autoClose: 1000, position: {x: 'center', y: 'center'}
-        });
-    }
-    function draftBtnClicked() {
-        new jBox('Notice', {
-            content: '已暂存到草稿箱', color: 'green',
-            autoClose: 1000, position: {x: 'center', y: 'center'}
-        });
-    }
-    function previewBtnClicked() {
-        alert("preview");
-    }
-</script>
 
 </body>
 

@@ -1,10 +1,14 @@
-package com.baidu.ueditor.upload;
+package com.baidu.ueditor.qiniu;
 
 import com.baidu.ueditor.PathFormat;
 import com.baidu.ueditor.define.AppInfo;
 import com.baidu.ueditor.define.BaseState;
 import com.baidu.ueditor.define.FileType;
 import com.baidu.ueditor.define.State;
+import com.baidu.ueditor.upload.StorageManager;
+import com.ng.daily.server.admin.IDGenerator;
+import com.ng.daily.server.common.qiniu.QiniuService;
+import com.ng.daily.server.common.util.SpringContextHolder;
 import org.apache.commons.fileupload.FileItemIterator;
 import org.apache.commons.fileupload.FileItemStream;
 import org.apache.commons.fileupload.FileUploadException;
@@ -18,9 +22,10 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-public class BinaryUploader {
+public class QiniuBinaryUploader   {
 
-    public static final State save(HttpServletRequest request,
+
+    public static State save(HttpServletRequest request,
                                    Map<String, Object> conf) {
         FileItemStream fileStream = null;
         boolean isAjaxUpload = request.getHeader("X_Requested_With") != null;
@@ -54,8 +59,7 @@ public class BinaryUploader {
             String originFileName = fileStream.getName();
             String suffix = FileType.getSuffixByFilename(originFileName);
 
-            originFileName = originFileName.substring(0,
-                    originFileName.length() - suffix.length());
+            originFileName = originFileName.substring(0, originFileName.length() - suffix.length());
             savePath = savePath + suffix;
 
             long maxSize = ((Long) conf.get("maxSize")).longValue();
@@ -64,20 +68,24 @@ public class BinaryUploader {
                 return new BaseState(false, AppInfo.NOT_ALLOW_FILE_TYPE);
             }
 
+            // 存储到本地
             savePath = PathFormat.parse(savePath, originFileName);
-
             String physicalPath = (String) conf.get("rootPath") + savePath;
-
             InputStream is = fileStream.openStream();
-            State storageState = StorageManager.saveFileByInputStream(is,
-                    physicalPath, maxSize);
+            State storageState = StorageManager.saveFileByInputStream(is,physicalPath, maxSize);
             is.close();
-
             if (storageState.isSuccess()) {
                 storageState.putInfo("url", PathFormat.format(savePath));
                 storageState.putInfo("type", suffix);
                 storageState.putInfo("original", originFileName + suffix);
             }
+
+            // 上传到七牛
+            String fileName = IDGenerator.getArticleImageId() + ".jpg";
+            QiniuService qiniuService = SpringContextHolder.getBean(QiniuService.class);
+            String imageUrl = qiniuService.uploadFile(physicalPath,fileName);
+            storageState.putInfo("url", imageUrl);
+
 
             return storageState;
         } catch (FileUploadException e) {
@@ -89,7 +97,6 @@ public class BinaryUploader {
 
     private static boolean validType(String type, String[] allowTypes) {
         List<String> list = Arrays.asList(allowTypes);
-
         return list.contains(type);
     }
 }

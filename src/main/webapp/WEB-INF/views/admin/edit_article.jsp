@@ -125,7 +125,11 @@
         });
     }
     function doPreview() {
-        alert("preview");
+        doDraft(function () {
+            var id = $("#postId").val();
+//            window.open('/admin/article/preview?id=' + id, 'newwindow', 'height=100,width=400,top=0,left=0,toolbar=no,menubar=no,scrollbars=no,resizable = no, location = no, status = no');
+            window.open('/admin/article/preview?id=' + id, 'newwindow');
+        });
     }
     function doDraft(callback) {
         var content = UE.getEditor('editor').getContent();

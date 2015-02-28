@@ -1,6 +1,7 @@
 package com.baidu.ueditor.upload;
 
 import com.baidu.ueditor.define.State;
+import com.baidu.ueditor.qiniu.QiniuBinaryUploader;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
@@ -14,7 +15,7 @@ public class Uploader {
         this.conf = conf;
     }
 
-    public final State doExec() {
+    public /*final*/ State doExec() {
         String filedName = (String) this.conf.get("fieldName");
         State state = null;
 
@@ -22,7 +23,12 @@ public class Uploader {
             state = Base64Uploader.save(this.request.getParameter(filedName),
                     this.conf);
         } else {
-            state = BinaryUploader.save(this.request, this.conf);
+
+            if(this.conf.get("useQiniu") == Boolean.TRUE){
+                state = QiniuBinaryUploader.save(this.request, this.conf);
+            } else {
+                state = BinaryUploader.save(this.request, this.conf);
+            }
         }
 
         return state;

@@ -46,6 +46,9 @@ public class FragmentController extends BaseAdminController {
     @RequestMapping(value = "/save", method = RequestMethod.POST, produces = MediaTypes.JSON_UTF_8)
     @ResponseBody
     public Object save(Post post) {
+
+        log.debug(post.toString());
+
         if (StringUtils.isBlank(post.getId())) {
             post.setId(IDGenerator.getArticleId());
             post.setType(Post.TYPE_FRAGMENT);
@@ -65,7 +68,7 @@ public class FragmentController extends BaseAdminController {
     @RequestMapping(value = "/queue", method = RequestMethod.POST, produces = MediaTypes.JSON_UTF_8)
     @ResponseBody
     public Object queue(@RequestParam(value = "id", required = true) String id) {
-        postService.updateStatus(id, Post.STATUS_QUEUE);
+        postService.updateStatusQueue(id);
         return success;
     }
 

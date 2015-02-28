@@ -30,6 +30,7 @@ public class ArticleController extends BaseAdminController {
         return "admin/edit_article";
     }
 
+    @RequestMapping(value = "/preview", method = RequestMethod.GET)
     public String preview(Model model, @RequestParam(value = "id", required = true) String id) {
         Post post = postService.findById(id);
         model.addAttribute("post", post);
@@ -64,7 +65,7 @@ public class ArticleController extends BaseAdminController {
     @RequestMapping(value = "/queue", method = RequestMethod.POST, produces = MediaTypes.JSON_UTF_8)
     @ResponseBody
     public Object queue(@RequestParam(value = "id", required = true) String id) {
-        postService.updateStatus(id, Post.STATUS_QUEUE);
+        postService.updateStatusQueue(id);
         return success;
     }
 

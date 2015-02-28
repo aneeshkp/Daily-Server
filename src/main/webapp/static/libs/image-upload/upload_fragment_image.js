@@ -1,3 +1,7 @@
+
+// WebUploader实例
+var    uploader;
+
 (function ($) {
     // 当domReady的时候开始初始化
     $(function () {
@@ -80,10 +84,8 @@
                         'OTransition' in s;
                 s = null;
                 return r;
-            })(),
+            })();
 
-        // WebUploader实例
-            uploader;
 
         if (!WebUploader.Uploader.support('flash') && WebUploader.browser.ie) {
 
@@ -143,7 +145,7 @@
                 id: '#filePicker',
                 label: '点击选择图片'
             },
-            formData: {
+            formData: { // 文件上传时带的参数, fangs
                 uid: 123
             },
             dnd: '#dndArea',
@@ -162,6 +164,8 @@
 
             // 禁掉全局的拖拽功能。这样不会出现图片拖进页面的时候，把图片打开。
             disableGlobalDnd: true,
+
+            // 上传文件限制, fangs
             fileNumLimit: 300,
             fileSizeLimit: 200 * 1024 * 1024,    // 200 M
             fileSingleSizeLimit: 50 * 1024 * 1024    // 50 M
@@ -470,7 +474,8 @@
                 case 'finish':
                     stats = uploader.getStats();
                     if (stats.successNum) {
-                        alert('上传成功');
+                        //alert('上传成功');
+                        notice('上传成功'); // fangs
                     } else {
                         // 没有成功的图片，重设
                         state = 'done';
@@ -564,6 +569,8 @@
 
         $upload.addClass('state-' + state);
         updateTotalProgress();
+
+
     });
 
 })(jQuery);

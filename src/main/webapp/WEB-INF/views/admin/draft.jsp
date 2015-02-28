@@ -54,6 +54,7 @@
                                         <th>标题</th>
                                         <th>内容</th>
                                         <th>来源</th>
+                                        <th>标签</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -69,13 +70,10 @@
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
-
-
         </div>
         <!-- /.container-fluid -->
     </div>
     <!-- /#page-wrapper -->
-
 </div>
 <!-- /#wrapper -->
 
@@ -104,6 +102,9 @@
             }, {
                 label: "来源:",
                 name: "source"
+            }, {
+                label: "标签:",
+                name: "tag"
             }
             ]
         });
@@ -140,7 +141,8 @@
                 {"data": "id", sDefaultContent: ""}, // 默认值
                 {"data": "title"},
                 {"data": "content"},
-                {"data": "source"}
+                {"data": "source"},
+                {"data": "tag"}
             ],
 
 //            sDom: "draftTable",

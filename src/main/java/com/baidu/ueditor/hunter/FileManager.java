@@ -14,10 +14,10 @@ import java.util.Map;
 
 public class FileManager {
 
-    private String dir = null;
-    private String rootPath = null;
-    private String[] allowFiles = null;
-    private int count = 0;
+    protected String dir = null;
+    protected String rootPath = null;
+    protected String[] allowFiles = null;
+    protected int count = 0;
 
     public FileManager(Map<String, Object> conf) {
 

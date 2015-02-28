@@ -13,6 +13,78 @@
     <script type="text/javascript" charset="utf-8" src="${ctx}/static/libs/webuploader/webuploader.min.js"></script>
     <script type="text/javascript" charset="utf-8"
             src="${ctx}/static/libs/image-upload/upload_fragment_image.js"></script>
+
+    <script type="text/javascript" charset="utf-8" src="${ctx}/static/libs/Sortable.js"></script>
+
+    <style>
+
+        #editable {
+        }
+
+        #editable li {
+            position: relative;
+        }
+
+        #editable i {
+            -webkit-transition: opacity .2s;
+            transition: opacity .2s;
+            opacity: 0;
+            display: block;
+            cursor: pointer;
+            color: #c00;
+            top: 10px;
+            right: 40px;
+            position: absolute;
+            font-style: normal;
+        }
+
+        #editable li:hover i {
+            opacity: 1;
+        }
+
+        #filter {
+        }
+
+        #filter button {
+            color: #fff;
+            width: 100%;
+            border: none;
+            outline: 0;
+            opacity: .5;
+            margin: 10px 0 0;
+            transition: opacity .1s ease;
+            cursor: pointer;
+            background: #5F9EDF;
+            padding: 10px 0;
+            font-size: 20px;
+        }
+
+        #filter button:hover {
+            opacity: 1;
+        }
+
+        #filter .block__list {
+            padding-bottom: 0;
+        }
+
+        .drag-handle {
+            margin-right: 10px;
+            font: bold 20px Sans-Serif;
+            color: #5F9EDF;
+            display: inline-block;
+            cursor: move;
+            cursor: -webkit-grabbing; /* overrides 'move' */
+        }
+
+        .my-handle {
+            cursor: move;
+            cursor: -webkit-grabbing;
+        }
+
+        .ghost {
+            opacity: 0.4;
+        }
+    </style>
 </head>
 
 
@@ -35,14 +107,13 @@
                 <div class="row">
                     <div class="col-lg-8">
                         <div class="form-group">
-                            <label>图片(4张)</label>
-
+                            <label>图片上传</label>
                             <!--头部，相册选择和格式选择-->
                             <div id="uploader">
                                 <div class="queueList">
                                     <div id="dndArea" class="placeholder">
                                         <div id="filePicker"></div>
-                                        <p>或将照片拖到这里，单次最多可选300张</p>
+                                        <p>或将照片拖到这里</p>
                                     </div>
                                 </div>
                                 <div class="statusBar" style="display:none;">
@@ -77,6 +148,29 @@
                         </div>
                     </div>
 
+                </div>
+
+                <div class="row">
+                    <script>
+                        $(document).ready(function () {
+                            new jBox('Image')
+                        });
+                    </script>
+                    <!-- 当前图片列表 -->
+                    <label>当前图片</label>
+                    <ul id="imageList" class="list-group">
+                        <c:forEach var="image" items="${post.imageList}">
+                            <li class="col-xs-6 col-md-2 thumbnail">
+                                <a href="${image}" data-jbox-image="gallery">
+                                    <img style="height: 140px; width: 100%; display: block;"
+                                         src="${image}"
+                                         data-holder-rendered="true"
+                                            />
+                                </a>
+                                <i class="js-remove">✖</i>
+                            </li>
+                        </c:forEach>
+                    </ul>
                 </div>
 
                 <div class="row">
@@ -125,7 +219,7 @@
         });
     }
     function doPublish() {
-        doDraft(function(){
+        doDraft(function () {
             var id = $("#postId").val();
             $.ajax({
                 type: "POST",
@@ -141,10 +235,25 @@
         });
     }
     function doPreview() {
-        alert("preview");
+        doDraft(function () {
+            var id = $("#postId").val();
+//            window.open('/admin/fragment/preview?id=' + id, 'newwindow', 'height=100,width=400,top=0,left=0,toolbar=no,menubar=no,scrollbars=no,resizable = no, location = no, status = no');
+            window.open('/admin/fragment/preview?id=' + id, 'newwindow');
+        });
     }
     function doDraft(callback) {
-//        var content = UE.getEditor('editor').getContent();
+
+        var imageList = {};
+
+        for (var i = 0; i < $('#imageList li a').length; i++) {
+            var imageUrl = $('#imageList li a')[i].href;
+            imageList[i] = imageUrl;
+        }
+
+//        for (var i = 0; i < uploader.getFiles().length; i++) {
+//            imageList[i] = uploader.getFiles()[i].uploadUrl;
+//        }
+
         var id = $("#postId").val();
         var title = $("#postTitle").val();
         var source = $("#postSource").val();
@@ -152,10 +261,10 @@
         $.ajax({
             type: "POST",
             url: "${ctx}/admin/fragment/save",
-            data: {"id": id, "title": title, "source": source, "tag": tag, "content": ""},
+            data: {"id": id, "title": title, "source": source, "tag": tag, "content": "", "imageList": imageList},
             success: function (data) {
                 $("#postId").val(data.id);
-                if(callback){
+                if (callback) {
                     callback();
                 } else {
                     notice("已暂存到草稿箱");
@@ -172,6 +281,108 @@
         $("#postTitle").val("${post.title}");
         $("#postSource").val("${post.source}");
         $("#postTag").val("${post.tag}");
+    });
+
+    $(document).ready(function () {
+        uploader.on('uploadSuccess', function (file, ret) {
+            file.uploadUrl = ret._raw;
+
+
+            var imageList = document.getElementById("imageList");
+            var $li = $('<li class="col-xs-6 col-md-2 thumbnail">' +
+            '<a href="' + file.uploadUrl + '" class="thumbnail" data-jbox-image="gallery">' +
+            '<img style="height: 140px; width: 100%; display: block;"' +
+            'src="' + file.uploadUrl + '"' +
+            'data-holder-rendered="true"' +
+            '/>' +
+            '</a>' +
+            '<i class="js-remove">✖</i>' +
+            '</li>');
+            $li.appendTo(imageList);
+
+
+        });
+    });
+
+
+</script>
+
+
+<script>
+    var imageList = document.getElementById("imageList");
+
+    var sortable = new Sortable(imageList, {
+        ghostClass: "ghost",
+        animation: 150,
+        filter: ".js-remove, .js-edit",
+        onFilter: function (evt) {
+            var item = evt.item,
+                    ctrl = evt.target;
+
+            if (Sortable.utils.is(ctrl, ".js-remove")) {  // Click on remove button
+                item.parentNode.removeChild(item); // remove sortable item
+            }
+            else if (Sortable.utils.is(ctrl, ".js-edit")) {  // Click on edit link
+                // ...
+            }
+        }
+//                        group: "name",  // or { name: "...", pull: [true, false, clone], put: [true, false, array] }
+//                        sort: true  // sorting inside list
+//                        disabled: false, // Disables the sortable if set to true.
+//                        store: null,  // @see Store
+//                        animation: 150,  // ms, animation speed moving items when sorting, `0` — without animation
+//                        handle: ".my-handle",  // Drag handle selector within list items
+//                        filter: ".ignore-elements",  // Selectors that do not lead to dragging (String or Function)
+//                        draggable: ".item",  // Specifies which items inside the element should be sortable
+//                        ghostClass: "sortable-ghost",  // Class name for the drop placeholder
+
+//                        scroll: true, // or HTMLElement
+//                        scrollSensitivity: 30, // px, how near the mouse must be to an edge to start scrolling.
+//                        scrollSpeed: 10, // px
+
+//                        setData: function (dataTransfer, dragEl) {
+//                            dataTransfer.setData('Text', dragEl.textContent);
+//                        },
+//
+//                        // dragging started
+//                        onStart: function (/**Event*/evt) {
+//                            evt.oldIndex;  // element index within parent
+//                        },
+//
+//                        // dragging ended
+//                        onEnd: function (/**Event*/evt) {
+//                            evt.oldIndex;  // element's old index within parent
+//                            evt.newIndex;  // element's new index within parent
+//                        },
+//
+//                        // Element is dropped into the list from another list
+//                        onAdd: function (/**Event*/evt) {
+//                            var itemEl = evt.item;  // dragged HTMLElement
+//                            evt.from;  // previous list
+//                            // + indexes from onEnd
+//                        },
+//
+//                        // Changed sorting within list
+//                        onUpdate: function (/**Event*/evt) {
+//                            var itemEl = evt.item;  // dragged HTMLElement
+//                            // + indexes from onEnd
+//                        },
+//
+//                        // Called by any change to the list (add / update / remove)
+//                        onSort: function (/**Event*/evt) {
+//                            // same properties as onUpdate
+//                        },
+//
+//                        // Element is removed from the list into another list
+//                        onRemove: function (/**Event*/evt) {
+//                            // same properties as onUpdate
+//                        },
+//
+//                        // Attempt to drag a filtered element
+//                        onFilter: function (/**Event*/evt) {
+//                            var itemEl = evt.item;  // HTMLElement receiving the `mousedown|tapstart` event.
+//                        }
+
     });
 
 </script>

@@ -6,6 +6,7 @@ import com.baidu.ueditor.define.BaseState;
 import com.baidu.ueditor.define.State;
 import com.baidu.ueditor.hunter.FileManager;
 import com.baidu.ueditor.hunter.ImageHunter;
+import com.baidu.ueditor.qiniu.QiniuFileManager;
 import com.baidu.ueditor.upload.Uploader;
 
 import javax.servlet.http.HttpServletRequest;
@@ -89,8 +90,12 @@ public class ActionEnter {
             case ActionMap.LIST_FILE:
                 conf = configManager.getConfig(actionCode);
                 int start = this.getStartIndex();
-                state = new FileManager(conf).listFile(start);
-                break;
+                if(conf.get("useQiniu") == Boolean.TRUE) {
+                    state = new QiniuFileManager(conf).listFile(start);
+                } else {
+                    state = new FileManager(conf).listFile(start);
+                    break;
+                }
 
         }
 

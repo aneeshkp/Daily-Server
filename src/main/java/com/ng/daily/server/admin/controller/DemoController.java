@@ -1,4 +1,4 @@
-package com.ng.daily.server.demo;
+package com.ng.daily.server.admin.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

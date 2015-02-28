@@ -7,8 +7,15 @@ import com.qiniu.api.io.IoApi;
 import com.qiniu.api.io.PutExtra;
 import com.qiniu.api.io.PutRet;
 import com.qiniu.api.rs.PutPolicy;
+import com.qiniu.api.rsf.ListItem;
+import com.qiniu.api.rsf.ListPrefixRet;
+import com.qiniu.api.rsf.RSFClient;
+import com.qiniu.api.rsf.RSFEofException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by fangs on 15/2/12.
@@ -42,6 +49,38 @@ public class QiniuService {
             throw new RuntimeException(e);
         }
         return resultUrl;
+    }
+
+    public List<ListItem> listFiles() {
+        Config.ACCESS_KEY = ak;
+        Config.SECRET_KEY = sk;
+        Mac mac = new Mac(Config.ACCESS_KEY, Config.SECRET_KEY);
+
+        RSFClient client = new RSFClient(mac);
+        String marker = "";
+
+        List<ListItem> all = new ArrayList<ListItem>();
+        ListPrefixRet ret = null;
+        while (true) {
+//            ret = client.listPrifix(bucketName, "<prifix>", marker, 10);
+            ret = client.listPrifix(bucketName, "", marker, 10);
+
+            marker = ret.marker;
+            all.addAll(ret.results);
+            if (!ret.ok()) {
+                // no more items or error occurs
+                break;
+            }
+        }
+        if (ret.exception.getClass() != RSFEofException.class) {
+            // error handler
+        }
+
+        for(ListItem item : all) {
+            item.key = domainName + item.key;
+        }
+
+        return all;
     }
 
 

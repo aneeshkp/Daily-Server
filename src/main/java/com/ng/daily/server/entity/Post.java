@@ -1,5 +1,6 @@
 package com.ng.daily.server.entity;
 
+import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -21,11 +22,17 @@ public class Post {
 
     @Id
     private String id; // 文章ID
+
+    @NotBlank
     private String title; // 标题
     private String content; // 内容
+    @NotBlank
     private Integer status; // 状态: 草稿 已发布 队列
+    @NotBlank
     private String type; // 类型: 文章 碎片
+    @NotBlank
     private String tag; // 标签:
+    @NotBlank
     private String source; // 来源
 
     private String titleImage; // 题图

@@ -80,6 +80,9 @@ public final class ConfigManager {
         Map<String, Object> conf = new HashMap<String, Object>();
         String savePath = null;
 
+        // fangs
+        conf.put("useQiniu", this.jsonConfig.getBoolean("useQiniu"));
+
         switch (type) {
 
             case ActionMap.UPLOAD_FILE:
