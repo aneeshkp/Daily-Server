@@ -29,7 +29,7 @@
                 <div class="row">
                     <label>知乎答案:</label>
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="知乎答案地址" id="zhihuAnswerUrl">
+                        <input type="text" class="form-control" placeholder="知乎答案地址 (例如 http://www.zhihu.com/question/28311018/answer/40543556)" id="zhihuAnswerUrl">
                         <span class="input-group-addon" id="getZhihuAnswer" onclick="zhihuAnswer()">抓取</span>
                     </div>
                 </div>
@@ -38,7 +38,7 @@
                 <div class="row">
                     <label>知乎日报:</label>
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="知乎日报地址" id="zhihuDailyUrl">
+                        <input type="text" class="form-control" placeholder="知乎日报地址 (例如 http://daily.zhihu.com/story/4525786)" id="zhihuDailyUrl">
                         <span class="input-group-addon" id="getZhihuDaily" onclick="zhihuDaily()">抓取</span>
                     </div>
                 </div>
@@ -47,8 +47,8 @@
                 <div class="row">
                     <label>豆瓣东西:</label>
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="豆瓣东西地址" id="doubanDongxiUrl">
-                        <span class="input-group-addon" id="getDoubanDongxi" onclick="dongxi()">抓取</span>
+                        <input type="text" class="form-control" placeholder="豆瓣东西地址 (例如 http://dongxi.douban.com/show/2534804/?r=P)" id="doubanDongxiUrl">
+                        <span class="input-group-addon" id="getDoubanDongxi" onclick="doubanDongxi()">抓取</span>
                     </div>
                 </div>
                 <p/>
@@ -107,9 +107,32 @@
 
                 }
 
-                function dongxi() {
+                function doubanDongxi() {
+                    notice("开始抓取,请稍候...");
                     var dongxiUrl = $("#doubanDongxiUrl").val();
-                    console.log(dongxiUrl);
+                    $.ajax({
+                        type: "POST",
+                        url: "${ctx}/admin/robot/getDoubanDongxi",
+                        data: {"url": dongxiUrl},
+                        success: function (data) {
+
+                            var editUrl = "${ctx}/admin/fragment/edit?id=" + data.post.id;
+                            var previewUrl = "${ctx}/admin/fragment/preview?id=" + data.post.id;
+
+                            var html = '<div class="alert alert-success alert-dismissable">' +
+                                    ' <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button> '
+                                    + data.post.title +
+                                    '<a href='+ editUrl +' class="alert-link">' + " -去编辑 "+'</a>' +
+                                    '<a href='+ previewUrl +' class="alert-link">' + " -去预览 "+'</a>' +
+                                    '</div>';
+                            $("#resultInfo").append(html);
+                            console.log(html);
+                            notice("抓取完成");
+                        },
+                        error: function (data, errCode, errDesc) {
+                            alert("操作失败:\n" + errCode + errDesc);
+                        }
+                    });
                 }
 
             </script>

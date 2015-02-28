@@ -6,7 +6,10 @@ import com.qiniu.api.config.Config;
 import com.qiniu.api.io.IoApi;
 import com.qiniu.api.io.PutExtra;
 import com.qiniu.api.io.PutRet;
+import com.qiniu.api.rs.BatchCallRet;
+import com.qiniu.api.rs.EntryPath;
 import com.qiniu.api.rs.PutPolicy;
+import com.qiniu.api.rs.RSClient;
 import com.qiniu.api.rsf.ListItem;
 import com.qiniu.api.rsf.ListPrefixRet;
 import com.qiniu.api.rsf.RSFClient;
@@ -72,7 +75,7 @@ public class QiniuService {
     }
 
 
-    public List<ListItem> listFiles() {
+    public List<ListItem> listFiles(boolean fixKey) {
         Config.ACCESS_KEY = ak;
         Config.SECRET_KEY = sk;
         Mac mac = new Mac(Config.ACCESS_KEY, Config.SECRET_KEY);
@@ -97,12 +100,40 @@ public class QiniuService {
             // error handler
         }
 
-        for(ListItem item : all) {
-            item.key = domainName + item.key;
+        if (fixKey) {
+            for (ListItem item : all) {
+                item.key = domainName + item.key;
+            }
         }
 
         return all;
     }
 
+
+    public void deleteAll() {
+
+        Config.ACCESS_KEY = ak;
+        Config.SECRET_KEY = sk;
+        Mac mac = new Mac(Config.ACCESS_KEY, Config.SECRET_KEY);
+
+        RSClient rs = new RSClient(mac);
+        List<EntryPath> entries = new ArrayList<EntryPath>();
+
+        List<ListItem> list = listFiles(false);
+
+        System.err.println(list.size());
+        for (ListItem item : list) {
+            EntryPath e1 = new EntryPath();
+            e1.bucket = bucketName;
+            e1.key = item.key;
+            entries.add(e1);
+            System.err.println(item.key);
+        }
+        if (entries.size() > 0) {
+            BatchCallRet bret = rs.batchDelete(entries);
+        }
+
+
+    }
 
 }

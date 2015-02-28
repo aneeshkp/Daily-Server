@@ -27,7 +27,7 @@ public class QiniuFileManager extends FileManager {
     public State listFile(int index) {
         State state = null;
         QiniuService qiniuService = SpringContextHolder.getBean(QiniuService.class);
-        List<ListItem> all = qiniuService.listFiles();
+        List<ListItem> all = qiniuService.listFiles(true);
 
         if (index < 0 || index > all.size()) {
             state = new MultiState(true);

@@ -29,7 +29,7 @@ public class ZhihuDaily {
         Element contentElement = doc.select(".question .answer .content").get(0);
         String content = contentElement.toString();
 
-        Element titleElement = doc.select(".headline .headline-background .heading-content").get(0);
+        Element titleElement = doc.select(".headline-title").get(0);
         String title = titleElement.text();
 
         post.setTitle(title);
