@@ -25,7 +25,6 @@ public class PostService {
 
     @Cacheable(value = "postCache")
     public Post findById(String id) {
-        System.err.println("PostService findById " + id);
         return postRepository.findOne(id);
     }
 

@@ -21,28 +21,11 @@ public class QiniuFileManager extends FileManager {
 
     public QiniuFileManager(Map<String, Object> conf) {
         super(conf);
-
     }
 
     @Override
     public State listFile(int index) {
-
-
         State state = null;
-        /**
-        File dir = new File(this.dir);
-
-        if (!dir.exists()) {
-            return new BaseState(false, AppInfo.NOT_EXIST);
-        }
-
-        if (!dir.isDirectory()) {
-            return new BaseState(false, AppInfo.NOT_DIRECTORY);
-        }
-
-        Collection<File> list = FileUtils.listFiles(dir, this.allowFiles, true);
-**/
-
         QiniuService qiniuService = SpringContextHolder.getBean(QiniuService.class);
         List<ListItem> all = qiniuService.listFiles();
 
@@ -57,7 +40,6 @@ public class QiniuFileManager extends FileManager {
         state.putInfo("total", all.size());
 
         return state;
-
     }
 
     private State getState(Object[] files) {

@@ -20,14 +20,15 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">预览</h1>
+                    <h1 class="page-header">预览
+                        <a href="${ctx}/admin/article/edit?id=${post.id}"><i class="fa fa-edit fa-fw"></i></a>
+                    </h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
             <!-- /.row -->
 
             <div class="row">
-
                 <div class="col-lg-8 col-lg-offset-2" style="background: #f6f8fa">
                     <h2 class="text-center">${post.title}</h2>
 
@@ -35,6 +36,7 @@
 
                     <div class="row">
                         <p class="pull-left">来源:${post.source}</p>
+
                         <p class="pull-right">标签:${post.tag}</p>
                     </div>
                 </div>
@@ -47,6 +49,7 @@
 
 </div>
 <!-- /#wrapper -->
+
 
 </body>
 

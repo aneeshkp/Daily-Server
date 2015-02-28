@@ -1,6 +1,6 @@
 package com.ng.daily.server.entity;
 
-import org.hibernate.validator.constraints.NotBlank;
+import com.ng.daily.server.admin.IDGenerator;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -20,19 +20,35 @@ public class Post {
     public static final Integer STATUS_QUEUE = 0;
     public static final Integer STATUS_ONLINE = 1;
 
+    public static final Post createArticle() {
+        Post post = new Post();
+        post.setId(IDGenerator.getArticleId());
+        post.setType(Post.TYPE_ARTICLE);
+        post.setStatus(Post.STATUS_DRAFT);
+        return post;
+    }
+
+    public static final Post createFragment() {
+        Post post = new Post();
+        post.setId(IDGenerator.getFragmentId());
+        post.setType(Post.TYPE_FRAGMENT);
+        post.setStatus(Post.STATUS_DRAFT);
+        return post;
+    }
+
     @Id
     private String id; // 文章ID
 
-    @NotBlank
+//    @NotBlank
     private String title; // 标题
     private String content; // 内容
-    @NotBlank
+//    @NotBlank
     private Integer status; // 状态: 草稿 已发布 队列
-    @NotBlank
+//    @NotBlank
     private String type; // 类型: 文章 碎片
-    @NotBlank
+//    @NotBlank
     private String tag; // 标签:
-    @NotBlank
+//    @NotBlank
     private String source; // 来源
 
     private String titleImage; // 题图

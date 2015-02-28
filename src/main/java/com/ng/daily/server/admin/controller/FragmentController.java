@@ -1,6 +1,5 @@
 package com.ng.daily.server.admin.controller;
 
-import com.ng.daily.server.admin.IDGenerator;
 import com.ng.daily.server.admin.base.BaseAdminController;
 import com.ng.daily.server.common.util.web.MediaTypes;
 import com.ng.daily.server.entity.Post;
@@ -26,6 +25,9 @@ public class FragmentController extends BaseAdminController {
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String index(Model model, Post post) {
+        if(post == null || StringUtils.isBlank(post.getId())) {
+            post = Post.createFragment();
+        }
         model.addAttribute("post", post);
         return "admin/edit_fragment";
     }
@@ -40,20 +42,20 @@ public class FragmentController extends BaseAdminController {
     @RequestMapping(value = "/edit", method = RequestMethod.GET)
     public String edit(Model model, @RequestParam(value = "id", required = true) String id) {
         Post post = postService.findById(id);
+        if(post == null) {
+            post = Post.createFragment();
+        }
         return index(model, post);
     }
 
     @RequestMapping(value = "/save", method = RequestMethod.POST, produces = MediaTypes.JSON_UTF_8)
     @ResponseBody
     public Object save(Post post) {
-
-        log.debug(post.toString());
-
-        if (StringUtils.isBlank(post.getId())) {
-            post.setId(IDGenerator.getArticleId());
-            post.setType(Post.TYPE_FRAGMENT);
-            post.setStatus(Post.STATUS_DRAFT);
+        if(post == null || StringUtils.isBlank(post.getId())) {
+            post = Post.createFragment();
         }
+        post.setType(Post.TYPE_FRAGMENT);
+        post.setStatus(Post.STATUS_DRAFT);
         postService.savePost(post);
         return post;
     }

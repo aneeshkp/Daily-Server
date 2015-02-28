@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class OnlineListController extends BaseAdminController {
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String index() {
-        return "admin/onlinelist";
+        return "admin/list_online";
     }
 
     // 查看 ( 撤回? 编辑? )

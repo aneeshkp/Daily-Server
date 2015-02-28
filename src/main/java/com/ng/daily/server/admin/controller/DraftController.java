@@ -29,7 +29,7 @@ public class DraftController extends BaseAdminController {
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String index() {
-        return "admin/draft";
+        return "admin/list_draft";
     }
 
     // 编辑 提交发布 废弃

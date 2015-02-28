@@ -211,7 +211,8 @@
             url: "${ctx}/admin/fragment/delete",
             data: {"id": id},
             success: function (data) {
-                notice("已废弃")
+                notice("已废弃");
+                window.location = "${ctx}/admin/fragment";
             },
             error: function (data, errCode, errDesc) {
                 alert("操作失败:\n" + errCode + errDesc);
@@ -258,10 +259,29 @@
         var title = $("#postTitle").val();
         var source = $("#postSource").val();
         var tag = $("#postTag").val();
+
+//        if(!imageList[0]) {
+//            alert('图片不能为空');
+//            return;
+//        }
+
+        if(!title || title=='') {
+            alert('标题不能为空');
+            return;
+        }
+        if(!source || source=='') {
+            alert('来源不能为空');
+            return;
+        }
+        if(!tag || tag=='') {
+            alert('标签不能为空');
+            return;
+        }
+
         $.ajax({
             type: "POST",
             url: "${ctx}/admin/fragment/save",
-            data: {"id": id, "title": title, "source": source, "tag": tag, "content": "", "imageList": imageList},
+            data: {"id": id, "title": title, "source": source, "tag": tag, "imageList": imageList},
             success: function (data) {
                 $("#postId").val(data.id);
                 if (callback) {
@@ -277,6 +297,7 @@
     }
 
     $(document).ready(function () {
+        console.log('${post.id}');
         $("#postId").val("${post.id}");
         $("#postTitle").val("${post.title}");
         $("#postSource").val("${post.source}");

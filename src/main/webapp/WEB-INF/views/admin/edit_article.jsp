@@ -101,7 +101,8 @@
             url: "${ctx}/admin/article/delete",
             data: {"id": id},
             success: function (data) {
-                notice("已废弃")
+                notice("已废弃");
+                window.location = "${ctx}/admin/article/";
             },
             error: function (data, errCode, errDesc) {
                 alert("操作失败:\n" + errCode + errDesc);
@@ -109,7 +110,7 @@
         });
     }
     function doPublish() {
-        doDraft(function(){
+        doDraft(function () {
             var id = $("#postId").val();
             $.ajax({
                 type: "POST",
@@ -133,17 +134,36 @@
     }
     function doDraft(callback) {
         var content = UE.getEditor('editor').getContent();
+        content = content.replace(/(?:\r\n|\r|\n)/g, '<br />');
         var id = $("#postId").val();
         var title = $("#postTitle").val();
         var source = $("#postSource").val();
         var tag = $("#postTag").val();
+
+        if(!content || content=='') {
+            alert('内容不能为空');
+            return;
+        }
+        if(!title || title=='') {
+            alert('标题不能为空');
+            return;
+        }
+        if(!source || source=='') {
+            alert('来源不能为空');
+            return;
+        }
+        if(!tag || tag=='') {
+            alert('标签不能为空');
+            return;
+        }
+
         $.ajax({
             type: "POST",
             url: "${ctx}/admin/article/save",
             data: {"id": id, "title": title, "source": source, "tag": tag, "content": content},
             success: function (data) {
                 $("#postId").val(data.id);
-                if(callback) {
+                if (callback) {
                     callback();
                 } else {
                     notice("已暂存到草稿箱");
@@ -159,6 +179,7 @@
         //判断ueditor 编辑器是否创建成功
         UE.getEditor('editor').addListener("ready", function () { // editor ready后 初始化
             UE.getEditor('editor').setContent('${post.content}', false);
+            console.log('${post.id}');
             $("#postId").val("${post.id}");
             $("#postTitle").val("${post.title}");
             $("#postSource").val("${post.source}");

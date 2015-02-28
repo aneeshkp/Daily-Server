@@ -19,7 +19,9 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">预览</h1>
+                    <h1 class="page-header">预览
+                        <a href="${ctx}/admin/fragment/edit?id=${post.id}"><i class="fa fa-edit fa-fw"></i></a>
+                    </h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -56,12 +58,12 @@
 
                     <div class="row">
                         <p class="pull-left">来源:${post.source}</p>
+
                         <p class="pull-right">标签:${post.tag}</p>
                     </div>
                 </div>
 
             </div>
-
 
         </div>
         <!-- /.container-fluid -->

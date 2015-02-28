@@ -15,9 +15,6 @@
     <!-- DataTables Responsive CSS -->
     <link href="${ctx}/static/libs/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
 
-    <link href="${ctx}/static/libs/datatables-tools/dataTables.tableTools.css" rel="stylesheet">
-    <link href="${ctx}/static/libs/datatables-editor/css/dataTables.editor.css" rel="stylesheet">
-
 </head>
 
 
@@ -51,10 +48,12 @@
                                     <thead>
                                     <tr>
                                         <th>ID</th>
+                                        <th>类型</th>
                                         <th>标题</th>
-                                        <th>内容</th>
                                         <th>来源</th>
                                         <th>标签</th>
+                                        <th>状态</th>
+                                        <th>操作</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -82,34 +81,13 @@
 <script src="${ctx}/static/libs/datatables/js/jquery.dataTables.min.js"></script>
 <script src="${ctx}/static/libs/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
 
-<script src="${ctx}/static/libs/datatables-tools/dataTables.tableTools.js"></script>
-<script src="${ctx}/static/libs/datatables-editor/js/dataTables.editor.js"></script>
 
 <!-- Page-Level Demo Scripts - Tables - Use for reference -->
 <script>
+    var draftTable;
     $(document).ready(function () {
 
-        var editor = new $.fn.dataTable.Editor({
-            ajax: _ctxPath + "/admin/draft", // 指定服务端URL
-            table: "#draftTable",
-
-            fields: [{
-                label: "标题:",
-                name: "title"
-            }, {
-                label: "内容:",
-                name: "content"
-            }, {
-                label: "来源:",
-                name: "source"
-            }, {
-                label: "标签:",
-                name: "tag"
-            }
-            ]
-        });
-
-        $('#draftTable').DataTable({
+        draftTable = $('#draftTable').DataTable({
             responsive: true,
             language: {
                 "sProcessing": "处理中...",
@@ -139,21 +117,24 @@
 
             "columns": [ // 列映射
                 {"data": "id", sDefaultContent: ""}, // 默认值
+                {"data": "type"},
                 {"data": "title"},
-                {"data": "content"},
                 {"data": "source"},
-                {"data": "tag"}
+                {"data": "tag"},
+                {"data": "status"},
             ],
 
-//            sDom: "draftTable",
-//            tableTools: {
-//                sRowSelect: "os",
-//                aButtons: [
-//                    {sExtends: "editor_create", editor: editor},
-//                    {sExtends: "editor_edit", editor: editor},
-//                    {sExtends: "editor_remove", editor: editor}
-//                ]
-//            },
+            "columnDefs": [{
+                "targets": 6,
+                "data": null,
+                "render": function (data, type, row) {
+                    var editHtml = "<a href='javascript:void(0);' onclick='_editFun(" + "\"" + data.id + "\"" + ")'> 编辑 </a>";
+                    var previewHtml = "<a href='javascript:void(0);' onclick='_previewFun(" + "\"" + data.id + "\"" + ")'> 预览 </a>";
+                    var submitHtml = "<a href='javascript:void(0);' onclick='_submitFun(\"" + data.id + "\")'> 发布 </a>";
+                    var deleteHtml = "<a href='javascript:void(0);' onclick='_deleteFun(\"" + data.id + "\")'> 废弃 </a>";
+                    return editHtml + previewHtml + submitHtml + deleteHtml;
+                }
+            }],
 
 //            scrollX: true,
 //            scrollY: true,
@@ -165,12 +146,53 @@
         });
 
         $('#draftTable tbody').on('click', 'tr', function () {
-            var name = $('td', this).eq(0).text();
-//            alert( '你点击了 '+name+'这行' );
+            var id = $('td', this).eq(0).text();
+//            console.log( '你点击了 '+id+'这行' );
         });
 
 
     });
+
+    function _submitFun(id) {
+        if (window.confirm("确认发布?")) {
+            $.ajax({
+                type: "POST",
+                url: "${ctx}/admin/article/queue",
+                data: {"id": id},
+                success: function (data) {
+                    notice("已提交到发布队列");
+                },
+                error: function (data, errCode, errDesc) {
+                    alert("操作失败:\n" + errCode + errDesc);
+                }
+            });
+        }
+    }
+
+    function _deleteFun(id) {
+        if (window.confirm("确认废弃?")) {
+            $.ajax({
+                type: "POST",
+                url: "${ctx}/admin/post/delete",
+                data: {"id": id},
+                success: function (data) {
+                    notice("已废弃");
+                    draftTable.ajax.reload();
+                },
+                error: function (data, errCode, errDesc) {
+                    alert("操作失败:\n" + errCode + errDesc);
+                }
+            });
+        }
+    }
+
+    function _editFun(id) {
+        window.location = "${ctx}/admin/post/edit?id=" + id;
+    }
+
+    function _previewFun(id) {
+        window.location = "${ctx}/admin/post/preview?id=" + id;
+    }
 
 
 </script>
