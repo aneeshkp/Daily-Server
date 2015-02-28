@@ -38,4 +38,11 @@
         <property name="maxUploadSize" value="5000000"></property>
     </bean>
 
+    <!-- HTTP客户端 -->
+    <bean id="httpClientManager" class="com.ng.daily.server.common.util.HttpClientManager"
+          init-method="init" destroy-method="destroy" scope="singleton">
+        <property name="timeoutSeconds" value="20"/>
+        <property name="poolSize" value="20"/>
+    </bean>
+
 </beans>

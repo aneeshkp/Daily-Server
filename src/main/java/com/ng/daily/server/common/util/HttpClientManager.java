@@ -27,7 +27,7 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 /**
- * HTTP客户端 调用V8接口
+ * HTTP客户端
  * <p/>
  * Created by fangs on 15/1/26.
  */

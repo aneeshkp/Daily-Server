@@ -17,6 +17,18 @@ import java.util.concurrent.Executors;
  */
 public class Style {
 
+
+    public static void main(String[] args) throws IOException {
+
+        Style style = new Style();
+        String saveDir = "/tmp/style.com";
+//        String collectionUrl = "http://www.style.com/slideshows/fashion-shows/spring-2015-couture/chanel/collection";
+        String collectionUrl = "http://www.style.com/slideshows/fashion-shows/pre-fall-2015/alice-olivia/collection";
+        style.download(saveDir, collectionUrl);
+
+    }
+
+
     int threadPoolSize = 20;
 
     public void download(String saveDir, String collectionUrl) throws IOException {

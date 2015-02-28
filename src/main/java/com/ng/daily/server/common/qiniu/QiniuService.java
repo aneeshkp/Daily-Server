@@ -14,6 +14,7 @@ import com.qiniu.api.rsf.RSFEofException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,6 +51,26 @@ public class QiniuService {
         }
         return resultUrl;
     }
+
+    public String upload(InputStream inputStream, String key) {
+        String resultUrl;
+        try {
+            Config.ACCESS_KEY = ak;
+            Config.SECRET_KEY = sk;
+            Mac mac = new Mac(Config.ACCESS_KEY, Config.SECRET_KEY);
+            PutPolicy putPolicy = new PutPolicy(bucketName);
+            String uptoken = putPolicy.token(mac);
+            PutExtra extra = new PutExtra();
+            PutRet ret = IoApi.Put(uptoken, key, inputStream, extra);
+//            ret.getHash();
+            resultUrl = domainName + key;
+        } catch (AuthException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+        return resultUrl;
+    }
+
 
     public List<ListItem> listFiles() {
         Config.ACCESS_KEY = ak;

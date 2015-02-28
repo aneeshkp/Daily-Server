@@ -43,9 +43,9 @@
                         <!-- 已有图片列表 -->
                         <ul id="imageList" class="list-group">
                             <c:forEach var="image" items="${post.imageList}">
-                                <li class="col-xs-6 col-md-2 thumbnail">
+                                <li class="col-xs-8 col-md-4 thumbnail">
                                     <a href="${image}" data-jbox-image="gallery">
-                                        <img style="height: 140px; width: 100%; display: block;"
+                                        <img style="height: 200px; width: 100%; display: block;"
                                              src="${image}"
                                              data-holder-rendered="true"
                                                 />
@@ -58,7 +58,6 @@
 
                     <div class="row">
                         <p class="pull-left">来源:${post.source}</p>
-
                         <p class="pull-right">标签:${post.tag}</p>
                     </div>
                 </div>
