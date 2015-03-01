@@ -32,27 +32,11 @@ public class DraftController extends BaseAdminController {
         return "admin/list_draft";
     }
 
-    // 编辑 提交发布 废弃
-
     @RequestMapping(value = "list", method = RequestMethod.GET, produces = MediaTypes.JSON_UTF_8)
     @ResponseBody
     public PageEntity<Post> list(@DatatablesParams DatatablesMetadata metadata) {
         Page<Post> page = postService.findAll(metadata.getCurrentPageIndex(), metadata.getLength(), metadata.getSearch());
-
         return new PageEntity<>(metadata.getDraw(), page.getNumberOfElements(), page.getTotalElements(), page.getContent());
-    }
-
-
-    @RequestMapping(value = "editor", produces = MediaTypes.JSON_UTF_8)
-    @ResponseBody
-    public Object editor(HttpServletRequest request, HttpServletResponse response) {
-
-        // action:
-        // create
-        // remove
-        // edit
-
-        return "";
     }
 
 }

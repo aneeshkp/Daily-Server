@@ -11,8 +11,7 @@
     <link href="${ctx}/static/libs/image-upload/style.css" type="text/css" rel="stylesheet"/>
 
     <script type="text/javascript" charset="utf-8" src="${ctx}/static/libs/webuploader/webuploader.min.js"></script>
-    <script type="text/javascript" charset="utf-8"
-            src="${ctx}/static/libs/image-upload/upload_fragment_image.js"></script>
+    <script type="text/javascript" charset="utf-8" src="${ctx}/static/libs/image-upload/upload_fragment_image.js"></script>
 
     <script type="text/javascript" charset="utf-8" src="${ctx}/static/libs/Sortable.js"></script>
 
@@ -189,7 +188,7 @@
                     </div>
                     <div class="col-lg-3">
                         <input id="dropBtn" class="btn btn-warning btn-block" type="button" value="废弃"
-                               data-confirm="确定要废弃吗?"
+                               data-confirm="废弃后无法恢复,确定要废弃吗?"
                                onclick="doDrop()"/>
                     </div>
                 </div>

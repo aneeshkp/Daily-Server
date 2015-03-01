@@ -11,11 +11,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 @RequestMapping(value = "/admin/operation")
 public class OperationController extends BaseAdminController {
+
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String index() {
         return "admin/operation";
     }
 
     // 用户数 微信 微博 友盟 分享..
-
 }

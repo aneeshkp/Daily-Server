@@ -28,6 +28,7 @@ public class ZhihuDaily {
 
         Element contentElement = doc.select(".question .answer .content").get(0);
         String content = contentElement.toString();
+//        content = Jsoup.clean(content, Whitelist.basic());
 
         Element titleElement = doc.select(".headline-title").get(0);
         String title = titleElement.text();

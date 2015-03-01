@@ -5,7 +5,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,9 +18,7 @@ import java.util.Map;
 public class DemoController {
 
     @RequestMapping(method = RequestMethod.GET)
-    public String defaultPage(RedirectAttributes attributes) {
-//        addMessage(MESSAGE_ALERT, attributes, "欢迎");
-//        return "redirect:index";
+    public String defaultPage() {
         return "demo/pages/index";
     }
 
@@ -125,7 +122,6 @@ public class DemoController {
         }
 
         return "demo/pages/ueditor";
-
     }
 
 //    uploadimage：//执行上传图片或截图的action名称

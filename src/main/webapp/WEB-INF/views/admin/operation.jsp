@@ -19,12 +19,24 @@
             <div class="row">
                 <div class="col-lg-12">
                     <h1 class="page-header">运营管理</h1>
-
-
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
             <!-- /.row -->
+
+
+            <div class="row">
+                <div class="col-lg-12">
+
+                    <div class="list-group">
+                        <button class="btn btn-default" type="button">微信公众号</button>
+                        <button class="btn btn-default" type="button">微博</button>
+                        <button class="btn btn-default" type="button">友盟</button>
+                    </div>
+
+                </div>
+            </div>
+
         </div>
         <!-- /.container-fluid -->
     </div>

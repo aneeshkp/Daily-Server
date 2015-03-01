@@ -45,11 +45,11 @@ public class PostController extends AdminController {
     }
 
 
-
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
     @ResponseBody
     public Object delete(Model model, @RequestParam(value = "id", required = true) String id) {
         postService.deleteById(id);
         return success;
     }
+
 }

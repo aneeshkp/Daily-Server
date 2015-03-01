@@ -170,7 +170,7 @@
     }
 
     function _deleteFun(id) {
-        if (window.confirm("确认废弃?")) {
+        if (window.confirm("废弃后无法恢复,确定要废弃吗?")) {
             $.ajax({
                 type: "POST",
                 url: "${ctx}/admin/post/delete",

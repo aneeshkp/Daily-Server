@@ -37,7 +37,7 @@
                 <a href="${ctx}/admin/postqueue/"><i class="fa fa-paper-plane fa-fw"></i> 发布队列</a>
             </li>
             <li>
-                <a href="${ctx}/admin/onlinelist/"><i class="fa fa-list  fa-fw"></i> 已发布列表</a>
+                <a href="${ctx}/admin/online/"><i class="fa fa-list  fa-fw"></i> 已发布列表</a>
             </li>
             <li>
                 <a href="${ctx}/admin/robot/"><i class="fa fa-beer fa-fw"></i> 抓取机器人</a>

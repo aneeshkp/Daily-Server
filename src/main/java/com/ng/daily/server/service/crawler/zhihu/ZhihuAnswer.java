@@ -21,6 +21,7 @@ public class ZhihuAnswer {
 
         Element contentElement = doc.select(".zm-item-answer .zm-item-rich-text .zm-editable-content").get(0);
         String content = contentElement.toString();
+//        content = Jsoup.clean(content, Whitelist.basic());
 
         Element titleElement = doc.select("#zh-question-title .zm-item-title").get(0);
         String title = titleElement.text();

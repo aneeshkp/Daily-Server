@@ -74,5 +74,4 @@ public class ArticleController extends BaseAdminController {
         return success;
     }
 
-
 }

@@ -14,4 +14,5 @@ public interface PostRepository extends PagingAndSortingRepository<Post, String>
     public Page<Post> findByTag(String tag, Pageable page);
 
 
+    public Page<Post> findByStatus(Integer status, Pageable page);
 }

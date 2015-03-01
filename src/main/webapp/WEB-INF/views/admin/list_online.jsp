@@ -31,7 +31,6 @@
             </div>
             <!-- /.row -->
 
-
             <!-- /.row -->
             <div class="row">
                 <div class="col-lg-12">
@@ -130,7 +129,7 @@
             pagingType: "full_numbers",
             processing: true,
             serverSide: true,
-            ajax: _ctxPath + "/admin/draft/list" // 指定服务端URL
+            ajax: _ctxPath + "/admin/online/list" // 指定服务端URL
         });
 
         $('#draftTable tbody').on('click', 'tr', function () {

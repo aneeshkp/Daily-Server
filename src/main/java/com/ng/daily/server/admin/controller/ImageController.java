@@ -42,8 +42,6 @@ public class ImageController extends BaseAdminController {
             FileUtils.writeByteArrayToFile(localFile, file.getBytes());
             // 上传到七牛
             imageUrl = qiniuService.uploadFile(localFile.getAbsolutePath(), fileName);
-            log.debug("localPath = " + localFile.getAbsolutePath());
-            log.debug("imageUrl = " + imageUrl);
         }
         return imageUrl;
     }
@@ -60,9 +58,8 @@ public class ImageController extends BaseAdminController {
             FileUtils.writeByteArrayToFile(localFile, file.getBytes());
             // 上传到七牛
             imageUrl = qiniuService.uploadFile(localFile.getAbsolutePath(), fileName);
-            log.debug("localPath = " + localFile.getAbsolutePath());
-            log.debug("imageUrl = " + imageUrl);
         }
         return imageUrl;
     }
+
 }

@@ -64,6 +64,10 @@ public class PostService {
         return postRepository.findByTag(tag, new PageRequest(page, size));
     }
 
+    public Page<Post> findByStatus(int page, int size) {
+        return postRepository.findByStatus(Post.STATUS_ONLINE, new PageRequest(page, size));
+    }
+
     public Page<Post> listAll() {
         return postRepository.findAll(new PageRequest(0, Integer.MAX_VALUE));
     }

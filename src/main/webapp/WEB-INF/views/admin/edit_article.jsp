@@ -79,7 +79,7 @@
                     </div>
                     <div class="col-lg-3">
                         <input id="dropBtn" class="btn btn-warning btn-block" type="button" value="废弃"
-                               data-confirm="确定要废弃吗?"
+                               data-confirm="废弃后无法恢复,确定要废弃吗?"
                                onclick="doDrop()"/>
                     </div>
                 </div>

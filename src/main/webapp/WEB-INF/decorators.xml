@@ -7,6 +7,7 @@
 		<pattern>/api/*</pattern>
 		<pattern>/swagger/*</pattern>
 		<pattern>/api-docs/*</pattern>
+
 	</excludes>
 
 	<decorator name="site" page="site/default.jsp">
@@ -18,6 +19,11 @@
 		<pattern>/demo/*</pattern>
 	</decorator>
 
-	<decorator name="no" page=""></decorator>
+	<decorator name="flow" page="flow.jsp">
+		<pattern>/admin/postqueue/flow</pattern>
+	</decorator>
+
+	<decorator name="no" page="">
+	</decorator>
 
 </decorators>
