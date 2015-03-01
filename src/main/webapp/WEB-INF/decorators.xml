@@ -19,8 +19,8 @@
 		<pattern>/demo/*</pattern>
 	</decorator>
 
-	<decorator name="flow" page="flow.jsp">
-		<pattern>/admin/postqueue/flow</pattern>
+	<decorator name="simple" page="simple.jsp">
+		<pattern>/admin/waterfall/*</pattern>
 	</decorator>
 
 	<decorator name="no" page="">

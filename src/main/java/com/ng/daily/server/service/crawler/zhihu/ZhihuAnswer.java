@@ -23,6 +23,9 @@ public class ZhihuAnswer {
         String content = contentElement.toString();
 //        content = Jsoup.clean(content, Whitelist.basic());
 
+//        content = content.replaceAll("(\r\n|\n)", "<br />");
+        content = content.replaceAll("(\r\n|\n)", "");
+
         Element titleElement = doc.select("#zh-question-title .zm-item-title").get(0);
         String title = titleElement.text();
 

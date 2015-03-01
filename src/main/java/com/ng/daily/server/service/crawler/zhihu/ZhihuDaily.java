@@ -30,6 +30,9 @@ public class ZhihuDaily {
         String content = contentElement.toString();
 //        content = Jsoup.clean(content, Whitelist.basic());
 
+//        content = content.replaceAll("(\r\n|\n)", "<br />");
+        content = content.replaceAll("(\r\n|\n)", "");
+
         Element titleElement = doc.select(".headline-title").get(0);
         String title = titleElement.text();
 

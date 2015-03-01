@@ -1,10 +1,12 @@
 package com.ng.daily.server.entity;
 
+import com.google.common.collect.Maps;
 import com.ng.daily.server.admin.IDGenerator;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by fangs on 15/1/9.
@@ -19,6 +21,7 @@ public class Post {
     public static final Integer STATUS_DRAFT = -1;
     public static final Integer STATUS_QUEUE = 0;
     public static final Integer STATUS_ONLINE = 1;
+
 
     public static final Post createArticle() {
         Post post = new Post();
@@ -39,20 +42,23 @@ public class Post {
     @Id
     private String id; // 文章ID
 
-//    @NotBlank
+    //    @NotBlank
     private String title; // 标题
     private String content; // 内容
-//    @NotBlank
+    //    @NotBlank
     private Integer status; // 状态: 草稿 已发布 队列
-//    @NotBlank
+    //    @NotBlank
     private String type; // 类型: 文章 碎片
-//    @NotBlank
+    //    @NotBlank
     private String tag; // 标签:
-//    @NotBlank
+    //    @NotBlank
     private String source; // 来源
 
     private String titleImage; // 题图
     private List<String> imageList; // 图片列表
+
+    private Map<String, Object> extras = Maps.newHashMap();
+
 
     public Post() {
     }
@@ -70,6 +76,22 @@ public class Post {
                 ", titleImage='" + titleImage + '\'' +
                 ", imageList=" + imageList +
                 '}';
+    }
+
+    public Object getExtra(String key) {
+        return extras.get(key);
+    }
+
+    public void addExtra(String key, Object value) {
+        extras.put(key, value);
+    }
+
+    public Map<String, Object> getExtras() {
+        return extras;
+    }
+
+    public void setExtras(Map<String, Object> extras) {
+        this.extras = extras;
     }
 
     public String getId() {

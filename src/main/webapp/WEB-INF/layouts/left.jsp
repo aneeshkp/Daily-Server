@@ -34,7 +34,7 @@
                 <a href="${ctx}/admin/draft/"><i class="fa fa-inbox fa-fw"></i> 草稿箱</a>
             </li>
             <li>
-                <a href="${ctx}/admin/postqueue/"><i class="fa fa-paper-plane fa-fw"></i> 发布队列</a>
+                <a href="${ctx}/admin/queue/"><i class="fa fa-paper-plane fa-fw"></i> 发布队列</a>
             </li>
             <li>
                 <a href="${ctx}/admin/online/"><i class="fa fa-list  fa-fw"></i> 已发布列表</a>
@@ -50,6 +50,9 @@
             </li>
             <li>
                 <a href="${ctx}/admin/system/"><i class="fa fa-cog fa-fw"></i> 系统管理</a>
+            </li>
+            <li>
+                <a href="${ctx}/admin/waterfall/"><i class="fa fa-newspaper-o fa-fw"></i> 瀑布流</a>
             </li>
 
             <%--<li class="active">--%>

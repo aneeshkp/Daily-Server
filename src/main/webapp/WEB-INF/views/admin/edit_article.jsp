@@ -178,7 +178,8 @@
     $(document).ready(function () {
         //判断ueditor 编辑器是否创建成功
         UE.getEditor('editor').addListener("ready", function () { // editor ready后 初始化
-            UE.getEditor('editor').setContent('${post.content}', false);
+            var content = '${post.content}'.replace(/(?:\r\n|\r|\n)/g, '<br />');
+            UE.getEditor('editor').setContent(content, false);
             console.log('${post.id}');
             $("#postId").val("${post.id}");
             $("#postTitle").val("${post.title}");
