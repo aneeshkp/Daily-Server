@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Validator;
 
 /**
+ * 移动端接口
+ *
  * Created by fangs on 15/1/27.
  */
 @Controller

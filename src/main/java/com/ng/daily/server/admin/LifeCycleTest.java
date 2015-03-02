@@ -1,4 +1,4 @@
-package com.ng.daily.server.admin.controller;
+package com.ng.daily.server.admin;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
 
 /**
+ * 测试Bean生命周期方法
  * Created by fangs on 15/2/13.
  */
 @Component

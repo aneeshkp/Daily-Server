@@ -19,6 +19,11 @@ public class AdminController extends BaseAdminController {
     }
 
 
+    /**
+     * 总览界面
+     *
+     * @return
+     */
     @RequestMapping(value = "/summary", method = RequestMethod.GET)
     public String summary() {
         return "admin/summary";

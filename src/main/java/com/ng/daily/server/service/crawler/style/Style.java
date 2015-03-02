@@ -13,6 +13,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 /**
+ * Style.com 爬虫
  * Created by fangs on 15/2/5.
  */
 public class Style {

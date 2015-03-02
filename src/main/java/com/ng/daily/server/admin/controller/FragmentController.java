@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
+ * 碎片
  * Created by fangs on 15/2/13.
  */
 @Controller
@@ -26,13 +27,20 @@ public class FragmentController extends BaseAdminController {
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String index(Model model, Post post) {
-        if(post == null || StringUtils.isBlank(post.getId())) {
+        if (post == null || StringUtils.isBlank(post.getId())) {
             post = Post.createFragment();
         }
         model.addAttribute("post", post);
         return "admin/edit_fragment";
     }
 
+    /**
+     * 预览
+     *
+     * @param model
+     * @param id
+     * @return
+     */
     @RequestMapping(value = "/preview", method = RequestMethod.GET)
     public String preview(Model model, @RequestParam(value = "id", required = true) String id) {
         Post post = postService.findById(id);
@@ -40,19 +48,32 @@ public class FragmentController extends BaseAdminController {
         return "admin/preview_fragment";
     }
 
+    /**
+     * 编辑
+     *
+     * @param model
+     * @param id
+     * @return
+     */
     @RequestMapping(value = "/edit", method = RequestMethod.GET)
     public String edit(Model model, @RequestParam(value = "id", required = true) String id) {
         Post post = postService.findById(id);
-        if(post == null) {
+        if (post == null) {
             post = Post.createFragment();
         }
         return index(model, post);
     }
 
+    /**
+     * 保存
+     *
+     * @param post
+     * @return
+     */
     @RequestMapping(value = "/save", method = RequestMethod.POST, produces = MediaTypes.JSON_UTF_8)
     @ResponseBody
     public Object save(Post post) {
-        if(post == null || StringUtils.isBlank(post.getId())) {
+        if (post == null || StringUtils.isBlank(post.getId())) {
             post = Post.createFragment();
         }
 
@@ -65,6 +86,12 @@ public class FragmentController extends BaseAdminController {
         return post;
     }
 
+    /**
+     * 删除
+     *
+     * @param id
+     * @return
+     */
     @RequestMapping(value = "/delete", method = RequestMethod.POST, produces = MediaTypes.JSON_UTF_8)
     @ResponseBody
     public Object delete(@RequestParam(value = "id", required = true) String id) {
@@ -72,6 +99,12 @@ public class FragmentController extends BaseAdminController {
         return success;
     }
 
+    /**
+     * 队列
+     *
+     * @param id
+     * @return
+     */
     @RequestMapping(value = "/queue", method = RequestMethod.POST, produces = MediaTypes.JSON_UTF_8)
     @ResponseBody
     public Object queue(@RequestParam(value = "id", required = true) String id) {

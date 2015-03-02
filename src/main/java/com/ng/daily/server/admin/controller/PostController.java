@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
+ * 根据Post类型 分发操作
+ * <p/>
  * Created by fangs on 15/2/28.
  */
 @Controller
@@ -21,6 +23,13 @@ public class PostController extends AdminController {
     @Autowired
     private PostService postService;
 
+    /**
+     * 编辑
+     *
+     * @param model
+     * @param id
+     * @return
+     */
     @RequestMapping(value = "/edit", method = RequestMethod.GET)
     public String edit(Model model, @RequestParam(value = "id", required = true) String id) {
         Post post = postService.findById(id);
@@ -33,6 +42,13 @@ public class PostController extends AdminController {
     }
 
 
+    /**
+     * 预览
+     *
+     * @param model
+     * @param id
+     * @return
+     */
     @RequestMapping(value = "/preview", method = RequestMethod.GET)
     public String preview(Model model, @RequestParam(value = "id", required = true) String id) {
         Post post = postService.findById(id);
@@ -45,6 +61,13 @@ public class PostController extends AdminController {
     }
 
 
+    /**
+     * 删除
+     *
+     * @param model
+     * @param id
+     * @return
+     */
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
     @ResponseBody
     public Object delete(Model model, @RequestParam(value = "id", required = true) String id) {

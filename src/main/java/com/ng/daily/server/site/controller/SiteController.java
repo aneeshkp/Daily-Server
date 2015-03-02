@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
+ * 网站
+ *
  * Created by fangs on 15/2/1.
  */
 @Controller

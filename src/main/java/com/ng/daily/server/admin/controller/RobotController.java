@@ -1,6 +1,7 @@
 package com.ng.daily.server.admin.controller;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.ng.daily.server.admin.IDGenerator;
 import com.ng.daily.server.admin.base.BaseAdminController;
 import com.ng.daily.server.common.qiniu.QiniuService;
@@ -23,8 +24,11 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
+import java.util.Map;
 
 /**
+ * 爬虫
+ * <p/>
  * Created by fangs on 15/2/13.
  */
 @Controller
@@ -48,6 +52,12 @@ public class RobotController extends BaseAdminController {
     // 运行状态 抓取日志 抓取量
 
 
+    /**
+     * 知乎答案
+     *
+     * @param url
+     * @return
+     */
     @RequestMapping(value = "/getZhihuAnswer", method = RequestMethod.POST, produces = MediaTypes.JSON_UTF_8)
     @ResponseBody
     public Object getZhihuAnswer(@RequestParam(value = "url", required = true) String url) {
@@ -67,49 +77,62 @@ public class RobotController extends BaseAdminController {
     }
 
 
+    /**
+     * 知乎日报
+     *
+     * @param url
+     * @return
+     */
     @RequestMapping(value = "/getZhihuDaily", method = RequestMethod.POST, produces = MediaTypes.JSON_UTF_8)
     @ResponseBody
     public Object getZhihuDaily(@RequestParam(value = "url", required = true) String url) {
         ZhihuDaily zhihu = new ZhihuDaily();
         String saveDir = "/tmp/zhihu.com";
 //        String answerUrl = "http://daily.zhihu.com/story/4559173";
+        Map result = Maps.newHashMap();
         try {
             Post post = zhihu.download(saveDir, url);
 
 
-
-            for(String imageUrl : post.getImageList()) {
+            for (String imageUrl : post.getImageList()) {
                 ByteArrayOutputStream out = new ByteArrayOutputStream();
                 httpClientManager.httpGet(imageUrl, out);
                 InputStream in = new ByteArrayInputStream(out.toByteArray());
                 String fileName = IDGenerator.getArticleImageId() + ".jpg";
                 String qiniuUrl = qiniuService.upload(in, fileName);
-                String newContent = post.getContent().replaceAll(imageUrl,qiniuUrl);
+                String newContent = post.getContent().replaceAll(imageUrl, qiniuUrl);
                 post.setContent(newContent);
             }
 
             postService.savePost(post);
-            success.put("post", post);
+            result.put("post", post);
 
             log.debug("抓取完成:" + post.getTitle());
         } catch (IOException e) {
             e.printStackTrace();
             return exception;
         }
-        return success;
+        return result;
     }
 
 
+    /**
+     * 豆瓣东西
+     *
+     * @param url
+     * @return
+     */
     @RequestMapping(value = "/getDoubanDongxi", method = RequestMethod.POST, produces = MediaTypes.JSON_UTF_8)
     @ResponseBody
     public Object getDoubanDongxi(@RequestParam(value = "url", required = true) String url) {
         Dongxi zhihu = new Dongxi();
         String saveDir = "/tmp/zhihu.com";
+        Map result = Maps.newHashMap();
         try {
             Post post = zhihu.download(saveDir, url);
 
             List<String> newImageList = Lists.newArrayList();
-            for(String imageUrl : post.getImageList()) {
+            for (String imageUrl : post.getImageList()) {
                 ByteArrayOutputStream out = new ByteArrayOutputStream();
                 httpClientManager.httpGet(imageUrl, out);
                 InputStream in = new ByteArrayInputStream(out.toByteArray());
@@ -120,14 +143,14 @@ public class RobotController extends BaseAdminController {
             post.setImageList(newImageList);
 
             postService.savePost(post);
-            success.put("post", post);
+            result.put("post", post);
 
             log.debug("抓取完成:" + post.getTitle());
         } catch (IOException e) {
             e.printStackTrace();
             return exception;
         }
-        return success;
+        return result;
     }
 
 }

@@ -15,8 +15,11 @@ import javax.validation.ConstraintViolationException;
 import javax.validation.Validator;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
+ * 系统后台 Controller 功能辅助
+ *
  * Created by fangs on 15/1/27.
  */
 public abstract class BaseAdminController {
@@ -140,4 +143,13 @@ public abstract class BaseAdminController {
         success.put("result","ok");
         exception.put("result","error");
     }
+
+    protected Map<Object,Object> data() {
+        return Maps.newHashMap();
+    }
+
+
+
+
+
 }

@@ -18,6 +18,7 @@ import java.io.File;
 import java.io.IOException;
 
 /**
+ * 图片上传
  * Created by fangs on 15/2/14.
  */
 @Controller
@@ -30,6 +31,13 @@ public class ImageController extends BaseAdminController {
     @Autowired
     private QiniuService qiniuService;
 
+    /**
+     * 文章图片上传
+     *
+     * @param file
+     * @return
+     * @throws IOException
+     */
     @RequestMapping(value = "/upload/article", method = RequestMethod.POST, produces = MediaTypes.JSON_UTF_8)
     @ResponseBody
     public String uploadArticleImage(@RequestParam(value = "file", required = true) MultipartFile file) throws IOException {
@@ -46,6 +54,13 @@ public class ImageController extends BaseAdminController {
         return imageUrl;
     }
 
+    /**
+     * 碎片图片上传
+     *
+     * @param file
+     * @return
+     * @throws IOException
+     */
     @RequestMapping(value = "/upload/fragment", method = RequestMethod.POST, produces = MediaTypes.JSON_UTF_8)
     @ResponseBody
     public String uploadFragmentImage(@RequestParam(value = "file", required = true) MultipartFile file) throws IOException {

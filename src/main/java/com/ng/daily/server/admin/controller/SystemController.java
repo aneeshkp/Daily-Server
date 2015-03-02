@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
+ * 系统管理
  * Created by fangs on 15/2/13.
  */
 @Controller
@@ -27,6 +28,11 @@ public class SystemController extends BaseAdminController {
     // 配置 异常日志..
 
 
+    /**
+     * 清空七牛文件
+     *
+     * @return
+     */
     @RequestMapping(value = "/clearQiniuFiles", method = RequestMethod.GET, produces = MediaTypes.JSON_UTF_8)
     @ResponseBody
     public Object clearQiniuFiles() {

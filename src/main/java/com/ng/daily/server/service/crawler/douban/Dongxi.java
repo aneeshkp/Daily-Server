@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.util.List;
 
 /**
+ * 豆瓣东西
  * Created by fangs on 15/3/1.
  */
 public class Dongxi {

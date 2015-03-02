@@ -7,6 +7,8 @@ import java.io.OutputStream;
 import java.util.concurrent.Callable;
 
 /**
+ * 文件下载任务
+ *
  * Created by fangs on 15/2/6.
  */
 public class DownloadTask implements Callable {

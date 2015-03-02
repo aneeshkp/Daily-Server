@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.util.List;
 
 /**
+ * 知乎日报
  * Created by fangs on 15/2/28.
  */
 public class ZhihuDaily {

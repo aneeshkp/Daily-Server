@@ -5,6 +5,7 @@ import org.joda.time.DateTime;
 import java.util.Random;
 
 /**
+ * ID生成器
  * Created by fangs on 15/2/14.
  */
 public class IDGenerator {

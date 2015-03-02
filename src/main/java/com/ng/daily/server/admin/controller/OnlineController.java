@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
+ * 已发布内容
+ * <p/>
  * Created by fangs on 15/2/13.
  */
 @Controller

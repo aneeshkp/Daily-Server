@@ -13,11 +13,12 @@
     <script type="text/javascript" charset="utf-8"
             src="${ctx}/static/libs/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
 
-    <script type="text/javascript" charset="utf-8"  src="${ctx}/static/libs/artTemplate/template.js"></script>
+    <script type="text/javascript" charset="utf-8" src="${ctx}/static/libs/artTemplate/template.js"></script>
 
-    <script type="text/javascript" charset="utf-8"  src="${ctx}/static/libs/moment/moment.min.js"></script>
-    <script type="text/javascript" charset="utf-8"  src="${ctx}/static/libs/jquery-timeago/jquery.timeago.js"></script>
-    <script type="text/javascript" charset="utf-8"  src="${ctx}/static/libs/jquery-timeago/locales/jquery.timeago.zh-CN.js"></script>
+    <script type="text/javascript" charset="utf-8" src="${ctx}/static/libs/moment/moment.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="${ctx}/static/libs/jquery-timeago/jquery.timeago.js"></script>
+    <script type="text/javascript" charset="utf-8"
+            src="${ctx}/static/libs/jquery-timeago/locales/jquery.timeago.zh-CN.js"></script>
 </head>
 
 
@@ -117,8 +118,22 @@
     function setPublishTime(id) {
 
         var date = $("#datetimepicker_" + id).data("datetimepicker").getDate();
-        console.log(date.getTime()); // 取到时间戳
+        var publishTime = date.getTime(); // 取到时间戳
 
+        var postId = id;
+
+
+        $.ajax({
+            type: "POST",
+            url: "${ctx}/admin/queue/changePublishTime",
+            data: {"postId": postId, "publishTime": publishTime},
+            success: function (data) {
+                notice("修改成功");
+            },
+            error: function (data, errCode, errDesc) {
+                alert("操作失败:\n" + errCode + errDesc);
+            }
+        });
 
 
     }
