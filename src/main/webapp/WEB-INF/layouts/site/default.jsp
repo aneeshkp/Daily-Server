@@ -25,7 +25,6 @@
 <sitemesh:body/>
 <%@ include file="/WEB-INF/layouts/site/navbar.jsp" %>
 <%@ include file="/WEB-INF/layouts/site/footer.jsp" %>
-
 </body>
 </html>
 

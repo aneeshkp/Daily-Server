@@ -4,7 +4,6 @@
 
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
 
-
 <head>
 
     <meta charset="utf-8">
@@ -19,20 +18,13 @@
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="${ctx}/static/site/css/bootstrap.min.css">
 
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="${ctx}/static/site/css/clean-blog.min.css">
 
-    <!-- Pygments Github CSS -->
-    <link rel="stylesheet" href="${ctx}/static/site/css/syntax.css">
 
     <!-- Custom Fonts -->
-    <link href="${ctx}/static/site/css/font-awesome.min.css" rel="stylesheet"
-          type="text/css">
+    <link href="${ctx}/static/site/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
-    <link href='${ctx}/static/site/css/fonts.googleapis.com.lora.css' rel='stylesheet'
-          type='text/css'>
-    <link href='${ctx}/static/site/css/fonts.googleapis.com.opensans.css'
-          rel='stylesheet' type='text/css'>
+    <link href='${ctx}/static/site/css/fonts.googleapis.com.lora.css' rel='stylesheet' type='text/css'>
+    <link href='${ctx}/static/site/css/fonts.googleapis.com.opensans.css' rel='stylesheet' type='text/css'>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->

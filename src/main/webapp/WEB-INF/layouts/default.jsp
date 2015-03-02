@@ -69,22 +69,6 @@
 
     <script>
         var _ctxPath = "${ctx}";
-
-        // 确认
-        $(document).ready(function () {
-            new jBox('Confirm', {
-                confirmButton: '确定',
-                cancelButton: '取消'
-            });
-        });
-        // 提醒
-        function notice(msg) {
-            new jBox('Notice', {
-                content: msg, color: 'green',
-                autoClose: 1000, position: {x: 'center', y: 'center'}
-            });
-        }
-
     </script>
 
     <sitemesh:head/>

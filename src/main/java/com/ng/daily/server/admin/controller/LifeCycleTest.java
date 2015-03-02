@@ -1,4 +1,4 @@
-package com.ng.daily.server.test;
+package com.ng.daily.server.admin.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,9 +12,9 @@ import javax.annotation.PostConstruct;
  * Created by fangs on 15/2/13.
  */
 @Component
-public class LifeBean implements InitializingBean, DisposableBean {
+public class LifeCycleTest implements InitializingBean, DisposableBean {
 
-    public static final Logger log = LoggerFactory.getLogger(LifeBean.class);
+    public static final Logger log = LoggerFactory.getLogger(LifeCycleTest.class);
 
     @Override
     public void afterPropertiesSet() throws Exception {

@@ -73,15 +73,12 @@ public class AccountService {
 //        // mybatis test
 //        ssUser u = BeanMapper.map(user, ssUser.class);
 //        userMapper.insert(u);
-//
 //        ssUser userFromDB = userMapper.selectByPrimaryKey(u.getId());
 //        logger.debug("user from DB : {}", userFromDB);
-//
 //
 //        // redis test
 //        redisTemplate.opsForValue().set("" + user.getId().longValue(), user.getLoginName());
 //        String userFromRedis = (String) redisTemplate.opsForValue().get("" + user.getId().longValue());
-//
 //        logger.debug("user from Redis : {}", userFromRedis);
 
 

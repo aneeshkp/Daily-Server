@@ -60,5 +60,3 @@
 <!-- Bootstrap Core JavaScript -->
 <script src="${ctx}/static/site/js/bootstrap.min.js"></script>
 
-<!-- Custom Theme JavaScript -->
-<script src="${ctx}/static/site/js/clean-blog.min.js"></script>
