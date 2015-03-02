@@ -32,7 +32,7 @@ public class OnlineController extends BaseAdminController {
     @RequestMapping(value = "list", method = RequestMethod.GET, produces = MediaTypes.JSON_UTF_8)
     @ResponseBody
     public PageEntity<Post> list(@DatatablesParams DatatablesMetadata metadata) {
-        Page<Post> page = postService.findByStatus(metadata.getCurrentPageIndex(), metadata.getLength());
+        Page<Post> page = postService.findByStatus(Post.STATUS_ONLINE, metadata.getCurrentPageIndex(), metadata.getLength());
         return new PageEntity<>(metadata.getDraw(), page.getNumberOfElements(), page.getTotalElements(), page.getContent());
     }
 }

@@ -5,6 +5,7 @@ import com.ng.daily.server.common.util.web.MediaTypes;
 import com.ng.daily.server.entity.Post;
 import com.ng.daily.server.service.post.PostService;
 import org.apache.commons.lang.StringUtils;
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -54,6 +55,10 @@ public class FragmentController extends BaseAdminController {
         if(post == null || StringUtils.isBlank(post.getId())) {
             post = Post.createFragment();
         }
+
+
+        post.setPublishScheduleAt(DateTime.now().toDate());
+
         post.setType(Post.TYPE_FRAGMENT);
         post.setStatus(Post.STATUS_DRAFT);
         postService.savePost(post);

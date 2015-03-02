@@ -7,14 +7,14 @@
 <head>
     <title>发布队列</title>
 
-    <link href="${ctx}/static/libs/nestable/nestable_style.css" rel="stylesheet"/>
-    <script type="text/javascript" charset="utf-8" src="${ctx}/static/libs/nestable/jquery.nestable.js"></script>
-
     <link href="${ctx}/static/libs/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet"/>
     <script type="text/javascript" charset="utf-8"
             src="${ctx}/static/libs/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
     <script type="text/javascript" charset="utf-8"
             src="${ctx}/static/libs/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+
+    <script type="text/javascript" charset="utf-8"
+            src="${ctx}/static/libs/artTemplate/template.js"></script>
 
 </head>
 
@@ -34,126 +34,19 @@
             </div>
             <!-- /.row -->
 
-
             <div class="row">
-                <div class="col-lg-12">
-
-                    <div class="input-append date form_datetime" data-date="2012-12-21T15:25:00Z">
-                        <input size="23" type="text" value="" readonly>
-                        <%--<span class="add-on"><i class="icon-remove"></i></span>--%>
-                        <%--<span class="add-on"><i class="icon-th"></i></span>--%>
-                        <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
-                        <span class="input-group-addon"><span class="glyphicon glyphicon-time"></span></span>
-                    </div>
-
-                    <script type="text/javascript">
-
-
-                        $(".form_datetime").datetimepicker({
-                            format: "dd MM yyyy - HH:ii P",
-                            showMeridian: true,
-                            autoclose: true,
-                            todayBtn: true,
-                            pickerPosition: "bottom-left",
-                            language:"zh-CN"
-                        });
-                    </script>
-
+                <div class="col-lg-3">
+                    <button class="btn btn-success btn-block" onclick="refreshQueue()">刷新队列</button>
                 </div>
             </div>
 
+            <p/>
 
-            <row>
+            <div class="row">
                 <div class="col-lg-12">
-
-                    <menu id="nestable-menu">
-                        <button type="button" data-action="expand-all">展开</button>
-                        <button type="button" data-action="collapse-all">收起</button>
-                    </menu>
-
-                    <div class="cf nestable-lists">
-
-                        <div class="dd" id="nestable">
-                            <ol class="dd-list">
-                                <li class="dd-item" data-id="1">
-                                    <div class="dd-handle">Item 1</div>
-                                </li>
-                                <li class="dd-item" data-id="2">
-                                    <div class="dd-handle">Item 2</div>
-                                    <ol class="dd-list">
-                                        <li class="dd-item" data-id="3">
-                                            <div class="dd-handle">Item 3</div>
-                                        </li>
-                                        <li class="dd-item" data-id="4">
-                                            <div class="dd-handle">Item 4</div>
-                                        </li>
-                                        <li class="dd-item" data-id="5">
-                                            <div class="dd-handle">Item 5</div>
-                                            <ol class="dd-list">
-                                                <li class="dd-item" data-id="6">
-                                                    <div class="dd-handle">Item 6</div>
-                                                </li>
-                                                <li class="dd-item" data-id="7">
-                                                    <div class="dd-handle">Item 7</div>
-                                                </li>
-                                                <li class="dd-item" data-id="8">
-                                                    <div class="dd-handle">Item 8</div>
-                                                </li>
-                                            </ol>
-                                        </li>
-                                        <li class="dd-item" data-id="9">
-                                            <div class="dd-handle">Item 9</div>
-                                        </li>
-                                        <li class="dd-item" data-id="10">
-                                            <div class="dd-handle">Item 10</div>
-                                        </li>
-                                    </ol>
-                                </li>
-                                <li class="dd-item" data-id="11">
-                                    <div class="dd-handle">Item 11</div>
-                                </li>
-                                <li class="dd-item" data-id="12">
-                                    <div class="dd-handle">Item 12</div>
-                                </li>
-                            </ol>
-                        </div>
-
-                        <div class="dd" id="nestable2">
-                            <ol class="dd-list">
-                                <li class="dd-item" data-id="13">
-                                    <div class="dd-handle">Item 13</div>
-                                </li>
-                                <li class="dd-item" data-id="14">
-                                    <div class="dd-handle">Item 14</div>
-                                </li>
-                                <li class="dd-item" data-id="15">
-                                    <div class="dd-handle">Item 15</div>
-                                    <ol class="dd-list">
-                                        <li class="dd-item" data-id="16">
-                                            <div class="dd-handle">Item 16</div>
-                                        </li>
-                                        <li class="dd-item" data-id="17">
-                                            <div class="dd-handle">Item 17</div>
-                                        </li>
-                                        <li class="dd-item" data-id="18">
-                                            <div class="dd-handle">Item 18</div>
-                                        </li>
-                                    </ol>
-                                </li>
-                            </ol>
-                        </div>
-
-                    </div>
-
-                    <p><strong>Serialised Output (per list)</strong></p>
-
-                    <textarea id="nestable-output"></textarea>
-                    <textarea id="nestable2-output"></textarea>
-
-
+                    <div id="queuelist"></div>
                 </div>
-
-            </row>
+            </div>
 
         </div>
         <!-- /.container-fluid -->
@@ -163,52 +56,112 @@
 </div>
 <!-- /#wrapper -->
 
+
+<script id="tpl" type="text/html">
+
+    <table class="table table-bordered table-hover">
+        <thead>
+        <tr>
+            <th class="col-lg-1">ID</th>
+            <th class="col-lg-2">发布时间</th>
+            <th class="col-lg-1">类型</th>
+            <th class="col-lg-4">标题</th>
+            <th class="col-lg-1">操作</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        {{each list as post i}}
+
+        <tr>
+            <td>{{post.id}}</td>
+            <td>
+                <div class="input-append date form_datetime">
+                    <input id="timeset_{{post.id}}" size="26" type="text" value="{{post.publishScheduleAt}}" readonly
+                           placeholder="未设置">
+                    <span class="add-on"><i class="icon-remove"></i></span>
+                    <span class="add-on"><i class="icon-th"></i></span>
+                    <button type="button" class="btn btn-link btn-flat" onclick="setPublishTime('{{post.id}}')">
+                        设置
+                    </button>
+                </div>
+            </td>
+            <td>{{post.type}}</td>
+            <td>{{post.title}}</td>
+            <td>
+                <div class="btn-group btn-group-xs">
+                    <button type="button" class="btn btn-link btn-flat" onclick="offline('{{post.id}}')">
+                        撤回
+                    </button>
+                    <button type="button" class="btn btn-link btn-flat" onclick="view('{{post.id}}')">
+                        查看
+                    </button>
+                </div>
+            </td>
+        </tr>
+
+        {{/each}}
+
+
+        </tbody>
+    </table>
+
+
+</script>
+
 <script>
 
-    $(document).ready(function () {
+    function setPublishTime(id) {
+        var time = $("#timeset_" + id).val();
+        alert('publishtime' + id + time);
+    }
 
-        var updateOutput = function (e) {
-            var list = e.length ? e : $(e.target),
-                    output = list.data('output');
-            if (window.JSON) {
-                output.val(window.JSON.stringify(list.nestable('serialize')));//, null, 2));
-            } else {
-                output.val('JSON browser support required for this demo.');
-            }
-        };
+    function offline(id) {
+        alert('offline' + id);
+    }
+    function view(id) {
+        alert('view' + id);
+    }
 
-        // activate Nestable for list 1
-        $('#nestable').nestable({
-            group: 1
-        })
-                .on('change', updateOutput);
+    function refreshQueue() {
 
-        // activate Nestable for list 2
-        $('#nestable2').nestable({
-            group: 1
-        })
-                .on('change', updateOutput);
+        $.ajax({
+            type: "GET",
+            url: "${ctx}/admin/queue/list",
+            success: function (data) {
+                console.log(data);
 
-        // output initial serialised data
-        updateOutput($('#nestable').data('output', $('#nestable-output')));
-        updateOutput($('#nestable2').data('output', $('#nestable2-output')));
-
-        $('#nestable-menu').on('click', function (e) {
-            var target = $(e.target),
-                    action = target.data('action');
-            if (action === 'expand-all') {
-                $('.dd').nestable('expandAll');
-            }
-            if (action === 'collapse-all') {
-                $('.dd').nestable('collapseAll');
+                var html = template('tpl', data);
+                document.getElementById('queuelist').innerHTML = html;
+                makeTimePicker();
+            },
+            error: function (data, errCode, errDesc) {
+                alert("操作失败:\n" + errCode + errDesc);
             }
         });
 
-        $('#nestable3').nestable();
+    }
 
+
+    $(document).ready(function () {
+        refreshQueue();
     });
+
+    function makeTimePicker() {
+
+        $(".form_datetime").datetimepicker({
+            format: "dd MM yyyy - HH:ii P",
+            showMeridian: true,
+            autoclose: true,
+            todayBtn: true,
+            pickerPosition: "bottom-left",
+            language: "zh-CN"
+        });
+    }
+
 </script>
 
 </body>
+
 
 </html>

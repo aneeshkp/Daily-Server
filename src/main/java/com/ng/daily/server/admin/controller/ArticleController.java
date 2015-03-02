@@ -5,6 +5,7 @@ import com.ng.daily.server.common.util.web.MediaTypes;
 import com.ng.daily.server.entity.Post;
 import com.ng.daily.server.service.post.PostService;
 import org.apache.commons.lang.StringUtils;
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -56,6 +57,10 @@ public class ArticleController extends BaseAdminController {
         }
         post.setType(Post.TYPE_ARTICLE);
         post.setStatus(Post.STATUS_DRAFT);
+
+
+        post.setPublishScheduleAt(DateTime.now().toDate());
+
         postService.savePost(post);
         return post;
     }

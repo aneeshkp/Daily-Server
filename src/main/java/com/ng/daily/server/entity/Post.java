@@ -5,6 +5,7 @@ import com.ng.daily.server.admin.IDGenerator;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -57,6 +58,10 @@ public class Post {
     private String titleImage; // 题图
     private List<String> imageList; // 图片列表
 
+
+    private Date publishScheduleAt; // 定时发布时间
+    private Date publishAt; // 发布时间
+
     private Map<String, Object> extras = Maps.newHashMap();
 
 
@@ -76,6 +81,22 @@ public class Post {
                 ", titleImage='" + titleImage + '\'' +
                 ", imageList=" + imageList +
                 '}';
+    }
+
+    public Date getPublishScheduleAt() {
+        return publishScheduleAt;
+    }
+
+    public void setPublishScheduleAt(Date publishScheduleAt) {
+        this.publishScheduleAt = publishScheduleAt;
+    }
+
+    public Date getPublishAt() {
+        return publishAt;
+    }
+
+    public void setPublishAt(Date publishAt) {
+        this.publishAt = publishAt;
     }
 
     public Object getExtra(String key) {

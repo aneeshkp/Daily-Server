@@ -14,9 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 /**
  * Created by fangs on 15/2/13.
  */
@@ -35,7 +32,7 @@ public class DraftController extends BaseAdminController {
     @RequestMapping(value = "list", method = RequestMethod.GET, produces = MediaTypes.JSON_UTF_8)
     @ResponseBody
     public PageEntity<Post> list(@DatatablesParams DatatablesMetadata metadata) {
-        Page<Post> page = postService.findAll(metadata.getCurrentPageIndex(), metadata.getLength(), metadata.getSearch());
+        Page<Post> page = postService.findByStatus(Post.STATUS_DRAFT, metadata.getCurrentPageIndex(), metadata.getLength() );
         return new PageEntity<>(metadata.getDraw(), page.getNumberOfElements(), page.getTotalElements(), page.getContent());
     }
 

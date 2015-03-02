@@ -11,10 +11,10 @@
             classpath*:/applicationContext-mongo.xml,
             classpath*:/applicationContext-shiro.xml,
             classpath*:/applicationContext-ehcache.xml,
+            classpath*:/applicationContext-spring-scheduler.xml,
             <!--classpath*:/applicationContext-mail.xml,-->
             <!--classpath*:/applicationContext-mybatis.xml,-->
             <!--classpath*:/applicationContext-redis.xml,-->
-            <!--classpath*:/applicationContext-spring-scheduler.xml,-->
             <!--classpath*:/applicationContext-swagger.xml,-->
         </param-value>
     </context-param>
