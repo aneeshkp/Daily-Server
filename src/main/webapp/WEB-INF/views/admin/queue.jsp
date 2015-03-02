@@ -13,9 +13,11 @@
     <script type="text/javascript" charset="utf-8"
             src="${ctx}/static/libs/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
 
-    <script type="text/javascript" charset="utf-8"
-            src="${ctx}/static/libs/artTemplate/template.js"></script>
+    <script type="text/javascript" charset="utf-8"  src="${ctx}/static/libs/artTemplate/template.js"></script>
 
+    <script type="text/javascript" charset="utf-8"  src="${ctx}/static/libs/moment/moment.min.js"></script>
+    <script type="text/javascript" charset="utf-8"  src="${ctx}/static/libs/jquery-timeago/jquery.timeago.js"></script>
+    <script type="text/javascript" charset="utf-8"  src="${ctx}/static/libs/jquery-timeago/locales/jquery.timeago.zh-CN.js"></script>
 </head>
 
 
@@ -76,8 +78,9 @@
         <tr>
             <td>{{post.id}}</td>
             <td>
-                <div class="input-append date form_datetime">
-                    <input id="timeset_{{post.id}}" size="26" type="text" value="{{post.publishScheduleAt}}" readonly
+                <div id="datetimepicker_{{post.id}}" class="input-append date form_datetime">
+                    <input id="timeset_{{post.id}}" data-format="yyyy-MM-dd hh:mm:ss" size="26" type="text"
+                           value="{{post.publishScheduleAt}}" readonly
                            placeholder="未设置">
                     <span class="add-on"><i class="icon-remove"></i></span>
                     <span class="add-on"><i class="icon-th"></i></span>
@@ -112,8 +115,12 @@
 <script>
 
     function setPublishTime(id) {
-        var time = $("#timeset_" + id).val();
-        alert('publishtime' + id + time);
+
+        var date = $("#datetimepicker_" + id).data("datetimepicker").getDate();
+        console.log(date.getTime()); // 取到时间戳
+
+
+
     }
 
     function offline(id) {
@@ -157,6 +164,9 @@
             pickerPosition: "bottom-left",
             language: "zh-CN"
         });
+//        $(".form_datetime").datetimepicker.dates['zh-CN'] = {
+//            format: 'dd/mm/yyyy'
+//        };
     }
 
 </script>
