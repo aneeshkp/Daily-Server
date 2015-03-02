@@ -10,6 +10,11 @@
     <link href="${ctx}/static/libs/nestable/nestable_style.css" rel="stylesheet"/>
     <script type="text/javascript" charset="utf-8" src="${ctx}/static/libs/nestable/jquery.nestable.js"></script>
 
+    <link href="${ctx}/static/libs/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet"/>
+    <script type="text/javascript" charset="utf-8"
+            src="${ctx}/static/libs/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+    <script type="text/javascript" charset="utf-8"
+            src="${ctx}/static/libs/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
 
 </head>
 
@@ -28,6 +33,35 @@
                 <!-- /.col-lg-12 -->
             </div>
             <!-- /.row -->
+
+
+            <div class="row">
+                <div class="col-lg-12">
+
+                    <div class="input-append date form_datetime" data-date="2012-12-21T15:25:00Z">
+                        <input size="23" type="text" value="" readonly>
+                        <%--<span class="add-on"><i class="icon-remove"></i></span>--%>
+                        <%--<span class="add-on"><i class="icon-th"></i></span>--%>
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-time"></span></span>
+                    </div>
+
+                    <script type="text/javascript">
+
+
+                        $(".form_datetime").datetimepicker({
+                            format: "dd MM yyyy - HH:ii P",
+                            showMeridian: true,
+                            autoclose: true,
+                            todayBtn: true,
+                            pickerPosition: "bottom-left",
+                            language:"zh-CN"
+                        });
+                    </script>
+
+                </div>
+            </div>
+
 
             <row>
                 <div class="col-lg-12">
