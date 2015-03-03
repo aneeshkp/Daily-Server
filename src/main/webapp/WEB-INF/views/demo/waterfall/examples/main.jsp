@@ -789,27 +789,27 @@
                 </div>
                 <div data-id="96247155" class="woo">
                     <div class="j">
-                        <div class="mbpho" style="height:200px;"><a target="_blank" class="a"
-                                                                    href="http://www.duitang.com/people/mblog/96247155/detail/"><img
-                                data-rootid="96247155" data-iid="4468891"
-                                srcd="http://cdn.duitang.com/uploads/item/201208/16/20120816203411_scT4m.thumb.200_0.jpeg"
-                                height="200"/></a>
-
-                            <div class="collbtn" data-favorite='{"id":96247155,"owner":903663}'><a class="y" href="#">391</a><a
-                                    class="z" href="#">0</a><a class="x" href="#">0</a></div>
+                        <div class="mbpho" style="height:200px;">
+                            <a target="_blank" class="a" href="http://www.duitang.com/people/mblog/96247155/detail/">
+                                <img data-rootid="96247155" data-iid="4468891"
+                                     srcd="http://cdn.duitang.com/uploads/item/201208/16/20120816203411_scT4m.thumb.200_0.jpeg" height="200"/>
+                            </a>
+                            <div class="collbtn" data-favorite='{"id":96247155,"owner":903663}'><a class="y" href="#">391</a>
+                                <a class="z" href="#">0</a><a class="x" href="#">0</a>
+                            </div>
                         </div>
                         <div class="d"><span class="d1">391</span><span class="d2">0</span><span class="d3">0</span>
                         </div>
                         <div class="g">创意孔雀挂钟表壁钟餐厅客厅卧室超静音现代时尚&nbsp;<a class="dymprice dib bl"
                                                                       href="http://www.duitang.com/dj/go2/?mk=_p_96247155&to=http%3A%2F%2Fitem.taobao.com%2Fitem.htm%3Fspm%3Da230r.1.10.102%26amp%3Bid%3D10782185564%26amp%3B_u%3Dgdnumikb3af&spm=2014.12553688.102.0"
-                                                                      target="_blank"><u class="_tb"
-                                                                                         title="去购买">￥164.0</u></a>
+                                                                      target="_blank"><u class="_tb" title="去购买">￥164.0</u></a>
                         </div>
                         <ul>
-                            <li class="f"><a target="_blank" href="http://www.duitang.com/people/903663/"> <img
-                                    width="24" height="24"
-                                    srcd="http://cdn.duitang.com/uploads/people/201401/15/20140115014745_4K4Tr.png"/>
-                            </a>
+                            <li class="f">
+                                <a target="_blank" href="http://www.duitang.com/people/903663/">
+                                    <img width="24" height="24"
+                                         srcd="http://cdn.duitang.com/uploads/people/201401/15/20140115014745_4K4Tr.png"/>
+                                </a>
 
                                 <p><a class="p" target="_blank" href="http://www.duitang.com/people/903663/">洋葱和小牛</a>&nbsp;收集到&nbsp;<a
                                         target="_blank" href="http://www.duitang.com/album/2523233/">购物</a>&nbsp;专辑中</p>
@@ -844,66 +844,8 @@
 
 
 <div id="preserve">
-    <h2>Reserved Words:</h2>
-    <ul>
-        <li><u>co(n)</u>
 
-            <p>className with column idx for the .woo unit.</p></li>
-        <li><u>sc(n)</u>
 
-            <p>className with screen idx for the .woo unit.</p></li>
-        <li><u>woo-(*)</u>
-
-            <p>reserved className or id.</p></li>
-        <li><u>woo-form-(*)</u>
-
-            <p>reserved id of forms which contain part of the request url.</p></li>
-        <li><u>srcd</u>
-
-            <p>replacement of img attribute src for delay loading images.</p></li>
-    </ul>
-    <h2>Requirements:</h2>
-    <ul>
-        <li>browser.js, disappeared in jQuery 1.10.1 and upper versions.</li>
-        <li>history.js, handles the hashchange event.(a littel fat~)</li>
-        <li>tabswitch.js, supports switching in different waterfalls.</li>
-        <li>(optional)template.min.js, pieces together html strings.(See more in masnunit.js)</li>
-
-    </ul>
-    <h2>Guides:</h2>
-    <ul>
-        <li>1) Each &lt;form &gt; at the bottom of the page represents a single waterfall. You need to put the url of
-            subpage data request into those forms. We use getFormAction() and paramForm() to get what is needed.
-        </li>
-        <li>2) If only one waterfall is prepared，please delete the unnecessary &lt;form &gt;, '.woo-swa' and '.woo-swb'
-            tags.
-        </li>
-        <li>3) If no fixed width is given to '.woo-masned(.woo-pcont)', waterfall will fill the parent like a
-            Response-type layout does. Otherwise, if you give a 1000px width to it by setting data-domwidth="1000", then
-            it will keep that width all the time.
-        </li>
-        <li>4) You can preset some(no limit) '.woo' tags in '.woo-pcont' in html(not in js), they will be treated as the
-            first subpage. Then waterfall request will start from subpage No. 2.
-        </li>
-        <li>5) Multiple waterfalls are supported as you can see, and settings for each waterfall can be different by
-            setting 'data-' attributes on '.woo-pcont'. Global settings such as 'subpagenum', 'unitsnum', 'sink',
-            'sinkheight' and 'sinkright' would be overrided.
-        </li>
-        <li>6) 'data-' attributes on '.woo-pcont' now supported: 'data-subpagenum', 'data-unitsnum', 'data-totalunits',
-            'data-wootemp', 'data-sink', 'data-sinkheight', 'data-sinkright'.
-        </li>
-        <li>7) 'data-wootemp', number, the idx of TEMPLATES you've already made in masnunit.js. Different numbers
-            represent different waterfall patterns. Corresponding functions RENDER[idx], ANALYZERESPONSE[idx] are also
-            given in masnunit.js.
-        </li>
-        <li>8) Does next upper page exist? Feature 'hasnext' in each subpage response has the toppest priority. If
-            hasnext=true, the next button will be visible even if the real total unitsnum has already exceeded the
-            number preseted by 'data-totalunits'.
-        </li>
-        <li>9) DEBUG mode has been opened in demos. DEBUG_DATA is being used after each successful request.</li>
-        <li>10) We've given several different-pattern waterfalls.</li>
-        <li>11) masnunit.js should be read carefully.</li>
-    </ul>
     <h2>一些保留命名 &gt;&gt;</h2>
     <ul>
         <li><u>co(n)</u>
@@ -918,6 +860,7 @@
         <li><u>woo-form-(*)</u>
 
             <p>form 表单的 id，用作请求地址url的拼装</p></li>
+
         <li><u>srcd</u>
 
             <p>单元块内的图片src 属性的替代，图片延迟加载功能使用</p></li>

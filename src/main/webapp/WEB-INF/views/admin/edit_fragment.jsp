@@ -13,7 +13,8 @@
     <script type="text/javascript" charset="utf-8" src="${ctx}/static/libs/webuploader/webuploader.min.js"></script>
     <script type="text/javascript" charset="utf-8" src="${ctx}/static/libs/image-upload/upload_fragment_image.js"></script>
 
-    <script type="text/javascript" charset="utf-8" src="${ctx}/static/libs/Sortable.js"></script>
+    <!-- 用于将碎片附图排序 -->
+    <script type="text/javascript" charset="utf-8" src="${ctx}/static/libs/sortable/Sortable.js"></script>
 
     <style>
 
@@ -306,7 +307,6 @@
     $(document).ready(function () {
         uploader.on('uploadSuccess', function (file, ret) {
             file.uploadUrl = ret._raw;
-
 
             var imageList = document.getElementById("imageList");
             var $li = $('<li class="col-xs-6 col-md-2 thumbnail">' +

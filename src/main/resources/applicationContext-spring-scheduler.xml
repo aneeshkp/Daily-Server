@@ -15,8 +15,9 @@
 
     <bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"/>
 
+
     <!-- namespace 方式 的便捷版 -->
-    <task:scheduler id="springScheduler" pool-size="2"/>
+    <!--<task:scheduler id="springScheduler" pool-size="2"/>-->
 
     <!--<task:scheduled-tasks scheduler="springScheduler">-->
         <!--&lt;!&ndash; timer &ndash;&gt;-->
