@@ -8,6 +8,8 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 /**
+ * 定时任务
+ *
  * Created by fangs on 15/3/1.
  */
 @Component

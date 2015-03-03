@@ -29,4 +29,8 @@
         <constructor-arg ref="mongoDbFactory"/>
     </bean>
 
+    <bean id="baseMongoDBTemplate" class="com.ng.daily.server.common.mongo.BaseMongoDBTemplate">
+        <property name="mongoTemplate" ref="mongoTemplate"/>
+    </bean>
+
 </beans>
