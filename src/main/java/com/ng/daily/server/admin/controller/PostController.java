@@ -72,7 +72,7 @@ public class PostController extends AdminController {
     @ResponseBody
     public Object delete(Model model, @RequestParam(value = "id", required = true) String id) {
         postService.deleteById(id);
-        return success;
+        return success();
     }
 
 }

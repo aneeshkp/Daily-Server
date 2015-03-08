@@ -1,5 +1,6 @@
-package com.ng.daily.server.service.post;
+package com.ng.daily.server.service.queue;
 
+import com.ng.daily.server.service.post.PostService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

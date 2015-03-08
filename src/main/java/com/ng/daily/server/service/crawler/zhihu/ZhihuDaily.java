@@ -2,6 +2,7 @@ package com.ng.daily.server.service.crawler.zhihu;
 
 import com.google.common.collect.Lists;
 import com.ng.daily.server.entity.Post;
+import org.joda.time.DateTime;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -22,8 +23,6 @@ public class ZhihuDaily {
 
 
         Post post = Post.createArticle();
-        post.setSource("知乎");
-        post.setTag("设计");
 
         Document doc = Jsoup.connect(dailyUrl).get();
 
@@ -47,6 +46,11 @@ public class ZhihuDaily {
             imageList.add(imageUrl);
         }
         post.setImageList(imageList);
+
+        post.setSource("知乎");
+        post.setTag("设计");
+        post.setCrawlerUrl(dailyUrl);
+        post.setCrawledAt(DateTime.now().toDate());
 
         return post;
 

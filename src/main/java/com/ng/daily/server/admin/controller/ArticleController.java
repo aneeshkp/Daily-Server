@@ -96,7 +96,7 @@ public class ArticleController extends BaseAdminController {
     @ResponseBody
     public Object delete(@RequestParam(value = "id", required = true) String id) {
         postService.deleteById(id);
-        return success;
+        return success();
     }
 
     /**
@@ -109,7 +109,7 @@ public class ArticleController extends BaseAdminController {
     @ResponseBody
     public Object queue(@RequestParam(value = "id", required = true) String id) {
         postService.updateStatusQueue(id);
-        return success;
+        return success();
     }
 
 }

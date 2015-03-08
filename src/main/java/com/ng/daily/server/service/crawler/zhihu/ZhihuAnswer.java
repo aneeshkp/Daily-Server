@@ -1,6 +1,7 @@
 package com.ng.daily.server.service.crawler.zhihu;
 
 import com.ng.daily.server.entity.Post;
+import org.joda.time.DateTime;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -47,9 +48,13 @@ public class ZhihuAnswer {
 
         Post post = Post.createArticle();
         post.setTitle(title);
-        post.setSource("知乎");
         post.setContent(content);
+
+        post.setSource("知乎");
         post.setTag("设计");
+        post.setCrawlerUrl(questionUrl);
+        post.setCrawledAt(DateTime.now().toDate());
+
         return post;
 
     }

@@ -24,22 +24,6 @@ public class Post {
     public static final Integer STATUS_ONLINE = 1;
 
 
-    public static final Post createArticle() {
-        Post post = new Post();
-        post.setId(IDGenerator.getArticleId());
-        post.setType(Post.TYPE_ARTICLE);
-        post.setStatus(Post.STATUS_DRAFT);
-        return post;
-    }
-
-    public static final Post createFragment() {
-        Post post = new Post();
-        post.setId(IDGenerator.getFragmentId());
-        post.setType(Post.TYPE_FRAGMENT);
-        post.setStatus(Post.STATUS_DRAFT);
-        return post;
-    }
-
     @Id
     private String id; // 文章ID
 
@@ -58,14 +42,31 @@ public class Post {
     private String titleImage; // 题图
     private List<String> imageList; // 图片列表
 
-
     private Date publishScheduleAt; // 定时发布时间
     private Date publishAt; // 发布时间
 
     private Map<String, Object> extras = Maps.newHashMap();
 
+    private String crawlerUrl; // 爬虫抓取地址
+    private Date crawledAt; // 抓取时间
 
     public Post() {
+    }
+
+    public static final Post createArticle() {
+        Post post = new Post();
+        post.setId(IDGenerator.getArticleId());
+        post.setType(Post.TYPE_ARTICLE);
+        post.setStatus(Post.STATUS_DRAFT);
+        return post;
+    }
+
+    public static final Post createFragment() {
+        Post post = new Post();
+        post.setId(IDGenerator.getFragmentId());
+        post.setType(Post.TYPE_FRAGMENT);
+        post.setStatus(Post.STATUS_DRAFT);
+        return post;
     }
 
     @Override
@@ -81,6 +82,22 @@ public class Post {
                 ", titleImage='" + titleImage + '\'' +
                 ", imageList=" + imageList +
                 '}';
+    }
+
+    public String getCrawlerUrl() {
+        return crawlerUrl;
+    }
+
+    public void setCrawlerUrl(String crawlerUrl) {
+        this.crawlerUrl = crawlerUrl;
+    }
+
+    public Date getCrawledAt() {
+        return crawledAt;
+    }
+
+    public void setCrawledAt(Date crawledAt) {
+        this.crawledAt = crawledAt;
     }
 
     public Date getPublishScheduleAt() {

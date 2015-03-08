@@ -43,14 +43,32 @@
                 </div>
             </div>
 
-            <p/>
+            <p></p>
 
             <div class="row">
                 <div class="col-lg-12">
-                    <div id="queuelist"></div>
+                    <div id="queueList"></div>
                 </div>
             </div>
 
+
+            <div class="row">
+                <div class="col-lg-12">
+
+                    <div id = "queueConfig">
+
+                    </div>
+
+                    <script>
+
+                        $(document).ready(function() {
+
+                        });
+
+                    </script>
+
+                </div>
+            </div>
         </div>
         <!-- /.container-fluid -->
     </div>
@@ -140,7 +158,6 @@
 
         var postId = id;
 
-
         $.ajax({
             type: "POST",
             url: "${ctx}/admin/queue/changePublishTime",
@@ -172,7 +189,7 @@
                 console.log(data);
 
                 var html = template('tpl', data);
-                document.getElementById('queuelist').innerHTML = html;
+                document.getElementById('queueList').innerHTML = html;
                 makeTimePicker();
             },
             error: function (data, errCode, errDesc) {

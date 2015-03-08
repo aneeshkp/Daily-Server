@@ -67,6 +67,10 @@ public class PostService {
         }
     }
 
+    public List<Post> findByCrawlerUrl(String url) {
+        return postRepository.findByCrawlerUrl(url);
+    }
+
     public Page<Post> findByTag(String tag,int page, int size) {
         return postRepository.findByTag(tag, new PageRequest(page, size));
     }

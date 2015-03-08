@@ -62,8 +62,20 @@ public class QueueController extends BaseAdminController {
         Post post = postService.findById(postId);
         post.setPublishAt(new Date(publishTime));
         postService.savePost(post);
-        return success;
+        return success();
     }
 
+
+
+    /**
+     * 列出队列待发布内容
+     *
+     * @return
+     */
+    @RequestMapping(value = "/getPublishConfig", method = RequestMethod.GET, produces = MediaTypes.JSON_UTF_8)
+    @ResponseBody
+    public Object getPublishConfig() {
+        return success();
+    }
 
 }

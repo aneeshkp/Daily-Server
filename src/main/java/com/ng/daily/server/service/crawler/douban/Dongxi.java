@@ -2,6 +2,7 @@ package com.ng.daily.server.service.crawler.douban;
 
 import com.google.common.collect.Lists;
 import com.ng.daily.server.entity.Post;
+import org.joda.time.DateTime;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -22,8 +23,6 @@ public class Dongxi {
 
 
         Post post = Post.createFragment();
-        post.setSource("豆瓣");
-        post.setTag("东西");
 
         Document doc = Jsoup.connect(url).get();
 
@@ -40,8 +39,10 @@ public class Dongxi {
         post.setTitle(title);
         post.setImageList(imageList);
 
-        System.err.println(title);
-        System.err.println(imageList);
+        post.setSource("豆瓣");
+        post.setTag("东西");
+        post.setCrawlerUrl(url);
+        post.setCrawledAt(DateTime.now().toDate());
 
         return post;
 

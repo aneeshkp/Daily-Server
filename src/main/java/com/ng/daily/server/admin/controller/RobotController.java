@@ -52,6 +52,15 @@ public class RobotController extends BaseAdminController {
     // 运行状态 抓取日志 抓取量
 
 
+    private Post checkExisted(String url) {
+        List<Post> postList = postService.findByCrawlerUrl(url);
+        if (postList != null && postList.size() > 0) {
+            return postList.get(0);
+        } else {
+            return null;
+        }
+    }
+
     /**
      * 知乎答案
      *
@@ -64,16 +73,22 @@ public class RobotController extends BaseAdminController {
         ZhihuAnswer zhihu = new ZhihuAnswer();
         String saveDir = "/tmp/zhihu.com";
 //        String answerUrl = "http://www.zhihu.com/question/22332149/answer/24682860";
+        Map result = Maps.newHashMap();
         try {
-            Post post = zhihu.download(saveDir, url);
 
-
-            postService.savePost(post);
-            log.debug("抓取完成:" + post.getTitle());
+            Post post = checkExisted(url);
+            if (post == null) {
+                post = zhihu.download(saveDir, url);
+                postService.savePost(post);
+                log.debug("抓取完成:" + post.getTitle());
+            } else {
+                log.debug("重复URL:" + url);
+            }
+            result.put("post", post);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return success;
+        return result;
     }
 
 
@@ -89,30 +104,32 @@ public class RobotController extends BaseAdminController {
         ZhihuDaily zhihu = new ZhihuDaily();
         String saveDir = "/tmp/zhihu.com";
 //        String answerUrl = "http://daily.zhihu.com/story/4559173";
-        Map result = Maps.newHashMap();
+        Post post = null;
         try {
-            Post post = zhihu.download(saveDir, url);
+            post = checkExisted(url);
+            if (post == null) {
+                post = zhihu.download(saveDir, url);
+                for (String imageUrl : post.getImageList()) {
+                    ByteArrayOutputStream out = new ByteArrayOutputStream();
+                    httpClientManager.httpGet(imageUrl, out);
+                    InputStream in = new ByteArrayInputStream(out.toByteArray());
+                    String fileName = IDGenerator.getArticleImageId() + ".jpg";
+                    String qiniuUrl = qiniuService.upload(in, fileName);
+                    String newContent = post.getContent().replaceAll(imageUrl, qiniuUrl);
+                    post.setContent(newContent);
+                }
+                postService.savePost(post);
+                log.debug("抓取完成:" + post.getTitle());
 
-
-            for (String imageUrl : post.getImageList()) {
-                ByteArrayOutputStream out = new ByteArrayOutputStream();
-                httpClientManager.httpGet(imageUrl, out);
-                InputStream in = new ByteArrayInputStream(out.toByteArray());
-                String fileName = IDGenerator.getArticleImageId() + ".jpg";
-                String qiniuUrl = qiniuService.upload(in, fileName);
-                String newContent = post.getContent().replaceAll(imageUrl, qiniuUrl);
-                post.setContent(newContent);
+            } else {
+                log.debug("重复URL:" + url);
             }
-
-            postService.savePost(post);
-            result.put("post", post);
-
             log.debug("抓取完成:" + post.getTitle());
         } catch (IOException e) {
             e.printStackTrace();
-            return exception;
+            return error(e.getMessage());
         }
-        return result;
+        return success(post);
     }
 
 
@@ -129,26 +146,29 @@ public class RobotController extends BaseAdminController {
         String saveDir = "/tmp/zhihu.com";
         Map result = Maps.newHashMap();
         try {
-            Post post = zhihu.download(saveDir, url);
-
-            List<String> newImageList = Lists.newArrayList();
-            for (String imageUrl : post.getImageList()) {
-                ByteArrayOutputStream out = new ByteArrayOutputStream();
-                httpClientManager.httpGet(imageUrl, out);
-                InputStream in = new ByteArrayInputStream(out.toByteArray());
-                String fileName = IDGenerator.getArticleImageId() + ".jpg";
-                String qiniuUrl = qiniuService.upload(in, fileName);
-                newImageList.add(qiniuUrl);
+            Post post = checkExisted(url);
+            if (post == null) {
+                post = zhihu.download(saveDir, url);
+                List<String> newImageList = Lists.newArrayList();
+                for (String imageUrl : post.getImageList()) {
+                    ByteArrayOutputStream out = new ByteArrayOutputStream();
+                    httpClientManager.httpGet(imageUrl, out);
+                    InputStream in = new ByteArrayInputStream(out.toByteArray());
+                    String fileName = IDGenerator.getArticleImageId() + ".jpg";
+                    String qiniuUrl = qiniuService.upload(in, fileName);
+                    newImageList.add(qiniuUrl);
+                }
+                post.setImageList(newImageList);
+                postService.savePost(post);
+                log.debug("抓取完成:" + post.getTitle());
+            } else {
+                log.debug("重复URL:" + url);
             }
-            post.setImageList(newImageList);
-
-            postService.savePost(post);
             result.put("post", post);
-
             log.debug("抓取完成:" + post.getTitle());
         } catch (IOException e) {
             e.printStackTrace();
-            return exception;
+            return error(e.getMessage());
         }
         return result;
     }

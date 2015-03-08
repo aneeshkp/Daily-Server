@@ -13,4 +13,5 @@ public interface PostRepositoryPlus {
     public List<Post> findPostToSchedule(Date currentDate);
 
     public List<Post> findPostQueued();
+
 }

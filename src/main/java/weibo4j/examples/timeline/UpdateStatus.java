@@ -21,7 +21,7 @@ public class UpdateStatus {
 			System.err.println(status.toString());
 		} catch (WeiboException e) {
 			e.printStackTrace();
-		}	
+		}
 	}
 
 }

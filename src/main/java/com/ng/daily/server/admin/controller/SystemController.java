@@ -37,7 +37,7 @@ public class SystemController extends BaseAdminController {
     @ResponseBody
     public Object clearQiniuFiles() {
         qiniuService.deleteAll();
-        return success;
+        return success();
     }
 
 }

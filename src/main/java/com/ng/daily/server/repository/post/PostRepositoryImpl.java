@@ -36,4 +36,5 @@ public class PostRepositoryImpl implements PostRepositoryPlus {
         return mongoTemplate.find(query, Post.class);
     }
 
+
 }
