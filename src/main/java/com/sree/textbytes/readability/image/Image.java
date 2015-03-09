@@ -1,4 +1,4 @@
-package com.sree.textbytes.readabilityBUNDLE.image;
+package com.sree.textbytes.readability.image;
 
 import org.jsoup.nodes.Element;
 

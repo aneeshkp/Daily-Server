@@ -1,11 +1,11 @@
-package com.sree.textbytes.readabilityBUNDLE.formatter;
+package com.sree.textbytes.readability.formatter;
 
 import com.sree.textbytes.StringHelpers.PatternMatcher;
 import com.sree.textbytes.StringHelpers.string;
-import com.sree.textbytes.readabilityBUNDLE.Patterns;
-import com.sree.textbytes.readabilityBUNDLE.ScoreInfo;
-import com.sree.textbytes.readabilityBUNDLE.WeightMethods;
-import com.sree.textbytes.readabilityBUNDLE.extractor.ReadabilitySnack;
+import com.sree.textbytes.readability.Patterns;
+import com.sree.textbytes.readability.ScoreInfo;
+import com.sree.textbytes.readability.WeightMethods;
+import com.sree.textbytes.readability.extractor.ReadabilitySnack;
 import org.jsoup.nodes.Attribute;
 import org.jsoup.nodes.Attributes;
 import org.jsoup.nodes.Element;

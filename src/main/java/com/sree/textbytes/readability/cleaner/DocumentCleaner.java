@@ -1,8 +1,8 @@
-package com.sree.textbytes.readabilityBUNDLE.cleaner;
+package com.sree.textbytes.readability.cleaner;
 
 import com.sree.textbytes.StringHelpers.ReplaceSequence;
 import com.sree.textbytes.StringHelpers.string;
-import com.sree.textbytes.readabilityBUNDLE.Patterns;
+import com.sree.textbytes.readability.Patterns;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.nodes.Node;

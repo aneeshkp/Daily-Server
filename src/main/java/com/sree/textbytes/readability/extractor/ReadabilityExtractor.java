@@ -1,7 +1,7 @@
-package com.sree.textbytes.readabilityBUNDLE.extractor;
+package com.sree.textbytes.readability.extractor;
 
-import com.sree.textbytes.readabilityBUNDLE.*;
-import com.sree.textbytes.readabilityBUNDLE.nextpage.AppendNextPage;
+import com.sree.textbytes.readability.*;
+import com.sree.textbytes.readability.nextpage.AppendNextPage;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.nodes.Node;

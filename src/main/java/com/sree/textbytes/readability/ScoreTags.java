@@ -1,4 +1,4 @@
-package com.sree.textbytes.readabilityBUNDLE;
+package com.sree.textbytes.readability;
 
 /**
  * 

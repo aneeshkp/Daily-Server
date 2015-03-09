@@ -1,13 +1,13 @@
-package com.sree.textbytes.readabilityBUNDLE;
+package com.sree.textbytes.readability;
 
 import com.sree.textbytes.StringHelpers.StringSplitter;
 import com.sree.textbytes.StringHelpers.string;
-import com.sree.textbytes.readabilityBUNDLE.cleaner.DocumentCleaner;
-import com.sree.textbytes.readabilityBUNDLE.extractor.GooseExtractor;
-import com.sree.textbytes.readabilityBUNDLE.extractor.ReadabilityExtractor;
-import com.sree.textbytes.readabilityBUNDLE.extractor.ReadabilitySnack;
-import com.sree.textbytes.readabilityBUNDLE.formatter.DocumentFormatter;
-import com.sree.textbytes.readabilityBUNDLE.image.BestImageGuesser;
+import com.sree.textbytes.readability.cleaner.DocumentCleaner;
+import com.sree.textbytes.readability.extractor.GooseExtractor;
+import com.sree.textbytes.readability.extractor.ReadabilityExtractor;
+import com.sree.textbytes.readability.extractor.ReadabilitySnack;
+import com.sree.textbytes.readability.formatter.DocumentFormatter;
+import com.sree.textbytes.readability.image.BestImageGuesser;
 import org.apache.commons.lang.StringEscapeUtils;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;

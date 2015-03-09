@@ -1,6 +1,6 @@
-package com.sree.textbytes.readabilityBUNDLE;
+package com.sree.textbytes.readability;
 
-import com.sree.textbytes.readabilityBUNDLE.image.Image;
+import com.sree.textbytes.readability.image.Image;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.slf4j.Logger;
@@ -172,7 +172,7 @@ public class Article {
 	/**
 	 * The unique set of tags that matched: "a[rel=tag], a[href*=/tag/]"
 	 * 
-	 * @return the unique set of TAGs extracted from this {@link com.sree.textbytes.readabilityBUNDLE.Article}
+	 * @return the unique set of TAGs extracted from this {@link com.sree.textbytes.readability.Article}
 	 */
 	public Set<String> getTags() {
 		if (tags == null) {

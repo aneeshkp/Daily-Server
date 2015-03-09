@@ -1,12 +1,12 @@
-package com.sree.textbytes.readabilityBUNDLE.nextpage;
+package com.sree.textbytes.readability.nextpage;
 
-import com.sree.textbytes.readabilityBUNDLE.Article;
-import com.sree.textbytes.readabilityBUNDLE.ParseWrapper;
-import com.sree.textbytes.readabilityBUNDLE.cleaner.DocumentCleaner;
-import com.sree.textbytes.readabilityBUNDLE.extractor.GooseExtractor;
-import com.sree.textbytes.readabilityBUNDLE.extractor.ReadabilityExtractor;
-import com.sree.textbytes.readabilityBUNDLE.extractor.ReadabilitySnack;
-import com.sree.textbytes.readabilityBUNDLE.formatter.DocumentFormatter;
+import com.sree.textbytes.readability.Article;
+import com.sree.textbytes.readability.ParseWrapper;
+import com.sree.textbytes.readability.cleaner.DocumentCleaner;
+import com.sree.textbytes.readability.extractor.GooseExtractor;
+import com.sree.textbytes.readability.extractor.ReadabilityExtractor;
+import com.sree.textbytes.readability.extractor.ReadabilitySnack;
+import com.sree.textbytes.readability.formatter.DocumentFormatter;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;

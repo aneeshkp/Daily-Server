@@ -2,8 +2,8 @@ package com.ng.daily.server.service.crawler.readability;
 
 import com.ng.daily.server.entity.Post;
 import com.sree.textbytes.network.HtmlFetcher;
-import com.sree.textbytes.readabilityBUNDLE.Article;
-import com.sree.textbytes.readabilityBUNDLE.ContentExtractor;
+import com.sree.textbytes.readability.Article;
+import com.sree.textbytes.readability.ContentExtractor;
 import org.joda.time.DateTime;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;

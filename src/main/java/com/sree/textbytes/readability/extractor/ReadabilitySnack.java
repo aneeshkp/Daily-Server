@@ -1,10 +1,10 @@
-package com.sree.textbytes.readabilityBUNDLE.extractor;
+package com.sree.textbytes.readability.extractor;
 
-import com.sree.textbytes.readabilityBUNDLE.AddSiblings;
-import com.sree.textbytes.readabilityBUNDLE.Article;
-import com.sree.textbytes.readabilityBUNDLE.ScoreInfo;
-import com.sree.textbytes.readabilityBUNDLE.ScoreTags;
-import com.sree.textbytes.readabilityBUNDLE.nextpage.AppendNextPage;
+import com.sree.textbytes.readability.AddSiblings;
+import com.sree.textbytes.readability.Article;
+import com.sree.textbytes.readability.ScoreInfo;
+import com.sree.textbytes.readability.ScoreTags;
+import com.sree.textbytes.readability.nextpage.AppendNextPage;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.slf4j.Logger;

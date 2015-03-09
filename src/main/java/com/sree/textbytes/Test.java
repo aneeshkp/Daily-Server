@@ -1,8 +1,8 @@
 package com.sree.textbytes;
 
 import com.sree.textbytes.network.HtmlFetcher;
-import com.sree.textbytes.readabilityBUNDLE.Article;
-import com.sree.textbytes.readabilityBUNDLE.ContentExtractor;
+import com.sree.textbytes.readability.Article;
+import com.sree.textbytes.readability.ContentExtractor;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
