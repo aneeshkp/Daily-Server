@@ -1,2 +1,2 @@
 # Daily-Server
-Server of ngDaily
+Server of ngdaily
