@@ -25,6 +25,9 @@ public class Readability {
         String html = htmlFetcher.getHtml(articleUrl, 0);
         Article article =  ce.extractContent(html, "ReadabilitySnack");
 
+        article.setCleanedArticleText(article.getCleanedArticleText().replaceAll("(\r\n|\n)", ""));
+
+        System.err.println(article.getCleanedArticleText());
 
         Document doc = Jsoup.parse(article.getCleanedArticleText());
         NodeTraversor traversor  = new NodeTraversor(new NodeVisitor() {
@@ -44,6 +47,7 @@ public class Readability {
         traversor.traverse(doc.body());
         String modifiedHtml = doc.toString();
 
+        modifiedHtml = modifiedHtml.replaceAll("(\r\n|\n)", "");
 
         Post post = Post.createArticle();
 

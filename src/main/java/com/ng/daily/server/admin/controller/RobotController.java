@@ -70,7 +70,8 @@ public class RobotController extends BaseAdminController {
     @ResponseBody
     public Object getReadability(@RequestParam(value = "url", required = true) String url) throws Exception {
         Readability read = new Readability();
-        Post post = checkExisted(url);
+//        Post post = checkExisted(url);
+        Post post = null;
         if (post == null) {
             post = read.download(url);
             postService.savePost(post);
@@ -147,7 +148,7 @@ public class RobotController extends BaseAdminController {
             e.printStackTrace();
             return error(e.getMessage());
         }
-        return success(post);
+        return success("post", post);
     }
 
 

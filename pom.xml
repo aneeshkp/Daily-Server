@@ -53,17 +53,6 @@
         <maven>3.0.0</maven>
     </prerequisites>
 
-    <repositories>
-        <repository>
-            <id>karussell_snapshots</id>
-            <url>https://github.com/karussell/mvnrepo/raw/master/snapshots/</url>
-        </repository>
-        <repository>
-            <id>karussell_releases</id>
-            <url>https://github.com/karussell/mvnrepo/raw/master/releases/</url>
-        </repository>
-    </repositories>
-
 
     <!-- 依赖项定义 -->
     <dependencies>
