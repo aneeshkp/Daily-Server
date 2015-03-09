@@ -1,4 +1,4 @@
-package com.sree.textbytes.StringHelpers;
+package com.sree.textbytes.stringhelper;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;

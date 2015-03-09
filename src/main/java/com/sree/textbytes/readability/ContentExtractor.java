@@ -1,7 +1,7 @@
 package com.sree.textbytes.readability;
 
-import com.sree.textbytes.StringHelpers.StringSplitter;
-import com.sree.textbytes.StringHelpers.string;
+import com.sree.textbytes.stringhelper.StringSplitter;
+import com.sree.textbytes.stringhelper.StringUtils;
 import com.sree.textbytes.readability.cleaner.DocumentCleaner;
 import com.sree.textbytes.readability.extractor.GooseExtractor;
 import com.sree.textbytes.readability.extractor.ReadabilityExtractor;
@@ -47,7 +47,7 @@ public class ContentExtractor {
 		Article article = new Article();
 		try {
 
-			if(!string.isNullOrEmpty(extractionAlgorithm)) {
+			if(!StringUtils.isNullOrEmpty(extractionAlgorithm)) {
 				logger.debug("Extraction algorithm set : "+extractionAlgorithm);
 			}
 			
@@ -107,7 +107,7 @@ public class ContentExtractor {
 			
 			article.setCleanedDocument(document);
 			
-			if(!string.isNullOrEmpty(extractionAlgorithm)) {
+			if(!StringUtils.isNullOrEmpty(extractionAlgorithm)) {
 				if(extractionAlgorithm.equalsIgnoreCase("ReadabilitySnack")) {
 					ReadabilitySnack readabilitySnack = new ReadabilitySnack();
 					article.setTopNode(readabilitySnack.grabArticle(article));
@@ -155,7 +155,7 @@ public class ContentExtractor {
 						logger.debug("BestImage : "	+ article.getTopImage().getImageSrc());
 						
 						String bestImage = article.getTopImage().getImageSrc();
-						if (!string.isNullOrEmpty(bestImage)) { 
+						if (!StringUtils.isNullOrEmpty(bestImage)) {
 							logger.debug("Best image found : " + bestImage);
 							if(!imageCandidates.contains(bestImage)) {
 								logger.debug("Top node does not contain the same Best Image");
@@ -242,9 +242,9 @@ public class ContentExtractor {
 		Elements meta = doc.select(metaName);
 		if (meta.size() > 0) {
 			String content = meta.first().attr("content");
-			return string.isNullOrEmpty(content) ? string.empty : content.trim();
+			return StringUtils.isNullOrEmpty(content) ? StringUtils.empty : content.trim();
 		}
-		return string.empty;
+		return StringUtils.empty;
 	}
 	
 	/**
@@ -256,16 +256,16 @@ public class ContentExtractor {
 	 * @return
 	 */
 	private String getTitle(Document doc) {
-		String title = string.empty;
+		String title = StringUtils.empty;
 
 		try {
 			Elements titleElem = doc.getElementsByTag("title");
 			if (titleElem == null || titleElem.isEmpty())
-				return string.empty;
+				return StringUtils.empty;
 
 			String titleText = titleElem.first().text();
-			if (string.isNullOrEmpty(titleText))
-				return string.empty;
+			if (StringUtils.isNullOrEmpty(titleText))
+				return StringUtils.empty;
 
 			boolean usedDelimeter = false;
 
@@ -333,7 +333,7 @@ public class ContentExtractor {
 		Set<String> tags = new HashSet<String>(elements.size());
 		for (Element el : elements) {
 			String tag = el.text();
-			if (!string.isNullOrEmpty(tag))
+			if (!StringUtils.isNullOrEmpty(tag))
 				tags.add(tag);
 		}
 		return tags;

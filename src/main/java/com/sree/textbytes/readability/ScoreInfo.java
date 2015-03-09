@@ -1,7 +1,7 @@
 package com.sree.textbytes.readability;
 
 import org.jsoup.nodes.Element;
-import com.sree.textbytes.StringHelpers.string;
+import com.sree.textbytes.stringhelper.StringUtils;
 
 /**
  * 
@@ -53,7 +53,7 @@ public class ScoreInfo {
 			return 0;
 		try {
 			String grvScoreString = node.attr("algoScore");
-			if (string.isNullOrEmpty(grvScoreString))
+			if (StringUtils.isNullOrEmpty(grvScoreString))
 				return 0;
 			return Double.parseDouble(grvScoreString);
 

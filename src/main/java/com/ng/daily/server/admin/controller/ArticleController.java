@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.Calendar;
+
 /**
  * 文章
  * Created by fangs on 15/2/13.
@@ -108,8 +110,20 @@ public class ArticleController extends BaseAdminController {
     @RequestMapping(value = "/queue", method = RequestMethod.POST, produces = MediaTypes.JSON_UTF_8)
     @ResponseBody
     public Object queue(@RequestParam(value = "id", required = true) String id) {
-        postService.updateStatusQueue(id);
-        return success();
+
+        Post post = postService.findById(id);
+        if (post != null) {
+            Calendar calendar = Calendar.getInstance();
+            calendar.add(Calendar.YEAR, 1000);
+            post.setPublishAt(calendar.getTime());
+            System.err.println(calendar.getTime());
+
+            postService.updateStatusQueue(id);
+            return success();
+        } else {
+            return error("找不到内容");
+        }
+
     }
 
 }

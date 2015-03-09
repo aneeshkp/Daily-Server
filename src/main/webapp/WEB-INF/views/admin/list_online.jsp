@@ -50,6 +50,7 @@
                                         <th>来源</th>
                                         <th>标签</th>
                                         <th>状态</th>
+                                        <th>操作</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -122,6 +123,32 @@
                 {"data": "status"}
             ],
 
+            "columnDefs": [
+                {
+                    "targets": 5,
+                    "data": "status",
+                    "render": function (data, type, row) {
+                        if(data == "-1") {
+                            return "草稿箱";
+                        } else if (data == "0") {
+                            return "队列中";
+                        } else if (data == "1") {
+                            return "已发布";
+                        }
+                    }
+                },
+                {
+                "targets": 6,
+                "data": null,
+                "render": function (data, type, row) {
+//                    var editHtml = "<a href='javascript:void(0);' onclick='_editFun(" + "\"" + data.id + "\"" + ")'> 编辑 </a>";
+                    var previewHtml = "<a href='javascript:void(0);' onclick='_previewFun(" + "\"" + data.id + "\"" + ")'> 查看 </a>";
+//                    var submitHtml = "<a href='javascript:void(0);' onclick='_submitFun(\"" + data.id + "\")'> 发布 </a>";
+//                    var deleteHtml = "<a href='javascript:void(0);' onclick='_deleteFun(\"" + data.id + "\")'> 废弃 </a>";
+//                    return editHtml + previewHtml + submitHtml + deleteHtml;
+                    return previewHtml;
+                }
+            }],
 
 //            scrollX: true,
 //            scrollY: true,
@@ -140,6 +167,10 @@
 
     });
 
+
+    function _previewFun(id) {
+        window.location = "${ctx}/admin/post/preview?id=" + id;
+    }
 
 </script>
 

@@ -1,4 +1,4 @@
-package com.sree.textbytes.StringHelpers;
+package com.sree.textbytes.stringhelper;
 
 import java.util.*;
 
@@ -74,7 +74,7 @@ public class StopWords
   }
 
   // the confusing pattern below is basically just match any non-word character excluding white-space.
-  public static final StringReplacement PUNCTUATION = StringReplacement.compile("[^\\p{Ll}\\p{Lu}\\p{Lt}\\p{Lo}\\p{Nd}\\p{Pc}\\s]", string.empty);
+  public static final StringReplacement PUNCTUATION = StringReplacement.compile("[^\\p{Ll}\\p{Lu}\\p{Lt}\\p{Lo}\\p{Nd}\\p{Pc}\\s]", StringUtils.empty);
 
   public static String removePunctuation(String str) {
 	  return PUNCTUATION.replaceAll(str);
@@ -82,19 +82,19 @@ public class StopWords
 
 
   public static WordStats getStopWordCount(String content) {
-	  if (string.isNullOrEmpty(content)) return WordStats.EMPTY;
+	  if (StringUtils.isNullOrEmpty(content)) return WordStats.EMPTY;
 
 	  WordStats ws = new WordStats();
 
 	  String strippedInput = removePunctuation(content);
-	  String[] words = string.SPACE_SPLITTER.split(strippedInput);
+	  String[] words = StringUtils.SPACE_SPLITTER.split(strippedInput);
 
 	  //stem each word in the array if it is not null or a stop word
 	  List<String> stopWords = new ArrayList<String>();
 	  for (int i = 0; i < words.length; i++)
 	  {
 		  String word = words[i];
-		  if (string.isNullOrEmpty(word)) continue;
+		  if (StringUtils.isNullOrEmpty(word)) continue;
 		  String wordLower = word.toLowerCase();
 		  if (STOP_WORDS.contains(wordLower))
 			  stopWords.add(wordLower);
@@ -111,7 +111,7 @@ public class StopWords
   }
   
   public static String removeStopWords(String str) {
-	  return str.replaceAll(STOP_WORDS.toString(), string.empty);
+	  return str.replaceAll(STOP_WORDS.toString(), StringUtils.empty);
   }
 
 

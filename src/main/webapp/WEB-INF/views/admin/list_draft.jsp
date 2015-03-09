@@ -124,7 +124,22 @@
                 {"data": "status"},
             ],
 
-            "columnDefs": [{
+            "columnDefs": [
+
+                {
+                    "targets": 5,
+                    "data": "status",
+                    "render": function (data, type, row) {
+                        if(data == "-1") {
+                            return "草稿箱";
+                        } else if (data == "0") {
+                            return "队列中";
+                        } else if (data == "1") {
+                            return "已发布";
+                        }
+                    }
+                },
+                {
                 "targets": 6,
                 "data": null,
                 "render": function (data, type, row) {
@@ -160,7 +175,9 @@
                 url: "${ctx}/admin/article/queue",
                 data: {"id": id},
                 success: function (data) {
-                    notice("已提交到发布队列");
+                    if(data.result == "ok") {
+                        notice("已提交到发布队列");
+                    }
                 },
                 error: function (data, errCode, errDesc) {
                     alert("操作失败:\n" + errCode + errDesc);
@@ -176,8 +193,10 @@
                 url: "${ctx}/admin/post/delete",
                 data: {"id": id},
                 success: function (data) {
-                    notice("已废弃");
-                    draftTable.ajax.reload();
+                    if(data.result == "ok") {
+                        notice("已废弃");
+                        draftTable.ajax.reload();
+                    }
                 },
                 error: function (data, errCode, errDesc) {
                     alert("操作失败:\n" + errCode + errDesc);

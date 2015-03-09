@@ -1,4 +1,4 @@
-package com.sree.textbytes.StringHelpers;
+package com.sree.textbytes.stringhelper;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

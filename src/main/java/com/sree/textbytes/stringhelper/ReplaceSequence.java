@@ -1,4 +1,4 @@
-package com.sree.textbytes.StringHelpers;
+package com.sree.textbytes.stringhelper;
 
 /**
  * Created by IntelliJ IDEA.
@@ -45,7 +45,7 @@ public class ReplaceSequence
    * @return a new instance
    */
   public static ReplaceSequence create(String firstPattern) {
-	  return create(firstPattern, string.empty);
+	  return create(firstPattern, StringUtils.empty);
   }
 
   /**
@@ -65,7 +65,7 @@ public class ReplaceSequence
    * @return this instance of itself for use in a builder pattern
    */
   public ReplaceSequence append(String pattern) {
-	  return append(pattern, string.empty);
+	  return append(pattern, StringUtils.empty);
   }
 
   /**
@@ -85,7 +85,7 @@ public class ReplaceSequence
    * @return the resulting {@link String} after all replacements have been applied
    */
   public String replaceAll(String input) {
-	  if (string.isNullOrEmpty(input)) return string.empty;
+	  if (StringUtils.isNullOrEmpty(input)) return StringUtils.empty;
 	  for (StringReplacement rp : replacements) {
 		  input = rp.replaceAll(input);
 	  }

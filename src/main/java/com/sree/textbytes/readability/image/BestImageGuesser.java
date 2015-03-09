@@ -1,6 +1,6 @@
 package com.sree.textbytes.readability.image;
 
-import com.sree.textbytes.StringHelpers.string;
+import com.sree.textbytes.stringhelper.StringUtils;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -44,12 +44,12 @@ public class BestImageGuesser {
 		StringBuilder sb = new StringBuilder();
 		sb.append(".html|.ico|button|twitter.jpg|facebook.jpg|digg.jpg|digg.png|delicious.png|facebook.png|reddit.jpg|doubleclick|diggthis|diggThis|adserver|/ads/|ec.atdmt.com");
 		sb.append("|mediaplex.com|adsatt|view.atdmt|reuters_fb_share.jpg");
-		matchBadImageNames = Pattern.compile(sb.toString()).matcher(string.empty);
+		matchBadImageNames = Pattern.compile(sb.toString()).matcher(StringUtils.empty);
 		
 		StringBuilder knownJunkImages = new StringBuilder();
 		knownJunkImages.append("d-logo-blue-100x100.png|WSJ_profile_lg.gif|dealbook75.gif|t_wb_75.gif|fivethirtyeight75.gif|current_issue.jpg|thecaucus75.gif");
 		
-		knownJunkImageMatcher = Pattern.compile(knownJunkImages.toString()).matcher(string.empty);
+		knownJunkImageMatcher = Pattern.compile(knownJunkImages.toString()).matcher(StringUtils.empty);
 	}
 
 	public BestImageGuesser() {
@@ -63,7 +63,7 @@ public class BestImageGuesser {
 		if (topNodeImages.size() > 0) {
 			for (Element imageElement : topNodeImages) {
 				String imgSrc = imageElement.attr("src");
-				if (string.isNullOrEmpty(imgSrc))
+				if (StringUtils.isNullOrEmpty(imgSrc))
 					continue;
 				matchBadImageNames.reset(imgSrc);
 				if (matchBadImageNames.find()) {

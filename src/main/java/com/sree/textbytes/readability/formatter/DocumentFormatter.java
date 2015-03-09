@@ -1,7 +1,7 @@
 package com.sree.textbytes.readability.formatter;
 
-import com.sree.textbytes.StringHelpers.PatternMatcher;
-import com.sree.textbytes.StringHelpers.string;
+import com.sree.textbytes.stringhelper.PatternMatcher;
+import com.sree.textbytes.stringhelper.StringUtils;
 import com.sree.textbytes.readability.Patterns;
 import com.sree.textbytes.readability.ScoreInfo;
 import com.sree.textbytes.readability.WeightMethods;
@@ -95,7 +95,7 @@ public class DocumentFormatter {
 			matchNote =getMatches(regex, lastElt.text(), 3);
 	    if(matchNote!=null) {
 	     str=lastElt.text().replace(matchNote, "");
-	     if(string.isNullOrEmpty(str))
+	     if(StringUtils.isNullOrEmpty(str))
 	    	 removeNode(lastElt);
 	     else
 	     {
@@ -117,7 +117,7 @@ public class DocumentFormatter {
 		for(Element elt : pTag){
 			
 			
-		   if(!string.isNullOrEmpty(elt.text()) && lsJunkInfo.contains(elt.text().hashCode()))	{
+		   if(!StringUtils.isNullOrEmpty(elt.text()) && lsJunkInfo.contains(elt.text().hashCode()))	{
 			    removeNode(elt);
 			}
 		}
@@ -339,7 +339,7 @@ public class DocumentFormatter {
 		Attributes iframeAttributes = iframe.attributes();
 		String attributes = "";
 		for(Attribute attrib : iframeAttributes) {
-			if(!string.isNullOrEmpty(attrib.getValue())) 
+			if(!StringUtils.isNullOrEmpty(attrib.getValue()))
 				attributes += attrib.getValue() + "|";
 		}
 	return attributes.substring(0, attributes.lastIndexOf("|"));

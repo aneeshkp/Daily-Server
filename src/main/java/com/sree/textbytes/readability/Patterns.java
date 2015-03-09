@@ -4,10 +4,10 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.regex.Pattern;
 
-import com.sree.textbytes.StringHelpers.ReplaceSequence;
-import com.sree.textbytes.StringHelpers.StringReplacement;
-import com.sree.textbytes.StringHelpers.StringSplitter;
-import com.sree.textbytes.StringHelpers.string;
+import com.sree.textbytes.stringhelper.ReplaceSequence;
+import com.sree.textbytes.stringhelper.StringReplacement;
+import com.sree.textbytes.stringhelper.StringSplitter;
+import com.sree.textbytes.stringhelper.StringUtils;
 
 /**
  * 
@@ -38,7 +38,7 @@ public class Patterns {
     public static Pattern BAR_DASH = Pattern.compile(" [\\|\\-] ");
     public static Pattern VIDEOS = Pattern.compile("http:\\/\\/(www\\.)?(youtube|vimeo|player\\.vimeo)\\.com");
     
-	public static final StringReplacement MOTLEY_REPLACEMENT = StringReplacement.compile("&#65533;", string.empty);
+	public static final StringReplacement MOTLEY_REPLACEMENT = StringReplacement.compile("&#65533;", StringUtils.empty);
 	public static final StringReplacement ESCAPED_FRAGMENT_REPLACEMENT = StringReplacement.compile("#!", "?_escaped_fragment_=");
 	public static final ReplaceSequence TITLE_REPLACEMENTS = ReplaceSequence.create("&raquo;").append("»");
 	public static final StringSplitter PIPE_SPLITTER = new StringSplitter("\\|");

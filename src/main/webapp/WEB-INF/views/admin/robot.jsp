@@ -26,6 +26,21 @@
 
 
             <div class="col-lg-8">
+
+                <div class="row">
+                    <label>通用文章提取, 可提取网页正文信息
+                        <small>(提取有问题的文章, 请把URL发给我)</small>
+                        :</label>
+
+                    <div class="input-group">
+                        <input type="text" class="form-control"
+                               placeholder="文章地址"
+                               id="readabilityUrl">
+                        <span class="input-group-addon" id="getReadabilityUrl" onclick="readability()">抓取</span>
+                    </div>
+                </div>
+                <br/>
+
                 <div class="row">
                     <label>知乎答案:</label>
 
@@ -36,7 +51,7 @@
                         <span class="input-group-addon" id="getZhihuAnswer" onclick="zhihuAnswer()">抓取</span>
                     </div>
                 </div>
-                <p/>
+                <br/>
 
                 <div class="row">
                     <label>知乎日报:</label>
@@ -47,7 +62,7 @@
                         <span class="input-group-addon" id="getZhihuDaily" onclick="zhihuDaily()">抓取</span>
                     </div>
                 </div>
-                <p/>
+                <br/>
 
                 <div class="row">
                     <label>豆瓣东西:</label>
@@ -59,22 +74,13 @@
                         <span class="input-group-addon" id="getDoubanDongxi" onclick="doubanDongxi()">抓取</span>
                     </div>
                 </div>
-                <p/>
+                <br/>
 
                 <div class="row">
-                    <label>通用文章提取:</label>
+                    <br/>
 
-                    <div class="input-group">
-                        <input type="text" class="form-control"
-                               placeholder="通用文章提取"
-                               id="readabilityUrl">
-                        <span class="input-group-addon" id="getReadabilityUrl" onclick="readability()">抓取</span>
-                    </div>
+                    <p>更多针对性抓取, 敬请期待. 请提交想抓取的内容网站地址给我</p>
                 </div>
-                <p/>
-
-
-
             </div>
 
             <div class="col-lg-8">

@@ -1,8 +1,8 @@
 package com.sree.textbytes.readability;
 
-import com.sree.textbytes.StringHelpers.StopWords;
-import com.sree.textbytes.StringHelpers.WordStats;
-import com.sree.textbytes.StringHelpers.string;
+import com.sree.textbytes.stringhelper.StopWords;
+import com.sree.textbytes.stringhelper.WordStats;
+import com.sree.textbytes.stringhelper.StringUtils;
 import org.slf4j.Logger;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -60,7 +60,7 @@ public class AddSiblings {
                 for (Element iframe : iframeElements) {
                     if (iframe.tagName().equals("iframe")) {
                         String srcAttribute = iframe.attr("src");
-                        if (!string.isNullOrEmpty(srcAttribute)) {
+                        if (!StringUtils.isNullOrEmpty(srcAttribute)) {
                             if (Patterns.exists(Patterns.VIDEOS, srcAttribute)) {
                                 logger.debug("Ifarme match found and its a video");
                                 node.appendElement("p").appendChild(iframe);

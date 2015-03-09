@@ -1,4 +1,4 @@
-package com.sree.textbytes.StringHelpers;
+package com.sree.textbytes.stringhelper;
 
 /**
  * Created by IntelliJ IDEA.
@@ -18,7 +18,7 @@ public class StringSplitter
 	}
 
 	public String[] split(String input) {
-		if (string.isNullOrEmpty(input)) return string.emptyArray;
+		if (StringUtils.isNullOrEmpty(input)) return StringUtils.emptyArray;
 		return pattern.split(input);
 	}
 }

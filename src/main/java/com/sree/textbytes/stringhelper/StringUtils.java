@@ -1,4 +1,4 @@
-package com.sree.textbytes.StringHelpers;
+package com.sree.textbytes.stringhelper;
 
 /**
  * Created by IntelliJ IDEA.
@@ -6,11 +6,9 @@ package com.sree.textbytes.StringHelpers;
  * @User  		: Sreejith.S
  * 
  */
-
-
-public class string 
+public class StringUtils
 {
-	private string(){}
+	private StringUtils(){}
 	public static final String empty = "";
 	public static final String[] emptyArray = new String[] {empty};
 	public static boolean isNullOrEmpty(String input) {

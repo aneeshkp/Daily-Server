@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fns" uri="http://java.sun.com/jsp/jstl/functionss" %>
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
 
 <html>
@@ -146,6 +147,13 @@
                             <label>标签</label>
                             <input id="postTag" class="form-control" placeholder="标签">
                         </div>
+                        <div class="form-group">
+                            <label>摘要</label>
+                            <input id="postSummary" class="form-control" placeholder="摘要">
+                        </div>
+                        <div class="form-group">
+                            <label>状态: <strong id="postStatus"></strong></label>
+                        </div>
                     </div>
 
                 </div>
@@ -259,11 +267,12 @@
         var title = $("#postTitle").val();
         var source = $("#postSource").val();
         var tag = $("#postTag").val();
+        var summary = $("#postSummary").val();
 
-//        if(!imageList[0]) {
-//            alert('图片不能为空');
-//            return;
-//        }
+        if(!imageList[0]) {
+            alert('图片不能为空');
+            return;
+        }
 
         if(!title || title=='') {
             alert('标题不能为空');
@@ -281,7 +290,7 @@
         $.ajax({
             type: "POST",
             url: "${ctx}/admin/fragment/save",
-            data: {"id": id, "title": title, "source": source, "tag": tag, "imageList": imageList},
+            data: {"id": id, "title": title, "source": source, "summary":summary, "tag": tag, "imageList": imageList},
             success: function (data) {
                 $("#postId").val(data.id);
                 if (callback) {
@@ -297,11 +306,12 @@
     }
 
     $(document).ready(function () {
-        console.log('${post.id}');
         $("#postId").val("${post.id}");
         $("#postTitle").val("${post.title}");
         $("#postSource").val("${post.source}");
         $("#postTag").val("${post.tag}");
+        $("#postSummary").val("${post.summary}");
+        $("#postStatus").text('${fns:getPostStatusByPostId(post.status)}');
     });
 
     $(document).ready(function () {

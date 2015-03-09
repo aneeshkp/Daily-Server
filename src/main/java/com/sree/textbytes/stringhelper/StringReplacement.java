@@ -1,4 +1,4 @@
-package com.sree.textbytes.StringHelpers;
+package com.sree.textbytes.stringhelper;
 
 /**
  * Created by IntelliJ IDEA.
@@ -20,13 +20,13 @@ public class StringReplacement
 	}
 
 	public static StringReplacement compile(String pattern, String replaceWith) {
-		if (string.isNullOrEmpty(pattern)) throw new IllegalArgumentException("Patterns must not be null or empty!");
+		if (StringUtils.isNullOrEmpty(pattern)) throw new IllegalArgumentException("Patterns must not be null or empty!");
 		Pattern p = Pattern.compile(pattern);
 		return new StringReplacement(p, replaceWith);
 	}
 
 	public String replaceAll(String input) {
-		if (string.isNullOrEmpty(input)) return string.empty;
+		if (StringUtils.isNullOrEmpty(input)) return StringUtils.empty;
 		return pattern.matcher(input).replaceAll(replaceWith);
 	}
 }

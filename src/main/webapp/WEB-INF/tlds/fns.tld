@@ -11,21 +11,13 @@
     <short-name>fns</short-name>
     <uri>http://java.sun.com/jsp/jstl/functionss</uri>
 
+    <function>
+        <description>检查是否登录</description>
+        <name>getPostStatusByPostId</name>
+        <function-class>com.ng.daily.server.admin.Utils</function-class>
+        <function-signature>java.lang.String getPostStatusByPostId(java.lang.Integer)</function-signature>
+        <example>${fns:getPostStatusByPostId(id)}</example>
+    </function>
 
-    <!--<function>-->
-        <!--<description>检查是否登录</description>-->
-        <!--<name>isLogin</name>-->
-        <!--<function-class>com.seeyon.openapi.developer.security.Login</function-class>-->
-        <!--<function-signature>java.lang.Boolean isLogin(javax.servlet.http.HttpServletRequest)</function-signature>-->
-        <!--<example>${fns:isLogin(request)}</example>-->
-    <!--</function>-->
-
-    <!--<function>-->
-        <!--<description>检查是否是管理员</description>-->
-        <!--<name>isAdmin</name>-->
-        <!--<function-class>com.seeyon.openapi.developer.security.Login</function-class>-->
-        <!--<function-signature>java.lang.Boolean isAdmin(javax.servlet.http.HttpServletRequest)</function-signature>-->
-        <!--<example>${fns:isLogin(request)}</example>-->
-    <!--</function>-->
 
 </taglib>

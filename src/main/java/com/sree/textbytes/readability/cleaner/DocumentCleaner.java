@@ -1,7 +1,7 @@
 package com.sree.textbytes.readability.cleaner;
 
-import com.sree.textbytes.StringHelpers.ReplaceSequence;
-import com.sree.textbytes.StringHelpers.string;
+import com.sree.textbytes.stringhelper.ReplaceSequence;
+import com.sree.textbytes.stringhelper.StringUtils;
 import com.sree.textbytes.readability.Patterns;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -254,7 +254,7 @@ public class DocumentCleaner  {
 	private void removeEmptyParas(Document docToClean) {
 		Elements paras = docToClean.select("p");
 		for(Element para : paras) {
-			if(string.isNullOrEmpty(para.text()) && para.childNodes().size() == 0) {
+			if(StringUtils.isNullOrEmpty(para.text()) && para.childNodes().size() == 0) {
 				logger.debug("Null Para found :"+para + "size : "+para.childNodes().size());
 				para.remove();
 			}
@@ -460,7 +460,7 @@ public class DocumentCleaner  {
 			} else if (kid.nodeName().equals("#text")) {
 				TextNode kidTextNode = (TextNode) kid;
 				String kidText = kidTextNode.attr("text");
-				if (string.isNullOrEmpty(kidText))
+				if (StringUtils.isNullOrEmpty(kidText))
 					continue;
 
 				// clean up text from tabs and newlines

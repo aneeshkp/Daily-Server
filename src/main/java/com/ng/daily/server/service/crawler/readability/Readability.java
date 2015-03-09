@@ -12,6 +12,8 @@ import org.jsoup.nodes.Node;
 import org.jsoup.select.NodeTraversor;
 import org.jsoup.select.NodeVisitor;
 
+import java.net.URLDecoder;
+
 /**
  * Created by fangs on 15/3/9.
  */
@@ -51,7 +53,8 @@ public class Readability {
 
         Post post = Post.createArticle();
 
-        post.setTitle(article.getTitle());
+        String title = URLDecoder.decode(article.getTitle(), "UTF-8");
+        post.setTitle(title);
         post.setContent(modifiedHtml);
 
         post.setSource("机器人");

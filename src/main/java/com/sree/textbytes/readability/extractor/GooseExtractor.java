@@ -1,7 +1,7 @@
 package com.sree.textbytes.readability.extractor;
 
-import com.sree.textbytes.StringHelpers.StopWords;
-import com.sree.textbytes.StringHelpers.WordStats;
+import com.sree.textbytes.stringhelper.StopWords;
+import com.sree.textbytes.stringhelper.WordStats;
 import com.sree.textbytes.readability.AddSiblings;
 import com.sree.textbytes.readability.Article;
 import com.sree.textbytes.readability.Patterns;

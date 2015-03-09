@@ -39,6 +39,8 @@ public class Post {
     //    @NotBlank
     private String source; // 来源
 
+    private String summary; // 摘要
+
     private String titleImage; // 题图
     private List<String> imageList; // 图片列表
 
@@ -82,6 +84,14 @@ public class Post {
                 ", titleImage='" + titleImage + '\'' +
                 ", imageList=" + imageList +
                 '}';
+    }
+
+    public String getSummary() {
+        return summary;
+    }
+
+    public void setSummary(String summary) {
+        this.summary = summary;
     }
 
     public String getCrawlerUrl() {
