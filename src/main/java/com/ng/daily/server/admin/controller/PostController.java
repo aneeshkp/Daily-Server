@@ -41,7 +41,6 @@ public class PostController extends AdminController {
         return "redirect:/admin/";
     }
 
-
     /**
      * 预览
      *
@@ -59,7 +58,6 @@ public class PostController extends AdminController {
         }
         return "redirect:/admin/";
     }
-
 
     /**
      * 删除

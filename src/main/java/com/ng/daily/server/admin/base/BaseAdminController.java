@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.ConstraintViolationException;
 import javax.validation.Validator;
 import java.util.HashMap;
@@ -128,12 +130,25 @@ public abstract class BaseAdminController {
      */
     @ExceptionHandler(Exception.class)
     @ResponseBody
-    public ModelAndView handleException(Exception ex) {
+    public ModelAndView handleException(Exception ex, HttpServletRequest request, HttpServletResponse response) {
         log.error("admin controller exception =====>>>>>>>>>>", ex);
-        ModelAndView model = new ModelAndView("error/500");
-        model.addObject("exception", ex);
-        model.addObject(ex);
-        return model;
+
+        if (!(request.getHeader("accept").contains("application/json") || (request
+                .getHeader("X-Requested-With") != null && request
+                .getHeader("X-Requested-With").contains("XMLHttpRequest")))) {
+
+
+            ModelAndView model = new ModelAndView("error/500");
+            model.addObject("exception", ex);
+            model.addObject(ex);
+            return model;
+
+        } else {// JSON格式返回
+//            return error(ex.getMessage());
+
+            return null;
+        }
+
     }
 
 
@@ -159,6 +174,15 @@ public abstract class BaseAdminController {
         map.put("result", "ok");
         if (data != null) {
             map.put("data", data);
+        }
+        return map;
+    }
+
+    protected HashMap success(String key, Object data) {
+        HashMap map = Maps.newHashMap();
+        map.put("result", "ok");
+        if (data != null) {
+            map.put(key, data);
         }
         return map;
     }

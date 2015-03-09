@@ -33,7 +33,6 @@ public class QueueController extends BaseAdminController {
 
     // 按时间排序 调整定时发布时间 立刻发布 转到草稿箱 调整顺序 预发布(开发者DEBUG) 废弃
 
-
     /**
      * 列出队列待发布内容
      *
@@ -47,7 +46,6 @@ public class QueueController extends BaseAdminController {
         result.put("list", postList);
         return result;
     }
-
 
     /**
      * 修改发布时间
@@ -64,8 +62,6 @@ public class QueueController extends BaseAdminController {
         postService.savePost(post);
         return success();
     }
-
-
 
     /**
      * 列出队列待发布内容

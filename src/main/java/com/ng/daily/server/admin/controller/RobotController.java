@@ -1,7 +1,6 @@
 package com.ng.daily.server.admin.controller;
 
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import com.ng.daily.server.admin.IDGenerator;
 import com.ng.daily.server.admin.base.BaseAdminController;
 import com.ng.daily.server.common.qiniu.QiniuService;
@@ -9,6 +8,7 @@ import com.ng.daily.server.common.util.HttpClientManager;
 import com.ng.daily.server.common.util.web.MediaTypes;
 import com.ng.daily.server.entity.Post;
 import com.ng.daily.server.service.crawler.douban.Dongxi;
+import com.ng.daily.server.service.crawler.readability.Readability;
 import com.ng.daily.server.service.crawler.zhihu.ZhihuAnswer;
 import com.ng.daily.server.service.crawler.zhihu.ZhihuDaily;
 import com.ng.daily.server.service.post.PostService;
@@ -24,7 +24,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
-import java.util.Map;
 
 /**
  * 爬虫
@@ -51,7 +50,6 @@ public class RobotController extends BaseAdminController {
 
     // 运行状态 抓取日志 抓取量
 
-
     private Post checkExisted(String url) {
         List<Post> postList = postService.findByCrawlerUrl(url);
         if (postList != null && postList.size() > 0) {
@@ -60,6 +58,29 @@ public class RobotController extends BaseAdminController {
             return null;
         }
     }
+
+
+    /**
+     * 通用正文提取
+     *
+     * @param url
+     * @return
+     */
+    @RequestMapping(value = "/getReadability", method = RequestMethod.POST, produces = MediaTypes.JSON_UTF_8)
+    @ResponseBody
+    public Object getReadability(@RequestParam(value = "url", required = true) String url) throws Exception {
+        Readability read = new Readability();
+        Post post = checkExisted(url);
+        if (post == null) {
+            post = read.download(url);
+            postService.savePost(post);
+            log.debug("抓取完成:" + post.getTitle());
+        } else {
+            log.debug("重复URL:" + url);
+        }
+        return success("post", post);
+    }
+
 
     /**
      * 知乎答案
@@ -71,12 +92,11 @@ public class RobotController extends BaseAdminController {
     @ResponseBody
     public Object getZhihuAnswer(@RequestParam(value = "url", required = true) String url) {
         ZhihuAnswer zhihu = new ZhihuAnswer();
-        String saveDir = "/tmp/zhihu.com";
+        String saveDir = "/tmp/ngdaily.com";
 //        String answerUrl = "http://www.zhihu.com/question/22332149/answer/24682860";
-        Map result = Maps.newHashMap();
+        Post post = checkExisted(url);
         try {
 
-            Post post = checkExisted(url);
             if (post == null) {
                 post = zhihu.download(saveDir, url);
                 postService.savePost(post);
@@ -84,11 +104,10 @@ public class RobotController extends BaseAdminController {
             } else {
                 log.debug("重复URL:" + url);
             }
-            result.put("post", post);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return result;
+        return success("post", post);
     }
 
 
@@ -102,11 +121,10 @@ public class RobotController extends BaseAdminController {
     @ResponseBody
     public Object getZhihuDaily(@RequestParam(value = "url", required = true) String url) {
         ZhihuDaily zhihu = new ZhihuDaily();
-        String saveDir = "/tmp/zhihu.com";
+        String saveDir = "/tmp/ngdaily.com";
 //        String answerUrl = "http://daily.zhihu.com/story/4559173";
-        Post post = null;
+        Post post = checkExisted(url);
         try {
-            post = checkExisted(url);
             if (post == null) {
                 post = zhihu.download(saveDir, url);
                 for (String imageUrl : post.getImageList()) {
@@ -143,10 +161,9 @@ public class RobotController extends BaseAdminController {
     @ResponseBody
     public Object getDoubanDongxi(@RequestParam(value = "url", required = true) String url) {
         Dongxi zhihu = new Dongxi();
-        String saveDir = "/tmp/zhihu.com";
-        Map result = Maps.newHashMap();
+        String saveDir = "/tmp/ngdaily.com";
+        Post post = checkExisted(url);
         try {
-            Post post = checkExisted(url);
             if (post == null) {
                 post = zhihu.download(saveDir, url);
                 List<String> newImageList = Lists.newArrayList();
@@ -164,13 +181,12 @@ public class RobotController extends BaseAdminController {
             } else {
                 log.debug("重复URL:" + url);
             }
-            result.put("post", post);
             log.debug("抓取完成:" + post.getTitle());
         } catch (IOException e) {
             e.printStackTrace();
             return error(e.getMessage());
         }
-        return result;
+        return success("post", post);
     }
 
 }

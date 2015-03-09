@@ -19,17 +19,17 @@ public class LifeCycleTest implements InitializingBean, DisposableBean {
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        log.debug("000000000000000000000000000000000000 afterPropertiesSet");
+        log.debug("LifeCycleTest afterPropertiesSet");
     }
 
     @Override
     public void destroy() throws Exception {
-        log.debug("000000000000000000000000000000000000 destroy");
+        log.debug("LifeCycleTest destroy");
     }
 
     @PostConstruct
     public void test() {       //startup explanation here
-        log.debug("000000000000000000000000000000000000 PostConstruct");
+        log.debug("LifeCycleTest PostConstruct");
     }
 
 }
