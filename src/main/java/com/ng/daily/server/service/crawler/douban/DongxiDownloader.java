@@ -17,9 +17,8 @@ import java.util.List;
  */
 public class DongxiDownloader {
 
-    int threadPoolSize = 20;
 
-    public Post download(String saveDir, String url) throws IOException {
+    public Post download( String url) throws IOException {
 
 
         Post post = Post.createFragment();
@@ -53,7 +52,7 @@ public class DongxiDownloader {
         DongxiDownloader zhihu = new DongxiDownloader();
         String saveDir = "/tmp/dongxi.douban.com";
         String answerUrl = "http://dongxi.douban.com/show/2534804/?r=P";
-        zhihu.download(saveDir, answerUrl);
+        zhihu.download(answerUrl);
 
     }
 

@@ -30,7 +30,8 @@
                     <div class="list-group">
                         <button class="btn btn-danger" type="button"
                                 data-confirm="确定要清空吗?慎用慎用"
-                                onclick="clearQiniuFiles()">清空七牛文件</button>
+                                onclick="clearQiniuFiles()">清空七牛文件
+                        </button>
                     </div>
 
                 </div>

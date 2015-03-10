@@ -14,14 +14,14 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
-import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
 
 @Document(collection = "user")
 public class User implements Serializable {
+
     @Id
-    private BigInteger id;
+    private String id;
     private String loginName;
     private String name;
     private String plainPassword;
@@ -47,15 +47,15 @@ public class User implements Serializable {
                 '}';
     }
 
-    public User(BigInteger id) {
+    public User(String id) {
         this.id = id;
     }
 
-    public BigInteger getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(BigInteger id) {
+    public void setId(String id) {
         this.id = id;
     }
 

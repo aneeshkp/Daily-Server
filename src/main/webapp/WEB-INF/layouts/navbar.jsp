@@ -11,7 +11,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
     </button>
-    <a class="navbar-brand" href="${ctx}/admin">绿草鞋 日报</a>
+    <a class="navbar-brand" href="${ctx}/admin/">绿草鞋 日报</a>
 </div>
 <!-- /.navbar-header -->
 
@@ -24,12 +24,13 @@
                 <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
             </a>
             <ul class="dropdown-menu dropdown-user">
+                <li><a href="${ctx}/admin/profile"><i class="fa fa-user fa-fw"></i> <shiro:principal
+                        property="name"/></a>
+                </li>
                 <shiro:hasRole name="admin">
-                    <li><a href="${ctx}/admin/user"><i class="fa fa-user fa-fw"></i> <shiro:principal property="name"/></a>
+                    <li><a href="${ctx}/admin/user/list"><i class="fa fa-gear fa-fw"></i> 用户管理</a>
                     </li>
                 </shiro:hasRole>
-                <li><a href="${ctx}/admin/profile"><i class="fa fa-gear fa-fw"></i> 设置</a>
-                </li>
                 <li class="divider"></li>
                 <li><a href="${ctx}/admin/logout"><i class="fa fa-sign-out fa-fw"></i> 退出</a>
                 </li>

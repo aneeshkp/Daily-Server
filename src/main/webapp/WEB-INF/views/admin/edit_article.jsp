@@ -48,6 +48,7 @@
 
                     <div id="uploaderDiv" class="uploader-container col-lg-4">
                         <label>封面</label>
+
                         <div id="filePicker">选择文件</div>
                     </div>
 
@@ -221,7 +222,7 @@
             imageList[i] = imageUrl;
         }
 
-        if(!imageList[0]) {
+        if (!imageList[0]) {
             alert('图片不能为空');
             return;
         }
@@ -247,7 +248,16 @@
         $.ajax({
             type: "POST",
             url: "${ctx}/admin/article/save",
-            data: {"id": id, "title": title, "source": source, "summary": summary, "tag": tag, "content": content,"imageList": imageList, "titleImage": titleImage},
+            data: {
+                "id": id,
+                "title": title,
+                "source": source,
+                "summary": summary,
+                "tag": tag,
+                "content": content,
+                "imageList": imageList,
+                "titleImage": titleImage
+            },
             success: function (data) {
                 $("#postId").val(data.id);
                 if (callback) {

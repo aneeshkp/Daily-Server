@@ -15,9 +15,7 @@ import java.io.IOException;
 public class ZhihuAnswerDownloader {
 
 
-    int threadPoolSize = 20;
-
-    public Post download(String saveDir, String questionUrl) throws IOException {
+    public Post download(String questionUrl) throws IOException {
 
         Document doc = Jsoup.connect(questionUrl).get();
 
@@ -62,9 +60,8 @@ public class ZhihuAnswerDownloader {
     public static void main(String[] args) throws IOException {
 
         ZhihuAnswerDownloader zhihu = new ZhihuAnswerDownloader();
-        String saveDir = "/tmp/zhihu.com";
         String answerUrl = "http://www.zhihu.com/question/22332149/answer/24682860";
-        zhihu.download(saveDir, answerUrl);
+        zhihu.download( answerUrl);
 
     }
 

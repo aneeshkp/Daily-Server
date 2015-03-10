@@ -56,7 +56,6 @@ public class RobotController extends BaseAdminController {
         }
     }
 
-
     /**
      * 通用正文提取
      *
@@ -68,8 +67,7 @@ public class RobotController extends BaseAdminController {
     public Object getReadability(@RequestParam(value = "url", required = true) String url,
                                  @RequestParam(value = "toQiniu", required = false) boolean toQiniu) throws Exception {
         ReadabilityDownloader downloader = new ReadabilityDownloader();
-//        Post post = checkExisted(url);
-        Post post = null;
+        Post post = checkExisted(url);
         if (post == null) {
             post = downloader.download(url);
             postService.savePost(post);
@@ -92,13 +90,11 @@ public class RobotController extends BaseAdminController {
     public Object getZhihuAnswer(@RequestParam(value = "url", required = true) String url,
                                  @RequestParam(value = "toQiniu", required = false) boolean toQiniu) throws Exception {
         ZhihuAnswerDownloader downloader = new ZhihuAnswerDownloader();
-        String saveDir = "/tmp/ngdaily.com";
-//        String answerUrl = "http://www.zhihu.com/question/22332149/answer/24682860";
         Post post = checkExisted(url);
         try {
 
             if (post == null) {
-                post = downloader.download(saveDir, url);
+                post = downloader.download(url);
                 postService.savePost(post);
                 log.debug("抓取完成:" + post.getTitle());
             } else {
@@ -122,12 +118,10 @@ public class RobotController extends BaseAdminController {
     public Object getZhihuDaily(@RequestParam(value = "url", required = true) String url,
                                 @RequestParam(value = "toQiniu", required = false) boolean toQiniu) throws Exception {
         ZhihuDailyDownloader downloader = new ZhihuDailyDownloader();
-        String saveDir = "/tmp/ngdaily.com";
-//        String answerUrl = "http://daily.zhihu.com/story/4559173";
         Post post = checkExisted(url);
         try {
             if (post == null) {
-                post = downloader.download(saveDir, url);
+                post = downloader.download(url);
                 for (String imageUrl : post.getImageList()) {
                     String fileName = IDGenerator.getArticleImageId() + ".jpg";
                     String qiniuUrl = qiniuService.uploadWithURL(imageUrl, fileName);
@@ -160,11 +154,10 @@ public class RobotController extends BaseAdminController {
     public Object getDoubanDongxi(@RequestParam(value = "url", required = true) String url,
                                   @RequestParam(value = "toQiniu", required = false) boolean toQiniu) throws Exception {
         DongxiDownloader downloader = new DongxiDownloader();
-        String saveDir = "/tmp/ngdaily.com";
         Post post = checkExisted(url);
         try {
             if (post == null) {
-                post = downloader.download(saveDir, url);
+                post = downloader.download(url);
                 List<String> newImageList = Lists.newArrayList();
                 for (String imageUrl : post.getImageList()) {
                     String fileName = IDGenerator.getFragmentImageId() + ".jpg";

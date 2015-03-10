@@ -36,6 +36,7 @@
 
                     <div class="row">
                         <p class="pull-left">来源:${post.source}</p>
+
                         <p class="pull-right">标签:${post.tag}</p>
                     </div>
                 </div>

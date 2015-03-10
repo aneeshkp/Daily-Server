@@ -6,7 +6,7 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 /**
  * Created by fangs on 15/1/9.
  */
-public interface UserRepository extends PagingAndSortingRepository<User, Long>, UserRepositoryCustom {
+public interface UserRepository extends PagingAndSortingRepository<User, String>, UserRepositoryCustom {
 
     User findByLoginName(String loginName);
 

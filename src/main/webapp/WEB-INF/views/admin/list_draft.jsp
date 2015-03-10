@@ -130,7 +130,7 @@
                     "targets": 5,
                     "data": "status",
                     "render": function (data, type, row) {
-                        if(data == "-1") {
+                        if (data == "-1") {
                             return "草稿箱";
                         } else if (data == "0") {
                             return "队列中";
@@ -140,16 +140,16 @@
                     }
                 },
                 {
-                "targets": 6,
-                "data": null,
-                "render": function (data, type, row) {
-                    var editHtml = "<a href='javascript:void(0);' onclick='_editFun(" + "\"" + data.id + "\"" + ")'> 编辑 </a>";
-                    var previewHtml = "<a href='javascript:void(0);' onclick='_previewFun(" + "\"" + data.id + "\"" + ")'> 预览 </a>";
-                    var submitHtml = "<a href='javascript:void(0);' onclick='_submitFun(\"" + data.id + "\")'> 发布 </a>";
-                    var deleteHtml = "<a href='javascript:void(0);' onclick='_deleteFun(\"" + data.id + "\")'> 废弃 </a>";
-                    return editHtml + previewHtml + submitHtml + deleteHtml;
-                }
-            }],
+                    "targets": 6,
+                    "data": null,
+                    "render": function (data, type, row) {
+                        var editHtml = "<a href='javascript:void(0);' onclick='_editFun(" + "\"" + data.id + "\"" + ")'> 编辑 </a>";
+                        var previewHtml = "<a href='javascript:void(0);' onclick='_previewFun(" + "\"" + data.id + "\"" + ")'> 预览 </a>";
+                        var submitHtml = "<a href='javascript:void(0);' onclick='_submitFun(\"" + data.id + "\")'> 发布 </a>";
+                        var deleteHtml = "<a href='javascript:void(0);' onclick='_deleteFun(\"" + data.id + "\")'> 废弃 </a>";
+                        return editHtml + previewHtml + submitHtml + deleteHtml;
+                    }
+                }],
 
 //            scrollX: true,
 //            scrollY: true,
@@ -175,7 +175,7 @@
                 url: "${ctx}/admin/article/queue",
                 data: {"id": id},
                 success: function (data) {
-                    if(data.result == "ok") {
+                    if (data.result == "ok") {
                         notice("已提交到发布队列");
                     }
                 },
@@ -193,7 +193,7 @@
                 url: "${ctx}/admin/post/delete",
                 data: {"id": id},
                 success: function (data) {
-                    if(data.result == "ok") {
+                    if (data.result == "ok") {
                         notice("已废弃");
                         draftTable.ajax.reload();
                     }

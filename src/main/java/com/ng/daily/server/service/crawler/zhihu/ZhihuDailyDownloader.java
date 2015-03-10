@@ -17,9 +17,8 @@ import java.util.List;
 public class ZhihuDailyDownloader {
 
 
-    int threadPoolSize = 20;
 
-    public Post download(String saveDir, String dailyUrl) throws IOException {
+    public Post download( String dailyUrl) throws IOException {
 
 
         Post post = Post.createArticle();
@@ -61,7 +60,7 @@ public class ZhihuDailyDownloader {
         ZhihuDailyDownloader zhihu = new ZhihuDailyDownloader();
         String saveDir = "/tmp/zhihu.com";
         String answerUrl = "http://www.zhihu.com/question/22332149/answer/24682860";
-        zhihu.download(saveDir, answerUrl);
+        zhihu.download(  answerUrl);
 
     }
 

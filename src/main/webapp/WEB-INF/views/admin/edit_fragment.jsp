@@ -12,7 +12,8 @@
     <link href="${ctx}/static/libs/image-upload/style.css" type="text/css" rel="stylesheet"/>
 
     <script type="text/javascript" charset="utf-8" src="${ctx}/static/libs/webuploader/webuploader.min.js"></script>
-    <script type="text/javascript" charset="utf-8" src="${ctx}/static/libs/image-upload/upload_fragment_image.js"></script>
+    <script type="text/javascript" charset="utf-8"
+            src="${ctx}/static/libs/image-upload/upload_fragment_image.js"></script>
 
     <!-- 用于将碎片附图排序 -->
     <script type="text/javascript" charset="utf-8" src="${ctx}/static/libs/sortable/Sortable.js"></script>
@@ -269,20 +270,20 @@
         var tag = $("#postTag").val();
         var summary = $("#postSummary").val();
 
-        if(!imageList[0]) {
+        if (!imageList[0]) {
             alert('图片不能为空');
             return;
         }
 
-        if(!title || title=='') {
+        if (!title || title == '') {
             alert('标题不能为空');
             return;
         }
-        if(!source || source=='') {
+        if (!source || source == '') {
             alert('来源不能为空');
             return;
         }
-        if(!tag || tag=='') {
+        if (!tag || tag == '') {
             alert('标签不能为空');
             return;
         }
@@ -290,7 +291,7 @@
         $.ajax({
             type: "POST",
             url: "${ctx}/admin/fragment/save",
-            data: {"id": id, "title": title, "source": source, "summary":summary, "tag": tag, "imageList": imageList},
+            data: {"id": id, "title": title, "source": source, "summary": summary, "tag": tag, "imageList": imageList},
             success: function (data) {
                 $("#postId").val(data.id);
                 if (callback) {

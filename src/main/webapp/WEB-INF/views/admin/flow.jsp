@@ -89,13 +89,13 @@
                     <div id="basic" class="container">
 
 
-                        <div class="item"><img src="${ctx}/static/images/testflow/1.jpg" /></div>
-                        <div class="item"><img src="${ctx}/static/images/testflow/2.jpg" /></div>
-                        <div class="item"><img src="${ctx}/static/images/testflow/3.jpg" /></div>
+                        <div class="item"><img src="${ctx}/static/images/testflow/1.jpg"/></div>
+                        <div class="item"><img src="${ctx}/static/images/testflow/2.jpg"/></div>
+                        <div class="item"><img src="${ctx}/static/images/testflow/3.jpg"/></div>
 
-                        <div class="item"><img src="${ctx}/static/images/testflow/1.jpg" /></div>
-                        <div class="item h4"><img src="${ctx}/static/images/testflow/2.jpg" /></div>
-                        <div class="item w2 h2"><img src="${ctx}/static/images/testflow/3.jpg" /></div>
+                        <div class="item"><img src="${ctx}/static/images/testflow/1.jpg"/></div>
+                        <div class="item h4"><img src="${ctx}/static/images/testflow/2.jpg"/></div>
+                        <div class="item w2 h2"><img src="${ctx}/static/images/testflow/3.jpg"/></div>
                         <div class="item w2"></div>
                         <div class="item h3"></div>
                         <div class="item w3"></div>
