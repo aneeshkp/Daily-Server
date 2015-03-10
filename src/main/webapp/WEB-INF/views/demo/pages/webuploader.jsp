@@ -44,7 +44,7 @@
                             <div class="info"></div>
                             <div class="btns">
                                 <div id="filePicker2"></div>
-                                <div class="uploadBtn">开始上传</div>
+                                <div class="uploadBtn">上传</div>
                             </div>
                         </div>
                     </div>

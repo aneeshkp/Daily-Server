@@ -39,7 +39,6 @@
                         </div>
                     </div>
 
-
                     <div class="row form-group">
                         <div class="col-lg-2">
                             <label>发布队列控制: </label>

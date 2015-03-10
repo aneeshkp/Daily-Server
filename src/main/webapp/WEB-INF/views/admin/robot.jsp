@@ -149,7 +149,6 @@
                         forceCrawl = true;
                     }
 
-                    notice("开始抓取,请稍候...");
                     $.ajax({
                         type: "POST",
                         url: "${ctx}/admin/robot/getReadability",
@@ -182,7 +181,6 @@
                         forceCrawl = true;
                     }
 
-                    notice("开始抓取,请稍候...");
                     $.ajax({
                         type: "POST",
                         url: "${ctx}/admin/robot/getZhihuDaily",
@@ -213,7 +211,6 @@
                         forceCrawl = true;
                     }
 
-                    notice("开始抓取,请稍候...");
                     $.ajax({
                         type: "POST",
                         url: "${ctx}/admin/robot/getZhihuAnswer",
@@ -244,7 +241,6 @@
                     }
 
 
-                    notice("开始抓取,请稍候...");
                     $.ajax({
                         type: "POST",
                         url: "${ctx}/admin/robot/getDoubanDongxi",

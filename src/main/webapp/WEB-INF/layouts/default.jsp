@@ -69,6 +69,13 @@
 
     <!-- Pace -->
     <link rel="stylesheet" href="${ctx}/static/libs/pace/pace.css">
+    <script>
+        window.paceOptions = {
+            ajax: {
+                trackMethods: ['GET', 'POST', 'PUT', 'DELETE', 'REMOVE']
+            }
+        };
+    </script>
     <script src="${ctx}/static/libs/pace/pace.min.js"></script>
 
 
