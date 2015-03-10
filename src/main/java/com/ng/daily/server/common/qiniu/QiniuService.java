@@ -1,5 +1,6 @@
 package com.ng.daily.server.common.qiniu;
 
+import com.ng.daily.server.common.util.HttpClientManager;
 import com.qiniu.api.auth.AuthException;
 import com.qiniu.api.auth.digest.Mac;
 import com.qiniu.api.config.Config;
@@ -14,9 +15,13 @@ import com.qiniu.api.rsf.ListItem;
 import com.qiniu.api.rsf.ListPrefixRet;
 import com.qiniu.api.rsf.RSFClient;
 import com.qiniu.api.rsf.RSFEofException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +41,9 @@ public class QiniuService {
     @Value("${qiniu.domain}")
     private String domainName;
 
+    @Autowired
+    private HttpClientManager httpClientManager;
+
     public String uploadFile(String localFilePath, String key) {
         String resultUrl;
         try {
@@ -53,6 +61,14 @@ public class QiniuService {
             throw new RuntimeException(e);
         }
         return resultUrl;
+    }
+
+
+    public String uploadWithURL(String fileUrl, String key) throws IOException {
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        httpClientManager.httpGet(fileUrl, out);
+        InputStream in = new ByteArrayInputStream(out.toByteArray());
+        return upload(in, key);
     }
 
     public String upload(InputStream inputStream, String key) {

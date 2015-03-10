@@ -17,7 +17,7 @@ import java.net.URLDecoder;
 /**
  * Created by fangs on 15/3/9.
  */
-public class Readability {
+public class ReadabilityDownloader {
 
 
     public Post download(String articleUrl) throws Exception {

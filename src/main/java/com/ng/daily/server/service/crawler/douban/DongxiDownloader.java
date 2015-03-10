@@ -15,7 +15,7 @@ import java.util.List;
  * 豆瓣东西
  * Created by fangs on 15/3/1.
  */
-public class Dongxi {
+public class DongxiDownloader {
 
     int threadPoolSize = 20;
 
@@ -50,7 +50,7 @@ public class Dongxi {
 
     public static void main(String[] args) throws IOException {
 
-        Dongxi zhihu = new Dongxi();
+        DongxiDownloader zhihu = new DongxiDownloader();
         String saveDir = "/tmp/dongxi.douban.com";
         String answerUrl = "http://dongxi.douban.com/show/2534804/?r=P";
         zhihu.download(saveDir, answerUrl);

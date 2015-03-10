@@ -14,7 +14,7 @@ import java.util.List;
  * 知乎日报
  * Created by fangs on 15/2/28.
  */
-public class ZhihuDaily {
+public class ZhihuDailyDownloader {
 
 
     int threadPoolSize = 20;
@@ -58,7 +58,7 @@ public class ZhihuDaily {
 
     public static void main(String[] args) throws IOException {
 
-        ZhihuDaily zhihu = new ZhihuDaily();
+        ZhihuDailyDownloader zhihu = new ZhihuDailyDownloader();
         String saveDir = "/tmp/zhihu.com";
         String answerUrl = "http://www.zhihu.com/question/22332149/answer/24682860";
         zhihu.download(saveDir, answerUrl);

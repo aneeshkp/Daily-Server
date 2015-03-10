@@ -12,7 +12,7 @@ import java.io.IOException;
  * 知乎答案
  * Created by fangs on 15/2/28.
  */
-public class ZhihuAnswer {
+public class ZhihuAnswerDownloader {
 
 
     int threadPoolSize = 20;
@@ -61,7 +61,7 @@ public class ZhihuAnswer {
 
     public static void main(String[] args) throws IOException {
 
-        ZhihuAnswer zhihu = new ZhihuAnswer();
+        ZhihuAnswerDownloader zhihu = new ZhihuAnswerDownloader();
         String saveDir = "/tmp/zhihu.com";
         String answerUrl = "http://www.zhihu.com/question/22332149/answer/24682860";
         zhihu.download(saveDir, answerUrl);

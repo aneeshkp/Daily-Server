@@ -7,10 +7,10 @@ import com.ng.daily.server.common.qiniu.QiniuService;
 import com.ng.daily.server.common.util.HttpClientManager;
 import com.ng.daily.server.common.util.web.MediaTypes;
 import com.ng.daily.server.entity.Post;
-import com.ng.daily.server.service.crawler.douban.Dongxi;
-import com.ng.daily.server.service.crawler.readability.Readability;
-import com.ng.daily.server.service.crawler.zhihu.ZhihuAnswer;
-import com.ng.daily.server.service.crawler.zhihu.ZhihuDaily;
+import com.ng.daily.server.service.crawler.douban.DongxiDownloader;
+import com.ng.daily.server.service.crawler.readability.ReadabilityDownloader;
+import com.ng.daily.server.service.crawler.zhihu.ZhihuAnswerDownloader;
+import com.ng.daily.server.service.crawler.zhihu.ZhihuDailyDownloader;
 import com.ng.daily.server.service.post.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,10 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.List;
 
 /**
@@ -68,12 +65,13 @@ public class RobotController extends BaseAdminController {
      */
     @RequestMapping(value = "/getReadability", method = RequestMethod.POST, produces = MediaTypes.JSON_UTF_8)
     @ResponseBody
-    public Object getReadability(@RequestParam(value = "url", required = true) String url) throws Exception {
-        Readability read = new Readability();
+    public Object getReadability(@RequestParam(value = "url", required = true) String url,
+                                 @RequestParam(value = "toQiniu", required = false) boolean toQiniu) throws Exception {
+        ReadabilityDownloader downloader = new ReadabilityDownloader();
 //        Post post = checkExisted(url);
         Post post = null;
         if (post == null) {
-            post = read.download(url);
+            post = downloader.download(url);
             postService.savePost(post);
             log.debug("抓取完成:" + post.getTitle());
         } else {
@@ -91,15 +89,16 @@ public class RobotController extends BaseAdminController {
      */
     @RequestMapping(value = "/getZhihuAnswer", method = RequestMethod.POST, produces = MediaTypes.JSON_UTF_8)
     @ResponseBody
-    public Object getZhihuAnswer(@RequestParam(value = "url", required = true) String url) {
-        ZhihuAnswer zhihu = new ZhihuAnswer();
+    public Object getZhihuAnswer(@RequestParam(value = "url", required = true) String url,
+                                 @RequestParam(value = "toQiniu", required = false) boolean toQiniu) throws Exception {
+        ZhihuAnswerDownloader downloader = new ZhihuAnswerDownloader();
         String saveDir = "/tmp/ngdaily.com";
 //        String answerUrl = "http://www.zhihu.com/question/22332149/answer/24682860";
         Post post = checkExisted(url);
         try {
 
             if (post == null) {
-                post = zhihu.download(saveDir, url);
+                post = downloader.download(saveDir, url);
                 postService.savePost(post);
                 log.debug("抓取完成:" + post.getTitle());
             } else {
@@ -120,20 +119,18 @@ public class RobotController extends BaseAdminController {
      */
     @RequestMapping(value = "/getZhihuDaily", method = RequestMethod.POST, produces = MediaTypes.JSON_UTF_8)
     @ResponseBody
-    public Object getZhihuDaily(@RequestParam(value = "url", required = true) String url) {
-        ZhihuDaily zhihu = new ZhihuDaily();
+    public Object getZhihuDaily(@RequestParam(value = "url", required = true) String url,
+                                @RequestParam(value = "toQiniu", required = false) boolean toQiniu) throws Exception {
+        ZhihuDailyDownloader downloader = new ZhihuDailyDownloader();
         String saveDir = "/tmp/ngdaily.com";
 //        String answerUrl = "http://daily.zhihu.com/story/4559173";
         Post post = checkExisted(url);
         try {
             if (post == null) {
-                post = zhihu.download(saveDir, url);
+                post = downloader.download(saveDir, url);
                 for (String imageUrl : post.getImageList()) {
-                    ByteArrayOutputStream out = new ByteArrayOutputStream();
-                    httpClientManager.httpGet(imageUrl, out);
-                    InputStream in = new ByteArrayInputStream(out.toByteArray());
                     String fileName = IDGenerator.getArticleImageId() + ".jpg";
-                    String qiniuUrl = qiniuService.upload(in, fileName);
+                    String qiniuUrl = qiniuService.uploadWithURL(imageUrl, fileName);
                     String newContent = post.getContent().replaceAll(imageUrl, qiniuUrl);
                     post.setContent(newContent);
                 }
@@ -160,20 +157,18 @@ public class RobotController extends BaseAdminController {
      */
     @RequestMapping(value = "/getDoubanDongxi", method = RequestMethod.POST, produces = MediaTypes.JSON_UTF_8)
     @ResponseBody
-    public Object getDoubanDongxi(@RequestParam(value = "url", required = true) String url) {
-        Dongxi zhihu = new Dongxi();
+    public Object getDoubanDongxi(@RequestParam(value = "url", required = true) String url,
+                                  @RequestParam(value = "toQiniu", required = false) boolean toQiniu) throws Exception {
+        DongxiDownloader downloader = new DongxiDownloader();
         String saveDir = "/tmp/ngdaily.com";
         Post post = checkExisted(url);
         try {
             if (post == null) {
-                post = zhihu.download(saveDir, url);
+                post = downloader.download(saveDir, url);
                 List<String> newImageList = Lists.newArrayList();
                 for (String imageUrl : post.getImageList()) {
-                    ByteArrayOutputStream out = new ByteArrayOutputStream();
-                    httpClientManager.httpGet(imageUrl, out);
-                    InputStream in = new ByteArrayInputStream(out.toByteArray());
-                    String fileName = IDGenerator.getArticleImageId() + ".jpg";
-                    String qiniuUrl = qiniuService.upload(in, fileName);
+                    String fileName = IDGenerator.getFragmentImageId() + ".jpg";
+                    String qiniuUrl = qiniuService.uploadWithURL(imageUrl, fileName);
                     newImageList.add(qiniuUrl);
                 }
                 post.setImageList(newImageList);

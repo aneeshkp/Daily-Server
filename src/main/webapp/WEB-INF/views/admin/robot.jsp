@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
 
 <html>
@@ -24,10 +25,22 @@
             </div>
             <!-- /.row -->
 
+            <div class="col-lg-8">
+                <div class="row form-group">
+                    <label>图片上传至七牛服务器:</label>
+                    <label class="radio-inline">
+                        <input type="radio" name="optionsRadiosInline" id="uploadToQiniu"
+                               value="option1" checked>上传
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="optionsRadiosInline"
+                               value="option2">不上传
+                    </label>
+                </div>
+            </div>
 
             <div class="col-lg-8">
-
-                <div class="row">
+                <div class="row form-group">
                     <label>通用文章提取, 可提取网页正文信息
                         <small>(提取有问题的文章, 请把URL发给我)</small>
                         :</label>
@@ -39,9 +52,8 @@
                         <span class="input-group-addon" id="getReadabilityUrl" onclick="readability()">抓取</span>
                     </div>
                 </div>
-                <br/>
 
-                <div class="row">
+                <div class="row form-group">
                     <label>知乎答案:</label>
 
                     <div class="input-group">
@@ -51,9 +63,8 @@
                         <span class="input-group-addon" id="getZhihuAnswer" onclick="zhihuAnswer()">抓取</span>
                     </div>
                 </div>
-                <br/>
 
-                <div class="row">
+                <div class="row form-group">
                     <label>知乎日报:</label>
 
                     <div class="input-group">
@@ -62,9 +73,8 @@
                         <span class="input-group-addon" id="getZhihuDaily" onclick="zhihuDaily()">抓取</span>
                     </div>
                 </div>
-                <br/>
 
-                <div class="row">
+                <div class="row form-group">
                     <label>豆瓣东西:</label>
 
                     <div class="input-group">
@@ -74,9 +84,8 @@
                         <span class="input-group-addon" id="getDoubanDongxi" onclick="doubanDongxi()">抓取</span>
                     </div>
                 </div>
-                <br/>
 
-                <div class="row">
+                <div class="row form-group">
                     <br/>
 
                     <p>更多针对性抓取, 敬请期待. 请提交想抓取的内容网站地址给我</p>
@@ -113,13 +122,26 @@
 
                 function readability() {
                     var url = $("#readabilityUrl").val();
+                    if (!url || !isUrl(url)) {
+                        alert("请输入网址");
+                        return;
+                    }
+                    var toQiniu = false;
+                    if ($('#uploadToQiniu').prop("checked")) {
+                        toQiniu = true;
+                    }
+
                     notice("开始抓取,请稍候...");
                     $.ajax({
                         type: "POST",
                         url: "${ctx}/admin/robot/getReadability",
-                        data: {"url": url},
+                        data: {"url": url, "toQiniu": toQiniu},
                         success: function (data) {
-                            showSuccessPost(data.post, "article");
+                            if (data.result == "ok") {
+                                showSuccessPost(data.post, "article");
+                            } else {
+                                alert(data.message);
+                            }
                         },
                         error: function (data, errCode, errDesc) {
                             alert("操作失败:\n" + errCode + errDesc);
@@ -128,12 +150,21 @@
                 }
 
                 function zhihuDaily() {
-                    var zhihuUrl = $("#zhihuDailyUrl").val();
+                    var url = $("#zhihuDailyUrl").val();
+                    if (!url || !isUrl(url)) {
+                        alert("请输入网址");
+                        return;
+                    }
+                    var toQiniu = false;
+                    if ($('#uploadToQiniu').prop("checked")) {
+                        toQiniu = true;
+                    }
+
                     notice("开始抓取,请稍候...");
                     $.ajax({
                         type: "POST",
                         url: "${ctx}/admin/robot/getZhihuDaily",
-                        data: {"url": zhihuUrl},
+                        data: {"url": url, "toQiniu": toQiniu},
                         success: function (data) {
                             showSuccessPost(data.post, "article");
                         },
@@ -146,14 +177,23 @@
 
 
                 function zhihuAnswer() {
-                    var zhihuUrl = $("#zhihuAnswerUrl").val();
+                    var url = $("#zhihuAnswerUrl").val();
+                    if (!url || !isUrl(url)) {
+                        alert("请输入网址");
+                        return;
+                    }
+                    var toQiniu = false;
+                    if ($('#uploadToQiniu').prop("checked")) {
+                        toQiniu = true;
+                    }
+
+                    notice("开始抓取,请稍候...");
                     $.ajax({
                         type: "POST",
                         url: "${ctx}/admin/robot/getZhihuAnswer",
-                        data: {"url": zhihuUrl},
+                        data: {"url": url, "toQiniu": toQiniu},
                         success: function (data) {
                             showSuccessPost(data.post, "article");
-                            notice("抓取完成");
                         },
                         error: function (data, errCode, errDesc) {
                             alert("操作失败:\n" + errCode + errDesc);
@@ -163,16 +203,23 @@
                 }
 
                 function doubanDongxi() {
+                    var url = $("#doubanDongxiUrl").val();
+                    if (!url || !isUrl(url)) {
+                        alert("请输入网址");
+                        return;
+                    }
+                    var toQiniu = false;
+                    if ($('#uploadToQiniu').prop("checked")) {
+                        toQiniu = true;
+                    }
+
                     notice("开始抓取,请稍候...");
-                    var dongxiUrl = $("#doubanDongxiUrl").val();
                     $.ajax({
                         type: "POST",
                         url: "${ctx}/admin/robot/getDoubanDongxi",
-                        data: {"url": dongxiUrl},
+                        data: {"url": url, "toQiniu": toQiniu},
                         success: function (data) {
-
                             showSuccessPost(data.post, "fragment");
-
                         },
                         error: function (data, errCode, errDesc) {
                             alert("操作失败:\n" + errCode + errDesc);
@@ -182,6 +229,18 @@
 
             </script>
 
+
+            <script>
+                function isUrl(url) {
+                    var expression = /[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi;
+                    var regex = new RegExp(expression);
+                    if (url.match(regex)) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+            </script>
 
         </div>
         <!-- /.container-fluid -->
