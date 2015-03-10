@@ -8,7 +8,6 @@ package com.ng.daily.server.service.account;
 import com.ng.daily.server.common.util.Encodes;
 import com.ng.daily.server.common.util.security.Digests;
 import com.ng.daily.server.entity.User;
-import com.ng.daily.server.repository.task.TaskRepository;
 import com.ng.daily.server.repository.user.UserRepository;
 import com.ng.daily.server.service.ServiceException;
 import org.apache.commons.lang3.StringUtils;
@@ -45,8 +44,6 @@ public class AccountService {
 
     @Autowired
     private UserRepository userRepository;
-    @Autowired
-    private TaskRepository taskRepository;
 
     public List<User> getAllUser() {
         return (List<User>) userRepository.findAll();

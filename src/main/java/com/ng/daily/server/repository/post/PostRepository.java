@@ -12,11 +12,10 @@ import java.util.List;
  */
 public interface PostRepository extends PagingAndSortingRepository<Post, String>, PostRepositoryPlus {
 
-
     public Page<Post> findByTag(String tag, Pageable page);
-
 
     public Page<Post> findByStatus(Integer status, Pageable page);
 
     public List<Post> findByCrawlerUrl(String url);
+
 }
