@@ -8,6 +8,14 @@
     <title>发布队列</title>
 
     <link href="${ctx}/static/libs/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet"/>
+
+
+    <!-- Bootcards CSS for desktop: -->
+    <link rel="stylesheet" href="${ctx}/static/libs/bootcards/css/bootcards-desktop.min.css">
+
+    <!-- Bootstrap and Bootcards JS -->
+    <script type="text/javascript" charset="utf-8" src="${ctx}/static/libs/bootcards/js/bootcards.min.js"></script>
+
     <script type="text/javascript" charset="utf-8"
             src="${ctx}/static/libs/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
     <script type="text/javascript" charset="utf-8"
@@ -42,8 +50,13 @@
                     <button class="btn btn-success btn-block" onclick="refreshQueue()">刷新队列</button>
                 </div>
             </div>
+            <br/><br/>
 
-            <p></p>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div id="cardsList"></div>
+                </div>
+            </div>
 
             <div class="row">
                 <div class="col-lg-12">
@@ -52,23 +65,6 @@
             </div>
 
 
-            <div class="row">
-                <div class="col-lg-12">
-
-                    <div id="queueConfig">
-
-                    </div>
-
-                    <script>
-
-                        $(document).ready(function () {
-
-                        });
-
-                    </script>
-
-                </div>
-            </div>
         </div>
         <!-- /.container-fluid -->
     </div>
@@ -78,7 +74,51 @@
 <!-- /#wrapper -->
 
 
-<script id="tpl" type="text/html">
+<script id="cardsTpl" type="text/html">
+
+    {{each list as post i}}
+
+    <div class="col-lg-3">
+
+        <div class="panel panel-default bootcards-media">
+            <div class="panel-heading clearfix">
+                <h3 class="panel-title pull-left">{{post.id}}</h3>
+
+                <!--small screen component-->
+                <div class="btn-group pull-right visible-xs">
+                    <a class="btn btn-primary" href="/notes/edit"
+                       data-toggle="modal"
+                       data-target="#editModal">
+                        <i class="fa fa-pencil"></i>
+                        <span>编辑</span>
+                    </a>
+                </div>
+                <!--big screen component-->
+                <a class="btn btn-primary pull-right hidden-xs" href="/notes/edit"
+                   data-toggle="modal"
+                   data-target="#editModal">
+                    <i class="fa fa-pencil"></i>
+                    <span>编辑</span>
+                </a>
+            </div>
+            <div class="panel-body">
+                {{post.title}}
+            </div>
+
+            <img src="{{post.titleImage}}" class="img-responsive"/>
+
+            <div class="panel-footer">
+                <small class="pull-left">Built with Bootcards - Media Card</small>
+            </div>
+
+        </div>
+
+    </div>
+
+    {{/each}}
+</script>
+
+<script id="queueTpl" type="text/html">
 
     <table class="table table-bordered table-hover">
         <thead>
@@ -104,12 +144,17 @@
                            placeholder="未设置">
                     <span class="add-on"><i class="icon-remove"></i></span>
                     <span class="add-on"><i class="icon-th"></i></span>
-                    <button type="button" class="btn btn-link btn-flat" onclick="setPublishTime('{{post.id}}')">
+                    <button type="button" class="btn btn-link btn-flat" onclick="changePublishTime('{{post.id}}')">
                         设置
                     </button>
                 </div>
             </td>
-            <td>{{post.type}}</td>
+
+            {{if post.type == 'article'}}
+            <td>文章</td>
+            {{else if post.type == 'fragment'}}
+            <td>碎片</td>
+            {{/if}}
             <td>{{post.title}}</td>
             <td>
                 <div class="btn-group btn-group-xs">
@@ -151,13 +196,46 @@
 
 <script>
 
-    function setPublishTime(id) {
+    $(document).ready(function () {
+        refreshQueue();
+//        refreshCards();
+    });
 
+    function refreshCards() {
+        $.ajax({
+            type: "GET",
+            url: "${ctx}/admin/queue/list",
+            success: function (data) {
+                var html = template('cardsTpl', data);
+                document.getElementById('#cardsList').innerHTML = html;
+                makeTimePicker();
+            },
+            error: function (data, errCode, errDesc) {
+                alert("操作失败:\n" + errCode + errDesc);
+            }
+        });
+    }
+
+    function refreshQueue() {
+        $.ajax({
+            type: "GET",
+            url: "${ctx}/admin/queue/list",
+            success: function (data) {
+                var html = template('queueTpl', data);
+                document.getElementById('queueList').innerHTML = html;
+                makeTimePicker();
+            },
+            error: function (data, errCode, errDesc) {
+                alert("操作失败:\n" + errCode + errDesc);
+            }
+        });
+    }
+
+
+    function changePublishTime(id) {
         var date = $("#datetimepicker_" + id).data("datetimepicker").getDate();
         var publishTime = date.getTime(); // 取到时间戳
-
         var postId = id;
-
         $.ajax({
             type: "POST",
             url: "${ctx}/admin/queue/changePublishTime",
@@ -169,8 +247,6 @@
                 alert("操作失败:\n" + errCode + errDesc);
             }
         });
-
-
     }
 
     function offline(id) {
@@ -180,32 +256,7 @@
         alert('view' + id);
     }
 
-    function refreshQueue() {
-
-        $.ajax({
-            type: "GET",
-            url: "${ctx}/admin/queue/list",
-            success: function (data) {
-                console.log(data);
-
-                var html = template('tpl', data);
-                document.getElementById('queueList').innerHTML = html;
-                makeTimePicker();
-            },
-            error: function (data, errCode, errDesc) {
-                alert("操作失败:\n" + errCode + errDesc);
-            }
-        });
-
-    }
-
-
-    $(document).ready(function () {
-        refreshQueue();
-    });
-
     function makeTimePicker() {
-
         $(".form_datetime").datetimepicker({
             format: "dd MM yyyy - HH:ii P",
             showMeridian: true,

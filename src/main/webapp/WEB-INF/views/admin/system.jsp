@@ -42,14 +42,14 @@
 
                     <div class="row form-group">
                         <div class="col-lg-2">
-                            <label>发布队列: </label>
+                            <label>发布队列控制: </label>
                         </div>
                         <div class="col-lg-8">
-                            <button class="btn btn-default" type="button"
+                            <button class="btn btn-warning" type="button"
                                     data-confirm="确定要暂停吗?"
                                     onclick="pauseQueue()">暂停发布队列
                             </button>
-                            <button class="btn btn-success" type="button"
+                            <button class="btn btn-info" type="button"
                                     data-confirm="确定要回复吗?"
                                     onclick="resumeQueue()">启动发布队列
                             </button>

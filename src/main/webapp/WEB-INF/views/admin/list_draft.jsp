@@ -177,6 +177,7 @@
                 success: function (data) {
                     if (data.result == "ok") {
                         notice("已提交到发布队列");
+                        draftTable.ajax.reload();
                     }
                 },
                 error: function (data, errCode, errDesc) {

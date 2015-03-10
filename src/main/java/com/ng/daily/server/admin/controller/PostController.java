@@ -73,4 +73,19 @@ public class PostController extends AdminController {
         return success();
     }
 
+    /**
+     * 删除
+     *
+     * @param model
+     * @param id
+     * @return
+     */
+    @RequestMapping(value = "/withdraw", method = RequestMethod.POST)
+    @ResponseBody
+    public Object withdraw(Model model, @RequestParam(value = "id", required = true) String id) {
+        Post post = postService.findById(id);
+        post.setStatus(Post.STATUS_DRAFT);
+        postService.savePost(post);
+        return success();
+    }
 }

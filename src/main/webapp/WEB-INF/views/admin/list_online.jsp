@@ -41,7 +41,7 @@
                         <!-- /.panel-heading -->
                         <div class="panel-body">
                             <div class="dataTable_wrapper">
-                                <table class="table table-striped table-bordered table-hover" id="draftTable">
+                                <table class="table table-striped table-bordered table-hover" id="onlineTable">
                                     <thead>
                                     <tr>
                                         <th>ID</th>
@@ -83,10 +83,11 @@
 
 <!-- Page-Level Demo Scripts - Tables - Use for reference -->
 <script>
+    var onlineTable;
     $(document).ready(function () {
 
 
-        $('#draftTable').DataTable({
+        onlineTable = $('#onlineTable').DataTable({
             responsive: true,
             language: {
                 "sProcessing": "处理中...",
@@ -141,12 +142,12 @@
                     "targets": 6,
                     "data": null,
                     "render": function (data, type, row) {
-//                    var editHtml = "<a href='javascript:void(0);' onclick='_editFun(" + "\"" + data.id + "\"" + ")'> 编辑 </a>";
                         var previewHtml = "<a href='javascript:void(0);' onclick='_previewFun(" + "\"" + data.id + "\"" + ")'> 查看 </a>";
+                        var withdrawHtml = "<a href='javascript:void(0);' onclick='_withdrawFun(" + "\"" + data.id + "\"" + ")'> 撤回 </a>";
 //                    var submitHtml = "<a href='javascript:void(0);' onclick='_submitFun(\"" + data.id + "\")'> 发布 </a>";
 //                    var deleteHtml = "<a href='javascript:void(0);' onclick='_deleteFun(\"" + data.id + "\")'> 废弃 </a>";
 //                    return editHtml + previewHtml + submitHtml + deleteHtml;
-                        return previewHtml;
+                        return previewHtml + withdrawHtml;
                     }
                 }],
 
@@ -159,17 +160,35 @@
             ajax: _ctxPath + "/admin/online/list" // 指定服务端URL
         });
 
-        $('#draftTable tbody').on('click', 'tr', function () {
+        $('#onlineTable tbody').on('click', 'tr', function () {
             var name = $('td', this).eq(0).text();
 //            alert( '你点击了 '+name+'这行' );
         });
-
-
     });
 
 
     function _previewFun(id) {
         window.location = "${ctx}/admin/post/preview?id=" + id;
+    }
+
+    function _withdrawFun(id) {
+
+        if (window.confirm("确认撤回吗? 已发布的内容, 请不要轻易撤回!!")) {
+            $.ajax({
+                type: "POST",
+                url: "${ctx}/admin/post/withdraw",
+                data: {"id": id},
+                success: function (data) {
+                    if (data.result == "ok") {
+                        notice("已撤回到草稿箱");
+                        onlineTable.ajax.reload();
+                    }
+                },
+                error: function (data, errCode, errDesc) {
+                    alert("操作失败:\n" + errCode + errDesc);
+                }
+            });
+        }
     }
 
 </script>
