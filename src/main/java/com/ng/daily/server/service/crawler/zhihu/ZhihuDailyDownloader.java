@@ -18,12 +18,12 @@ public class ZhihuDailyDownloader {
 
 
 
-    public Post download( String dailyUrl) throws IOException {
+    public Post download( String targetUrl) throws IOException {
 
 
         Post post = Post.createArticle();
 
-        Document doc = Jsoup.connect(dailyUrl).get();
+        Document doc = Jsoup.connect(targetUrl).get();
 
         Element contentElement = doc.select(".question .answer .content").get(0);
         String content = contentElement.toString();
@@ -41,14 +41,13 @@ public class ZhihuDailyDownloader {
         List<String> imageList = Lists.newArrayList();
         for(Element imageElement : doc.select(".content-image")) {
             String imageUrl = imageElement.attr("src");
-            System.err.println(imageUrl);
             imageList.add(imageUrl);
         }
         post.setImageList(imageList);
 
         post.setSource("知乎");
         post.setTag("设计");
-        post.setCrawlerUrl(dailyUrl);
+        post.setCrawlerUrl(targetUrl);
         post.setCrawledAt(DateTime.now().toDate());
 
         return post;

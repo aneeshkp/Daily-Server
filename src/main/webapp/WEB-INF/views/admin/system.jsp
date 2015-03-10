@@ -117,7 +117,6 @@
                 } else if (data.status == "paused") {
                     $('#queueStatus').text("已暂停");
                 }
-                notice("操作完成");
             },
             error: function (data, errCode, errDesc) {
                 alert("操作失败:\n" + errCode + errDesc);

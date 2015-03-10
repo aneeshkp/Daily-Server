@@ -58,9 +58,13 @@ public class QueueController extends BaseAdminController {
     @ResponseBody
     public Object changePublishTime(@RequestParam(value = "postId") String postId, @RequestParam(value = "publishTime") Long publishTime) {
         Post post = postService.findById(postId);
-        post.setPublishAt(new Date(publishTime));
+
+        Date publishScheduleAt = new Date(publishTime);
+        post.setPublishScheduleAt(publishScheduleAt);
+        log.debug(publishScheduleAt.toString());
+
         postService.savePost(post);
-        return success();
+        return success(post);
     }
 
     /**

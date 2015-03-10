@@ -29,14 +29,28 @@
                 <div class="row form-group">
                     <label>图片上传至七牛服务器:</label>
                     <label class="radio-inline">
-                        <input type="radio" name="optionsRadiosInline" id="uploadToQiniu"
+                        <input type="radio" name="uploadOptions" id="uploadToQiniu"
                                value="option1" checked>上传
                     </label>
                     <label class="radio-inline">
-                        <input type="radio" name="optionsRadiosInline"
+                        <input type="radio" name="uploadOptions"
                                value="option2">不上传
                     </label>
                 </div>
+
+                <div class="row form-group">
+                    <label>抓取设置:</label>
+                    <label class="radio-inline">
+                        <input type="radio" name="crawlOptions" id="forceCrawl"
+                               value="option1">强制抓取
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="crawlOptions"
+                               value="option2" checked>先检查,没有抓取过才抓取
+                    </label>
+                </div>
+
+
             </div>
 
             <div class="col-lg-8">
@@ -112,11 +126,10 @@
                     var html = '<div class="alert alert-success alert-dismissable">' +
                             ' <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button> '
                             + post.title +
-                            '<a href=' + editUrl + ' class="alert-link">' + " -去编辑 " + '</a>' +
-                            '<a href=' + previewUrl + ' class="alert-link">' + " -去预览 " + '</a>' +
+                            '<a href=' + editUrl + ' class="alert-link" target="_blank">' + " -去编辑 " + '</a>' +
+                            '<a href=' + previewUrl + ' class="alert-link" target="_blank">' + " -去预览 " + '</a>' +
                             '</div>';
                     $("#resultInfo").append(html);
-                    console.log(html);
                     notice("抓取完成");
                 }
 
@@ -131,11 +144,16 @@
                         toQiniu = true;
                     }
 
+                    var forceCrawl = false;
+                    if ($('#forceCrawl').prop("checked")) {
+                        forceCrawl = true;
+                    }
+
                     notice("开始抓取,请稍候...");
                     $.ajax({
                         type: "POST",
                         url: "${ctx}/admin/robot/getReadability",
-                        data: {"url": url, "toQiniu": toQiniu},
+                        data: {"url": url, "toQiniu": toQiniu, "forceCrawl":forceCrawl},
                         success: function (data) {
                             if (data.result == "ok") {
                                 showSuccessPost(data.post, "article");
@@ -159,12 +177,16 @@
                     if ($('#uploadToQiniu').prop("checked")) {
                         toQiniu = true;
                     }
+                    var forceCrawl = false;
+                    if ($('#forceCrawl').prop("checked")) {
+                        forceCrawl = true;
+                    }
 
                     notice("开始抓取,请稍候...");
                     $.ajax({
                         type: "POST",
                         url: "${ctx}/admin/robot/getZhihuDaily",
-                        data: {"url": url, "toQiniu": toQiniu},
+                        data: {"url": url, "toQiniu": toQiniu, "forceCrawl":forceCrawl},
                         success: function (data) {
                             showSuccessPost(data.post, "article");
                         },
@@ -186,12 +208,16 @@
                     if ($('#uploadToQiniu').prop("checked")) {
                         toQiniu = true;
                     }
+                    var forceCrawl = false;
+                    if ($('#forceCrawl').prop("checked")) {
+                        forceCrawl = true;
+                    }
 
                     notice("开始抓取,请稍候...");
                     $.ajax({
                         type: "POST",
                         url: "${ctx}/admin/robot/getZhihuAnswer",
-                        data: {"url": url, "toQiniu": toQiniu},
+                        data: {"url": url, "toQiniu": toQiniu, "forceCrawl":forceCrawl},
                         success: function (data) {
                             showSuccessPost(data.post, "article");
                         },
@@ -212,12 +238,17 @@
                     if ($('#uploadToQiniu').prop("checked")) {
                         toQiniu = true;
                     }
+                    var forceCrawl = false;
+                    if ($('#forceCrawl').prop("checked")) {
+                        forceCrawl = true;
+                    }
+
 
                     notice("开始抓取,请稍候...");
                     $.ajax({
                         type: "POST",
                         url: "${ctx}/admin/robot/getDoubanDongxi",
-                        data: {"url": url, "toQiniu": toQiniu},
+                        data: {"url": url, "toQiniu": toQiniu, "forceCrawl":forceCrawl},
                         success: function (data) {
                             showSuccessPost(data.post, "fragment");
                         },

@@ -18,6 +18,8 @@
     <!-- 用于将碎片附图排序 -->
     <script type="text/javascript" charset="utf-8" src="${ctx}/static/libs/sortable/Sortable.js"></script>
 
+    <script type="text/javascript" charset="utf-8" src="${ctx}/static/libs/jquery.sticky-kit.min.js"></script>
+
     <style>
 
         #editable {
@@ -105,104 +107,103 @@
             </div>
             <!-- /.row -->
 
-            <form role="form" method="post">
-                <div class="row">
-                    <div class="col-lg-8">
-                        <div class="form-group">
-                            <label>图片上传</label>
-                            <!--头部，相册选择和格式选择-->
-                            <div id="uploader">
-                                <div class="queueList">
-                                    <div id="dndArea" class="placeholder">
-                                        <div id="filePicker"></div>
-                                        <p>或将照片拖到这里</p>
-                                    </div>
+            <div class="row sticky" style="z-index: 100; padding-bottom: 10px;">
+                <div class="col-lg-3">
+                    <input id="draftBtn" class="btn btn-primary btn-block" type="button" value="暂存到草稿箱"
+                           onclick="doDraft()"/>
+                </div>
+                <div class="col-lg-3">
+                    <input id="previewBtn" class="btn btn-normal btn-block" type="button" value="预览"
+                           onclick="doPreview()"/>
+                </div>
+                <div class="col-lg-3">
+                    <input id="publishBtn" class="btn btn-success btn-block" type="button" value="提交发布"
+                           data-confirm="确定要发布吗?"
+                           onclick="doPublish()"/>
+                </div>
+                <div class="col-lg-3">
+                    <input id="dropBtn" class="btn btn-warning btn-block" type="button" value="废弃"
+                           data-confirm="废弃后无法恢复,确定要废弃吗?"
+                           onclick="doDrop()"/>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="form-group">
+                        <label>图片上传</label>
+                        <!--头部，相册选择和格式选择-->
+                        <div id="uploader">
+                            <div class="queueList">
+                                <div id="dndArea" class="placeholder">
+                                    <div id="filePicker"></div>
+                                    <p>或将照片拖到这里</p>
                                 </div>
-                                <div class="statusBar" style="display:none;">
-                                    <div class="progress">
-                                        <span class="text">0%</span>
-                                        <span class="percentage"></span>
-                                    </div>
-                                    <div class="info"></div>
-                                    <div class="btns">
-                                        <div id="filePicker2"></div>
-                                        <div class="uploadBtn">开始上传</div>
-                                    </div>
+                            </div>
+                            <div class="statusBar" style="display:none;">
+                                <div class="progress">
+                                    <span class="text">0%</span>
+                                    <span class="percentage"></span>
+                                </div>
+                                <div class="info"></div>
+                                <div class="btns">
+                                    <div id="filePicker2"></div>
+                                    <div class="uploadBtn">开始上传</div>
                                 </div>
                             </div>
                         </div>
                     </div>
-
-                    <div class="col-lg-4">
-                        <input id="postId" type="hidden">
-
-                        <div class="form-group">
-                            <label>标题</label>
-                            <textarea id="postTitle" class="form-control" rows="2" placeholder="标题,不超过20字"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label>来源</label>
-                            <input id="postSource" class="form-control" placeholder="来源">
-                        </div>
-                        <div class="form-group">
-                            <label>标签</label>
-                            <input id="postTag" class="form-control" placeholder="标签">
-                        </div>
-                        <div class="form-group">
-                            <label>摘要</label>
-                            <input id="postSummary" class="form-control" placeholder="摘要">
-                        </div>
-                        <div class="form-group">
-                            <label>状态: <strong id="postStatus"></strong></label>
-                        </div>
-                    </div>
-
                 </div>
 
-                <div class="row">
-                    <script>
-                        $(document).ready(function () {
-                            new jBox('Image')
-                        });
-                    </script>
-                    <!-- 当前图片列表 -->
-                    <label>当前图片</label>
-                    <ul id="imageList" class="list-group">
-                        <c:forEach var="image" items="${post.imageList}">
-                            <li class="col-xs-6 col-md-2 thumbnail">
-                                <a href="${image}" data-jbox-image="gallery">
-                                    <img style="height: 140px; width: 100%; display: block;"
-                                         src="${image}"
-                                         data-holder-rendered="true"
-                                            />
-                                </a>
-                                <i class="js-remove">✖</i>
-                            </li>
-                        </c:forEach>
-                    </ul>
+                <div class="col-lg-4">
+                    <input id="postId" type="hidden">
+
+                    <div class="form-group">
+                        <label>标题</label>
+                        <textarea id="postTitle" class="form-control" rows="2" placeholder="标题,不超过20字"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>来源</label>
+                        <input id="postSource" class="form-control" placeholder="来源">
+                    </div>
+                    <div class="form-group">
+                        <label>标签</label>
+                        <input id="postTag" class="form-control" placeholder="标签">
+                    </div>
+                    <div class="form-group">
+                        <label>摘要</label>
+                        <input id="postSummary" class="form-control" placeholder="摘要">
+                    </div>
+                    <div class="form-group">
+                        <label>状态: <strong id="postStatus"></strong></label>
+                    </div>
                 </div>
 
-                <div class="row">
-                    <div class="col-lg-3">
-                        <input id="draftBtn" class="btn btn-primary btn-block" type="button" value="暂存到草稿箱"
-                               onclick="doDraft()"/>
-                    </div>
-                    <div class="col-lg-3">
-                        <input id="previewBtn" class="btn btn-normal btn-block" type="button" value="预览"
-                               onclick="doPreview()"/>
-                    </div>
-                    <div class="col-lg-3">
-                        <input id="publishBtn" class="btn btn-success btn-block" type="button" value="提交发布"
-                               data-confirm="确定要发布吗?"
-                               onclick="doPublish()"/>
-                    </div>
-                    <div class="col-lg-3">
-                        <input id="dropBtn" class="btn btn-warning btn-block" type="button" value="废弃"
-                               data-confirm="废弃后无法恢复,确定要废弃吗?"
-                               onclick="doDrop()"/>
-                    </div>
-                </div>
-            </form>
+            </div>
+
+            <div class="row">
+                <script>
+                    $(document).ready(function () {
+                        new jBox('Image')
+                    });
+                </script>
+                <!-- 当前图片列表 -->
+                <label>当前图片</label>
+                <ul id="imageList" class="list-group">
+                    <c:forEach var="image" items="${post.imageList}">
+                        <li class="col-xs-6 col-md-2 thumbnail">
+                            <a href="${image}" data-jbox-image="gallery">
+                                <img style="height: 140px; width: 100%; display: block;"
+                                     src="${image}"
+                                     data-holder-rendered="true"
+                                        />
+                            </a>
+                            <i class="js-remove">✖</i>
+                        </li>
+                    </c:forEach>
+                </ul>
+            </div>
+
         </div>
         <!-- /.container-fluid -->
     </div>
@@ -333,6 +334,11 @@
 
 
         });
+    });
+
+
+    $(document).ready(function(){
+        $(".sticky").stick_in_parent();
     });
 
 

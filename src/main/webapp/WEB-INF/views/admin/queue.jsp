@@ -241,6 +241,9 @@
             url: "${ctx}/admin/queue/changePublishTime",
             data: {"postId": postId, "publishTime": publishTime},
             success: function (data) {
+
+                alert(data['publishScheduleAt']);
+
                 notice("修改成功");
             },
             error: function (data, errCode, errDesc) {

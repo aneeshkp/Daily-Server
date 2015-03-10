@@ -18,12 +18,12 @@ import java.util.List;
 public class DongxiDownloader {
 
 
-    public Post download( String url) throws IOException {
+    public Post download( String targetUrl) throws IOException {
 
 
         Post post = Post.createFragment();
 
-        Document doc = Jsoup.connect(url).get();
+        Document doc = Jsoup.connect(targetUrl).get();
 
         List<String> imageList = Lists.newArrayList();
         Elements imageElements = doc.select(".nav-images .nav-image");
@@ -40,7 +40,7 @@ public class DongxiDownloader {
 
         post.setSource("豆瓣");
         post.setTag("东西");
-        post.setCrawlerUrl(url);
+        post.setCrawlerUrl(targetUrl);
         post.setCrawledAt(DateTime.now().toDate());
 
         return post;

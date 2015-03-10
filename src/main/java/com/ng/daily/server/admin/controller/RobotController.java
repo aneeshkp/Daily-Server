@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -65,11 +66,18 @@ public class RobotController extends BaseAdminController {
     @RequestMapping(value = "/getReadability", method = RequestMethod.POST, produces = MediaTypes.JSON_UTF_8)
     @ResponseBody
     public Object getReadability(@RequestParam(value = "url", required = true) String url,
-                                 @RequestParam(value = "toQiniu", required = false) boolean toQiniu) throws Exception {
+                                 @RequestParam(value = "toQiniu", required = false) boolean toQiniu,
+                                 @RequestParam(value = "forceCrawl", required = false) boolean forceCrawl) throws Exception {
         ReadabilityDownloader downloader = new ReadabilityDownloader();
         Post post = checkExisted(url);
-        if (post == null) {
+        if (post == null || forceCrawl) {
             post = downloader.download(url);
+
+            // TOOD 提取图片上传到七牛
+            if(toQiniu) {
+
+            }
+
             postService.savePost(post);
             log.debug("抓取完成:" + post.getTitle());
         } else {
@@ -88,13 +96,22 @@ public class RobotController extends BaseAdminController {
     @RequestMapping(value = "/getZhihuAnswer", method = RequestMethod.POST, produces = MediaTypes.JSON_UTF_8)
     @ResponseBody
     public Object getZhihuAnswer(@RequestParam(value = "url", required = true) String url,
-                                 @RequestParam(value = "toQiniu", required = false) boolean toQiniu) throws Exception {
+                                 @RequestParam(value = "toQiniu", required = false) boolean toQiniu,
+                                 @RequestParam(value = "forceCrawl", required = false) boolean forceCrawl) throws Exception {
         ZhihuAnswerDownloader downloader = new ZhihuAnswerDownloader();
         Post post = checkExisted(url);
         try {
 
-            if (post == null) {
+            if (post == null || forceCrawl) {
                 post = downloader.download(url);
+
+
+                // TOOD 提取图片上传到七牛
+                if(toQiniu) {
+
+                }
+
+
                 postService.savePost(post);
                 log.debug("抓取完成:" + post.getTitle());
             } else {
@@ -116,18 +133,31 @@ public class RobotController extends BaseAdminController {
     @RequestMapping(value = "/getZhihuDaily", method = RequestMethod.POST, produces = MediaTypes.JSON_UTF_8)
     @ResponseBody
     public Object getZhihuDaily(@RequestParam(value = "url", required = true) String url,
-                                @RequestParam(value = "toQiniu", required = false) boolean toQiniu) throws Exception {
+                                @RequestParam(value = "toQiniu", required = false) boolean toQiniu,
+                                @RequestParam(value = "forceCrawl", required = false) boolean forceCrawl) throws Exception {
         ZhihuDailyDownloader downloader = new ZhihuDailyDownloader();
         Post post = checkExisted(url);
         try {
-            if (post == null) {
+            if (post == null || forceCrawl) {
                 post = downloader.download(url);
-                for (String imageUrl : post.getImageList()) {
-                    String fileName = IDGenerator.getArticleImageId() + ".jpg";
-                    String qiniuUrl = qiniuService.uploadWithURL(imageUrl, fileName);
-                    String newContent = post.getContent().replaceAll(imageUrl, qiniuUrl);
-                    post.setContent(newContent);
+
+                if(toQiniu) {
+                    List<String> imageListCopy = new ArrayList<>();
+                    imageListCopy.addAll(post.getImageList());
+                    for (String imageUrl : imageListCopy) {
+                        String fileName = IDGenerator.getArticleImageId() + ".jpg";
+                        String qiniuUrl = qiniuService.uploadWithURL(imageUrl, fileName);
+                        String newContent = post.getContent().replaceAll(imageUrl, qiniuUrl);
+                        post.setContent(newContent);
+
+                        if(post.getImageList().contains(imageUrl)) {
+                            post.getImageList().remove(imageUrl);
+                            post.getImageList().add(qiniuUrl);
+                        }
+
+                    }
                 }
+
                 postService.savePost(post);
                 log.debug("抓取完成:" + post.getTitle());
 
@@ -152,19 +182,24 @@ public class RobotController extends BaseAdminController {
     @RequestMapping(value = "/getDoubanDongxi", method = RequestMethod.POST, produces = MediaTypes.JSON_UTF_8)
     @ResponseBody
     public Object getDoubanDongxi(@RequestParam(value = "url", required = true) String url,
-                                  @RequestParam(value = "toQiniu", required = false) boolean toQiniu) throws Exception {
+                                  @RequestParam(value = "toQiniu", required = false) boolean toQiniu,
+                                  @RequestParam(value = "forceCrawl", required = false) boolean forceCrawl) throws Exception {
         DongxiDownloader downloader = new DongxiDownloader();
         Post post = checkExisted(url);
         try {
-            if (post == null) {
+            if (post == null || forceCrawl) {
                 post = downloader.download(url);
-                List<String> newImageList = Lists.newArrayList();
-                for (String imageUrl : post.getImageList()) {
-                    String fileName = IDGenerator.getFragmentImageId() + ".jpg";
-                    String qiniuUrl = qiniuService.uploadWithURL(imageUrl, fileName);
-                    newImageList.add(qiniuUrl);
+
+                if(toQiniu) {
+                    List<String> newImageList = Lists.newArrayList();
+                    for (String imageUrl : post.getImageList()) {
+                        String fileName = IDGenerator.getFragmentImageId() + ".jpg";
+                        String qiniuUrl = qiniuService.uploadWithURL(imageUrl, fileName);
+                        newImageList.add(qiniuUrl);
+                    }
+                    post.setImageList(newImageList);
                 }
-                post.setImageList(newImageList);
+
                 postService.savePost(post);
                 log.debug("抓取完成:" + post.getTitle());
             } else {

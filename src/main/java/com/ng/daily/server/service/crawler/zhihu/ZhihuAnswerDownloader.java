@@ -15,9 +15,9 @@ import java.io.IOException;
 public class ZhihuAnswerDownloader {
 
 
-    public Post download(String questionUrl) throws IOException {
+    public Post download(String targetUrl) throws IOException {
 
-        Document doc = Jsoup.connect(questionUrl).get();
+        Document doc = Jsoup.connect(targetUrl).get();
 
         Element contentElement = doc.select(".zm-item-answer .zm-item-rich-text .zm-editable-content").get(0);
         String content = contentElement.toString();
@@ -50,7 +50,7 @@ public class ZhihuAnswerDownloader {
 
         post.setSource("知乎");
         post.setTag("设计");
-        post.setCrawlerUrl(questionUrl);
+        post.setCrawlerUrl(targetUrl);
         post.setCrawledAt(DateTime.now().toDate());
 
         return post;

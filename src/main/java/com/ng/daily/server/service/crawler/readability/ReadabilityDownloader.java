@@ -20,11 +20,11 @@ import java.net.URLDecoder;
 public class ReadabilityDownloader {
 
 
-    public Post download(String articleUrl) throws Exception {
+    public Post download(String targetUrl) throws Exception {
 
         ContentExtractor ce = new ContentExtractor();
         HtmlFetcher htmlFetcher = new HtmlFetcher();
-        String html = htmlFetcher.getHtml(articleUrl, 0);
+        String html = htmlFetcher.getHtml(targetUrl, 0);
         Article article =  ce.extractContent(html, "ReadabilitySnack");
 
         article.setCleanedArticleText(article.getCleanedArticleText().replaceAll("(\r\n|\n)", ""));
@@ -59,7 +59,7 @@ public class ReadabilityDownloader {
 
         post.setSource("机器人");
         post.setTag("资源");
-        post.setCrawlerUrl(articleUrl);
+        post.setCrawlerUrl(targetUrl);
         post.setCrawledAt(DateTime.now().toDate());
 
         return post;

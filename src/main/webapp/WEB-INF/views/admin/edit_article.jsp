@@ -23,6 +23,8 @@
 
     <script type="text/javascript" charset="utf-8" src="${ctx}/static/libs/sortable/Sortable.js"></script>
 
+    <script type="text/javascript" charset="utf-8" src="${ctx}/static/libs/jquery.sticky-kit.min.js"></script>
+
 </head>
 
 
@@ -41,6 +43,27 @@
             </div>
             <!-- /.row -->
 
+
+            <div class="row sticky" style="z-index: 100; padding-bottom: 10px;">
+                <div class="col-lg-3">
+                    <input id="draftBtn" class="btn btn-primary btn-block" type="button" value="暂存到草稿箱"
+                           onclick="doDraft()"/>
+                </div>
+                <div class="col-lg-3">
+                    <input id="previewBtn" class="btn btn-normal btn-block" type="button" value="预览"
+                           onclick="doPreview()"/>
+                </div>
+                <div class="col-lg-3">
+                    <input id="publishBtn" class="btn btn-success btn-block" type="button" value="提交发布"
+                           data-confirm="确定要发布吗?"
+                           onclick="doPublish()"/>
+                </div>
+                <div class="col-lg-3">
+                    <input id="dropBtn" class="btn btn-warning btn-block" type="button" value="废弃"
+                           data-confirm="废弃后无法恢复,确定要废弃吗?"
+                           onclick="doDrop()"/>
+                </div>
+            </div>
 
             <div class="row">
 
@@ -137,26 +160,6 @@
                 </div>
             </div>
 
-            <div class="row">
-                <div class="col-lg-3">
-                    <input id="draftBtn" class="btn btn-primary btn-block" type="button" value="暂存到草稿箱"
-                           onclick="doDraft()"/>
-                </div>
-                <div class="col-lg-3">
-                    <input id="previewBtn" class="btn btn-normal btn-block" type="button" value="预览"
-                           onclick="doPreview()"/>
-                </div>
-                <div class="col-lg-3">
-                    <input id="publishBtn" class="btn btn-success btn-block" type="button" value="提交发布"
-                           data-confirm="确定要发布吗?"
-                           onclick="doPublish()"/>
-                </div>
-                <div class="col-lg-3">
-                    <input id="dropBtn" class="btn btn-warning btn-block" type="button" value="废弃"
-                           data-confirm="废弃后无法恢复,确定要废弃吗?"
-                           onclick="doDrop()"/>
-                </div>
-            </div>
 
         </div>
         <!-- /.container-fluid -->
@@ -223,7 +226,11 @@
         }
 
         if (!imageList[0]) {
-            alert('图片不能为空');
+            alert('封面图片不能为空');
+            return;
+        }
+        if (imageList[1]) {
+            alert('封面图片只能设置一张,请挑选一张作为封面图片,移除其他  (目前是这样,容我再想想..)');
             return;
         }
         var titleImage = imageList[0];
@@ -291,6 +298,9 @@
             }
     );
 
+    $(document).ready(function(){
+        $(".sticky").stick_in_parent();
+    });
 
 </script>
 
