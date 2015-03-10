@@ -67,6 +67,11 @@
     <script src="${ctx}/static/libs/formvalidation/js/framework/bootstrap.min.js"></script>
     <script src="${ctx}/static/libs/formvalidation/js/language/zh_CN.js"></script>
 
+    <!-- Pace -->
+    <link rel="stylesheet" href="${ctx}/static/libs/pace/pace.css">
+    <script src="${ctx}/static/libs/pace/pace.min.js"></script>
+
+
     <script>
         var _ctxPath = "${ctx}";
 

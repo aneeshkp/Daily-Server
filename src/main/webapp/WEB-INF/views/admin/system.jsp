@@ -71,7 +71,6 @@
 
 <script>
     function clearQiniuFiles() {
-        notice("操作开始, 请稍候...");
         $.ajax({
             type: "GET",
             url: "${ctx}/admin/system/clearQiniuFiles",
