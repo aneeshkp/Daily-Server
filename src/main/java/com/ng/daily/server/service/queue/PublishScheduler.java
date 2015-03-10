@@ -10,15 +10,16 @@ import org.springframework.stereotype.Component;
 
 /**
  * 定时任务
- *
+ * <p/>
  * Created by fangs on 15/3/1.
  */
 @Component
 @Lazy(false)
 public class PublishScheduler {
 
-
     private static final Logger logger = LoggerFactory.getLogger(PublishScheduler.class);
+
+    private boolean paused = Boolean.FALSE;
 
     @Autowired
     private PostService postService;
@@ -33,10 +34,25 @@ public class PublishScheduler {
 //        logger.debug("I'm doing with rate now!");
     }
 
-    @Scheduled(cron = "0/60 * * * * *") // 每分钟触发任务
+    @Scheduled(cron = "0/60 * * * * *")
+        // 每分钟触发任务
     void doSomethingWithCron() {
-        postService.checkAndDoPost();
+        if (!paused) {
+            postService.checkAndDoPost();
+        }
     }
 
+    public boolean isPaused() {
+        return paused;
+    }
+
+    public void setPaused(boolean paused) {
+        if(paused) {
+            logger.debug("暂停发布队列");
+        } else {
+            logger.debug("继续发布队列");
+        }
+        this.paused = paused;
+    }
 
 }
