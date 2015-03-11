@@ -1,4 +1,4 @@
-package com.ng.daily.server.service.queue;
+package com.ng.daily.server.service.scheduler;
 
 import com.ng.daily.server.service.post.PostService;
 import org.slf4j.Logger;

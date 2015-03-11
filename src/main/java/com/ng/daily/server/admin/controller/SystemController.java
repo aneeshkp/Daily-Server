@@ -3,7 +3,7 @@ package com.ng.daily.server.admin.controller;
 import com.ng.daily.server.admin.base.BaseAdminController;
 import com.ng.daily.server.common.qiniu.QiniuService;
 import com.ng.daily.server.common.util.web.MediaTypes;
-import com.ng.daily.server.service.queue.PublishScheduler;
+import com.ng.daily.server.service.scheduler.PublishScheduler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
