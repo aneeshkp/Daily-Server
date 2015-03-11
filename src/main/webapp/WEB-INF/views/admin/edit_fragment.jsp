@@ -188,7 +188,7 @@
                     });
                 </script>
                 <!-- 当前图片列表 -->
-                <label>当前图片</label>
+                <label>当前图片<small><em>(拖动以改变顺序)</em></small></label>
                 <ul id="imageList" class="list-group">
                     <c:forEach var="image" items="${post.imageList}">
                         <li class="col-xs-6 col-md-2 thumbnail">

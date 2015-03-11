@@ -9,27 +9,35 @@
         <ul class="nav" id="side-menu">
 
 
-            <li class="sidebar-search">
-                <div class="input-group custom-search-form">
-                    <input type="text" class="form-control" placeholder="搜索...">
-                    <span class="input-group-btn">
-                    <button class="btn btn-default" type="button">
-                        <i class="fa fa-search"></i>
-                    </button>
-                    </span>
-                </div>
-                <!-- /input-group -->
-            </li>
+            <%--<li class="sidebar-search">--%>
+                <%--<div class="input-group custom-search-form">--%>
+                    <%--<input type="text" class="form-control" placeholder="搜索...">--%>
+                    <%--<span class="input-group-btn">--%>
+                    <%--<button class="btn btn-default" type="button">--%>
+                        <%--<i class="fa fa-search"></i>--%>
+                    <%--</button>--%>
+                    <%--</span>--%>
+                <%--</div>--%>
+                <%--<!-- /input-group -->--%>
+            <%--</li>--%>
 
             <li>
                 <a href="${ctx}/admin/summary/"><i class="fa fa-dashboard fa-fw"></i> 概要</a>
             </li>
-            <li>
-                <a href="${ctx}/admin/article/"><i class="fa fa-edit fa-fw"></i> 编辑文章</a>
+
+
+            <li class="active">
+                <a href="#"><i class="fa fa-edit fa-fw"></i> 编辑<span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                    <li>
+                        <a href="${ctx}/admin/article/"><i  ></i> 编辑文章</a>
+                    </li>
+                    <li>
+                        <a href="${ctx}/admin/fragment/"><i  ></i> 编辑碎片</a>
+                    </li>
+                </ul>
             </li>
-            <li>
-                <a href="${ctx}/admin/fragment/"><i class="fa fa-edit fa-fw"></i> 编辑碎片</a>
-            </li>
+
             <li>
                 <a href="${ctx}/admin/draft/"><i class="fa fa-inbox fa-fw"></i> 草稿箱</a>
             </li>
@@ -55,18 +63,6 @@
                 <a href="${ctx}/admin/waterfall/"><i class="fa fa-newspaper-o fa-fw"></i> 瀑布流</a>
             </li>
 
-            <%--<li class="active">--%>
-                <%--<a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> 编辑<span class="fa arrow"></span></a>--%>
-                <%--<ul class="nav nav-second-level">--%>
-                    <%--<li>--%>
-                        <%--<a href="${ctx}/demo/pages/flot">文章</a>--%>
-                    <%--</li>--%>
-                    <%--<li>--%>
-                        <%--<a href="${ctx}/demo/pages/morris">碎片</a>--%>
-                    <%--</li>--%>
-                <%--</ul>--%>
-                <%--<!-- /.nav-second-level -->--%>
-            <%--</li>--%>
 
         </ul>
     </div>

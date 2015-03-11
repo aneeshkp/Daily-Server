@@ -108,4 +108,12 @@ public class PostService {
         List<Post> postList = postRepository.findPostQueued();
         return postList;
     }
+
+    public void changeStatusAll(Integer oldStatus, Integer newStatus) {
+        List<Post> postList = postRepository.findByStatus(oldStatus);
+        for(Post post : postList) {
+            post.setStatus(newStatus);
+            postRepository.save(post);
+        }
+    }
 }

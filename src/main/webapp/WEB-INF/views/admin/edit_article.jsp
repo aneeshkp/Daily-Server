@@ -97,8 +97,7 @@
 
                         <br/>
                         <br/>
-                        <!-- 当前封面 -->
-                        <label>当前封面</label>
+                        <label>封面图片</label>
                         <ul id="imageList" class="list-group">
                             <c:forEach var="image" items="${post.imageList}">
                                 <li class=" thumbnail">
@@ -112,19 +111,12 @@
                                 </li>
                             </c:forEach>
                         </ul>
-
-
                     </div>
                 </div>
-
-
             </div>
-
 
             <div class="row">
                 <div class="col-lg-8">
-
-
                     <div class="form-group">
                         <label>内容</label>
                         <!-- 加载编辑器的容器 -->

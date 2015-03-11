@@ -77,6 +77,9 @@ public class FragmentController extends BaseAdminController {
             post = Post.createFragment();
         }
 
+        if (post.getImageList().size() > 0) {
+            post.setTitleImage(post.getImageList().get(0));
+        }
 
         post.setPublishScheduleAt(DateTime.now().toDate());
 

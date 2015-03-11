@@ -16,6 +16,8 @@ public interface PostRepository extends PagingAndSortingRepository<Post, String>
 
     public Page<Post> findByStatus(Integer status, Pageable page);
 
+    public List<Post> findByStatus(Integer status);
+
     public List<Post> findByCrawlerUrl(String url);
 
 }

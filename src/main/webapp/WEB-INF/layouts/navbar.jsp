@@ -11,7 +11,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
     </button>
-    <a class="navbar-brand" href="${ctx}/admin/">绿草鞋 日报</a>
+    <a class="navbar-brand" href="${ctx}/admin/">绿草鞋 <small style="color:darkgray;"><em>重生</em></small></a>
 </div>
 <!-- /.navbar-header -->
 

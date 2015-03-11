@@ -11,7 +11,7 @@
 
 
     <!-- Bootcards CSS for desktop: -->
-    <link rel="stylesheet" href="${ctx}/static/libs/bootcards/css/bootcards-desktop.min.css">
+    <%--<link rel="stylesheet" href="${ctx}/static/libs/bootcards/css/bootcards-desktop-lite.css">--%>
 
     <!-- Bootstrap and Bootcards JS -->
     <script type="text/javascript" charset="utf-8" src="${ctx}/static/libs/bootcards/js/bootcards.min.js"></script>
@@ -27,6 +27,7 @@
     <script type="text/javascript" charset="utf-8" src="${ctx}/static/libs/jquery-timeago/jquery.timeago.js"></script>
     <script type="text/javascript" charset="utf-8"
             src="${ctx}/static/libs/jquery-timeago/locales/jquery.timeago.zh-CN.js"></script>
+
 </head>
 
 
@@ -46,8 +47,11 @@
             <!-- /.row -->
 
             <div class="row">
-                <div class="col-lg-3">
-                    <button class="btn btn-success btn-block" onclick="refreshQueue()">刷新队列</button>
+                <div class="col-lg-2">
+                    <button class="btn btn-success btn-block" onclick="refreshCards()">刷新队列</button>
+                </div>
+                <div class="col-lg-2">
+                    <button class="btn btn-danger btn-block" onclick="_withdrawAll()">撤销全部</button>
                 </div>
             </div>
             <br/><br/>
@@ -55,12 +59,6 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div id="cardsList"></div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-lg-12">
-                    <div id="queueList"></div>
                 </div>
             </div>
 
@@ -76,39 +74,68 @@
 
 <script id="cardsTpl" type="text/html">
 
-    {{each list as post i}}
+{{each list as post i}}
 
     <div class="col-lg-3">
 
         <div class="panel panel-default bootcards-media">
             <div class="panel-heading clearfix">
-                <h3 class="panel-title pull-left">{{post.id}}</h3>
+
+                <em style="color:blueviolet">发布时间:{{post.publishScheduleAt}}</em><br/>
+
+                <h3 class="panel-title pull-left">
+                    <a href="javascript:void(0)" onclick='_previewFun("{{post.id}}")'>{{post.title}}</a></h3><br/>
 
                 <!--small screen component-->
-                <div class="btn-group pull-right visible-xs">
-                    <a class="btn btn-primary" href="/notes/edit"
-                       data-toggle="modal"
-                       data-target="#editModal">
-                        <i class="fa fa-pencil"></i>
-                        <span>编辑</span>
-                    </a>
-                </div>
+                <%--<div class="btn-group pull-right visible-xs">--%>
+                <%--<a class="btn btn-default" href="/notes/edit"--%>
+                <%--data-toggle="modal"--%>
+                <%--data-target="#editModal">--%>
+                <%--<i class="fa fa-pencil"></i>--%>
+                <%--<span>编辑</span>--%>
+                <%--</a>--%>
+                <%--</div>--%>
+
                 <!--big screen component-->
-                <a class="btn btn-primary pull-right hidden-xs" href="/notes/edit"
-                   data-toggle="modal"
-                   data-target="#editModal">
-                    <i class="fa fa-pencil"></i>
-                    <span>编辑</span>
-                </a>
+                <%--<a class="btn btn-default pull-right hidden-xs" href="/notes/edit"--%>
+                <%--data-toggle="modal"--%>
+                <%--data-target="#editModal">--%>
+                <%--<i class="fa fa-pencil"></i>--%>
+                <%--<span>编辑</span>--%>
+                <%--</a>--%>
+
             </div>
             <div class="panel-body">
-                {{post.title}}
+                {{post.abstract}}
             </div>
 
+            {{if post.type == 'article'}}
             <img src="{{post.titleImage}}" class="img-responsive"/>
+            {{else if post.type == 'fragment'}}
+            <%--{{each post.imageList as img i}}--%>
+            <%--<div class="col-lg-3 col-md-4 col-xs-6 thumb">--%>
+            <%--<a class="thumbnail" href="{{img}}">--%>
+            <%--<img class="img-responsive" src="{{img}}" alt="">--%>
+            <%--</a>--%>
+            <%--</div>--%>
+            <%--{{/each}}--%>
+            <img src="{{post.titleImage}}" class="img-responsive"/>
+            {{/if}}
 
             <div class="panel-footer">
-                <small class="pull-left">Built with Bootcards - Media Card</small>
+                <a href="javascript:void(0)" onclick='_withdrawFun("{{post.id}}")' style="color: #ff0000"><u>撤回</u></a>
+                <%--<a href="javascript:void(0)" onclick='_previewFun("{{post.id}}")'><u>查看</u></a>--%>
+                <a href="javascript:void(0)" onclick='_previewFun("{{post.id}}")' style="color: cadetblue"><u>设置发布时间</u></a>
+                <a href="javascript:void(0)" onclick='_publishFun("{{post.id}}")' style="color: green"><u>现在发布!</u></a>
+            </div>
+
+            <div class="panel-footer" style="height: 30px;">
+                {{if post.type == 'article'}}
+                <small class="pull-left"><em>文章</em></small>
+                {{else if post.type == 'fragment'}}
+                <small class="pull-left"><em>碎片</em></small>
+                {{/if}}
+                <small class="pull-right"><em>{{post.id}}</em></small>
             </div>
 
         </div>
@@ -118,87 +145,10 @@
     {{/each}}
 </script>
 
-<script id="queueTpl" type="text/html">
-
-    <table class="table table-bordered table-hover">
-        <thead>
-        <tr>
-            <th class="col-lg-1">ID</th>
-            <th class="col-lg-2">发布时间</th>
-            <th class="col-lg-1">类型</th>
-            <th class="col-lg-4">标题</th>
-            <th class="col-lg-1">操作</th>
-            <th class="col-lg-1">测试下拉操作</th>
-        </tr>
-        </thead>
-        <tbody>
-
-        {{each list as post i}}
-
-        <tr>
-            <td>{{post.id}}</td>
-            <td>
-                <div id="datetimepicker_{{post.id}}" class="input-append date form_datetime">
-                    <input id="timeset_{{post.id}}" data-format="yyyy-MM-dd hh:mm:ss" size="26" type="text"
-                           value="{{post.publishScheduleAt}}" readonly
-                           placeholder="未设置">
-                    <span class="add-on"><i class="icon-remove"></i></span>
-                    <span class="add-on"><i class="icon-th"></i></span>
-                    <button type="button" class="btn btn-link btn-flat" onclick="changePublishTime('{{post.id}}')">
-                        设置
-                    </button>
-                </div>
-            </td>
-
-            {{if post.type == 'article'}}
-            <td>文章</td>
-            {{else if post.type == 'fragment'}}
-            <td>碎片</td>
-            {{/if}}
-            <td>{{post.title}}</td>
-            <td>
-                <div class="btn-group btn-group-xs">
-                    <button type="button" class="btn btn-link btn-flat" onclick="offline('{{post.id}}')">
-                        撤回
-                    </button>
-                    <button type="button" class="btn btn-link btn-flat" onclick="view('{{post.id}}')">
-                        查看
-                    </button>
-                </div>
-            </td>
-
-            <td>
-                <div class="dropdown">
-                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1"
-                            data-toggle="dropdown" aria-expanded="true">
-                        Dropdown
-                        <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Another action</a></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Something else here</a></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Separated link</a></li>
-                    </ul>
-                </div>
-            </td>
-
-        </tr>
-
-        {{/each}}
-
-
-        </tbody>
-    </table>
-
-
-</script>
-
 <script>
 
     $(document).ready(function () {
-        refreshQueue();
-//        refreshCards();
+        refreshCards();
     });
 
     function refreshCards() {
@@ -207,22 +157,7 @@
             url: "${ctx}/admin/queue/list",
             success: function (data) {
                 var html = template('cardsTpl', data);
-                document.getElementById('#cardsList').innerHTML = html;
-                makeTimePicker();
-            },
-            error: function (data, errCode, errDesc) {
-                alert("操作失败:\n" + errCode + errDesc);
-            }
-        });
-    }
-
-    function refreshQueue() {
-        $.ajax({
-            type: "GET",
-            url: "${ctx}/admin/queue/list",
-            success: function (data) {
-                var html = template('queueTpl', data);
-                document.getElementById('queueList').innerHTML = html;
+                document.getElementById('cardsList').innerHTML = html;
                 makeTimePicker();
             },
             error: function (data, errCode, errDesc) {
@@ -241,9 +176,6 @@
             url: "${ctx}/admin/queue/changePublishTime",
             data: {"postId": postId, "publishTime": publishTime},
             success: function (data) {
-
-                alert(data['publishScheduleAt']);
-
                 notice("修改成功");
             },
             error: function (data, errCode, errDesc) {
@@ -271,6 +203,73 @@
 //        $(".form_datetime").datetimepicker.dates['zh-CN'] = {
 //            format: 'dd/mm/yyyy'
 //        };
+    }
+
+</script>
+
+<script>
+
+
+    function _previewFun(id) {
+        <%--window.location = "${ctx}/admin/post/preview?id=" + id;--%>
+        window.open("${ctx}/admin/post/preview?id=" + id, 'newwindow');
+    }
+
+    function _publishFun(id) {
+        if (window.confirm("确认现在发布吗?")) {
+            $.ajax({
+                type: "POST",
+                url: "${ctx}/admin/post/publish",
+                data: {"id": id},
+                success: function (data) {
+                    if (data.result == "ok") {
+                        notice("已发布");
+                        refreshCards();
+                    }
+                },
+                error: function (data, errCode, errDesc) {
+                    alert("操作失败:\n" + errCode + errDesc);
+                }
+            });
+        }
+    }
+
+    function _withdrawFun(id) {
+
+        if (window.confirm("确认撤回吗? 已发布的内容, 请不要轻易撤回!!")) {
+            $.ajax({
+                type: "POST",
+                url: "${ctx}/admin/post/withdraw",
+                data: {"id": id},
+                success: function (data) {
+                    if (data.result == "ok") {
+                        notice("已撤回到草稿箱");
+                        refreshCards();
+                    }
+                },
+                error: function (data, errCode, errDesc) {
+                    alert("操作失败:\n" + errCode + errDesc);
+                }
+            });
+        }
+    }
+
+    function _withdrawAll() {
+        if (window.confirm("仅供调试时使用, 正式环境需要去掉此功能!!! , 请不要误点 !!! ")) {
+            $.ajax({
+                type: "POST",
+                url: "${ctx}/admin/post/withdrawAll",
+                success: function (data) {
+                    if (data.result == "ok") {
+                        notice("已撤回到草稿箱");
+                        refreshCards();
+                    }
+                },
+                error: function (data, errCode, errDesc) {
+                    alert("操作失败:\n" + errCode + errDesc);
+                }
+            });
+        }
     }
 
 </script>
