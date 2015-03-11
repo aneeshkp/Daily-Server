@@ -19,7 +19,7 @@ public class PublishScheduler {
 
     private static final Logger logger = LoggerFactory.getLogger(PublishScheduler.class);
 
-    private boolean paused = Boolean.FALSE;
+    private boolean paused = Boolean.TRUE;
 
     @Autowired
     private PostService postService;
