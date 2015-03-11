@@ -7,6 +7,7 @@
 <html>
 <head>
     <title>抓取机器人</title>
+    <meta name="decorator" content="default"/>
 </head>
 
 

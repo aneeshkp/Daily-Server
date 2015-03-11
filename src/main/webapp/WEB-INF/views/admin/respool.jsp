@@ -6,6 +6,7 @@
 <html>
 <head>
     <title>资源池</title>
+    <meta name="decorator" content="default"/>
 </head>
 
 
@@ -111,9 +112,6 @@
                 <%--</div>--%>
 
             <%--</div>--%>
-
-
-
 
 
 

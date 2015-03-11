@@ -6,6 +6,7 @@
 <html>
 <head>
     <title>概要</title>
+    <meta name="decorator" content="default"/>
 </head>
 
 

@@ -6,6 +6,7 @@
 <html>
 <head>
     <title>系统管理</title>
+    <meta name="decorator" content="default"/>
 </head>
 
 

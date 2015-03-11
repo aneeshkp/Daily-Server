@@ -6,24 +6,27 @@
 <html>
 <head>
     <title>发布队列</title>
-
-    <link href="${ctx}/static/libs/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet"/>
-
+    <meta name="decorator" content="default"/>
 
     <!-- Bootcards CSS for desktop: -->
     <%--<link rel="stylesheet" href="${ctx}/static/libs/bootcards/css/bootcards-desktop-lite.css">--%>
-
-    <!-- Bootstrap and Bootcards JS -->
+    <!-- Bootcards JS -->
     <script type="text/javascript" charset="utf-8" src="${ctx}/static/libs/bootcards/js/bootcards.min.js"></script>
 
+    <!-- Bootstrap-DatetimePicker -->
+    <link href="${ctx}/static/libs/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet"/>
     <script type="text/javascript" charset="utf-8"
             src="${ctx}/static/libs/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
     <script type="text/javascript" charset="utf-8"
             src="${ctx}/static/libs/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
 
+    <!-- ArtTemplate -->
     <script type="text/javascript" charset="utf-8" src="${ctx}/static/libs/artTemplate/template.js"></script>
 
+    <!-- moment.js -->
     <script type="text/javascript" charset="utf-8" src="${ctx}/static/libs/moment/moment.min.js"></script>
+
+    <!-- jquery.timeago -->
     <script type="text/javascript" charset="utf-8" src="${ctx}/static/libs/jquery-timeago/jquery.timeago.js"></script>
     <script type="text/javascript" charset="utf-8"
             src="${ctx}/static/libs/jquery-timeago/locales/jquery.timeago.zh-CN.js"></script>

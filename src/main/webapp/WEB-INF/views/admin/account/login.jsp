@@ -6,6 +6,7 @@
 <html>
 <head>
     <title>登录页</title>
+    <meta name="decorator" content="default"/>
 </head>
 
 <body>

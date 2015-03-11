@@ -8,20 +8,21 @@
 <head>
     <title>编辑碎片</title>
     <meta name="decorator" content="default"/>
+
+    <!-- WebUploader -->
     <link href="${ctx}/static/libs/webuploader/webuploader.css" type="text/css" rel="stylesheet"/>
     <link href="${ctx}/static/libs/image-upload/style.css" type="text/css" rel="stylesheet"/>
-
     <script type="text/javascript" charset="utf-8" src="${ctx}/static/libs/webuploader/webuploader.min.js"></script>
     <script type="text/javascript" charset="utf-8"
             src="${ctx}/static/libs/image-upload/upload_fragment_image.js"></script>
 
-    <!-- 用于将碎片附图排序 -->
+    <!-- Sortable -->
     <script type="text/javascript" charset="utf-8" src="${ctx}/static/libs/sortable/Sortable.js"></script>
 
+    <!-- Sticky -->
     <script type="text/javascript" charset="utf-8" src="${ctx}/static/libs/jquery.sticky-kit.min.js"></script>
 
     <style>
-
         #editable {
         }
 
@@ -188,7 +189,9 @@
                     });
                 </script>
                 <!-- 当前图片列表 -->
-                <label>当前图片<small><em>(拖动以改变顺序)</em></small></label>
+                <label>当前图片
+                    <small><em>(拖动以改变顺序)</em></small>
+                </label>
                 <ul id="imageList" class="list-group">
                     <c:forEach var="image" items="${post.imageList}">
                         <li class="col-xs-6 col-md-2 thumbnail">
@@ -337,7 +340,7 @@
     });
 
 
-    $(document).ready(function(){
+    $(document).ready(function () {
         $(".sticky").stick_in_parent();
     });
 

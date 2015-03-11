@@ -5,6 +5,7 @@
 <html>
 <head>
     <title>个人资料</title>
+    <meta name="decorator" content="default"/>
 </head>
 
 <body>

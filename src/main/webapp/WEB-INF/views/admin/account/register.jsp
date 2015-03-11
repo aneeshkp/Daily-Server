@@ -5,11 +5,10 @@
 <html>
 <head>
     <title>用户注册</title>
-
+    <meta name="decorator" content="default"/>
 </head>
 
 <body>
-
 
 <div class="container">
     <div class="row">

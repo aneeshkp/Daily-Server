@@ -6,6 +6,7 @@
 <html>
 <head>
     <title>用户管理</title>
+    <meta name="decorator" content="default"/>
 </head>
 
 <body>

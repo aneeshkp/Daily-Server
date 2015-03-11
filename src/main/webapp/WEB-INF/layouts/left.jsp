@@ -30,31 +30,38 @@
                 <a href="#"><i class="fa fa-edit fa-fw"></i> 编辑<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     <li>
-                        <a href="${ctx}/admin/article/"><i  ></i> 编辑文章</a>
+                        <a href="${ctx}/admin/article/"><i></i> 编辑文章</a>
                     </li>
                     <li>
-                        <a href="${ctx}/admin/fragment/"><i  ></i> 编辑碎片</a>
+                        <a href="${ctx}/admin/fragment/"><i></i> 编辑碎片</a>
+                    </li>
+                    <li>
+                        <a href="${ctx}/admin/draft/"><i class="fa fa-inbox fa-fw"></i> 草稿</a>
+                    </li>
+                </ul>
+            </li>
+
+
+            <li class="active">
+                <a href="#"><i class="fa fa-paper-plane fa-fw"></i> 发布<span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                    <li>
+                        <a href="${ctx}/admin/queue/"><i></i> 发布队列</a>
+                    </li>
+                    <li>
+                        <a href="${ctx}/admin/online/"><i></i> 已发布列表</a>
                     </li>
                 </ul>
             </li>
 
             <li>
-                <a href="${ctx}/admin/draft/"><i class="fa fa-inbox fa-fw"></i> 草稿箱</a>
-            </li>
-            <li>
-                <a href="${ctx}/admin/queue/"><i class="fa fa-paper-plane fa-fw"></i> 发布队列</a>
-            </li>
-            <li>
-                <a href="${ctx}/admin/online/"><i class="fa fa-list  fa-fw"></i> 已发布列表</a>
-            </li>
-            <li>
                 <a href="${ctx}/admin/robot/"><i class="fa fa-beer fa-fw"></i> 抓取机器人</a>
             </li>
+            <%--<li>--%>
+                <%--<a href="${ctx}/admin/respool/"><i class="fa fa-retweet fa-fw"></i> 资源池</a>--%>
+            <%--</li>--%>
             <li>
-                <a href="${ctx}/admin/respool/"><i class="fa fa-retweet fa-fw"></i> 资源池</a>
-            </li>
-            <li>
-                <a href="${ctx}/admin/operation/"><i class="fa fa-weixin fa-fw"></i> 运营管理</a>
+                <a href="${ctx}/admin/operation/"><i class="fa fa-weixin fa-fw"></i> 运营</a>
             </li>
             <li>
                 <a href="${ctx}/admin/system/"><i class="fa fa-cog fa-fw"></i> 系统管理</a>

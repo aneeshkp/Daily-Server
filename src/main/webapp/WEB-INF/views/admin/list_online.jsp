@@ -6,6 +6,8 @@
 <html>
 <head>
     <title>已发布列表</title>
+    <meta name="decorator" content="default"/>
+
     <!-- DataTables CSS -->
     <link href="${ctx}/static/libs/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css"
           rel="stylesheet">
