@@ -105,6 +105,19 @@
     </script>
 
     <sitemesh:head/>
+
+    <style>
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: Helvetica, Tahoma, Arial, STXihei, "华文细黑", "Microsoft YaHei", "微软雅黑", SimSun, "宋体", Heiti, "黑体", sans-serif;
+        }
+
+        p, div {
+            font-family: Helvetica, Tahoma, Arial, STXihei, "华文细黑", "Microsoft YaHei", "微软雅黑", SimSun, "宋体", Heiti, "黑体", sans-serif;
+        }
+
+    </style>
+
 </head>
 
 <body>

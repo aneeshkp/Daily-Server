@@ -15,7 +15,6 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.concurrent.TimeUnit;
 
 /**
  * HTTP客户端
@@ -56,14 +55,21 @@ public class HttpClient {
             }
             HttpEntity entity = remoteResponse.getEntity();
             // 输出结果
-            InputStream input = entity.getContent();
-            if (result != null) {
-                IOUtils.copy(input, result); // 基于byte数组读取InputStream并直接写入OutputStream, 数组默认大小为4k.
-                result.flush();
+            InputStream input = null;
+            try {
+                input = entity.getContent();
+                if (result != null) {
+                    IOUtils.copy(input, result); // 基于byte数组读取InputStream并直接写入OutputStream, 数组默认大小为4k.
+                    result.flush();
+                }
+            } finally {
+                IOUtils.closeQuietly(result);
+                IOUtils.closeQuietly(input);
             }
+
         } finally {
             remoteResponse.close();
-            log.debug("http get finished:" + targetUrl + ", cost " + sw.stop().elapsed(TimeUnit.MILLISECONDS) + " ms");
+//            log.debug("http get finished:" + targetUrl + ", cost " + sw.stop().elapsed(TimeUnit.MILLISECONDS) + " ms");
         }
     }
 

@@ -6,8 +6,10 @@ import com.ng.daily.server.service.crawler.HttpClient;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -21,36 +23,67 @@ public class Style {
 
     public static void main(String[] args) throws IOException {
 
+
         Style style = new Style();
-        String saveDir = "/tmp/style.com";
-//        String collectionUrl = "http://www.style.com/slideshows/fashion-shows/spring-2015-couture/chanel/collection";
-        String collectionUrl = "http://www.style.com/slideshows/fashion-shows/pre-fall-2015/alice-olivia/collection";
-        style.download(saveDir, collectionUrl);
+
+        String seasonUrl = "http://www.style.com/fashion-shows/fall-2015-ready-to-wear";
+        style.downloadSeason(seasonUrl);
+
+    }
+
+    int threadPoolSize = 20;
+    ExecutorService service = Executors.newFixedThreadPool(threadPoolSize);
+
+
+    public void downloadSeason(String seasonUrl) throws IOException {
+
+
+        Document doc = Jsoup.connect(seasonUrl).get();
+        Elements elements = doc.select("#s0-latest li a");
+        List<String> brands = new ArrayList<>();
+        for (Element element : elements) {
+            String href = element.attr("href");
+            String brand = href.substring(href.lastIndexOf("/") + 1, href.length());
+            brands.add(brand);
+        }
+
+        int c = 1;
+        for (String brand : brands) {
+            service.submit(new CollectionTask(this, brand, c++, brands.size()));
+        }
 
     }
 
 
-    int threadPoolSize = 20;
+    public void downloadCollection(String description, String saveDir, String collectionUrl) throws IOException {
 
-    public void download(String saveDir, String collectionUrl) throws IOException {
+        Document doc = null;
+        int retrys = 1;
+        while (doc == null && retrys < 50) {
+            try {
+                doc = Jsoup.connect(collectionUrl).timeout(5000).get();
+            } catch (Exception e) {
+                System.err.println("collection download exception : " + "===" + e.toString() + " ---  " + retrys);
+            }
+            retrys++;
+        }
+        if (doc == null) {
+            System.err.println("collection download failed : " + collectionUrl);
+        }
 
-        Document doc = Jsoup.connect(collectionUrl).get();
         Element script = doc.select("script").get(5);
         String json = script.toString().replace("<script>", "").replace("window.slideshowItems =", "").replace(";\n</script>", "");
-
-        System.err.println(json);
 
         Gson gson = new Gson();
         ResultMap resultMap = gson.fromJson(json, ResultMap.class);
 
         HttpClient httpClient = new HttpClient();
         httpClient.init();
-        ExecutorService service = Executors.newFixedThreadPool(threadPoolSize);
 
-//        System.out.println(resultMap.id);
-//        System.out.println(resultMap.slideCount);
-//        System.out.println(resultMap.items.size());
+        int index = 0;
+        int total = resultMap.items.size();
         for (Item item : resultMap.items) {
+            index++;
             String url = "http://media.style.com/image" + item.slidepath;
 
             int pos = url.lastIndexOf("collection/") + "collection/".length();
@@ -58,29 +91,73 @@ public class Style {
 
             String saveName = url.substring(url.lastIndexOf("/") + 1, url.length());
 
-            DownloadTask task = new DownloadTask(url, saveDir, saveName, httpClient);
-//            service.submit(task);
+            DownloadTask task = new DownloadTask(description + ",image " + index + "/" + total, url, saveDir, saveName, httpClient);
+            service.submit(task);
+//            System.out.println(url + ":" + saveName);
 
-            if(item.hasDetailSlides) {
-            // TODO deltail image download
+            if (item.hasDetailSlides) {
+
+                int i = 0;
+                for (Details detail : item.details) {
+//                    int order = detail.order;
+                    String detailUrl = "http://media.style.com/image" + detail.slidepath;
+
+                    int p = detailUrl.lastIndexOf("detail/") + "detail/".length();
+                    detailUrl = detailUrl.substring(0, p) + "683/1024/" + detailUrl.substring(p, detailUrl.length());
+                    String saveNameDetail = saveName.replace(".jpg", "") + "_" + (++i) + ".jpg";
+
+                    DownloadTask detailTask = new DownloadTask(description + ",detail " + index + "/" + total, detailUrl, saveDir, saveNameDetail, httpClient);
+                    service.submit(detailTask);
+//                    System.err.println(detailUrl + ":" + saveNameDetail);
+                }
+
             }
 
         }
 
-        service.shutdown();
+//        service.shutdown();
     }
 
 }
 
+class CollectionTask implements Runnable {
+
+    private String brand;
+    private Style style;
+    private int order;
+    private int total;
+
+    public CollectionTask(Style style, String brand, int order, int total) {
+        this.brand = brand;
+        this.style = style;
+        this.order = order;
+        this.total = total;
+    }
+
+    @Override
+    public void run() {
+
+
+        System.out.println("=========>>>>>>>>>>>>>" + brand + "," + order + " / " + total);
+        String saveDir = "/tmp/style.com/" + brand + "/";
+        String collectionUrl = "http://www.style.com/slideshows/fashion-shows/fall-2015-ready-to-wear/" + brand + "/collection";
+        try {
+            style.downloadCollection("brand " + brand + " " + order + "/" + total, saveDir, collectionUrl);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+}
 
 class ResultMap {
-    String id;
-    String title;
-    String slideCount;
-    String seasonUrlFragment;
-    String brandUrlFragment;
+    //    String id;
+//    String title;
+//    String slideCount;
+//    String seasonUrlFragment;
+//    String brandUrlFragment;
     List<Item> items;
-    String canonicalUrl;
+//    String canonicalUrl;
 }
 
 class Item {
@@ -90,9 +167,13 @@ class Item {
     Boolean hasDetailSlides;
     int height;
     int width;
-    SlideDetail slideDetails;
+    List<Details> details;
 }
 
-class SlideDetail {
-
+class Details {
+    String id;
+    int order;
+    String slidepath;
+    int height;
+    int width;
 }
