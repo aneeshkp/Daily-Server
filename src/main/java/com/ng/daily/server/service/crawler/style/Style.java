@@ -22,13 +22,10 @@ public class Style {
 
 
     public static void main(String[] args) throws IOException {
-
-
         Style style = new Style();
-
-        String seasonUrl = "http://www.style.com/fashion-shows/fall-2015-ready-to-wear";
+//        String seasonUrl = "http://www.style.com/fashion-shows/fall-2015-ready-to-wear";
+        String seasonUrl = "http://www.style.com/fashion-shows/pre-fall-2015";
         style.downloadSeason(seasonUrl);
-
     }
 
     int threadPoolSize = 20;
@@ -36,26 +33,24 @@ public class Style {
 
 
     public void downloadSeason(String seasonUrl) throws IOException {
-
-
         Document doc = Jsoup.connect(seasonUrl).get();
-        Elements elements = doc.select("#s0-latest li a");
+        Elements elements = doc.select("#s0-all li a");
         List<String> brands = new ArrayList<>();
         for (Element element : elements) {
             String href = element.attr("href");
             String brand = href.substring(href.lastIndexOf("/") + 1, href.length());
             brands.add(brand);
         }
-
         int c = 1;
         for (String brand : brands) {
             service.submit(new CollectionTask(this, brand, c++, brands.size()));
         }
-
     }
 
 
     public void downloadCollection(String description, String saveDir, String collectionUrl) throws IOException {
+
+        System.err.println(collectionUrl);
 
         Document doc = null;
         int retrys = 1;
@@ -93,13 +88,11 @@ public class Style {
 
             DownloadTask task = new DownloadTask(description + ",image " + index + "/" + total, url, saveDir, saveName, httpClient);
             service.submit(task);
-//            System.out.println(url + ":" + saveName);
 
             if (item.hasDetailSlides) {
 
                 int i = 0;
                 for (Details detail : item.details) {
-//                    int order = detail.order;
                     String detailUrl = "http://media.style.com/image" + detail.slidepath;
 
                     int p = detailUrl.lastIndexOf("detail/") + "detail/".length();
@@ -108,7 +101,6 @@ public class Style {
 
                     DownloadTask detailTask = new DownloadTask(description + ",detail " + index + "/" + total, detailUrl, saveDir, saveNameDetail, httpClient);
                     service.submit(detailTask);
-//                    System.err.println(detailUrl + ":" + saveNameDetail);
                 }
 
             }
@@ -136,11 +128,11 @@ class CollectionTask implements Runnable {
 
     @Override
     public void run() {
-
-
         System.out.println("=========>>>>>>>>>>>>>" + brand + "," + order + " / " + total);
         String saveDir = "/tmp/style.com/" + brand + "/";
-        String collectionUrl = "http://www.style.com/slideshows/fashion-shows/fall-2015-ready-to-wear/" + brand + "/collection";
+
+        // TODO
+        String collectionUrl = "http://www.style.com/slideshows/fashion-shows/pre-fall-2015/" + brand + "/collection";
         try {
             style.downloadCollection("brand " + brand + " " + order + "/" + total, saveDir, collectionUrl);
         } catch (Exception e) {
@@ -151,13 +143,13 @@ class CollectionTask implements Runnable {
 }
 
 class ResultMap {
-    //    String id;
-//    String title;
-//    String slideCount;
-//    String seasonUrlFragment;
-//    String brandUrlFragment;
+    String id;
+    String title;
+    String slideCount;
+    String seasonUrlFragment;
+    String brandUrlFragment;
     List<Item> items;
-//    String canonicalUrl;
+    String canonicalUrl;
 }
 
 class Item {
