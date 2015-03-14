@@ -35,11 +35,6 @@
     <!-- Custom Fonts -->
     <link href="${ctx}/static/libs/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
-    <style>
-        body {
-            font-family: Helvetica, Tahoma, Arial, STXihei, "华文细黑", "Microsoft YaHei", "微软雅黑", SimSun, "宋体", Heiti, "黑体", sans-serif;
-        }
-    </style>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -63,13 +58,13 @@
 
     <!-- JBox -->
     <link href="${ctx}/static/libs/jBox/jBox.css" rel="stylesheet"/>
-    <script src="${ctx}/static/libs/jBox/jBox.js" type="text/javascript"></script>
+    <script src="${ctx}/static/libs/jBox/jBox.min.js" type="text/javascript"></script>
 
 
     <!-- FormValidation CSS file -->
     <link rel="stylesheet" href="${ctx}/static/libs/formvalidation/css/formValidation.min.css">
     <!-- FormValidation plugin and the class supports validating Bootstrap form -->
-    <script src="${ctx}/static/libs/formvalidation/js/formValidation.js"></script>
+    <script src="${ctx}/static/libs/formvalidation/js/formValidation.min.js"></script>
     <script src="${ctx}/static/libs/formvalidation/js/framework/bootstrap.min.js"></script>
     <script src="${ctx}/static/libs/formvalidation/js/language/zh_CN.js"></script>
 
@@ -116,6 +111,9 @@
             font-family: Helvetica, Tahoma, Arial, STXihei, "华文细黑", "Microsoft YaHei", "微软雅黑", SimSun, "宋体", Heiti, "黑体", sans-serif;
         }
 
+         body {
+             font-family: Helvetica, Tahoma, Arial, STXihei, "华文细黑", "Microsoft YaHei", "微软雅黑", SimSun, "宋体", Heiti, "黑体", sans-serif;
+         }
     </style>
 
 </head>

@@ -74,7 +74,7 @@ public class RobotController extends BaseAdminController {
             post = downloader.download(url);
 
             // TOOD 提取图片上传到七牛
-            if(toQiniu) {
+            if (toQiniu) {
 
             }
 
@@ -107,7 +107,7 @@ public class RobotController extends BaseAdminController {
 
 
                 // TOOD 提取图片上传到七牛
-                if(toQiniu) {
+                if (toQiniu) {
 
                 }
 
@@ -135,13 +135,14 @@ public class RobotController extends BaseAdminController {
     public Object getZhihuDaily(@RequestParam(value = "url", required = true) String url,
                                 @RequestParam(value = "toQiniu", required = false) boolean toQiniu,
                                 @RequestParam(value = "forceCrawl", required = false) boolean forceCrawl) throws Exception {
+
         ZhihuDailyDownloader downloader = new ZhihuDailyDownloader();
         Post post = checkExisted(url);
         try {
             if (post == null || forceCrawl) {
                 post = downloader.download(url);
 
-                if(toQiniu) {
+                if (toQiniu) {
                     List<String> imageListCopy = new ArrayList<>();
                     imageListCopy.addAll(post.getImageList());
                     for (String imageUrl : imageListCopy) {
@@ -150,7 +151,7 @@ public class RobotController extends BaseAdminController {
                         String newContent = post.getContent().replaceAll(imageUrl, qiniuUrl);
                         post.setContent(newContent);
 
-                        if(post.getImageList().contains(imageUrl)) {
+                        if (post.getImageList().contains(imageUrl)) {
                             post.getImageList().remove(imageUrl);
                             post.getImageList().add(qiniuUrl);
                         }
@@ -190,7 +191,7 @@ public class RobotController extends BaseAdminController {
             if (post == null || forceCrawl) {
                 post = downloader.download(url);
 
-                if(toQiniu) {
+                if (toQiniu) {
                     List<String> newImageList = Lists.newArrayList();
                     for (String imageUrl : post.getImageList()) {
                         String fileName = IDGenerator.getFragmentImageId() + ".jpg";

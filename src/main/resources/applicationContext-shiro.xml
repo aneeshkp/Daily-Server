@@ -30,6 +30,7 @@
                 /admin/register/** = anon
                 /admin/** = roles[admin]
 
+                / = anon
                 /site/** = anon
 
                 /api/** = anon

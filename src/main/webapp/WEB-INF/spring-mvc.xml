@@ -51,7 +51,7 @@
 
 
     <!-- 定义无需Controller的url<->view直接映射 -->
-    <mvc:view-controller path="/" view-name="redirect:/admin/"/>
+    <mvc:view-controller path="/" view-name="redirect:/site/"/>
 
     <!-- the mvc resources tag does the magic -->
     <mvc:resources mapping="/static/**" location="/static/"/>
@@ -63,7 +63,7 @@
     <mvc:interceptors>
         <mvc:interceptor>
             <mvc:mapping path="/developer/**"/>
-            <bean class="com.ng.daily.server.admin.security.LoginInterceptor"></bean>
+            <bean class="com.ng.daily.server.admin.security.LoginInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>
 

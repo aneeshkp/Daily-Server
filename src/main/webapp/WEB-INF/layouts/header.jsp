@@ -8,10 +8,10 @@
         <!-- Navigation -->
         <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
 
-            <jsp:include page="navbar.jsp"></jsp:include>
+            <jsp:include page="navbar.jsp"/>
 
             <shiro:hasRole name="admin">
-                <jsp:include page="left.jsp"></jsp:include>
+                <jsp:include page="menu.jsp"/>
             </shiro:hasRole>
 
         </nav>

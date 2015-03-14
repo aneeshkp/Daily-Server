@@ -8,6 +8,8 @@
 		<pattern>/swagger/*</pattern>
 		<pattern>/api-docs/*</pattern>
 
+		<pattern>/site/pure</pattern>
+
 	</excludes>
 
 	<decorator name="site" page="site/default.jsp">

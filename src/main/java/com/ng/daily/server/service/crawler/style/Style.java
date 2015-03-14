@@ -50,8 +50,6 @@ public class Style {
 
     public void downloadCollection(String description, String saveDir, String collectionUrl) throws IOException {
 
-        System.err.println(collectionUrl);
-
         Document doc = null;
         int retrys = 1;
         while (doc == null && retrys < 50) {

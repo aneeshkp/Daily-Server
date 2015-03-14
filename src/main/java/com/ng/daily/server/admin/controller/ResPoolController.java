@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
  * 资源池
- *
+ * <p/>
  * Created by fangs on 15/2/13.
  */
 @Controller
