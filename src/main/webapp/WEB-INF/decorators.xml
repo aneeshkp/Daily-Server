@@ -8,13 +8,14 @@
 		<pattern>/swagger/*</pattern>
 		<pattern>/api-docs/*</pattern>
 
+		<pattern>/site</pattern>
 		<pattern>/site/pure</pattern>
 
 	</excludes>
 
-	<decorator name="site" page="site/default.jsp">
-		<pattern>/site/*</pattern>
-	</decorator>
+	<!--<decorator name="site" page="site/default.jsp">-->
+		<!--<pattern>/site/*</pattern>-->
+	<!--</decorator>-->
 
 	<decorator name="default" page="default.jsp">
 		<pattern>/admin/*</pattern>

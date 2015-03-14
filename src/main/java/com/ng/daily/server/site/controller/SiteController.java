@@ -16,7 +16,7 @@ public class SiteController extends BaseSiteController {
 
     @RequestMapping(value = {"", "/"}, method = RequestMethod.GET)
     public String index() {
-        return "site/index";
+        return "site/pure";
     }
 
     @RequestMapping(value = "/about", method = RequestMethod.GET)

@@ -334,7 +334,7 @@
                     </ul>
 
                     <p class="legal-copyright">
-                        &copy; 2014 Yahoo! Inc. All rights reserved.
+                        &copy; 2014 LvCaoXie Inc. All rights reserved.
                     </p>
                 </div>
             </div>
