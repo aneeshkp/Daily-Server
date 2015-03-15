@@ -39,7 +39,7 @@
                                 </div>
                             </div>
                         </div>
-                        <a href="${ctx}/admin/postqueue/">
+                        <a href="${ctx}/admin/queue/">
                             <div class="panel-footer">
                                 <span class="pull-left">详情</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -62,7 +62,7 @@
                                 </div>
                             </div>
                         </div>
-                        <a href="${ctx}/admin/onlinelist/">
+                        <a href="${ctx}/admin/online/">
                             <div class="panel-footer">
                                 <span class="pull-left">详情</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>

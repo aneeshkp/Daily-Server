@@ -14,6 +14,6 @@ public interface PostRepositoryPlus {
 
     public List<Post> findPostQueued();
 
-
+    public List<Post> findPostPublished();
 
 }

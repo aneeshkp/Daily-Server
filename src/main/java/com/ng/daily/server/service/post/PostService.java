@@ -2,6 +2,7 @@ package com.ng.daily.server.service.post;
 
 import com.ng.daily.server.entity.Post;
 import com.ng.daily.server.repository.post.PostRepository;
+import org.apache.commons.lang.StringUtils;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -115,5 +116,20 @@ public class PostService {
             post.setStatus(newStatus);
             postRepository.save(post);
         }
+    }
+
+    public List<Post> listOnlinePosts() {
+        List<Post> postList = postRepository.findPostPublished();
+        for(Post post : postList) {
+            if(StringUtils.isBlank(post.getSummary())) {
+                post.setSummary(getPostSummary(post));
+            }
+        }
+        return postList;
+    }
+
+    public String getPostSummary(Post post) {
+        String summary = StringUtils.abbreviate(post.getContent(), 200);
+        return summary;
     }
 }

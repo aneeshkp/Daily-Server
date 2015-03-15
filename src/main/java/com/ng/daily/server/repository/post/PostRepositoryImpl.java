@@ -36,4 +36,12 @@ public class PostRepositoryImpl implements PostRepositoryPlus {
         return mongoTemplate.find(query, Post.class);
     }
 
+    @Override
+    public List<Post> findPostPublished() {
+        Query query = new Query();
+        query.addCriteria(Criteria.where("status").is(Post.STATUS_ONLINE));
+        query.with(new Sort(Sort.Direction.DESC, "publishAt"));
+        return mongoTemplate.find(query, Post.class);
+    }
+
 }
