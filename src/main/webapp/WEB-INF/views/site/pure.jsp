@@ -4,6 +4,7 @@
 
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
 
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -67,54 +68,54 @@
             <ul class="pure-menu-list">
 
                 <li class="pure-menu-item">
-                    <a href="/start/" class="pure-menu-link">设计</a>
+                    <a href="${ctx}/site/" class="pure-menu-link">设计</a>
                 </li>
 
                 <li class="pure-menu-item">
-                    <a href="/layouts/" class="pure-menu-link">资讯</a>
+                    <a href="${ctx}/site/" class="pure-menu-link">资讯</a>
                 </li>
 
                 <li class="pure-menu-item menu-item-divided">
-                    <a href="/base/" class="pure-menu-link">灵感</a>
+                    <a href="/${ctx}/site/" class="pure-menu-link">灵感</a>
                 </li>
 
                 <li class="pure-menu-item">
-                    <a href="/grids/" class="pure-menu-link">人物</a>
+                    <a href="${ctx}/site/" class="pure-menu-link">人物</a>
                 </li>
 
                 <li class="pure-menu-item">
-                    <a href="/forms/" class="pure-menu-link">公司</a>
+                    <a href="${ctx}/site/" class="pure-menu-link">公司</a>
                 </li>
 
                 <li class="pure-menu-item">
-                    <a href="/buttons/" class="pure-menu-link">自然</a>
+                    <a href="${ctx}/site/" class="pure-menu-link">自然</a>
                 </li>
 
                 <li class="pure-menu-item">
-                    <a href="/tables/" class="pure-menu-link">风格</a>
+                    <a href="${ctx}/site/" class="pure-menu-link">风格</a>
                 </li>
 
                 <li class="pure-menu-item">
-                    <a href="/menus/" class="pure-menu-link">国外</a>
+                    <a href="${ctx}/site/" class="pure-menu-link">国外</a>
                 </li>
 
                 <li class="pure-menu-item menu-item-divided">
-                    <a href="/tools/" class="pure-menu-link">精选</a>
+                    <a href="${ctx}/site/" class="pure-menu-link">精选</a>
                 </li>
 
                 <li class="pure-menu-item">
-                    <a href="/customize/" class="pure-menu-link">品质</a>
+                    <a href="${ctx}/site/" class="pure-menu-link">品质</a>
                 </li>
 
                 <li class="pure-menu-item">
-                    <a href="/extend/" class="pure-menu-link">味道</a>
+                    <a href="${ctx}/site/" class="pure-menu-link">味道</a>
                 </li>
 
                 <li class="pure-menu-item">
-                    <a href="http://blog.purecss.io/" class="pure-menu-link">八卦</a>
+                    <a href="${ctx}/site/" class="pure-menu-link">八卦</a>
                 </li>
                 <li class="pure-menu-item">
-                    <a href="https://github.com/yahoo/pure/releases/" class="pure-menu-link">周报</a>
+                    <a href="${ctx}/site/" class="pure-menu-link">周报</a>
                 </li>
             </ul>
         </div>
@@ -137,8 +138,8 @@
                 </div>
 
                 <p>
-                    <a class="button-cta pure-button" href="/start/">查看最新</a>
-                    <a class="button-secondary pure-button" href="https://github.com/yahoo/pure/">微信关注</a>
+                    <a class="button-cta pure-button" href="${ctx}/site/">查看最新</a>
+                    <a class="button-secondary pure-button" href="${ctx}/site/">微信关注</a>
                 </p>
             </div>
         </div>
@@ -147,7 +148,7 @@
             <div class="size-chart pure-g">
 
                 <div class="size-chart-base pure-u" style="width: 19.8516%;">
-                    <a class="size-chart-item" href="/base/">
+                    <a class="size-chart-item" href="${ctx}/site/">
                 <span class="size-chart-label">
                     <span class="size-chart-mod">专业</span>
                     <span class="size-chart-size">20%</span>
@@ -156,7 +157,7 @@
                 </div>
 
                 <div class="size-chart-grids pure-u" style="width: 15.4361%;">
-                    <a class="size-chart-item" href="/grids/">
+                    <a class="size-chart-item" href="${ctx}/site/">
                 <span class="size-chart-label">
                     <span class="size-chart-mod">深度</span>
                     <span class="size-chart-size">15.4361%</span>
@@ -165,7 +166,7 @@
                 </div>
 
                 <div class="size-chart-forms pure-u" style="width: 26.8730%;">
-                    <a class="size-chart-item" href="/forms/">
+                    <a class="size-chart-item" href="${ctx}/site/">
                 <span class="size-chart-label">
                     <span class="size-chart-mod">灵感</span>
                     <span class="size-chart-size">26.8730%</span>
@@ -174,7 +175,7 @@
                 </div>
 
                 <div class="size-chart-buttons pure-u" style="width: 14.4951%;">
-                    <a class="size-chart-item" href="/buttons/">
+                    <a class="size-chart-item" href="${ctx}/site/">
                 <span class="size-chart-label">
                     <span class="size-chart-mod">潮流</span>
                     <span class="size-chart-size">14.4951%</span>
@@ -183,7 +184,7 @@
                 </div>
 
                 <div class="size-chart-tables pure-u" style="width: 8.9215%;">
-                    <a class="size-chart-item" href="/tables/">
+                    <a class="size-chart-item" href="${ctx}/site/">
                 <span class="size-chart-label">
                     <span class="size-chart-mod">国外</span>
                     <span class="size-chart-size">8.9215%</span>
@@ -192,7 +193,7 @@
                 </div>
 
                 <div class="size-chart-menus pure-u" style="width: 14.4227%;">
-                    <a class="size-chart-item" href="/menus/">
+                    <a class="size-chart-item" href="${ctx}/site/">
                 <span class="size-chart-label">
                     <span class="size-chart-mod">发现</span>
                     <span class="size-chart-size">14.4227%</span>
@@ -248,93 +249,13 @@
             </div>
         </div>
 
-        <%--<div class="marketing l-wrap pure-g">--%>
-            <%--<div class="marketing-diagram content pure-u-1 u-sm-2-3 u-md-1-2">--%>
-                <%--<a href="/layouts/">--%>
-                    <%--<img src="${ctx}/static/images/layout-icon.jpg" class="pure-img-responsive"--%>
-                         <%--alt="Diagram of a sample layout.">--%>
-                <%--</a>--%>
-            <%--</div>--%>
 
-            <%--<div class="content pure-u-1 u-md-1-2">--%>
-                <%--<h3 class="marketing-header">Create responsive layouts.</h3>--%>
-
-                <%--<p>--%>
-                    <%--By using <a href="/grids/">Grids</a>, <a href="/menus/">Menus</a>, and more, it's easy to create--%>
-                    <%--beautiful responsive layouts for all screen sizes. We've made it easy for you to get started. Take a--%>
-                    <%--look at a few different <a href="/layouts/">layouts</a> and start your next web project with a--%>
-                    <%--rock-solid foundation.--%>
-                <%--</p>--%>
-
-                <%--<p>--%>
-                    <%--<a href="/layouts/" class="pure-button">View Layouts</a>--%>
-                <%--</p>--%>
-            <%--</div>--%>
-        <%--</div>--%>
-
-        <%--<div class="marketing marketing-customize l-wrap pure-g">--%>
-            <%--<div class="content pure-u-1 u-md-1-2">--%>
-                <%--<h3 class="marketing-header">Create your own look and feel.</h3>--%>
-
-                <%--<p>--%>
-                    <%--Unlike other frameworks, Pure's design is unopinionated, minimal and flat. We believe that it's much--%>
-                    <%--easier to add new CSS rules than to overwrite existing rules. By adding a few lines of CSS, you can--%>
-                    <%--customize Pure's appearance to work with your web project.--%>
-                <%--</p>--%>
-
-                <%--<p>--%>
-                    <%--<a href="/extend/" class="pure-button">Extend Pure</a>--%>
-                <%--</p>--%>
-            <%--</div>--%>
-
-            <%--<div class="sample-buttons content pure-u-1 u-md-1-2">--%>
-                <%--<div class="pure-g">--%>
-            <%--<span class="sample-button pure-u-1-2 u-sm-1-3">--%>
-                <%--<button class="pure-button">Default</button>--%>
-            <%--</span>--%>
-
-            <%--<span class="sample-button pure-u-1-2 u-sm-1-3">--%>
-                <%--<button class="button-a pure-button">Blue</button>--%>
-            <%--</span>--%>
-
-            <%--<span class="sample-button pure-u-1-2 u-sm-1-3">--%>
-                <%--<button class="button-b pure-button">Yellow</button>--%>
-            <%--</span>--%>
-
-            <%--<span class="sample-button pure-u-1-2 u-sm-1-3">--%>
-                <%--<button class="button-c pure-button">Black</button>--%>
-            <%--</span>--%>
-
-            <%--<span class="sample-button pure-u-1-2 u-sm-1-3">--%>
-                <%--<button class="button-d pure-button">Green</button>--%>
-            <%--</span>--%>
-
-            <%--<span class="sample-button pure-u-1-2 u-sm-1-3">--%>
-                <%--<button class="button-e pure-button">Red</button>--%>
-            <%--</span>--%>
-
-            <%--<span class="sample-button pure-u-1-2 u-sm-1-3">--%>
-                <%--<button class="button-f pure-button">Purple</button>--%>
-            <%--</span>--%>
-
-            <%--<span class="sample-button pure-u-1-2 u-sm-1-3">--%>
-                <%--<button class="button-g pure-button">Orange</button>--%>
-            <%--</span>--%>
-
-            <%--<span class="sample-button pure-u-1 u-sm-1-3">--%>
-                <%--<button class="button-h pure-button">Indigo</button>--%>
-            <%--</span>--%>
-                <%--</div>--%>
-            <%--</div>--%>
-        <%--</div>--%>
-
-
-        <c:forEach var="item" items="${postList}">
+        <c:forEach var="item" items="${posts.getContent()}">
 
 
             <div class="marketing l-wrap pure-g">
                 <div class="marketing-diagram content pure-u-1 u-sm-2-3 u-md-1-2">
-                    <a href="/layouts/">
+                    <a href="${ctx}/site/">
                         <img src="${item.titleImage}" class="pure-img-responsive"
                              alt="Diagram of a sample layout.">
                     </a>
@@ -342,17 +263,21 @@
 
                 <div class="content pure-u-1 u-md-1-2">
                     <h3 class="marketing-header">${item.title}</h3>
+
                     <p>
-                        ${item.summary}
+                            ${item.summary}
                     </p>
+
                     <p>
-                        <a href="/layouts/" class="pure-button">详情</a>
+                        <a href="${ctx}/site/" class="pure-button">详情</a>
                     </p>
                 </div>
             </div>
 
         </c:forEach>
 
+
+        <tags:pagination page="${posts}" paginationSize="5"/>
 
         <div class="footer">
             <div class="legal pure-g">
@@ -367,8 +292,8 @@
 
                 <div class="pure-u-1 u-sm-1-2">
                     <ul class="legal-links">
-                        <li><a href="https://github.com/yahoo/pure/">关于我们</a></li>
-                        <li><a href="https://hackerone.com/yahoo/">Security Contact Info</a></li>
+                        <li><a href="${ctx}/site/">关于我们</a></li>
+                        <li><a href="${ctx}/site/">Security Contact Info</a></li>
                     </ul>
 
                     <p class="legal-copyright">
@@ -383,7 +308,6 @@
 
 
 <script src="${ctx}/static/site/libs/pure/site/js/ui.js"></script>
-
 
 </body>
 

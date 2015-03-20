@@ -14,6 +14,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by fangs on 15/1/27.
@@ -131,5 +132,9 @@ public class PostService {
     public String getPostSummary(Post post) {
         String summary = StringUtils.abbreviate(post.getContent(), 200);
         return summary;
+    }
+
+    public Page<Post> listOnlinePosts(Map<String, Object> searchParams, int pageNumber, int pageSize, String sortType) {
+        return postRepository.findAll(new PageRequest(pageNumber, pageSize));
     }
 }
