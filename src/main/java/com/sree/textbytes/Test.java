@@ -29,12 +29,12 @@ public class Test {
         article = ce.extractContent(html, "ReadabilitySnack");
 
 
-        System.out.println("Content : "+article.getCleanedArticleText());
+        System.out.println("Content : " + article.getCleanedArticleText());
 
 
         Document doc = Jsoup.parse(article.getCleanedArticleText());
 
-        NodeTraversor traversor  = new NodeTraversor(new NodeVisitor() {
+        NodeTraversor traversor = new NodeTraversor(new NodeVisitor() {
             @Override
             public void tail(Node node, int depth) {
                 if (node instanceof Element) {
@@ -44,6 +44,7 @@ public class Test {
                     e.removeAttr("algoscore");
                 }
             }
+
             @Override
             public void head(Node node, int depth) {
             }

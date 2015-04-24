@@ -2,32 +2,32 @@ package com.sree.textbytes.stringhelper;
 
 /**
  * Created by IntelliJ IDEA.
- * 
- * @user 		: Sreejith.S
- * 
+ *
+ * @user        : Sreejith.S
+ *
  */
 
 import java.util.regex.Pattern;
 
-public class StringReplacement
-{
-	private Pattern pattern;
-	private String replaceWith;
-	
-	private StringReplacement(Pattern pattern, String replaceWith) {
-		this.pattern = pattern;
-		this.replaceWith = replaceWith;
-	}
+public class StringReplacement {
+    private Pattern pattern;
+    private String replaceWith;
 
-	public static StringReplacement compile(String pattern, String replaceWith) {
-		if (StringUtils.isNullOrEmpty(pattern)) throw new IllegalArgumentException("Patterns must not be null or empty!");
-		Pattern p = Pattern.compile(pattern);
-		return new StringReplacement(p, replaceWith);
-	}
+    private StringReplacement(Pattern pattern, String replaceWith) {
+        this.pattern = pattern;
+        this.replaceWith = replaceWith;
+    }
 
-	public String replaceAll(String input) {
-		if (StringUtils.isNullOrEmpty(input)) return StringUtils.empty;
-		return pattern.matcher(input).replaceAll(replaceWith);
-	}
+    public static StringReplacement compile(String pattern, String replaceWith) {
+        if (StringUtils.isNullOrEmpty(pattern))
+            throw new IllegalArgumentException("Patterns must not be null or empty!");
+        Pattern p = Pattern.compile(pattern);
+        return new StringReplacement(p, replaceWith);
+    }
+
+    public String replaceAll(String input) {
+        if (StringUtils.isNullOrEmpty(input)) return StringUtils.empty;
+        return pattern.matcher(input).replaceAll(replaceWith);
+    }
 }
 

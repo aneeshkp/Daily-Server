@@ -4,23 +4,20 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 /**
- * 
  * Created by Intellij IDEA
- *
  */
 
-public class HashUtils
-{
+public class HashUtils {
     /**
      * Return a string of 40 lower case hex characters.
-     * 
+     *
      * @param input
      * @return a string of 40 hex characters
      */
     public static String sha1(String input) {
         String hexHash = null;
         try {
-        	MessageDigest md = MessageDigest.getInstance("SHA1");
+            MessageDigest md = MessageDigest.getInstance("SHA1");
             md.update(input.getBytes());
             byte[] output = md.digest();
             hexHash = bytesToLowerCaseHex(output);
@@ -32,7 +29,7 @@ public class HashUtils
 
     /**
      * Return a string of 32 lower case hex characters.
-     * 
+     *
      * @param input
      * @return a string of 32 hex characters
      */
@@ -51,7 +48,7 @@ public class HashUtils
 
     @SuppressWarnings("unused")
     private static String bytesToUpperCaseHex(byte[] b) {
-        char hexDigit[] = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F' };
+        char hexDigit[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
         StringBuffer buf = new StringBuffer();
         for (int j = 0; j < b.length; j++) {
             buf.append(hexDigit[(b[j] >> 4) & 0x0f]);

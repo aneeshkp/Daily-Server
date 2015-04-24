@@ -1,11 +1,11 @@
 package com.sree.textbytes.readability;
 
 import com.sree.textbytes.stringhelper.StopWords;
-import com.sree.textbytes.stringhelper.WordStats;
 import com.sree.textbytes.stringhelper.StringUtils;
-import org.slf4j.Logger;
+import com.sree.textbytes.stringhelper.WordStats;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class AddSiblings {

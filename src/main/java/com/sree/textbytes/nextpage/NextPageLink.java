@@ -13,17 +13,15 @@ import java.util.regex.Matcher;
 
 /**
  * Main class to identify the Next page links. Concept taken from Readability
- * 
- * @author Java-Readability
- * 
- * @modified author sree
  *
+ * @author Java-Readability
+ * @modified author sree
  */
 
 public class NextPageLink {
-	
-	public static Logger logger = LoggerFactory.getLogger(NextPageLink.class.getName());
-	
+
+    public static Logger logger = LoggerFactory.getLogger(NextPageLink.class.getName());
+
     private String findBaseUrl(String stringUrl) {
         try {
             URI base = findBaseURL(stringUrl);
@@ -34,17 +32,17 @@ public class NextPageLink {
         }
     }
 
-    /***
-     * FInd the base url 
-     * 
+    /**
+     * FInd the base url
+     *
      * @param stringUrl
      * @return
      * @throws java.net.URISyntaxException
      */
     private URI findBaseURL(String stringUrl) throws URISyntaxException {
         //Compensate for Windows path names. 
-    	stringUrl = stringUrl.replace("\\", "/");
-    	int qindex = stringUrl.indexOf("?");
+        stringUrl = stringUrl.replace("\\", "/");
+        int qindex = stringUrl.indexOf("?");
         if (qindex != -1) {
             stringUrl = stringUrl.substring(0, qindex);
         }
@@ -104,18 +102,18 @@ public class NextPageLink {
              * If this is purely a number, and it's the first or second segment, it's probably a page number.
              * Remove it.
              */
-            
+
             if (i < 2 && segment.matches("^\\d{1,2}$")) {
                 del = true;
             }
-            
+
             /**
              * If this is the first segment and it's just "index", remove it.
              */
 
             if (i == 0 && segment.toLowerCase() == "index")
                 del = true;
-            
+
             /**
              * If our first or second segment is smaller than 3 characters, and the first segment was purely
              * alphas, remove it.
@@ -138,14 +136,14 @@ public class NextPageLink {
             cleanedPath = cleanedPath + "/";
         }
         URI cleaned = new URI(url.getScheme(), url.getAuthority(), "/"
-                                                                   + cleanedPath.substring(0, cleanedPath
-                                                                       .length() - 1), null, null);
+                + cleanedPath.substring(0, cleanedPath
+                .length() - 1), null, null);
         return cleaned;
     }
-    
+
     /**
      * Officially parsing URL's from HTML pages is a mug's game.
-     * 
+     *
      * @param url
      * @return
      */
@@ -166,16 +164,16 @@ public class NextPageLink {
 
     /**
      * Find the next page link by applying some heuristics
-     * 
+     *
      * @param body
      * @param article
      * @return
      */
-    public String findNextPageLink(Elements linkElements,DocumentInfo documentInfo) {
+    public String findNextPageLink(Elements linkElements, DocumentInfo documentInfo) {
         Map<String, PageLinkInfo> possiblePages = new HashMap<String, PageLinkInfo>();
         Elements allLinks = linkElements;
         String articleBaseUrl = findBaseUrl(documentInfo.getUrl());
-        logger.debug("Base Url : "+articleBaseUrl);
+        logger.debug("Base Url : " + articleBaseUrl);
         String baseHost = getUrlHost(articleBaseUrl);
 
         /**
@@ -186,21 +184,21 @@ public class NextPageLink {
          **/
         for (Element link : allLinks) {
             String linkHref = link.attr("abs:href").replaceAll("#.*$", "").replaceAll("/$", "");
-            
+
             /**
              * If we've already seen this page, ignore it
              */
-            if ("".equals(linkHref) || linkHref.equals(articleBaseUrl) || linkHref.equals(documentInfo.getUrl()) 
-            		|| documentInfo.getParsedPages().contains(linkHref)) {
-            	logger.debug("parsed pages. continue"+ linkHref );
+            if ("".equals(linkHref) || linkHref.equals(articleBaseUrl) || linkHref.equals(documentInfo.getUrl())
+                    || documentInfo.getParsedPages().contains(linkHref)) {
+                logger.debug("parsed pages. continue" + linkHref);
                 continue;
             }
-            
-            if(isParsedPageSubString(linkHref, documentInfo.getParsedPages())) {
-            	logger.debug("Substring matches in parsed pages : "+linkHref);
-            	continue;
+
+            if (isParsedPageSubString(linkHref, documentInfo.getParsedPages())) {
+                logger.debug("Substring matches in parsed pages : " + linkHref);
+                continue;
             }
-            
+
             String linkHost = getUrlHost(linkHref);
 
             /**
@@ -255,7 +253,7 @@ public class NextPageLink {
                 linkObj.incrementScore(25);
             }
             if (Patterns.exists(Patterns.FIRST_OR_LAST, linkData)) {
-            	/** -65 is enough to negate any bonuses gotten from a > or » in the text,
+                /** -65 is enough to negate any bonuses gotten from a > or » in the text,
                  * If we already matched on "next", last is probably fine. If we didn't, then it's bad.
                  * Penalize.
                  */
@@ -265,7 +263,7 @@ public class NextPageLink {
             }
 
             if (Patterns.exists(Patterns.NEGATIVE, linkData)
-                || Patterns.exists(Patterns.EXTRANEOUS, linkData)) {
+                    || Patterns.exists(Patterns.EXTRANEOUS, linkData)) {
                 linkObj.incrementScore(-50);
             }
             if (Patterns.exists(Patterns.PREV_LINK, linkData)) {
@@ -300,7 +298,7 @@ public class NextPageLink {
              * ?p=3, ?page=11, ?pagination=34
              **/
             if (Patterns.exists(Patterns.PAGE_AND_NUMBER, linkHref)
-                || Patterns.exists(Patterns.PAGE_OR_PAGING, linkHref)) {
+                    || Patterns.exists(Patterns.PAGE_OR_PAGING, linkHref)) {
                 linkObj.incrementScore(+25);
             }
 
@@ -348,17 +346,17 @@ public class NextPageLink {
         PageLinkInfo topPage = null;
         for (Map.Entry<String, PageLinkInfo> pageEntry : possiblePages.entrySet()) {
             if (pageEntry.getValue().getScore() >= 50
-                && (topPage == null || topPage.getScore() < pageEntry.getValue().getScore())) {
+                    && (topPage == null || topPage.getScore() < pageEntry.getValue().getScore())) {
                 topPage = pageEntry.getValue();
             }
         }
 
         if (topPage != null) {
             String nextHref = topPage.getHref().replaceFirst("/$", "");
-            if(isAdLink(nextHref)){
-            	logger.debug("Next Page looks like Ad link , ignoring : "+nextHref);
-            	return null;
-            }else {
+            if (isAdLink(nextHref)) {
+                logger.debug("Next Page looks like Ad link , ignoring : " + nextHref);
+                return null;
+            } else {
                 logger.debug("Next page = " + nextHref);
                 documentInfo.setParsedPages(nextHref);
                 return nextHref;
@@ -368,69 +366,66 @@ public class NextPageLink {
         }
     }
 
-	/**
-	 * get the word count of a sub string in a string
-	 * 
-	 * @author sree
-	 * 
-	 * @param string
-	 * @param subString
-	 * @return
-	 */
-	private int getWordCount(String string, String subString) {
-		int count = 0;
-		int index = string.indexOf(subString);
-		if (index >= 0) {
-			count++;
-			count += getWordCount(string.substring(index + subString.length()),
-					subString);
-		}
-		return count;
-	}
-
-	/**
-	 * check whether its an Ad image / not
-	 * 
-	 * @author sree
-	 * 
-	 * @param imgUrl
-	 * @return
-	 */
-	private boolean isAdLink(String nextPageUrl) {
-		return getWordCount(nextPageUrl, "ad") >= 2;
-	}
-	
-	/**
-	 * Perform a sub string match to avoid identifying part of parsed pages as next page
-	 * 
-	 * http://www.washingtontimes.com/news/2012/aug/29/american-scene-cdc-says-west-nile-cases-rise-40-in/?page=3
-	 * http://www.washingtontimes.com/news/2012/aug/29/american-scene-cdc-says-west-nile-cases-rise-40-in/?page=3&utm_medium=RSS&utm_source=RSS_Feed
-	 * 
-	 * @author sree
-	 * 
-	 * @param url
-	 * @param parsedPages
-	 * @return
-	 */
-	private boolean isParsedPageSubString(String url,Set<String> parsedPages) {
-		boolean status = false;
-        Set<String> parsedPagesSet = new HashSet<String>();
-        parsedPagesSet = parsedPages; 
-        Iterator pagesIterator = parsedPagesSet.iterator();
-        while(pagesIterator.hasNext()) {
-        	String parsedPage = pagesIterator.next().toString();
-        	if(parsedPage.length() > url.length()) {
-        		String subString = parsedPage.substring(0, url.length());
-        		logger.debug("Substring : "+subString + " Parsed page : "+parsedPage);
-        		if(subString.equals(url)) {
-        			status = true;
-        			break;
-        		}
-        	}
+    /**
+     * get the word count of a sub string in a string
+     *
+     * @param string
+     * @param subString
+     * @return
+     * @author sree
+     */
+    private int getWordCount(String string, String subString) {
+        int count = 0;
+        int index = string.indexOf(subString);
+        if (index >= 0) {
+            count++;
+            count += getWordCount(string.substring(index + subString.length()),
+                    subString);
         }
-        
+        return count;
+    }
+
+    /**
+     * check whether its an Ad image / not
+     *
+     * @param imgUrl
+     * @return
+     * @author sree
+     */
+    private boolean isAdLink(String nextPageUrl) {
+        return getWordCount(nextPageUrl, "ad") >= 2;
+    }
+
+    /**
+     * Perform a sub string match to avoid identifying part of parsed pages as next page
+     * <p/>
+     * http://www.washingtontimes.com/news/2012/aug/29/american-scene-cdc-says-west-nile-cases-rise-40-in/?page=3
+     * http://www.washingtontimes.com/news/2012/aug/29/american-scene-cdc-says-west-nile-cases-rise-40-in/?page=3&utm_medium=RSS&utm_source=RSS_Feed
+     *
+     * @param url
+     * @param parsedPages
+     * @return
+     * @author sree
+     */
+    private boolean isParsedPageSubString(String url, Set<String> parsedPages) {
+        boolean status = false;
+        Set<String> parsedPagesSet = new HashSet<String>();
+        parsedPagesSet = parsedPages;
+        Iterator pagesIterator = parsedPagesSet.iterator();
+        while (pagesIterator.hasNext()) {
+            String parsedPage = pagesIterator.next().toString();
+            if (parsedPage.length() > url.length()) {
+                String subString = parsedPage.substring(0, url.length());
+                logger.debug("Substring : " + subString + " Parsed page : " + parsedPage);
+                if (subString.equals(url)) {
+                    status = true;
+                    break;
+                }
+            }
+        }
+
         return status;
 
-	}
+    }
 
 }

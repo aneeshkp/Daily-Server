@@ -13,208 +13,209 @@ import java.util.Set;
 
 /**
  * Original code from Project Goose
- * 
+ * <p/>
  * modified author : Sree
- * 
+ * <p/>
  * This class represents the extraction of an Article from a website
  * It also contains all the meta data's extracted from the web page.
  */
 public class Article {
-	private static final Logger logger = LoggerFactory.getLogger(Article.class.getName());
-	
-	/**
-	 * Cleaned document for extraction
-	 */
-	private Document cleanedDocument;
+    private static final Logger logger = LoggerFactory.getLogger(Article.class.getName());
 
-	/**
-	 * Holds the title of the webpage
-	 */
-	private String title;
-	
-	/**
-	 * publish date
-	 */
-	private String publishDate;
-	
-	/**
-	 * If any top image from the web page
-	 */
-	Image topImage;
-	
-	/**
-	 * holds the metadescription meta tag in the html doc
-	 */
-	private String metaDescription;
-	/**
-	 * holds the clean text after we do strip out everything but the text and
-	 * wrap it up in a nice package this is the guy you probably want, just pure
-	 * text
-	 */
-	private String cleanedArticleText;
+    /**
+     * Cleaned document for extraction
+     */
+    private Document cleanedDocument;
 
-	/**
-	 * holds the original unmodified HTML retrieved from the URL
-	 */
-	private String rawHtml;
+    /**
+     * Holds the title of the webpage
+     */
+    private String title;
 
-	/**
-	 * holds the meta keywords that would in the meta tag of the html doc
-	 */
-	private String metaKeywords;
+    /**
+     * publish date
+     */
+    private String publishDate;
 
-	/**
-	 * holds the meta data canonical link that may be place in the meta tags of
-	 * the html doc
-	 */
-	private String canonicalLink;
+    /**
+     * If any top image from the web page
+     */
+    Image topImage;
 
-	/**
-	 * this represents the jSoup element that we think is the big content dude
-	 * of this page we can use this node to start grabbing text, images, etc..
-	 * around the content
-	 */
-	private Element topNode;
+    /**
+     * holds the metadescription meta tag in the html doc
+     */
+    private String metaDescription;
+    /**
+     * holds the clean text after we do strip out everything but the text and
+     * wrap it up in a nice package this is the guy you probably want, just pure
+     * text
+     */
+    private String cleanedArticleText;
 
-	/**
-	 * holds a list of tags extracted from the article
-	 */
-	private Set<String> tags;
-	
-	private List<String> nextPageHtmlSources = new ArrayList<String>();
+    /**
+     * holds the original unmodified HTML retrieved from the URL
+     */
+    private String rawHtml;
 
-	/**
-	 * Set the next page html sources
-	 * @param nextPageSources
-	 */
-	public void setNextPageHtmlSources(List<String> nextPageSources) {
-		this.nextPageHtmlSources = nextPageSources;
-	}
-	
-	/**
-	 * Get the next page html sources
-	 * @return
-	 */
-	
-	public List<String> getNextPageSources() {
-		return this.nextPageHtmlSources;
-	}
+    /**
+     * holds the meta keywords that would in the meta tag of the html doc
+     */
+    private String metaKeywords;
+
+    /**
+     * holds the meta data canonical link that may be place in the meta tags of
+     * the html doc
+     */
+    private String canonicalLink;
+
+    /**
+     * this represents the jSoup element that we think is the big content dude
+     * of this page we can use this node to start grabbing text, images, etc..
+     * around the content
+     */
+    private Element topNode;
+
+    /**
+     * holds a list of tags extracted from the article
+     */
+    private Set<String> tags;
+
+    private List<String> nextPageHtmlSources = new ArrayList<String>();
+
+    /**
+     * Set the next page html sources
+     *
+     * @param nextPageSources
+     */
+    public void setNextPageHtmlSources(List<String> nextPageSources) {
+        this.nextPageHtmlSources = nextPageSources;
+    }
+
+    /**
+     * Get the next page html sources
+     *
+     * @return
+     */
+
+    public List<String> getNextPageSources() {
+        return this.nextPageHtmlSources;
+    }
 
 
-	
-	public void setCleanedDocument(Document document) {
-		this.cleanedDocument = document;
-	}
-	
-	public Document getCleanedDocument() {
-		return cleanedDocument;
-	}
-	
-	/**
-	 * Its true of the document has next pages.
-	 */
-	private boolean isMultiPage = false;
-	
-	public void setMultiPageStatus(boolean status) {
-		this.isMultiPage = status;
-	}
-	
-	public boolean getMultiPageStatus() {
-		return isMultiPage;
-	}
-	
-	/**
-	 * returns the title of the webpage
-	 * 
-	 * @return
-	 */
+    public void setCleanedDocument(Document document) {
+        this.cleanedDocument = document;
+    }
 
-	public String getTitle() {
-		return title;
-	}
+    public Document getCleanedDocument() {
+        return cleanedDocument;
+    }
 
-	public void setTitle(String title) {
-		this.title = title;
-	}
+    /**
+     * Its true of the document has next pages.
+     */
+    private boolean isMultiPage = false;
 
-	public String getMetaDescription() {
-		return metaDescription;
-	}
+    public void setMultiPageStatus(boolean status) {
+        this.isMultiPage = status;
+    }
 
-	public void setMetaDescription(String metaDescription) {
-		this.metaDescription = metaDescription;
-	}
+    public boolean getMultiPageStatus() {
+        return isMultiPage;
+    }
 
-	public String getMetaKeywords() {
-		return metaKeywords;
-	}
+    /**
+     * returns the title of the webpage
+     *
+     * @return
+     */
 
-	public void setMetaKeywords(String metaKeywords) {
-		this.metaKeywords = metaKeywords;
-	}
+    public String getTitle() {
+        return title;
+    }
 
-	public String getCanonicalLink() {
-		return canonicalLink;
-	}
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
-	public void setCanonicalLink(String canonicalLink) {
-		this.canonicalLink = canonicalLink;
-	}
+    public String getMetaDescription() {
+        return metaDescription;
+    }
 
-	public Element getTopNode() {
-		return topNode;
-	}
+    public void setMetaDescription(String metaDescription) {
+        this.metaDescription = metaDescription;
+    }
 
-	public void setTopNode(Element topNode) {
-		this.topNode = topNode;
-	}
+    public String getMetaKeywords() {
+        return metaKeywords;
+    }
 
-	/**
-	 * The unique set of tags that matched: "a[rel=tag], a[href*=/tag/]"
-	 * 
-	 * @return the unique set of TAGs extracted from this {@link com.sree.textbytes.readability.Article}
-	 */
-	public Set<String> getTags() {
-		if (tags == null) {
-			tags = new HashSet<String>();
-		}
-		return tags;
-	}
+    public void setMetaKeywords(String metaKeywords) {
+        this.metaKeywords = metaKeywords;
+    }
 
-	public void setTags(Set<String> tags) {
-		this.tags = tags;
-	}
+    public String getCanonicalLink() {
+        return canonicalLink;
+    }
 
-	public String getCleanedArticleText() {
-		return cleanedArticleText;
-	}
+    public void setCanonicalLink(String canonicalLink) {
+        this.canonicalLink = canonicalLink;
+    }
 
-	public void setCleanedArticleText(String cleanedArticleText) {
-		this.cleanedArticleText = cleanedArticleText;
-	}
+    public Element getTopNode() {
+        return topNode;
+    }
 
-	public String getRawHtml() {
-		return rawHtml;
-	}
+    public void setTopNode(Element topNode) {
+        this.topNode = topNode;
+    }
 
-	public void setRawHtml(String rawHtml) {
-		this.rawHtml = rawHtml;
-	}
+    /**
+     * The unique set of tags that matched: "a[rel=tag], a[href*=/tag/]"
+     *
+     * @return the unique set of TAGs extracted from this {@link com.sree.textbytes.readability.Article}
+     */
+    public Set<String> getTags() {
+        if (tags == null) {
+            tags = new HashSet<String>();
+        }
+        return tags;
+    }
 
-	public void setPublishDate(String date) {
-		publishDate = date;
-	}
-	
-	public String getPublishDate() {
-		return publishDate;
-	}
-	
-	public Image getTopImage() {
-		return topImage;
-	}
+    public void setTags(Set<String> tags) {
+        this.tags = tags;
+    }
 
-	public void setTopImage(Image topImage) {
-		this.topImage = topImage;
-	}
-	
+    public String getCleanedArticleText() {
+        return cleanedArticleText;
+    }
+
+    public void setCleanedArticleText(String cleanedArticleText) {
+        this.cleanedArticleText = cleanedArticleText;
+    }
+
+    public String getRawHtml() {
+        return rawHtml;
+    }
+
+    public void setRawHtml(String rawHtml) {
+        this.rawHtml = rawHtml;
+    }
+
+    public void setPublishDate(String date) {
+        publishDate = date;
+    }
+
+    public String getPublishDate() {
+        return publishDate;
+    }
+
+    public Image getTopImage() {
+        return topImage;
+    }
+
+    public void setTopImage(Image topImage) {
+        this.topImage = topImage;
+    }
+
 }
