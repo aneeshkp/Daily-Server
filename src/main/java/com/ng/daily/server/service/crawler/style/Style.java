@@ -108,62 +108,63 @@ public class Style {
 //        service.shutdown();
     }
 
-}
 
-class CollectionTask implements Runnable {
+    class CollectionTask implements Runnable {
 
-    private String brand;
-    private Style style;
-    private int order;
-    private int total;
+        private String brand;
+        private Style style;
+        private int order;
+        private int total;
 
-    public CollectionTask(Style style, String brand, int order, int total) {
-        this.brand = brand;
-        this.style = style;
-        this.order = order;
-        this.total = total;
-    }
-
-    @Override
-    public void run() {
-        System.out.println("=========>>>>>>>>>>>>>" + brand + "," + order + " / " + total);
-        String saveDir = "/tmp/style.com/" + brand + "/";
-
-        // TODO
-        String collectionUrl = "http://www.style.com/slideshows/fashion-shows/pre-fall-2015/" + brand + "/collection";
-        try {
-            style.downloadCollection("brand " + brand + " " + order + "/" + total, saveDir, collectionUrl);
-        } catch (Exception e) {
-            e.printStackTrace();
+        public CollectionTask(Style style, String brand, int order, int total) {
+            this.brand = brand;
+            this.style = style;
+            this.order = order;
+            this.total = total;
         }
 
+        @Override
+        public void run() {
+            System.out.println("=========>>>>>>>>>>>>>" + brand + "," + order + " / " + total);
+            String saveDir = "/tmp/style.com/" + brand + "/";
+
+            // TODO
+            String collectionUrl = "http://www.style.com/slideshows/fashion-shows/pre-fall-2015/" + brand + "/collection";
+            try {
+                style.downloadCollection("brand " + brand + " " + order + "/" + total, saveDir, collectionUrl);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        }
     }
-}
 
-class ResultMap {
-    String id;
-    String title;
-    String slideCount;
-    String seasonUrlFragment;
-    String brandUrlFragment;
-    List<Item> items;
-    String canonicalUrl;
-}
+    class ResultMap {
+        String id;
+        String title;
+        String slideCount;
+        String seasonUrlFragment;
+        String brandUrlFragment;
+        List<Item> items;
+        String canonicalUrl;
+    }
 
-class Item {
-    String id;
-    int order;
-    String slidepath;
-    Boolean hasDetailSlides;
-    int height;
-    int width;
-    List<Details> details;
-}
+    class Item {
+        String id;
+        int order;
+        String slidepath;
+        Boolean hasDetailSlides;
+        int height;
+        int width;
+        List<Details> details;
+    }
 
-class Details {
-    String id;
-    int order;
-    String slidepath;
-    int height;
-    int width;
+    class Details {
+        String id;
+        int order;
+        String slidepath;
+        int height;
+        int width;
+    }
+
 }

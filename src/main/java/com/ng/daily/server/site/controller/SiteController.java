@@ -55,8 +55,6 @@ public class SiteController extends BaseSiteController {
 
     @RequestMapping(value = "/pure", method = RequestMethod.GET)
     public ModelAndView pure() {
-
-        logger.debug("pure......");
         ModelAndView mv = new ModelAndView();
         List<Post> postList = postService.listOnlinePosts();
         mv.addObject("postList", postList);

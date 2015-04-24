@@ -1,15 +1,14 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="sitemesh" uri="http://www.opensymphony.com/sitemesh/decorator" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
-
 
 <!DOCTYPE html>
 <html>
 <head>
-
     <title>绿草鞋</title>
+
+    <meta name="baidu-site-verification" content="nO7XEEQM1h" />
 
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -18,15 +17,11 @@
     <meta name="author" content="">
     <link type="image/x-icon" href="${ctx}/static/images/favicon.ico" rel="shortcut icon">
 
-
     <link rel="stylesheet" href="${ctx}/static/site/libs/pure/pure-min.css">
 
-
-    <link rel="stylesheet" href="${ctx}/static/site/libs/pure/site/css/main-grid.css">
-    <link rel="stylesheet" href="${ctx}/static/site/libs/pure/site/css/main.css">
-    <link rel="stylesheet" href="${ctx}/static/site/libs/pure/site/css/home.css">
-    <link rel="stylesheet" href="${ctx}/static/site/libs/pure/site/css/rainbow/baby-blue.css">
-
+    <link rel="stylesheet" href="${ctx}/static/site/libs/pure/css/main-grid.css">
+    <link rel="stylesheet" href="${ctx}/static/site/libs/pure/css/main.css">
+    <link rel="stylesheet" href="${ctx}/static/site/libs/pure/css/home.css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -37,16 +32,7 @@
 
 
     <style>
-
-        h1, h2, h3, h4, h5, h6 {
-            font-family: Helvetica, Tahoma, Arial, STXihei, "华文细黑", "Microsoft YaHei", "微软雅黑", SimSun, "宋体", Heiti, "黑体", sans-serif;
-        }
-
-        p, div {
-            font-family: Helvetica, Tahoma, Arial, STXihei, "华文细黑", "Microsoft YaHei", "微软雅黑", SimSun, "宋体", Heiti, "黑体", sans-serif;
-        }
-
-        body {
+        h1, h2, h3, h4, h5, h6, p, div, body {
             font-family: Helvetica, Tahoma, Arial, STXihei, "华文细黑", "Microsoft YaHei", "微软雅黑", SimSun, "宋体", Heiti, "黑体", sans-serif;
         }
     </style>
@@ -276,6 +262,15 @@
 
         </c:forEach>
 
+        <ul class="pure-paginator">
+            <li><a class="pure-button prev" href="#">&#171;</a></li>
+            <li><a class="pure-button" href="#">1</a></li>
+            <li><a class="pure-button pure-button-active" href="#">2</a></li>
+            <li><a class="pure-button" href="#">3</a></li>
+            <li><a class="pure-button" href="#">4</a></li>
+            <li><a class="pure-button" href="#">5</a></li>
+            <li><a class="pure-button next" href="#">&#187;</a></li>
+        </ul>
 
         <tags:pagination page="${posts}" paginationSize="5"/>
 
@@ -307,7 +302,7 @@
 </div>
 
 
-<script src="${ctx}/static/site/libs/pure/site/js/ui.js"></script>
+<script src="${ctx}/static/site/libs/pure/js/ui.js"></script>
 
 </body>
 
