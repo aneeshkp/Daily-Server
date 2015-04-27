@@ -11,11 +11,11 @@
 //import java.util.concurrent.TimeUnit;
 //
 ///**
-// * 使用Spring的ThreadPoolTaskScheduler执行Cron式任务的类.
-// * 相比Spring的Task NameSpace配置方式, 不需要反射調用，并强化了退出超时控制.
-// *
-// * @author calvin
-// */
+//* 使用Spring的ThreadPoolTaskScheduler执行Cron式任务的类.
+//* 相比Spring的Task NameSpace配置方式, 不需要反射調用，并强化了退出超时控制.
+//*
+//* @author calvin
+//*/
 //public class SpringCronJob implements Runnable {
 //
 //    private String cronExpression;

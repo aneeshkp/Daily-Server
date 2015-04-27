@@ -1,11 +1,14 @@
 //package com.ng.daily.server.common.util.schedule;
 //
+//import org.slf4j.Logger;
+//import org.slf4j.LoggerFactory;
 //import org.springframework.context.annotation.Lazy;
+//import org.springframework.scheduling.annotation.Scheduled;
 //import org.springframework.stereotype.Component;
 //
 ///**
-// * Created by fangs on 15/1/27.
-// */
+//* Created by fangs on 15/1/27.
+//*/
 //@Component
 //@Lazy(false)
 //public class SimpleTask {

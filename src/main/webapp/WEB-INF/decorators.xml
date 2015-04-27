@@ -8,8 +8,8 @@
 		<pattern>/swagger/*</pattern>
 		<pattern>/api-docs/*</pattern>
 
-		<pattern>/site</pattern>
-		<pattern>/site/pure</pattern>
+		<!--<pattern>/site</pattern>-->
+		<!--<pattern>/site/pure</pattern>-->
 
 	</excludes>
 

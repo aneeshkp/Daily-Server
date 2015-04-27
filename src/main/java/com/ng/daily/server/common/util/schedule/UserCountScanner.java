@@ -1,8 +1,8 @@
 ///********
 //
-// *
+//*
 //
-// ********/
+//********/
 //package com.ng.daily.server.common.util.schedule;
 //
 //import org.slf4j.Logger;
@@ -10,10 +10,10 @@
 //import org.springframework.stereotype.Component;
 //
 ///**
-// * 被Spring各种Scheduler反射调用的Service POJO.
-// *
-// * @author Calvin
-// */
+//* 被Spring各种Scheduler反射调用的Service POJO.
+//*
+//* @author Calvin
+//*/
 //@Component
 //public class UserCountScanner {
 //
