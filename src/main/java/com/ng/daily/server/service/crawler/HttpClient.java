@@ -15,8 +15,7 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
+import java.util.concurrent.TimeUnit;
 
 /**
  * HTTP客户端
@@ -71,7 +70,7 @@ public class HttpClient {
 
         } finally {
             remoteResponse.close();
-//            log.debug("http get finished:" + targetUrl + ", cost " + sw.stop().elapsed(TimeUnit.MILLISECONDS) + " ms");
+            log.debug("HttpClient.httpGet success, cost " + sw.stop().elapsed(TimeUnit.MILLISECONDS) + " ms" + ":" + targetUrl);
         }
     }
 
@@ -91,10 +90,4 @@ public class HttpClient {
         this.timeoutSeconds = timeoutSeconds;
     }
 
-
-    public static void main(String[] args) throws UnsupportedEncodingException {
-
-        String s = URLEncoder.encode("http://media.style.com/image/slideshows/street/top-looks/2015/04/0410-denim-shirts/slides/2048/1363/2 _AKS7745.jpg", "UTF-8");
-        System.out.println(s);
-    }
 }

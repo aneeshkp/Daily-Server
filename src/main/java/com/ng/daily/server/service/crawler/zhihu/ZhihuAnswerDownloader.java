@@ -61,10 +61,9 @@ public class ZhihuAnswerDownloader {
 
         ZhihuAnswerDownloader zhihu = new ZhihuAnswerDownloader();
         String answerUrl = "http://www.zhihu.com/question/22332149/answer/24682860";
-        zhihu.download( answerUrl);
+        zhihu.download(answerUrl);
 
     }
-
 
 
 }

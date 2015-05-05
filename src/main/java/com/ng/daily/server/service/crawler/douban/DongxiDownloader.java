@@ -18,7 +18,7 @@ import java.util.List;
 public class DongxiDownloader {
 
 
-    public Post download( String targetUrl) throws IOException {
+    public Post download(String targetUrl) throws IOException {
 
 
         Post post = Post.createFragment();
@@ -27,7 +27,7 @@ public class DongxiDownloader {
 
         List<String> imageList = Lists.newArrayList();
         Elements imageElements = doc.select(".nav-images .nav-image");
-        for(Element e : imageElements) {
+        for (Element e : imageElements) {
             String imageUrl = e.attr("data-original-url");
             imageList.add(imageUrl);
         }

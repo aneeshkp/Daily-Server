@@ -118,7 +118,7 @@ public class Servlets {
         // 替换空格，否则firefox下有空格文件名会被截断,其他浏览器会将空格替换成+号
         encodedfileName = fileName.trim().replaceAll(" ", "_");
         String agent = request.getHeader("User-Agent");
-        boolean isMSIE = (agent != null && agent.toUpperCase().indexOf("MSIE") != -1);
+        boolean isMSIE = (agent != null && agent.toUpperCase().contains("MSIE"));
         if (isMSIE) {
             encodedfileName = Encodes.urlEncode(fileName);
         } else {

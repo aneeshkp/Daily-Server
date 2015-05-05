@@ -38,9 +38,9 @@ public class DownloadTask implements Callable {
             return Boolean.TRUE;
         }
 
-        int retrys = 1;
+        int retry = 1;
         boolean success = false;
-        while (!success && retrys < 10) {
+        while (!success && retry < 10) {
             OutputStream out = null;
             try {
                 out = FileUtils.openOutputStream(new File(savePath, saveName));
@@ -48,11 +48,11 @@ public class DownloadTask implements Callable {
                 success = true;
                 System.out.println("finished : " + description);
             } catch (Exception e) {
-                System.err.println("image download exception: " + "===" + e.toString() + " ---  " + retrys);
+                System.err.println("image download exception: " + "===" + e.toString() + " ---  " + retry);
             } finally {
                 IOUtils.closeQuietly(out);
             }
-            retrys++;
+            retry++;
         }
         if (!success) {
             System.err.println("image download failed : " + url);

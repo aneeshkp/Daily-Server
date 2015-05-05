@@ -51,14 +51,14 @@ public class Style {
     public void downloadCollection(String description, String saveDir, String collectionUrl) throws IOException {
 
         Document doc = null;
-        int retrys = 1;
-        while (doc == null && retrys < 50) {
+        int retry = 1;
+        while (doc == null && retry < 50) {
             try {
                 doc = Jsoup.connect(collectionUrl).timeout(5000).get();
             } catch (Exception e) {
-                System.err.println("collection download exception : " + "===" + e.toString() + " ---  " + retrys);
+                System.err.println("collection download exception : " + "===" + e.toString() + " ---  " + retry);
             }
-            retrys++;
+            retry++;
         }
         if (doc == null) {
             System.err.println("collection download failed : " + collectionUrl);

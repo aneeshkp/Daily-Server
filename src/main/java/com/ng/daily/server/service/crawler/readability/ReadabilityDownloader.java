@@ -25,14 +25,14 @@ public class ReadabilityDownloader {
         ContentExtractor ce = new ContentExtractor();
         HtmlFetcher htmlFetcher = new HtmlFetcher();
         String html = htmlFetcher.getHtml(targetUrl, 0);
-        Article article =  ce.extractContent(html, "ReadabilitySnack");
+        Article article = ce.extractContent(html, "ReadabilitySnack");
 
         article.setCleanedArticleText(article.getCleanedArticleText().replaceAll("(\r\n|\n)", ""));
 
         System.err.println(article.getCleanedArticleText());
 
         Document doc = Jsoup.parse(article.getCleanedArticleText());
-        NodeTraversor traversor  = new NodeTraversor(new NodeVisitor() {
+        NodeTraversor traversor = new NodeTraversor(new NodeVisitor() {
             @Override
             public void tail(Node node, int depth) {
                 if (node instanceof Element) {
@@ -42,6 +42,7 @@ public class ReadabilityDownloader {
                     e.removeAttr("algoscore");
                 }
             }
+
             @Override
             public void head(Node node, int depth) {
             }

@@ -118,8 +118,13 @@ public class Downloader {
 
 
     public static void main(String[] args) {
-        Downloader downloader = new Downloader();
-        downloader.download();
+        if (args.length < 1) {
+            new IllegalArgumentException("Missing required argument");
+        }
+
+
+//        Downloader downloader = new Downloader();
+//        downloader.download();
     }
 
 

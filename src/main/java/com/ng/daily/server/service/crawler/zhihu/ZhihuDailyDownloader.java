@@ -17,8 +17,7 @@ import java.util.List;
 public class ZhihuDailyDownloader {
 
 
-
-    public Post download( String targetUrl) throws IOException {
+    public Post download(String targetUrl) throws IOException {
 
 
         Post post = Post.createArticle();
@@ -39,7 +38,7 @@ public class ZhihuDailyDownloader {
         post.setContent(content);
 
         List<String> imageList = Lists.newArrayList();
-        for(Element imageElement : doc.select(".content-image")) {
+        for (Element imageElement : doc.select(".content-image")) {
             String imageUrl = imageElement.attr("src");
             imageList.add(imageUrl);
         }
@@ -59,10 +58,9 @@ public class ZhihuDailyDownloader {
         ZhihuDailyDownloader zhihu = new ZhihuDailyDownloader();
         String saveDir = "/tmp/zhihu.com";
         String answerUrl = "http://www.zhihu.com/question/22332149/answer/24682860";
-        zhihu.download(  answerUrl);
+        zhihu.download(answerUrl);
 
     }
-
 
 
 }
